@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="conocheApp.schedule.detail.title">Schedule</span> {{vm.schedule.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row jh-entity-details">
+        <dt><span data-translate="conocheApp.schedule.initialDay">Initial Day</span></dt>
+        <dd>
+            <span data-translate="{{'conocheApp.Day.' + vm.schedule.initialDay}}">{{vm.schedule.initialDay}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.schedule.finalDay">Final Day</span></dt>
+        <dd>
+            <span data-translate="{{'conocheApp.Day.' + vm.schedule.finalDay}}">{{vm.schedule.finalDay}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.schedule.initialTime">Initial Time</span></dt>
+        <dd>
+            <span>{{vm.schedule.initialTime}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.schedule.finalTime">Final Time</span></dt>
+        <dd>
+            <span>{{vm.schedule.finalTime}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.schedule.local">Local</span></dt>
+        <dd>
+            <a ui-sref="local-ang-detail({id:vm.schedule.localId})">{{vm.schedule.localName}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="schedule-ang-detail.edit({id:vm.schedule.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

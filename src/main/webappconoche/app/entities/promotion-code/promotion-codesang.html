@@ -1,0 +1,70 @@
+<div>
+    <h2 data-translate="conocheApp.promotionCode.home.title">Promotion Codes</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="promotion-code-ang.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="conocheApp.promotionCode.home.createLabel">
+                        Create new Promotion Code
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="code"><span data-translate="conocheApp.promotionCode.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="active"><span data-translate="conocheApp.promotionCode.active">Active</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="promotionId"><span data-translate="conocheApp.promotionCode.promotion">Promotion</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="userId"><span data-translate="conocheApp.promotionCode.user">User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="promotionCode in vm.promotionCodes track by promotionCode.id">
+                    <td><a ui-sref="promotion-code-ang-detail({id:promotionCode.id})">{{promotionCode.id}}</a></td>
+                    <td>{{promotionCode.code}}</td>
+                    <td>{{promotionCode.active}}</td>
+                    <td>
+                        <a ui-sref="promotion-ang-detail({id:promotionCode.promotionId})">{{promotionCode.promotionId}}</a>
+                    </td>
+                    <td>
+                        {{promotionCode.userId}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="promotion-code-ang-detail({id:promotionCode.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="promotion-code-ang.edit({id:promotionCode.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="promotion-code-ang.delete({id:promotionCode.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+</div>

@@ -1,0 +1,23 @@
+{
+    "conocheApp": {
+        "eventImage" : {
+            "home": {
+                "title": "Event Images",
+                "createLabel": "Crear nuevo Event Image",
+                "createOrEditLabel": "Crear o editar Event Image"
+            },
+            "created": "Un nuevo Event Image ha sido creado con el identificador {{ param }}",
+            "updated": "Un Event Image ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Event Image ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Event Image {{ id }}?"
+            },
+            "detail": {
+                "title": "Event Image"
+            },
+            "image": "Image",
+            "imageUrl": "Image Url",
+            "event": "Event"
+        }
+    }
+}

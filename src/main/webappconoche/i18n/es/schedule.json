@@ -1,0 +1,25 @@
+{
+    "conocheApp": {
+        "schedule" : {
+            "home": {
+                "title": "Schedules",
+                "createLabel": "Crear nuevo Schedule",
+                "createOrEditLabel": "Crear o editar Schedule"
+            },
+            "created": "Un nuevo Schedule ha sido creado con el identificador {{ param }}",
+            "updated": "Un Schedule ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Schedule ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Schedule {{ id }}?"
+            },
+            "detail": {
+                "title": "Schedule"
+            },
+            "initialDay": "Initial Day",
+            "finalDay": "Final Day",
+            "initialTime": "Initial Time",
+            "finalTime": "Final Time",
+            "local": "Local"
+        }
+    }
+}
