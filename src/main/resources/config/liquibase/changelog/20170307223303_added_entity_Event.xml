@@ -30,7 +30,7 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="price" type="varchar(255)">
+            <column name="price" type="double">
                 <constraints nullable="false" />
             </column>
 
@@ -38,6 +38,10 @@
                 <constraints nullable="true" />
             </column>
             <column name="banner_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="banner_url" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

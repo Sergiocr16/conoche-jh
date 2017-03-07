@@ -52,13 +52,16 @@ public class EventResourceIntTest {
     private static final String DEFAULT_DETAILS = "AAAAAAAAAA";
     private static final String UPDATED_DETAILS = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PRICE = "AAAAAAAAAA";
-    private static final String UPDATED_PRICE = "BBBBBBBBBB";
+    private static final Double DEFAULT_PRICE = 1D;
+    private static final Double UPDATED_PRICE = 2D;
 
     private static final byte[] DEFAULT_BANNER = TestUtil.createByteArray(1, "0");
     private static final byte[] UPDATED_BANNER = TestUtil.createByteArray(2, "1");
     private static final String DEFAULT_BANNER_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_BANNER_CONTENT_TYPE = "image/png";
+
+    private static final String DEFAULT_BANNER_URL = "AAAAAAAAAA";
+    private static final String UPDATED_BANNER_URL = "BBBBBBBBBB";
 
     private static final ZonedDateTime DEFAULT_INITIAL_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_INITIAL_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
@@ -114,6 +117,7 @@ public class EventResourceIntTest {
                 .price(DEFAULT_PRICE)
                 .banner(DEFAULT_BANNER)
                 .bannerContentType(DEFAULT_BANNER_CONTENT_TYPE)
+                .bannerUrl(DEFAULT_BANNER_URL)
                 .initialTime(DEFAULT_INITIAL_TIME)
                 .finalTime(DEFAULT_FINAL_TIME);
         return event;
@@ -146,6 +150,7 @@ public class EventResourceIntTest {
         assertThat(testEvent.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testEvent.getBanner()).isEqualTo(DEFAULT_BANNER);
         assertThat(testEvent.getBannerContentType()).isEqualTo(DEFAULT_BANNER_CONTENT_TYPE);
+        assertThat(testEvent.getBannerUrl()).isEqualTo(DEFAULT_BANNER_URL);
         assertThat(testEvent.getInitialTime()).isEqualTo(DEFAULT_INITIAL_TIME);
         assertThat(testEvent.getFinalTime()).isEqualTo(DEFAULT_FINAL_TIME);
     }
@@ -279,9 +284,10 @@ public class EventResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(event.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].details").value(hasItem(DEFAULT_DETAILS.toString())))
-            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.toString())))
+            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].bannerContentType").value(hasItem(DEFAULT_BANNER_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].banner").value(hasItem(Base64Utils.encodeToString(DEFAULT_BANNER))))
+            .andExpect(jsonPath("$.[*].bannerUrl").value(hasItem(DEFAULT_BANNER_URL.toString())))
             .andExpect(jsonPath("$.[*].initialTime").value(hasItem(sameInstant(DEFAULT_INITIAL_TIME))))
             .andExpect(jsonPath("$.[*].finalTime").value(hasItem(sameInstant(DEFAULT_FINAL_TIME))));
     }
@@ -299,9 +305,10 @@ public class EventResourceIntTest {
             .andExpect(jsonPath("$.id").value(event.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.details").value(DEFAULT_DETAILS.toString()))
-            .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.toString()))
+            .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()))
             .andExpect(jsonPath("$.bannerContentType").value(DEFAULT_BANNER_CONTENT_TYPE))
             .andExpect(jsonPath("$.banner").value(Base64Utils.encodeToString(DEFAULT_BANNER)))
+            .andExpect(jsonPath("$.bannerUrl").value(DEFAULT_BANNER_URL.toString()))
             .andExpect(jsonPath("$.initialTime").value(sameInstant(DEFAULT_INITIAL_TIME)))
             .andExpect(jsonPath("$.finalTime").value(sameInstant(DEFAULT_FINAL_TIME)));
     }
@@ -329,6 +336,7 @@ public class EventResourceIntTest {
                 .price(UPDATED_PRICE)
                 .banner(UPDATED_BANNER)
                 .bannerContentType(UPDATED_BANNER_CONTENT_TYPE)
+                .bannerUrl(UPDATED_BANNER_URL)
                 .initialTime(UPDATED_INITIAL_TIME)
                 .finalTime(UPDATED_FINAL_TIME);
         EventDTO eventDTO = eventMapper.eventToEventDTO(updatedEvent);
@@ -347,6 +355,7 @@ public class EventResourceIntTest {
         assertThat(testEvent.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testEvent.getBanner()).isEqualTo(UPDATED_BANNER);
         assertThat(testEvent.getBannerContentType()).isEqualTo(UPDATED_BANNER_CONTENT_TYPE);
+        assertThat(testEvent.getBannerUrl()).isEqualTo(UPDATED_BANNER_URL);
         assertThat(testEvent.getInitialTime()).isEqualTo(UPDATED_INITIAL_TIME);
         assertThat(testEvent.getFinalTime()).isEqualTo(UPDATED_FINAL_TIME);
     }

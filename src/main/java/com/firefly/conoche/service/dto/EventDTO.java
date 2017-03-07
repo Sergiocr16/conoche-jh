@@ -23,11 +23,13 @@ public class EventDTO implements Serializable {
     private String details;
 
     @NotNull
-    private String price;
+    private Double price;
 
     @Lob
     private byte[] banner;
     private String bannerContentType;
+
+    private String bannerUrl;
 
     @NotNull
     private ZonedDateTime initialTime;
@@ -64,11 +66,11 @@ public class EventDTO implements Serializable {
     public void setDetails(String details) {
         this.details = details;
     }
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
     public byte[] getBanner() {
@@ -85,6 +87,13 @@ public class EventDTO implements Serializable {
 
     public void setBannerContentType(String bannerContentType) {
         this.bannerContentType = bannerContentType;
+    }
+    public String getBannerUrl() {
+        return bannerUrl;
+    }
+
+    public void setBannerUrl(String bannerUrl) {
+        this.bannerUrl = bannerUrl;
     }
     public ZonedDateTime getInitialTime() {
         return initialTime;
@@ -162,6 +171,7 @@ public class EventDTO implements Serializable {
             ", details='" + details + "'" +
             ", price='" + price + "'" +
             ", banner='" + banner + "'" +
+            ", bannerUrl='" + bannerUrl + "'" +
             ", initialTime='" + initialTime + "'" +
             ", finalTime='" + finalTime + "'" +
             '}';

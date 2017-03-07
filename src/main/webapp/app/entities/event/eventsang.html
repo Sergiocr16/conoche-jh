@@ -23,6 +23,7 @@
                     <th jh-sort-by="details"><span data-translate="conocheApp.event.details">Details</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="price"><span data-translate="conocheApp.event.price">Price</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="banner"><span data-translate="conocheApp.event.banner">Banner</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="bannerUrl"><span data-translate="conocheApp.event.bannerUrl">Banner Url</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="initialTime"><span data-translate="conocheApp.event.initialTime">Initial Time</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="finalTime"><span data-translate="conocheApp.event.finalTime">Final Time</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="localName"><span data-translate="conocheApp.event.local">Local</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -41,6 +42,7 @@
                         </a>
                         <span ng-if="event.banner">{{event.bannerContentType}}, {{vm.byteSize(event.banner)}}</span>
                     </td>
+                    <td>{{event.bannerUrl}}</td>
                     <td>{{event.initialTime | date:'medium'}}</td>
                     <td>{{event.finalTime | date:'medium'}}</td>
                     <td>

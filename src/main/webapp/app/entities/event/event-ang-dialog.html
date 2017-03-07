@@ -39,13 +39,17 @@
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="conocheApp.event.price" for="field_price">Price</label>
-            <input type="text" class="form-control" name="price" id="field_price"
+            <input type="number" class="form-control" name="price" id="field_price"
                     ng-model="vm.event.price"
                     required/>
             <div ng-show="editForm.price.$invalid">
                 <p class="help-block"
                     ng-show="editForm.price.$error.required" data-translate="entity.validation.required">
                     This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.price.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
                 </p>
             </div>
         </div>
@@ -70,6 +74,12 @@
                     />
             <input type="hidden" class="form-control" name="bannerContentType" id="field_bannerContentType"
                     ng-model="vm.event.bannerContentType" />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="conocheApp.event.bannerUrl" for="field_bannerUrl">Banner Url</label>
+            <input type="text" class="form-control" name="bannerUrl" id="field_bannerUrl"
+                    ng-model="vm.event.bannerUrl"
+                    />
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="conocheApp.event.initialTime" for="field_initialTime">Initial Time</label>

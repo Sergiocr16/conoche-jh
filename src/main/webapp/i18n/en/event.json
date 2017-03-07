@@ -19,6 +19,7 @@
             "details": "Details",
             "price": "Price",
             "banner": "Banner",
+            "bannerUrl": "Banner Url",
             "initialTime": "Initial Time",
             "finalTime": "Final Time",
             "promotions": "Promotions",

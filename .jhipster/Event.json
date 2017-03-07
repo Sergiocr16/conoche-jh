@@ -65,7 +65,7 @@
         },
         {
             "fieldName": "price",
-            "fieldType": "String",
+            "fieldType": "Double",
             "fieldValidateRules": [
                 "required"
             ]
@@ -74,6 +74,10 @@
             "fieldName": "banner",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "bannerUrl",
+            "fieldType": "String"
         },
         {
             "fieldName": "initialTime",

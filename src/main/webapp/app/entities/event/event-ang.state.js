@@ -129,6 +129,7 @@
                                 price: null,
                                 banner: null,
                                 bannerContentType: null,
+                                bannerUrl: null,
                                 initialTime: null,
                                 finalTime: null,
                                 id: null

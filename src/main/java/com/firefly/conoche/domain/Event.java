@@ -36,7 +36,7 @@ public class Event implements Serializable {
 
     @NotNull
     @Column(name = "price", nullable = false)
-    private String price;
+    private Double price;
 
     @Lob
     @Column(name = "banner")
@@ -44,6 +44,9 @@ public class Event implements Serializable {
 
     @Column(name = "banner_content_type")
     private String bannerContentType;
+
+    @Column(name = "banner_url")
+    private String bannerUrl;
 
     @NotNull
     @Column(name = "initial_time", nullable = false)
@@ -124,16 +127,16 @@ public class Event implements Serializable {
         this.details = details;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public Event price(String price) {
+    public Event price(Double price) {
         this.price = price;
         return this;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -161,6 +164,19 @@ public class Event implements Serializable {
 
     public void setBannerContentType(String bannerContentType) {
         this.bannerContentType = bannerContentType;
+    }
+
+    public String getBannerUrl() {
+        return bannerUrl;
+    }
+
+    public Event bannerUrl(String bannerUrl) {
+        this.bannerUrl = bannerUrl;
+        return this;
+    }
+
+    public void setBannerUrl(String bannerUrl) {
+        this.bannerUrl = bannerUrl;
     }
 
     public ZonedDateTime getInitialTime() {
@@ -377,6 +393,7 @@ public class Event implements Serializable {
             ", price='" + price + "'" +
             ", banner='" + banner + "'" +
             ", bannerContentType='" + bannerContentType + "'" +
+            ", bannerUrl='" + bannerUrl + "'" +
             ", initialTime='" + initialTime + "'" +
             ", finalTime='" + finalTime + "'" +
             '}';
