@@ -1,0 +1,33 @@
+{
+    "conocheApp": {
+        "local" : {
+            "home": {
+                "title": "Locals",
+                "createLabel": "Crear nuevo Local",
+                "createOrEditLabel": "Crear o editar Local"
+            },
+            "created": "Un nuevo Local ha sido creado con el identificador {{ param }}",
+            "updated": "Un Local ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Local ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Local {{ id }}?"
+            },
+            "detail": {
+                "title": "Local"
+            },
+            "name": "Name",
+            "longitud": "Longitud",
+            "banner": "Banner",
+            "bannerUrl": "Banner Url",
+            "latitud": "Latitud",
+            "descripcion": "Descripcion",
+            "provincia": "Provincia",
+            "images": "Images",
+            "events": "Events",
+            "schedules": "Schedules",
+            "services": "Services",
+            "subcribers": "Subcribers",
+            "ratings": "Ratings"
+        }
+    }
+}

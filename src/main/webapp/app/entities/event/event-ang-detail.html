@@ -1,0 +1,64 @@
+
+<div>
+    <h2><span data-translate="conocheApp.event.detail.title">Event</span> {{vm.event.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row jh-entity-details">
+        <dt><span data-translate="conocheApp.event.name">Name</span></dt>
+        <dd>
+            <span>{{vm.event.name}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.event.details">Details</span></dt>
+        <dd>
+            <span>{{vm.event.details}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.event.price">Price</span></dt>
+        <dd>
+            <span>{{vm.event.price}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.event.banner">Banner</span></dt>
+        <dd>
+            <div ng-if="vm.event.banner">
+                <a ng-click="vm.openFile(vm.event.bannerContentType, vm.event.banner)">
+                    <img data-ng-src="{{'data:' + vm.event.bannerContentType + ';base64,' + vm.event.banner}}" style="max-width: 100%;" alt="event image"/>
+                </a>
+                {{vm.event.bannerContentType}}, {{vm.byteSize(vm.event.banner)}}
+            </div>
+        </dd>
+        <dt><span data-translate="conocheApp.event.initialTime">Initial Time</span></dt>
+        <dd>
+            <span>{{vm.event.initialTime | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.event.finalTime">Final Time</span></dt>
+        <dd>
+            <span>{{vm.event.finalTime | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.event.attendingUsers">Attending Users</span></dt>
+        <dd>
+            <span ng-repeat="attendingUsers in vm.event.attendingUsers">
+                {{attendingUsers.id}}{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span data-translate="conocheApp.event.services">Services</span></dt>
+        <dd>
+            <span ng-repeat="services in vm.event.services">
+                <a ui-sref="servicio-ang-detail({id: services.id})">{{services.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span data-translate="conocheApp.event.local">Local</span></dt>
+        <dd>
+            <a ui-sref="local-ang-detail({id:vm.event.localId})">{{vm.event.localName}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="event-ang-detail.edit({id:vm.event.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

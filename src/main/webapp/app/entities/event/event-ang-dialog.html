@@ -1,0 +1,138 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myEventLabel" data-translate="conocheApp.event.home.createOrEditLabel">Create or edit a Event</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.event.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.event.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="conocheApp.event.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.event.name"
+                    required/>
+            <div ng-show="editForm.name.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.name.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="conocheApp.event.details" for="field_details">Details</label>
+            <input type="text" class="form-control" name="details" id="field_details"
+                    ng-model="vm.event.details"
+                    required/>
+            <div ng-show="editForm.details.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.details.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="conocheApp.event.price" for="field_price">Price</label>
+            <input type="text" class="form-control" name="price" id="field_price"
+                    ng-model="vm.event.price"
+                    required/>
+            <div ng-show="editForm.price.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.price.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setBanner($file, vm.event)" ngf-pattern="'image/*'">
+            <label class="control-label" data-translate="conocheApp.event.banner" for="field_banner">Banner</label>
+            <div>
+                <img data-ng-src="{{'data:' + vm.event.bannerContentType + ';base64,' + vm.event.banner}}" style="max-height: 100px;" ng-if="vm.event.banner" alt="event image"/>
+                <div ng-if="vm.event.banner" class="help-block clearfix">
+                    <span class="pull-left">{{vm.event.bannerContentType}}, {{vm.byteSize(vm.event.banner)}}</span>
+                    <button type="button" ng-click="vm.event.banner=null;vm.event.bannerContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="button" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setBanner($file, vm.event)" accept="image/*" data-translate="entity.action.addimage">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="banner" id="field_banner"
+                    ng-model="vm.event.banner"
+                    />
+            <input type="hidden" class="form-control" name="bannerContentType" id="field_bannerContentType"
+                    ng-model="vm.event.bannerContentType" />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="conocheApp.event.initialTime" for="field_initialTime">Initial Time</label>
+                <div class="input-group">
+                    <input id="field_initialTime" type="text" class="form-control" name="initialTime" datetime-picker="{{dateformat}}" ng-model="vm.event.initialTime" is-open="vm.datePickerOpenStatus.initialTime"
+                    required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('initialTime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.initialTime.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.initialTime.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.initialTime.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="conocheApp.event.finalTime" for="field_finalTime">Final Time</label>
+                <div class="input-group">
+                    <input id="field_finalTime" type="text" class="form-control" name="finalTime" datetime-picker="{{dateformat}}" ng-model="vm.event.finalTime" is-open="vm.datePickerOpenStatus.finalTime"
+                    required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('finalTime')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.finalTime.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.finalTime.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.finalTime.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="conocheApp.event.attendingUsers" for="field_attendingUsers">Attending Users</label>
+            <select class="form-control" id="field_attendingUsers" multiple name="attendingUsers" ng-model="vm.event.attendingUsers" ng-options="user as user.id for user in vm.users track by user.id"></select>
+        </div>
+        <div class="form-group">
+            <label data-translate="conocheApp.event.services" for="field_services">Services</label>
+            <select class="form-control" id="field_services" multiple name="services" ng-model="vm.event.services" ng-options="servicio as servicio.id for servicio in vm.servicios track by servicio.id"></select>
+        </div>
+        <div class="form-group">
+            <label data-translate="conocheApp.event.local" for="field_local">Local</label>
+            <select class="form-control" id="field_local" name="local" ng-model="vm.event.localId" ng-options="local.id as local.name for local in vm.locals"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

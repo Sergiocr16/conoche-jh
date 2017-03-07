@@ -1,0 +1,24 @@
+{
+    "conocheApp": {
+        "actionObject" : {
+            "home": {
+                "title": "Action Objects",
+                "createLabel": "Crear nuevo Action Object",
+                "createOrEditLabel": "Crear o editar Action Object"
+            },
+            "created": "Un nuevo Action Object ha sido creado con el identificador {{ param }}",
+            "updated": "Un Action Object ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Action Object ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Action Object {{ id }}?"
+            },
+            "detail": {
+                "title": "Action Object"
+            },
+            "objectId": "Object Id",
+            "description": "Description",
+            "objectType": "Object Type",
+            "action": "Action"
+        }
+    }
+}

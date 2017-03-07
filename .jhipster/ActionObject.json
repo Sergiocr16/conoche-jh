@@ -1,0 +1,35 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "action",
+            "otherEntityName": "action",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "objectId",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "objectType",
+            "fieldType": "ActionObjectType",
+            "fieldValues": "USER,LOCAL,EVENT,PROMOTION,MESSAGE,RATING,EVENT_IMAGE,REALTIME_EVENT_IMAGE,LOCAL_IMAGE"
+        }
+    ],
+    "changelogDate": "20170307223303",
+    "entityTableName": "action_object",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "angularJSSuffix": "ang"
+}

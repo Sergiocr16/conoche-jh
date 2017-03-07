@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span data-translate="conocheApp.promotionCode.detail.title">Promotion Code</span> {{vm.promotionCode.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row jh-entity-details">
+        <dt><span data-translate="conocheApp.promotionCode.code">Code</span></dt>
+        <dd>
+            <span>{{vm.promotionCode.code}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.promotionCode.active">Active</span></dt>
+        <dd>
+            <span>{{vm.promotionCode.active}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.promotionCode.promotion">Promotion</span></dt>
+        <dd>
+            <a ui-sref="promotion-ang-detail({id:vm.promotionCode.promotionId})">{{vm.promotionCode.promotionId}}</a>
+        </dd>
+        <dt><span data-translate="conocheApp.promotionCode.user">User</span></dt>
+        <dd>
+            {{vm.promotionCode.userId}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="promotion-code-ang-detail.edit({id:vm.promotionCode.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

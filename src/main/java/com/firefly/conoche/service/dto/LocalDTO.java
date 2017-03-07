@@ -1,0 +1,155 @@
+package com.firefly.conoche.service.dto;
+
+
+import javax.validation.constraints.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Objects;
+import javax.persistence.Lob;
+import com.firefly.conoche.domain.enumeration.Provincia;
+
+/**
+ * A DTO for the Local entity.
+ */
+public class LocalDTO implements Serializable {
+
+    private Long id;
+
+    @NotNull
+    private String name;
+
+    private Double longitud;
+
+    @Lob
+    private byte[] banner;
+    private String bannerContentType;
+
+    private String bannerUrl;
+
+    private Double latitud;
+
+    private String descripcion;
+
+    private Provincia provincia;
+
+    private Set<ServicioDTO> services = new HashSet<>();
+
+    private Set<UserDTO> subcribers = new HashSet<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
+    }
+    public byte[] getBanner() {
+        return banner;
+    }
+
+    public void setBanner(byte[] banner) {
+        this.banner = banner;
+    }
+
+    public String getBannerContentType() {
+        return bannerContentType;
+    }
+
+    public void setBannerContentType(String bannerContentType) {
+        this.bannerContentType = bannerContentType;
+    }
+    public String getBannerUrl() {
+        return bannerUrl;
+    }
+
+    public void setBannerUrl(String bannerUrl) {
+        this.bannerUrl = bannerUrl;
+    }
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    public Provincia getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(Provincia provincia) {
+        this.provincia = provincia;
+    }
+
+    public Set<ServicioDTO> getServices() {
+        return services;
+    }
+
+    public void setServices(Set<ServicioDTO> servicios) {
+        this.services = servicios;
+    }
+
+    public Set<UserDTO> getSubcribers() {
+        return subcribers;
+    }
+
+    public void setSubcribers(Set<UserDTO> users) {
+        this.subcribers = users;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        LocalDTO localDTO = (LocalDTO) o;
+
+        if ( ! Objects.equals(id, localDTO.id)) { return false; }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
+    @Override
+    public String toString() {
+        return "LocalDTO{" +
+            "id=" + id +
+            ", name='" + name + "'" +
+            ", longitud='" + longitud + "'" +
+            ", banner='" + banner + "'" +
+            ", bannerUrl='" + bannerUrl + "'" +
+            ", latitud='" + latitud + "'" +
+            ", descripcion='" + descripcion + "'" +
+            ", provincia='" + provincia + "'" +
+            '}';
+    }
+}

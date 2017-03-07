@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span data-translate="conocheApp.ratingLocal.detail.title">Rating Local</span> {{vm.ratingLocal.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row jh-entity-details">
+        <dt><span data-translate="conocheApp.ratingLocal.rating">Rating</span></dt>
+        <dd>
+            <span>{{vm.ratingLocal.rating}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.ratingLocal.description">Description</span></dt>
+        <dd>
+            <span>{{vm.ratingLocal.description}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.ratingLocal.userDetails">User Details</span></dt>
+        <dd>
+            {{vm.ratingLocal.userDetailsId}}
+        </dd>
+        <dt><span data-translate="conocheApp.ratingLocal.local">Local</span></dt>
+        <dd>
+            <a ui-sref="local-ang-detail({id:vm.ratingLocal.localId})">{{vm.ratingLocal.localName}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="rating-local-ang-detail.edit({id:vm.ratingLocal.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
