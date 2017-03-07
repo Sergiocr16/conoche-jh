@@ -1,0 +1,36 @@
+
+<div>
+    <h2><span data-translate="conocheApp.eventImage.detail.title">Event Image</span> {{vm.eventImage.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row jh-entity-details">
+        <dt><span data-translate="conocheApp.eventImage.image">Image</span></dt>
+        <dd>
+            <div ng-if="vm.eventImage.image">
+                <a ng-click="vm.openFile(vm.eventImage.imageContentType, vm.eventImage.image)">
+                    <img data-ng-src="{{'data:' + vm.eventImage.imageContentType + ';base64,' + vm.eventImage.image}}" style="max-width: 100%;" alt="eventImage image"/>
+                </a>
+                {{vm.eventImage.imageContentType}}, {{vm.byteSize(vm.eventImage.image)}}
+            </div>
+        </dd>
+        <dt><span data-translate="conocheApp.eventImage.imageUrl">Image Url</span></dt>
+        <dd>
+            <span>{{vm.eventImage.imageUrl}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.eventImage.event">Event</span></dt>
+        <dd>
+            <a ui-sref="event-ang-detail({id:vm.eventImage.eventId})">{{vm.eventImage.eventId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="event-image-ang-detail.edit({id:vm.eventImage.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,116 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myScheduleLabel" data-translate="conocheApp.schedule.home.createOrEditLabel">Create or edit a Schedule</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.schedule.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.schedule.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="conocheApp.schedule.initialDay" for="field_initialDay">Initial Day</label>
+            <select class="form-control" name="initialDay" ng-model="vm.schedule.initialDay" id="field_initialDay" required>
+                <option value="MONDAY" data-translate="conocheApp.Day.MONDAY">MONDAY</option>
+                <option value="TUESDAY" data-translate="conocheApp.Day.TUESDAY">TUESDAY</option>
+                <option value="WEDNESDAY" data-translate="conocheApp.Day.WEDNESDAY">WEDNESDAY</option>
+                <option value="THURSDAY" data-translate="conocheApp.Day.THURSDAY">THURSDAY</option>
+                <option value="FRIDAY" data-translate="conocheApp.Day.FRIDAY">FRIDAY</option>
+                <option value="SATURDAY" data-translate="conocheApp.Day.SATURDAY">SATURDAY</option>
+                <option value="SUNDAY" data-translate="conocheApp.Day.SUNDAY">SUNDAY</option>
+            </select>
+            <div ng-show="editForm.initialDay.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.initialDay.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="conocheApp.schedule.finalDay" for="field_finalDay">Final Day</label>
+            <select class="form-control" name="finalDay" ng-model="vm.schedule.finalDay" id="field_finalDay" required>
+                <option value="MONDAY" data-translate="conocheApp.Day.MONDAY">MONDAY</option>
+                <option value="TUESDAY" data-translate="conocheApp.Day.TUESDAY">TUESDAY</option>
+                <option value="WEDNESDAY" data-translate="conocheApp.Day.WEDNESDAY">WEDNESDAY</option>
+                <option value="THURSDAY" data-translate="conocheApp.Day.THURSDAY">THURSDAY</option>
+                <option value="FRIDAY" data-translate="conocheApp.Day.FRIDAY">FRIDAY</option>
+                <option value="SATURDAY" data-translate="conocheApp.Day.SATURDAY">SATURDAY</option>
+                <option value="SUNDAY" data-translate="conocheApp.Day.SUNDAY">SUNDAY</option>
+            </select>
+            <div ng-show="editForm.finalDay.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.finalDay.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="conocheApp.schedule.initialTime" for="field_initialTime">Initial Time</label>
+            <input type="number" class="form-control" name="initialTime" id="field_initialTime"
+                    ng-model="vm.schedule.initialTime"
+                    required min="0" max="1439"/>
+            <div ng-show="editForm.initialTime.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.initialTime.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.initialTime.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                    This field should be at least 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.initialTime.$error.max" data-translate="entity.validation.max" translate-value-max="1439">
+                    This field cannot be more than 1439.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.initialTime.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="conocheApp.schedule.finalTime" for="field_finalTime">Final Time</label>
+            <input type="number" class="form-control" name="finalTime" id="field_finalTime"
+                    ng-model="vm.schedule.finalTime"
+                    required min="0" max="1439"/>
+            <div ng-show="editForm.finalTime.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.finalTime.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.finalTime.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                    This field should be at least 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.finalTime.$error.max" data-translate="entity.validation.max" translate-value-max="1439">
+                    This field cannot be more than 1439.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.finalTime.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="conocheApp.schedule.local" for="field_local">Local</label>
+            <select class="form-control" id="field_local" name="local" ng-model="vm.schedule.localId" ng-options="local.id as local.name for local in vm.locals"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

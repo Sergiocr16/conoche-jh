@@ -1,0 +1,71 @@
+<div>
+    <h2 data-translate="conocheApp.imagenLocal.home.title">Imagen Locals</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="imagen-local-ang.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="conocheApp.imagenLocal.home.createLabel">
+                        Create new Imagen Local
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="imageUrl"><span data-translate="conocheApp.imagenLocal.imageUrl">Image Url</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="image"><span data-translate="conocheApp.imagenLocal.image">Image</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="localId"><span data-translate="conocheApp.imagenLocal.local">Local</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="imagenLocal in vm.imagenLocals track by imagenLocal.id">
+                    <td><a ui-sref="imagen-local-ang-detail({id:imagenLocal.id})">{{imagenLocal.id}}</a></td>
+                    <td>{{imagenLocal.imageUrl}}</td>
+                    <td>
+                        <a ng-if="imagenLocal.image" ng-click="vm.openFile(imagenLocal.imageContentType, imagenLocal.image)">
+                            <img data-ng-src="{{'data:' + imagenLocal.imageContentType + ';base64,' + imagenLocal.image}}" style="max-height: 30px;" alt="imagenLocal image"/>
+                        </a>
+                        <span ng-if="imagenLocal.image">{{imagenLocal.imageContentType}}, {{vm.byteSize(imagenLocal.image)}}</span>
+                    </td>
+                    <td>
+                        <a ui-sref="local-ang-detail({id:imagenLocal.localId})">{{imagenLocal.localId}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="imagen-local-ang-detail({id:imagenLocal.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="imagen-local-ang.edit({id:imagenLocal.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="imagen-local-ang.delete({id:imagenLocal.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+</div>

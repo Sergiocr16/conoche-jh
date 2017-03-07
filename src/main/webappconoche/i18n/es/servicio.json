@@ -1,0 +1,22 @@
+{
+    "conocheApp": {
+        "servicio" : {
+            "home": {
+                "title": "Servicios",
+                "createLabel": "Crear nuevo Servicio",
+                "createOrEditLabel": "Crear o editar Servicio"
+            },
+            "created": "Un nuevo Servicio ha sido creado con el identificador {{ param }}",
+            "updated": "Un Servicio ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Servicio ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Servicio {{ id }}?"
+            },
+            "detail": {
+                "title": "Servicio"
+            },
+            "descripcion": "Descripcion",
+            "icon": "Icon"
+        }
+    }
+}
