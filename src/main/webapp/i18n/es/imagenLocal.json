@@ -1,0 +1,23 @@
+{
+    "conocheApp": {
+        "imagenLocal" : {
+            "home": {
+                "title": "Imagen Locals",
+                "createLabel": "Crear nuevo Imagen Local",
+                "createOrEditLabel": "Crear o editar Imagen Local"
+            },
+            "created": "Un nuevo Imagen Local ha sido creado con el identificador {{ param }}",
+            "updated": "Un Imagen Local ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Imagen Local ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Imagen Local {{ id }}?"
+            },
+            "detail": {
+                "title": "Imagen Local"
+            },
+            "imageUrl": "Image Url",
+            "image": "Image",
+            "local": "Local"
+        }
+    }
+}

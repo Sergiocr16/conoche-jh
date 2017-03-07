@@ -1,0 +1,86 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "images",
+            "otherEntityName": "imagenLocal",
+            "otherEntityRelationshipName": "local"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "events",
+            "otherEntityName": "event",
+            "otherEntityRelationshipName": "local"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "schedules",
+            "otherEntityName": "schedule",
+            "otherEntityRelationshipName": "local"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "services",
+            "otherEntityName": "servicio",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "subcribers",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "ratings",
+            "otherEntityName": "ratingLocal",
+            "otherEntityRelationshipName": "local"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "longitud",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "banner",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "bannerUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "latitud",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "descripcion",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "provincia",
+            "fieldType": "Provincia",
+            "fieldValues": "SAN_JOSE,ALAJUELA,CARTAGO,GUANACASTE,LIMON,HEREDIA,PUNTARENAS"
+        }
+    ],
+    "changelogDate": "20170307223303",
+    "entityTableName": "local",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "angularJSSuffix": "ang"
+}

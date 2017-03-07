@@ -1,0 +1,64 @@
+
+<div>
+    <h2><span data-translate="conocheApp.local.detail.title">Local</span> {{vm.local.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row jh-entity-details">
+        <dt><span data-translate="conocheApp.local.name">Name</span></dt>
+        <dd>
+            <span>{{vm.local.name}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.local.longitud">Longitud</span></dt>
+        <dd>
+            <span>{{vm.local.longitud}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.local.banner">Banner</span></dt>
+        <dd>
+            <div ng-if="vm.local.banner">
+                <a ng-click="vm.openFile(vm.local.bannerContentType, vm.local.banner)">
+                    <img data-ng-src="{{'data:' + vm.local.bannerContentType + ';base64,' + vm.local.banner}}" style="max-width: 100%;" alt="local image"/>
+                </a>
+                {{vm.local.bannerContentType}}, {{vm.byteSize(vm.local.banner)}}
+            </div>
+        </dd>
+        <dt><span data-translate="conocheApp.local.bannerUrl">Banner Url</span></dt>
+        <dd>
+            <span>{{vm.local.bannerUrl}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.local.latitud">Latitud</span></dt>
+        <dd>
+            <span>{{vm.local.latitud}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.local.descripcion">Descripcion</span></dt>
+        <dd>
+            <span>{{vm.local.descripcion}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.local.provincia">Provincia</span></dt>
+        <dd>
+            <span data-translate="{{'conocheApp.Provincia.' + vm.local.provincia}}">{{vm.local.provincia}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.local.services">Services</span></dt>
+        <dd>
+            <span ng-repeat="services in vm.local.services">
+                <a ui-sref="servicio-ang-detail({id: services.id})">{{services.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span data-translate="conocheApp.local.subcribers">Subcribers</span></dt>
+        <dd>
+            <span ng-repeat="subcribers in vm.local.subcribers">
+                {{subcribers.id}}{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="local-ang-detail.edit({id:vm.local.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

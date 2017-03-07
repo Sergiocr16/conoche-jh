@@ -1,0 +1,24 @@
+{
+    "conocheApp": {
+        "ratingLocal" : {
+            "home": {
+                "title": "Rating Locals",
+                "createLabel": "Crear nuevo Rating Local",
+                "createOrEditLabel": "Crear o editar Rating Local"
+            },
+            "created": "Un nuevo Rating Local ha sido creado con el identificador {{ param }}",
+            "updated": "Un Rating Local ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Rating Local ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Rating Local {{ id }}?"
+            },
+            "detail": {
+                "title": "Rating Local"
+            },
+            "rating": "Rating",
+            "description": "Description",
+            "userDetails": "User Details",
+            "local": "Local"
+        }
+    }
+}

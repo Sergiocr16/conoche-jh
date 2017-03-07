@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "userDetails",
+            "otherEntityName": "user",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "local",
+            "otherEntityName": "local",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "rating",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 0,
+            "fieldValidateRulesMax": 10
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170307223303",
+    "entityTableName": "rating_local",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "angularJSSuffix": "ang"
+}

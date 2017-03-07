@@ -1,0 +1,23 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "descripcion",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "icon",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170307223303",
+    "entityTableName": "servicio",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "angularJSSuffix": "ang"
+}

@@ -1,0 +1,200 @@
+//Elimnar las url si no usamos cloudinary
+
+entity Promotion {
+    description String required,
+    imageUrl String,
+    image ImageBlob,
+    initialTime ZonedDateTime required,
+    finalTime ZonedDateTime required,
+    maximumCodePerUser Integer min(1) required,
+}
+
+entity PromotionCode {
+	code String required,
+    active Boolean required
+}
+
+entity Local {
+	name String required,
+    longitud Double,
+    banner ImageBlob,
+    bannerUrl String,
+    latitud Double,
+    descripcion String,
+    provincia Provincia,
+    
+}
+entity Servicio {
+	descripcion String required,
+    icon String
+}
+
+enum Provincia {
+	SAN_JOSE,
+    ALAJUELA,
+    CARTAGO,
+    GUANACASTE,
+    LIMON,
+    HEREDIA,
+    PUNTARENAS
+}
+
+entity Event {
+	name String required,
+    details String required,
+    price String required,
+    banner ImageBlob,
+    initialTime ZonedDateTime required,
+    finalTime ZonedDateTime required,
+}
+
+entity EventImage {
+	image ImageBlob,
+    imageUrl String,
+}
+
+entity RealTimeEventImage {
+	image ImageBlob,
+    imageUrl String,
+    creationTime ZonedDateTime required,
+    description String
+}
+
+entity ImagenLocal {
+	imageUrl String,
+    image ImageBlob
+}
+
+
+//Preguntar si es mejor tener una entidad con varias relaciones
+// o tener una entidad con un tipo y un id.
+// o tener todas la entidades relacionadas a una entidad entity(herencia en bd)
+entity RatingLocal {
+	rating Integer  required min(0) max(10),
+    description String,
+}
+
+
+
+entity Action {
+	descripcion String required,
+    creation ZonedDateTime required,
+} 
+
+entity ActionObject {
+	objectId Long required,
+    description String,
+    objectType ActionObjectType 
+}
+
+
+enum ActionObjectType {
+	USER,
+    LOCAL,
+    EVENT,
+    PROMOTION,
+    MESSAGE,
+    RATING,
+    EVENT_IMAGE,
+    REALTIME_EVENT_IMAGE,
+    LOCAL_IMAGE
+}
+
+entity Schedule {
+	initialDay Day required,
+    finalDay Day required,
+    initialTime Integer required min(0) max(1439),
+    finalTime Integer required min(0) max(1439),
+}
+enum Day {
+	MONDAY,
+    TUESDAY,
+    WEDNESDAY,
+    THURSDAY,
+    FRIDAY,
+    SATURDAY,
+    SUNDAY
+}
+
+entity Message {
+	payload String required, 
+    creationTime ZonedDateTime required,
+}
+
+
+relationship OneToMany {
+	Promotion{codes} to PromotionCode
+}
+
+relationship ManyToOne {
+	PromotionCode{user} to User
+}
+
+
+relationship ManyToMany {
+	Event{attendingUsers} to User
+}
+
+relationship ManyToMany {
+	Local{services} to Servicio
+}
+
+relationship ManyToMany {
+	Event{services} to Servicio
+}
+
+relationship OneToMany {
+	Action{objects} to ActionObject
+}
+
+relationship OneToMany {
+	Event{promotions} to Promotion{event}
+}
+
+relationship OneToMany {
+  Local{images} to ImagenLocal,
+  Local{events} to Event{local(name)},
+  Local{schedules} to Schedule{local(name)}
+}
+
+relationship OneToMany {
+	Event{images(description)} to EventImage
+}
+
+relationship OneToMany {
+	Event{realTimeImages(description)} to RealTimeEventImage
+}
+
+relationship ManyToOne {
+	Message{user} to User,
+    Message{event(name)} to Event{messages}
+}
+
+relationship ManyToOne {
+	RatingLocal{userDetails} to User,
+    RatingLocal{local(name)} to Local{ratings}
+}
+
+
+relationship ManyToMany {
+	 Action{users} to User
+}
+
+relationship ManyToMany {
+	 Local{subcribers} to User
+}
+
+
+
+//paginacion para todas las entidades de angular
+paginate * with pager
+//Agrega dto a todas las entidades
+dto * with mapstruct
+
+// Crea los servicios sin interfaces.
+service all with serviceClass //serviceImpl
+angularSuffix * with ang
+
+
+#title: ProyectoConocheV4
+#zoom: 1

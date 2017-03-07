@@ -1,0 +1,39 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "promotion",
+            "otherEntityName": "promotion",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "code",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "active",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170307223303",
+    "entityTableName": "promotion_code",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "angularJSSuffix": "ang"
+}

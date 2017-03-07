@@ -1,0 +1,24 @@
+{
+    "conocheApp": {
+        "promotionCode" : {
+            "home": {
+                "title": "Promotion Codes",
+                "createLabel": "Crear nuevo Promotion Code",
+                "createOrEditLabel": "Crear o editar Promotion Code"
+            },
+            "created": "Un nuevo Promotion Code ha sido creado con el identificador {{ param }}",
+            "updated": "Un Promotion Code ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Promotion Code ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Promotion Code {{ id }}?"
+            },
+            "detail": {
+                "title": "Promotion Code"
+            },
+            "code": "Code",
+            "active": "Active",
+            "promotion": "Promotion",
+            "user": "User"
+        }
+    }
+}

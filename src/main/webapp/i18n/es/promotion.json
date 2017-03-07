@@ -1,0 +1,28 @@
+{
+    "conocheApp": {
+        "promotion" : {
+            "home": {
+                "title": "Promotions",
+                "createLabel": "Crear nuevo Promotion",
+                "createOrEditLabel": "Crear o editar Promotion"
+            },
+            "created": "Un nuevo Promotion ha sido creado con el identificador {{ param }}",
+            "updated": "Un Promotion ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Promotion ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Promotion {{ id }}?"
+            },
+            "detail": {
+                "title": "Promotion"
+            },
+            "description": "Description",
+            "imageUrl": "Image Url",
+            "image": "Image",
+            "initialTime": "Initial Time",
+            "finalTime": "Final Time",
+            "maximumCodePerUser": "Maximum Code Per User",
+            "codes": "Codes",
+            "event": "Event"
+        }
+    }
+}

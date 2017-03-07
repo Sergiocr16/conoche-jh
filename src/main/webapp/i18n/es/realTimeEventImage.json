@@ -1,0 +1,25 @@
+{
+    "conocheApp": {
+        "realTimeEventImage" : {
+            "home": {
+                "title": "Real Time Event Images",
+                "createLabel": "Crear nuevo Real Time Event Image",
+                "createOrEditLabel": "Crear o editar Real Time Event Image"
+            },
+            "created": "Un nuevo Real Time Event Image ha sido creado con el identificador {{ param }}",
+            "updated": "Un Real Time Event Image ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Real Time Event Image ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Real Time Event Image {{ id }}?"
+            },
+            "detail": {
+                "title": "Real Time Event Image"
+            },
+            "image": "Image",
+            "imageUrl": "Image Url",
+            "creationTime": "Creation Time",
+            "description": "Description",
+            "event": "Event"
+        }
+    }
+}

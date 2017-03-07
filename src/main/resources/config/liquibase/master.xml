@@ -5,6 +5,31 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <include file="classpath:config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_Message.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_Action.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_Event.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_EventImage.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_ImagenLocal.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_Local.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_ActionObject.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_Promotion.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_PromotionCode.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_RatingLocal.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_RealTimeEventImage.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_Schedule.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_Servicio.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_constraints_Message.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_constraints_Action.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_constraints_Event.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_constraints_EventImage.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_constraints_ImagenLocal.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_constraints_Local.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_constraints_ActionObject.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_constraints_Promotion.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_constraints_PromotionCode.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_constraints_RatingLocal.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_constraints_RealTimeEventImage.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170307223303_added_entity_constraints_Schedule.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

@@ -7,6 +7,19 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entidades",
+                "messageAng": "Message",
+                "actionAng": "Action",
+                "eventAng": "Event",
+                "eventImageAng": "Event Image",
+                "imagenLocalAng": "Imagen Local",
+                "localAng": "Local",
+                "actionObjectAng": "Action Object",
+                "promotionAng": "Promotion",
+                "promotionCodeAng": "Promotion Code",
+                "ratingLocalAng": "Rating Local",
+                "realTimeEventImageAng": "Real Time Event Image",
+                "scheduleAng": "Schedule",
+                "servicioAng": "Servicio",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
