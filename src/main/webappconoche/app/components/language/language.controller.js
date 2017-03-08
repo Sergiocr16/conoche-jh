@@ -5,11 +5,14 @@
         .module('conocheApp')
         .controller('JhiLanguageController', JhiLanguageController);
 
-    JhiLanguageController.$inject = ['$translate', 'JhiLanguageService', 'tmhDynamicLocale'];
+    JhiLanguageController.$inject = ['$translate', 'JhiLanguageService', 'tmhDynamicLocale','Principal'];
 
-    function JhiLanguageController ($translate, JhiLanguageService, tmhDynamicLocale) {
+    function JhiLanguageController ($translate, JhiLanguageService, tmhDynamicLocale,Principal) {
         var vm = this;
-
+        Principal.identity().then(function(account) {
+            vm.currentLanguage = account.langKey;
+        });
+        console.log(vm.account);
         vm.changeLanguage = changeLanguage;
         vm.languages = null;
 
@@ -20,6 +23,7 @@
         function changeLanguage (languageKey) {
             $translate.use(languageKey);
             tmhDynamicLocale.set(languageKey);
+            vm.currentLanguage = languageKey;
         }
     }
 })();

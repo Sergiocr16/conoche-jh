@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance','Principal'];
 
-    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance) {
+    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance,Principal) {
         var vm = this;
 
         vm.authenticationError = false;
@@ -55,6 +55,9 @@
                     Auth.resetPreviousState();
                     $state.go(previousState.name, previousState.params);
                 }
+            Principal.identity().then(function(account) {
+                   $rootScope.account = account;
+            });
             }).catch(function () {
                 vm.authenticationError = true;
             });

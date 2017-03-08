@@ -133,5 +133,16 @@
         "emailexists": "E-mail is already in use!",
         "idexists": "A new {{entityName}} cannot already have an ID"
     },
-    "footer": "pie de página"
+    "footer": {
+        "about": "Acerca de Nosotros",
+        "subscribe":"SUBSCRIBETE",
+        "submit": "ENVIAR",
+        "followUs":"SIGUENOS EN",
+        "contact":{
+            "contact":"Contactos",
+            "phone":"Télefono",
+            "email":"Correo eléctronico"
+        },
+        "copyright":"2017 © Firefly. Todos los Derechos Reservados."
+    }
 }
