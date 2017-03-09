@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService'];
+    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService', '$rootScope'];
 
-    function NavbarController ($state, Auth, Principal, ProfileService, LoginService) {
+    function NavbarController ($state, Auth, Principal, ProfileService, LoginService, $rootScope) {
         var vm = this;
          angular.element(document).ready(function () {
            Layout.initHeader();
@@ -26,6 +26,7 @@
         vm.login = login;
         vm.logout = logout;
         vm.$state = $state;
+        vm.pageTitle = $state.current.data.pageTitle;
 
         function login() {
             LoginService.open();
@@ -38,7 +39,10 @@
             $state.go('home');
         }
 
-
+        $rootScope.$on('$stateChangeStart',
+            function(event, toState, toParams, fromState, fromParams){
+                vm.pageTitle = toState.data.pageTitle;
+            });
 
     }
 })();
