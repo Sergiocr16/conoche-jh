@@ -1,236 +1,427 @@
-<nav class="navbar navbar-default" role="navigation">
+<!-- BEGIN HEADER TOP -->
+<div class="page-header-top">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" ng-click="vm.toggleNavbar()">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand logo" href="#/" ng-click="vm.collapseNavbar()">
-                <img class="logo-img" src="content/images/logo-jhipster.png" alt="logo"/>
-                <span data-translate="global.title">Conoche</span> <span class="navbar-version">v{{VERSION}}</span>
-            </a>
+        <!-- BEGIN LOGO -->
+        <div class="page-logo">
+            <a ui-sref="home"><img src="content/template/admin/layout3/img/logo-default.png" alt="logo" class="logo-default"></a>
         </div>
-        <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
-            <ul class="nav navbar-nav navbar-right">
-                <li ui-sref-active="active">
-                    <a ui-sref="home" ng-click="vm.collapseNavbar()">
-                        <span class="glyphicon glyphicon-home"></span>
-                        <span class="hidden-sm" data-translate="global.menu.home">Home</span>
+        <!-- END LOGO -->
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+        <a href="javascript:;" class="menu-toggler"></a>
+        <!-- END RESPONSIVE MENU TOGGLER -->
+        <!-- BEGIN TOP NAVIGATION MENU -->
+        <div class="top-menu"   ng-switch="vm.isAuthenticated()">
+            <ul class="nav navbar-nav pull-right" ng-controller="JhiLanguageController as languageVm" >
+                <!-- BEGIN NOTIFICATION DROPDOWN -->
+                <li class="dropdown dropdown-extended  dropdown-notification" id="header_notification_bar"  ng-switch-when="true">
+                    <a href="javascript:;" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
+                        <i class="icon-bell"></i>
+                        <span class="badge badge-default">7</span>
                     </a>
-                </li>
-                <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-th-list"></span>
-                            <span class="hidden-sm" data-translate="global.menu.entities.main">
-                                Entities
-                            </span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active">
-                                <a ui-sref="message-ang" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.messageAng">Message Ang</span>
-                                </a>
-                            </li>
-                        <li ui-sref-active="active">
-                                <a ui-sref="action-ang" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.actionAng">Action Ang</span>
-                                </a>
-                            </li>
-                        <li ui-sref-active="active">
-                                <a ui-sref="event-ang" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.eventAng">Event Ang</span>
-                                </a>
-                            </li>
-                        <li ui-sref-active="active">
-                                <a ui-sref="event-image-ang" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.eventImageAng">Event Image Ang</span>
-                                </a>
-                            </li>
-                        <li ui-sref-active="active">
-                                <a ui-sref="imagen-local-ang" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.imagenLocalAng">Imagen Local Ang</span>
-                                </a>
-                            </li>
-                        <li ui-sref-active="active">
-                                <a ui-sref="local-ang" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.localAng">Local Ang</span>
-                                </a>
-                            </li>
-                        <li ui-sref-active="active">
-                                <a ui-sref="action-object-ang" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.actionObjectAng">Action Object Ang</span>
-                                </a>
-                            </li>
-                        <li ui-sref-active="active">
-                                <a ui-sref="promotion-ang" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.promotionAng">Promotion Ang</span>
-                                </a>
-                            </li>
-                        <li ui-sref-active="active">
-                                <a ui-sref="promotion-code-ang" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.promotionCodeAng">Promotion Code Ang</span>
-                                </a>
-                            </li>
-                        <li ui-sref-active="active">
-                                <a ui-sref="rating-local-ang" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.ratingLocalAng">Rating Local Ang</span>
-                                </a>
-                            </li>
-                        <li ui-sref-active="active">
-                                <a ui-sref="real-time-event-image-ang" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.realTimeEventImageAng">Real Time Event Image Ang</span>
-                                </a>
-                            </li>
-                        <li ui-sref-active="active">
-                                <a ui-sref="schedule-ang" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.scheduleAng">Schedule Ang</span>
-                                </a>
-                            </li>
-                        <li ui-sref-active="active">
-                                <a ui-sref="servicio-ang" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.servicioAng">Servicio Ang</span>
-                                </a>
-                            </li>
-                        <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
-                    </ul>
-                </li>
-                <li ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-user"></span>
-                            <span class="hidden-sm" data-translate="global.menu.account.main">
-                                Account
-                            </span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active" ng-switch-when="true">
-                            <a ui-sref="settings" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-wrench"></span>&nbsp;
-                                <span data-translate="global.menu.account.settings">Settings</span>
-                            </a>
+                    <ul class="dropdown-menu">
+                        <li class="external">
+                            <h3>You have <strong>12</strong> notifications</h3>
                         </li>
-                        <li ui-sref-active="active" ng-switch-when="true">
-                            <a ui-sref="password" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-lock"></span>&nbsp;
-                                <span data-translate="global.menu.account.password">Password</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active" ng-switch-when="true">
-                            <a href="" ng-click="vm.logout()" id="logout">
-                                <span class="glyphicon glyphicon-log-out"></span>&nbsp;
-                                <span data-translate="global.menu.account.logout">Sign out</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active" ng-switch-when="false">
-                            <a href="" ng-click="vm.login()" id="login">
-                                <span class="glyphicon glyphicon-log-in"></span>&nbsp;
-                                <span data-translate="global.menu.account.login">Sign in</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active" ng-switch-when="false">
-                            <a ui-sref="register" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
-                                <span data-translate="global.menu.account.register">Register</span>
-                            </a>
+                        <li>
+                            <ul class="dropdown-menu-list scroller" data-handle-color="#637283">
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="time">just now</span>
+                                        <span class="details">
+									<span class="label label-sm label-icon label-success">
+									<i class="fa fa-plus"></i>
+									</span>
+									New user registered. </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="time">3 mins</span>
+                                        <span class="details">
+									<span class="label label-sm label-icon label-danger">
+									<i class="fa fa-bolt"></i>
+									</span>
+									Server #12 overloaded. </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="time">10 mins</span>
+                                        <span class="details">
+									<span class="label label-sm label-icon label-warning">
+									<i class="fa fa-bell-o"></i>
+									</span>
+									Server #2 not responding. </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="time">14 hrs</span>
+                                        <span class="details">
+									<span class="label label-sm label-icon label-info">
+									<i class="fa fa-bullhorn"></i>
+									</span>
+									Application error. </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="time">2 days</span>
+                                        <span class="details">
+									<span class="label label-sm label-icon label-danger">
+									<i class="fa fa-bolt"></i>
+									</span>
+									Database overloaded 68%. </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="time">3 days</span>
+                                        <span class="details">
+									<span class="label label-sm label-icon label-danger">
+									<i class="fa fa-bolt"></i>
+									</span>
+									A user IP blocked. </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="time">4 days</span>
+                                        <span class="details">
+									<span class="label label-sm label-icon label-warning">
+									<i class="fa fa-bell-o"></i>
+									</span>
+									Storage Server #4 not responding dfdfdfd. </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="time">5 days</span>
+                                        <span class="details">
+									<span class="label label-sm label-icon label-info">
+									<i class="fa fa-bullhorn"></i>
+									</span>
+									System Error. </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="time">9 days</span>
+                                        <span class="details">
+									<span class="label label-sm label-icon label-danger">
+									<i class="fa fa-bolt"></i>
+									</span>
+									Storage server failed. </span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </li>
-                <li ng-class="{active: vm.$state.includes('admin')}"  ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="admin-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-tower"></span>
-                            <span class="hidden-sm" data-translate="global.menu.admin.main">Administration</span>
-                            <b class="caret"></b>
-                        </span>
+                <!-- END NOTIFICATION DROPDOWN -->
+
+                <!-- BEGIN USER LOGIN DROPDOWN -->
+                <li class="dropdown dropdown-user " ng-switch="vm.isAuthenticated()">
+                    <a href="javascript:;" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
+                        <img alt="" class="img-circle" src="content/template/admin/layout3/img/no-one.jpg">
+                        <span ng-switch-when="true" class="username username-hide-mobile">{{vm.account.login}}</span>
+                        <span ng-switch-when="false" class="username username-hide-mobile" data-translate="global.menu.account.main">Account</span>
                     </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active">
-                            <a ui-sref="user-management" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-user"></span>&nbsp;
-                                <span data-translate="global.menu.admin.userManagement">User management</span>
-                            </a>
+                    <ul class="dropdown-menu dropdown-menu-default">
+                        <li ui-sref="settings" ng-switch-when="true" >
+                            <a>
+                                <i class="icon-settings"></i>
+                                <span data-translate="global.menu.account.settings">Settings </span></a>
                         </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="jhi-tracker" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;
-                                <span data-translate="global.menu.admin.tracker">User tracker</span>
-                            </a>
+                        <li ui-sref="password" ng-switch-when="true" >
+                            <a>
+                                <i class="icon-lock"></i>
+                                <span data-translate="global.menu.account.password">Password </span></a>
                         </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="jhi-metrics" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-dashboard"></span>&nbsp;
-                                <span data-translate="global.menu.admin.metrics">Metrics</span>
-                            </a>
+                        <li ng-click="vm.logout()" ng-switch-when="true" >
+                            <a>
+                                <i class="icon-logout"></i>
+                                <span data-translate="global.menu.account.logout">Log Out </span></a>
                         </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="jhi-health" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-heart"></span>&nbsp;
-                                <span data-translate="global.menu.admin.health">Health</span>
-                            </a>
+                        <li  ng-click="vm.login()" ng-switch-when="false">
+                            <a>
+                                <i class="icon-login"></i>
+                                <span data-translate="global.menu.account.login">Log in </span></a>
                         </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="jhi-configuration" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
-                                <span data-translate="global.menu.admin.configuration">Configuration</span>
-                            </a>
+                        <li  ui-sref="register" ng-switch-when="false">
+                            <a><i class="icon-user"></i>
+                                <span data-translate="global.menu.account.register">Register</span></a>
                         </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="audits" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-bell"></span>&nbsp;
-                                <span data-translate="global.menu.admin.audits">Audits</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="logs" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-tasks"></span>&nbsp;
-                                <span data-translate="global.menu.admin.logs">Logs</span>
-                            </a>
-                        </li>
-                        <li ng-show="vm.swaggerEnabled" ui-sref-active="active">
-                            <a ui-sref="docs" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-book"></span>&nbsp;
-                                <span data-translate="global.menu.admin.apidocs">API</span>
-                            </a>
-                        </li>
-                        <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+
                     </ul>
                 </li>
-                <li ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-controller="JhiLanguageController as languageVm">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" ng-if="languageVm.languages.length > 1">
-                        <span>
-                            <span class="glyphicon glyphicon-flag"></span>
-                            <span class="hidden-sm" data-translate="global.menu.language">Language</span>
-                            <b class="caret"></b>
-                        </span>
+                <!-- END USER LOGIN DROPDOWN -->
+                <li class="droddown dropdown-separator" ng-if="languageVm.languages.length > 1">
+                    <span class="separator"></span>
+                </li>
+                <!-- BEGIN LANGUAGES DROPDOWN -->
+                <li class="dropdown dropdown-language"  ng-if="languageVm.languages.length > 1">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        <img  ng-show="languageVm.currentLanguage == 'en'" src="content/template/global/img/flags/us.png">
+                        <img ng-show="languageVm.currentLanguage == 'es'" src="content/template/global/img/flags/es.png" alt="">
+                        <span>{{languageVm.currentLanguage}}</span>
                     </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu ng-if="languageVm.languages.length > 1">
-                        <li active-menu="{{language}}" ng-repeat="language in languageVm.languages">
-                            <a href="" ng-click="languageVm.changeLanguage(language);vm.collapseNavbar();">{{language | findLanguageFromKey}}</a>
+                    <ul class="dropdown-menu dropdown-menu-default">
+                        <li ng-click="languageVm.changeLanguage(language)" ng-repeat="language in languageVm.languages" ng-show="language != languageVm.currentLanguage">
+                            <a>
+                                <img ng-show="language == 'es'" src="content/template/global/img/flags/es.png" alt="">
+                                <img ng-show="language == 'en'" src="content/template/global/img/flags/us.png" alt="">
+                                <span>{{language | findLanguageFromKey}}</span>
+                            </a>
                         </li>
                     </ul>
                 </li>
+                <!-- END LANGUAGES DROPDOWN -->
+
+            </ul>
+
+        </div>
+
+        <!-- END TOP NAVIGATION MENU -->
+    </div>
+</div>
+<!-- END HEADER TOP -->
+<!-- BEGIN HEADER MENU -->
+<div class="page-header-menu">
+    <div class="container">
+        <!-- BEGIN HEADER SEARCH BOX -->
+        <form class="search-form" action="extra_search.html" method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search" name="query">
+                <span class="input-group-btn">
+				<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+				</span>
+            </div>
+        </form>
+        <!-- END HEADER SEARCH BOX -->
+        <!-- BEGIN MEGA MENU -->
+        <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
+        <!-- DOC: Remove dropdown-menu-hover and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
+        <div class="hor-menu">
+            <ul class="nav navbar-nav"  ng-switch="vm.isAuthenticated()">
+                <li ui-sref="home" class="active">
+                    <a data-translate="global.menu.home">Home</a>
+                </li>
+                <!--BEGIN ENTITIES MENU-->
+                <li class="menu-dropdown mega-menu-dropdown" ng-switch-when="true">
+                    <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" class="dropdown-toggle">
+                        <span data-translate="global.menu.entities.main">Entities</span> <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="mega-menu-content">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <ul class="mega-menu-submenu">
+                                            <li ui-sref="message-ang">
+                                                <a class="iconify">
+                                                    <i class="icon-fire"></i>
+                                                    <span data-translate="global.menu.entities.messageAng">
+                                                     Message Ang
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="action-ang">
+                                                <a class="iconify">
+                                                    <i class="icon-fire"></i>
+                                                    <span data-translate="global.menu.entities.actionAng">
+                                                     Action Ang
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="event-ang">
+                                                <a class="iconify">
+                                                    <i class="icon-fire"></i>
+                                                    <span data-translate="global.menu.entities.eventAng">
+                                                     Event Ang
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="event-image-ang">
+                                                <a class="iconify">
+                                                    <i class="icon-fire"></i>
+                                                    <span data-translate="global.menu.entities.eventImageAng">
+                                                     Event Image Ang
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="imagen-local-ang">
+                                                <a class="iconify">
+                                                    <i class="icon-fire"></i>
+                                                    <span data-translate="global.menu.entities.imagenLocalAng">
+                                                     Imagen Local Ang
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="local-ang">
+                                                <a class="iconify">
+                                                    <i class="icon-fire"></i>
+                                                    <span data-translate="global.menu.entities.localAng">
+                                                     Local Ang
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="action-object-ang">
+                                                <a class="iconify">
+                                                    <i class="icon-fire"></i>
+                                                    <span data-translate="global.menu.entities.actionObjectAng">
+                                                     Action Object Ang
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="promotion-ang">
+                                                <a class="iconify">
+                                                    <i class="icon-fire"></i>
+                                                    <span data-translate="global.menu.entities.promotionAng">
+                                                     Promotion Ang
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="promotion-code-ang">
+                                                <a class="iconify">
+                                                    <i class="icon-fire"></i>
+                                                    <span data-translate="global.menu.entities.promotionCodeAng">
+                                                     Promotion Code Ang
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="rating-local-ang">
+                                                <a class="iconify">
+                                                    <i class="icon-fire"></i>
+                                                    <span data-translate="global.menu.entities.ratingLocalAng">
+                                                     Rating Local Ang
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="real-time-event-image-ang">
+                                                <a class="iconify">
+                                                    <i class="icon-fire"></i>
+                                                    <span data-translate="global.menu.entities.realTimeEventImageAng">
+                                                     Real Time Event Image Ang
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="schedule-ang">
+                                                <a class="iconify">
+                                                    <i class="icon-fire"></i>
+                                                    <span data-translate="global.menu.entities.scheduleAng">
+                                                     Schedule Ang
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="servicio-ang">
+                                                <a class="iconify">
+                                                    <i class="icon-fire"></i>
+                                                    <span data-translate="global.menu.entities.servicioAng">
+                                                     Servicio Ang
+                                                    </span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <!--END ENTITIES MENU-->
+
+                <!--BEGIN ADMINISTRACION MENU-->
+                <li class="menu-dropdown mega-menu-dropdown" ng-switch-when="true" has-authority="ROLE_ADMIN">
+                    <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" class="dropdown-toggle">
+                        <span  data-translate="global.menu.admin.main">Administracion</span> <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu" style="min-width: 410px">
+                        <li>
+                            <div class="mega-menu-content">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ul class="mega-menu-submenu">
+                                            <li ui-sref="user-management">
+                                                <a class="iconify">
+                                                    <i class="icon-users"></i>
+                                                    <span data-translate="global.menu.admin.userManagement">
+                                                     User management
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ng-show="vm.swaggerEnabled" ui-sref="docs">
+                                                <a class="iconify">
+                                                    <i class="icon-notebook"></i>
+                                                    <span data-translate="global.menu.admin.apidocs">
+                                                     API
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="jhi-metrics">
+                                                <a class="iconify">
+                                                    <i class="icon-speedometer"></i>
+                                                    <span data-translate="global.menu.admin.metrics">
+                                                     Metrics
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="jhi-health">
+                                                <a class="iconify">
+                                                    <i class="icon-heart"></i>
+                                                    <span data-translate="global.menu.admin.health">
+                                                     Health
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul class="mega-menu-submenu">
+                                            <li ui-sref="jhi-configuration">
+                                                <a class="iconify">
+                                                    <i class="icon-wrench"></i>
+                                                    <span data-translate="global.menu.admin.configuration">
+                                                     Configuration
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="audits">
+                                                <a class="iconify">
+                                                    <i class="icon-bell"></i>
+                                                    <span data-translate="global.menu.admin.audits">
+                                                     Audits
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="logs">
+                                                <a class="iconify">
+                                                    <i class="icon-book-open"></i>
+                                                    <span data-translate="global.menu.admin.logs">
+                                                     Logs
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li ui-sref="jhi-tracker">
+                                                <a class="iconify">
+                                                    <i class="icon-eye"></i>
+                                                    <span data-translate="global.menu.admin.tracker">
+                                                     User Tracker
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <!--END ADMINISTRACION MENU-->
             </ul>
         </div>
+        <!-- END MEGA MENU -->
     </div>
-</nav>
+</div>
+<!-- END HEADER MENU -->

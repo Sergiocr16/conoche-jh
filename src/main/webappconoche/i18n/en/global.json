@@ -1,6 +1,6 @@
 {
     "global": {
-        "title": "Conoche!!!!!!!!!!!!!!!!!!!!!!!!!!",
+        "title": "Conoche",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
             "home": "Home",
@@ -133,5 +133,16 @@
         "emailexists": "E-mail is already in use!",
         "idexists": "A new {{ entityName }} cannot already have an ID"
     },
-    "footer": "This is your footer"
+    "footer": {
+        "about": "About",
+        "subscribe":"SUBSCRIBE EMAIL",
+        "submit": "SUBMIT",
+        "followUs":"FOLLOW US ON",
+        "contact":{
+                "contact":"Contacts",
+                "phone":"Phone",
+                "email":"Email"
+        },
+        "copyright":"2017 © Firefly. All Rights Reserved."
+    }
 }

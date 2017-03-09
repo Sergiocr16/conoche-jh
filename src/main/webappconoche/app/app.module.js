@@ -25,5 +25,8 @@
     function run(stateHandler, translationHandler) {
         stateHandler.initialize();
         translationHandler.initialize();
+        Metronic.init();
+        Metronic.initComponents();
+        Metronic.initAjax();
     }
 })();
