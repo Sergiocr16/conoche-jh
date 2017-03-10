@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title th:text="#{email.activation.title}">JHipster activation</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    </head>
-    <body>
-        <p th:text="#{email.activation.greeting(${user.login})}">
-            Dear
-        </p>
-        <p th:text="#{email.activation.text1}">
-            Your JHipster account has been created, please click on the URL below to activate it:
-        </p>
-        <p>
-            <a th:href="@{|${baseUrl}/#/activate?key=${user.activationKey}|}"
-               th:text="|${user.login}|">Activation Link</a>
-        </p>
-        <p>
-            <span th:text="#{email.activation.text2}">Regards, </span>
-            <br/>
-            <em th:text="#{email.signature}">JHipster.</em>
-        </p>
-    </body>
+
+<head>
+    <title th:text="#{email.activation.title}">JHipster creation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body style="margin:0;padding:15px;background-color:#48525e;font-family:Raleway,'Helvetica Neue',Helvetica,Arial,sans-serif;color:white;line-height:1.428571429;font-size:13px;">
+<h1 style="text-align:center;">CONO<span style="color:#9749b7">CHE</span></h1>
+<div style="margin:10px 5px 5px 10px;background-color:white;padding:10px;border-radius:10px;color:#6a6c6f!important;">
+    <h2>Bienvenido(a)</h2>
+    <p>¡Tu cuenta en Conoche ha sido creada exitosamente! :)</p>
+    <p>Tu nombre de usuario para iniciar sesión en nuestra página web es el siguiente:</p>
+    <h2 th:text="|${user.login}|" style="text-align:center">User</h2>
+    <p>Por favor haz click en el URL de abajo para activar tu cuenta:</p>
+    <p style="text-align:center">
+        <a th:href="@{|${baseUrl}/#/activate?key=${user.activationKey}|}">¡Has click aquí para activar tu cuenta!</a>
+    </p>
+</div>
+<span th:text="#{email.activation.text2}">Regards, </span>
+<br/>
+<em>Firefly</em>
+
+</body>
+
 </html>
