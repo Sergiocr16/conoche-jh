@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('RealTimeEventImageAngDialogController', RealTimeEventImageAngDialogController);
 
-    RealTimeEventImageAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'RealTimeEventImage', 'Event'];
+    RealTimeEventImageAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'RealTimeEventImage', 'Event', 'CloudinaryService'];
 
-    function RealTimeEventImageAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, RealTimeEventImage, Event) {
+    function RealTimeEventImageAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, RealTimeEventImage, Event, CloudinaryService) {
         var vm = this;
 
         vm.realTimeEventImage = entity;
@@ -51,7 +51,17 @@
             if ($file && $file.$error === 'pattern') {
                 return;
             }
+
             if ($file) {
+                CloudinaryService.uploadFile($file).then(function(data) {
+
+                    var propValue;
+                    for(var propName in data) {
+                        propValue = data[propName]
+
+                        console.log(propName,propValue);
+                    }
+                });
                 DataUtils.toBase64($file, function(base64Data) {
                     $scope.$apply(function() {
                         realTimeEventImage.image = base64Data;

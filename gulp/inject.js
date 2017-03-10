@@ -29,6 +29,7 @@ function app() {
 }
 
 function vendor() {
+
     var stream = gulp.src(config.app + 'index.html')
         .pipe(plumber({errorHandler: handleErrors}))
         .pipe(inject(gulp.src(bowerFiles(), {read: false}), {
