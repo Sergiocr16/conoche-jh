@@ -36,23 +36,32 @@
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <!--<page-ribbon></page-ribbon>-->
-    <div ui-view="navbar" ng-cloak class="page-header"></div>
+    <div class="col-md-12" id="loading" style="background-color:black;height:100%;width:100%;position:absolute">
+        <div ng-spinner-bar class="page-spinner-bar" >
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <div id="loaded" style="display:none">
+    <div ui-view="navbar" ng-cloak class="page-header" style="background:url('content/images/bg1.jpg')"></div>
 
     <div class="clearfix">
     </div>
-    <div class="page-content">
+    <div class="page-content" style="background:url('content/images/bg.jpg');background-size: cover;">
         <!-- BEGIN PAGE HEAD -->
-        <div ui-view="head" class="page-head">
-        </div>
+        <!--<div ui-view="head" class="page-head">-->
+        <!--</div>-->
         <!-- END PAGE HEAD -->
-        <div class="container">
-            <div class="well" ui-view="content">
+        <div class="container" style="padding:20px">
+            <div class="well" ui-view="content" style="border-radius:5px;background-color:rgba(255,255,255,0.9)">
                 <!-- Angular views -->
             </div>
         </div>
 
         <div ui-view="footer">
         </div>
+    </div>
     </div>
 
     <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.

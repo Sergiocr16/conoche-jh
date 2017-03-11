@@ -559,7 +559,9 @@ Page Header
     .page-header .page-header-top .top-menu {
       margin: 13px 0 0;
       padding: 0;
-      float: right; }
+      float: right;
+          background-color: transparent;
+      }
       .page-header .page-header-top .top-menu .navbar-nav {
         padding: 0;
         margin-right: 0;
@@ -781,6 +783,7 @@ Page Header
           .page-header .page-header-top .top-menu .navbar-nav > li.dropdown-tasks .dropdown-menu .dropdown-menu-list > li .progress .progress-bar {
             box-shadow: none; }
         .page-header .page-header-top .top-menu .navbar-nav > li.dropdown-user .dropdown-toggle {
+          background-color: transparent;
           padding: 12px 6px 7px 6px;
           padding-left: 0;
           padding-right: 0; }

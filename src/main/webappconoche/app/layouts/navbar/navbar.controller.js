@@ -14,6 +14,8 @@
            Principal.identity().then(function(account) {
                vm.account = account;
            });
+           $('#loaded').show();
+           $('#loading').fadeOut(30);
           });
         vm.isNavbarCollapsed = true;
         vm.isAuthenticated = Principal.isAuthenticated;

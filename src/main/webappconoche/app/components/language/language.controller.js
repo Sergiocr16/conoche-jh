@@ -9,8 +9,11 @@
 
     function JhiLanguageController ($translate, JhiLanguageService, tmhDynamicLocale,Principal) {
         var vm = this;
+        vm.currentLanguage = 'es';
         Principal.identity().then(function(account) {
+        if(account!=undefined){
             vm.currentLanguage = account.langKey;
+            }
         });
         console.log(vm.account);
         vm.changeLanguage = changeLanguage;
