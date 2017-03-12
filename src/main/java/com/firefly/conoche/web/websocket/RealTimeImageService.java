@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 
 import java.security.Principal;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Created by melvin on 3/10/2017.
@@ -36,13 +35,12 @@ public class RealTimeImageService {
     }
 
     //cambiar el zoneid
-    @SubscribeMapping("/topic/saveRTimage/{idEvent}")
-    @SendTo("/topic/RTimage/{idEvent}")
-    public RealTimeEventImageDTO sendActivity(@Payload RealTimeEventImageDTO RTEimageDTO,
+    @SubscribeMapping("/topic/saveRealTimeEventImage/{idEvent}")
+    @SendTo("/topic/RealTimeEventImage/{idEvent}")
+    public RealTimeEventImageDTO sendRealTimeEventImage(@Payload RealTimeEventImageDTO RTEimageDTO,
                                               @DestinationVariable Long idEvent,
                                               StompHeaderAccessor stompHeaderAccessor,
                                               Principal principal) {
-        RTEimageDTO.setImage(null);
         RTEimageDTO.setCreationTime(ZonedDateTime.now());
         RTEimageDTO.setEventId(idEvent);
         return realTimeEventImageService.save(RTEimageDTO);

@@ -26,8 +26,10 @@ module.exports = function (config) {
             'src/main/webappconoche/bower_components/jquery/dist/jquery.js',
             'src/main/webappconoche/bower_components/messageformat/messageformat.js',
             'src/main/webappconoche/bower_components/json3/lib/json3.js',
+            'src/main/webappconoche/bower_components/lodash/lodash.js',
             'src/main/webappconoche/bower_components/sockjs-client/dist/sockjs.js',
             'src/main/webappconoche/bower_components/stomp-websocket/lib/stomp.min.js',
+            'src/main/webappconoche/bower_components/cloudinary-core/cloudinary-core.js',
             'src/main/webappconoche/bower_components/angular/angular.js',
             'src/main/webappconoche/bower_components/angular-aria/angular-aria.js',
             'src/main/webappconoche/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
@@ -46,6 +48,7 @@ module.exports = function (config) {
             'src/main/webappconoche/bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js',
             'src/main/webappconoche/bower_components/ng-file-upload/ng-file-upload.js',
             'src/main/webappconoche/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
+            'src/main/webappconoche/bower_components/cloudinary_ng/js/angular.cloudinary.js',
             'src/main/webappconoche/bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'src/main/webappconoche/app/app.module.js',

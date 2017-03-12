@@ -10,7 +10,7 @@
     /* globals SockJS, Stomp */
 
     angular
-        .module('chatApp')
+        .module('conocheApp')
         .factory('StompManager', StompManager);
 
     StompManager.$inject = ['$window', '$q', 'AuthServerProvider'];

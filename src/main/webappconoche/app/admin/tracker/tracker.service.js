@@ -3,7 +3,7 @@
 
 
     angular
-        .module('chatApp')
+        .module('conocheApp')
         .factory('JhiTrackerService', JhiTrackerService);
 
     JhiTrackerService.$inject = ['$rootScope', '$window', '$cookies', '$http', '$q', 'AuthServerProvider', 'StompManager'];

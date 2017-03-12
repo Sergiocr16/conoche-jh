@@ -21,7 +21,12 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'eventRealTimeImages' : {
+                method: 'GET',
+                isArray: true,
+                url: 'api/real-time-event-images/event/:idEvent'
+            }
         });
     }
 })();

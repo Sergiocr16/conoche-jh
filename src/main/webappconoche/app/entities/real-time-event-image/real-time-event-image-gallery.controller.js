@@ -1,16 +1,19 @@
+/**
+ * Created by melvin on 3/11/2017.
+ */
 (function() {
     'use strict';
 
     angular
         .module('conocheApp')
-        .controller('RealTimeEventImageAngController', RealTimeEventImageAngController);
+        .controller('RealTimeEventImageGalleryController', RealTimeEventImageGalleryController);
 
-    RealTimeEventImageAngController.$inject = ['$state', 'RealTimeEventImage', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    RealTimeEventImageGalleryController.$inject = ['$state', '$stateParams', 'RealTimeEventImage', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
 
-    function RealTimeEventImageAngController($state, RealTimeEventImage, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function RealTimeEventImageGalleryController($state, $stateParams, RealTimeEventImage, ParseLinks, AlertService, paginationConstants, pagingParams) {
 
         var vm = this;
-
+        vm.idEvent = $stateParams.idEvent;
         vm.loadPage = loadPage;
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;
@@ -20,7 +23,8 @@
         loadAll();
 
         function loadAll () {
-            RealTimeEventImage.query({
+            RealTimeEventImage.eventRealTimeImages({
+                idEvent: vm.idEvent,
                 page: pagingParams.page - 1,
                 size: vm.itemsPerPage,
                 sort: sort()

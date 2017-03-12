@@ -1,16 +1,20 @@
+/**
+ * Created by melvin on 3/11/2017.
+ */
 (function() {
     'use strict';
 
     angular
         .module('conocheApp')
-        .controller('RealTimeEventImageAngDialogController', RealTimeEventImageAngDialogController);
+        .controller('RealTimeEventImageSaveWS', RealTimeEventImageAngDialogController);
 
-    RealTimeEventImageAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'RealTimeEventImage', 'Event'];
+    RealTimeEventImageAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'Event', 'RealTimeEventImageCloudinary'];
 
-    function RealTimeEventImageAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, RealTimeEventImage, Event) {
+    function RealTimeEventImageAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, Event, RealTimeEventImageCloudinary) {
         var vm = this;
+        var fileImage = null;
 
-        vm.realTimeEventImage = entity;
+        vm.realTimeEventImage = {idEvent: $stateParams.idEvent};
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
@@ -28,12 +32,10 @@
         }
 
         function save () {
-            vm.isSaving = true;
-            if (vm.realTimeEventImage.id !== null) {
-                RealTimeEventImage.update(vm.realTimeEventImage, onSaveSuccess, onSaveError);
-            } else {
-                RealTimeEventImage.save(vm.realTimeEventImage, onSaveSuccess, onSaveError);
-            }
+            vm.isSaving = true
+            RealTimeEventImageCloudinary
+                .save(fileImage, vm.realTimeEventImage)
+                .then(onSaveSuccess, onSaveError);
         }
 
         function onSaveSuccess (result) {
@@ -47,17 +49,18 @@
         }
 
 
-        vm.setImage = function ($file, realTimeEventImage) {
+        vm.setImage = function ($file) {
             if ($file && $file.$error === 'pattern') {
                 return;
             }
             if ($file) {
                 DataUtils.toBase64($file, function(base64Data) {
                     $scope.$apply(function() {
-                        realTimeEventImage.image = base64Data;
-                        realTimeEventImage.imageContentType = $file.type;
+                        vm.displayImage = base64Data;
+                        vm.displayImageType = $file.type;
                     });
                 });
+                fileImage = $file;
             }
         };
         vm.datePickerOpenStatus.creationTime = false;

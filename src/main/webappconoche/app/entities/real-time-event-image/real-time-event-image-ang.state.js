@@ -9,6 +9,54 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
+            .state('real-time-event-image-gallery', {
+                parent: 'entity',
+                url: '/real-time-event-image-gallery/{idEvent}?page&sort&search',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'conocheApp.realTimeEventImage.Gallery.title'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'app/entities/real-time-event-image/real-time-event-image-gallery.html',
+                        controller: 'RealTimeEventImageGalleryController',
+                        controllerAs: 'vm'
+                    }
+                },
+                params: {
+                    page: {
+                        value: '1',
+                        squash: true
+                    },
+                    sort: {
+                        value: 'id,asc',
+                        squash: true
+                    },
+                    search: null
+                },
+                resolve: {
+                    pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+                        return {
+                            page: PaginationUtil.parsePage($stateParams.page),
+                            sort: $stateParams.sort,
+                            predicate: PaginationUtil.parsePredicate($stateParams.sort),
+                            ascending: PaginationUtil.parseAscending($stateParams.sort),
+                            search: $stateParams.search
+                        };
+                    }],
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('realTimeEventImage');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]
+                },
+                onEnter: ['$stateParams', 'WSRealTimeEventImages', function($stateParams, WSRealTimeEventImages) {
+                    WSRealTimeEventImages.subscribe($stateParams.idEvent);
+                }],
+                onExit: ['$stateParams', 'WSRealTimeEventImages', function($stateParams, WSRealTimeEventImages) {
+                    WSRealTimeEventImages.unsubscribe($stateParams.idEvent);
+                }]
+            })
         .state('real-time-event-image-ang', {
             parent: 'entity',
             url: '/real-time-event-image-ang?page&sort&search',
@@ -124,8 +172,6 @@
                     resolve: {
                         entity: function () {
                             return {
-                                image: null,
-                                imageContentType: null,
                                 imageUrl: null,
                                 creationTime: null,
                                 description: null,
@@ -165,6 +211,26 @@
                 });
             }]
         })
+            .state('real-time-event-image-gallery.savews', {
+                parent: 'real-time-event-image-gallery',
+                url: '/{idEvent}/save',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: [ '$state', '$uibModal', function($state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/real-time-event-image/real-time-event-image-savews.html',
+                        controller: 'RealTimeEventImageSaveWS',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                    }).result.then(function() {
+                        $state.go('real-time-event-image-gallery', null, { reload: 'real-time-event-image-gallery' });
+                    }, function() {
+                        $state.go('^');
+                    });
+                }]
+            })
         .state('real-time-event-image-ang.delete', {
             parent: 'real-time-event-image-ang',
             url: '/{id}/delete',
