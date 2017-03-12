@@ -9,7 +9,7 @@ body.page-md {
 }
 
 /******
-General 
+General
 ******/
 /* Theme Font Color */
 .theme-font {
@@ -39,7 +39,7 @@ General
 }
 
 /******
-Page Header 
+Page Header
 ******/
 .page-header {
   background-color: #fff;
@@ -71,7 +71,7 @@ Page Header
   color: #C1CCD1;
 }
 .page-header .page-header-top .top-menu .navbar-nav > li.dropdown > .dropdown-toggle:hover {
-  background-color: #fff;
+  background-color: transparent;
 }
 .page-header .page-header-top .top-menu .navbar-nav > li.dropdown > .dropdown-toggle:hover > i {
   color: #a4b4bb;
@@ -81,7 +81,7 @@ Page Header
   color: #ffffff;
 }
 .page-header .page-header-top .top-menu .navbar-nav > li.dropdown.open .dropdown-toggle {
-  background-color: #fff;
+     background-color: transparent;
 }
 .page-header .page-header-top .top-menu .navbar-nav > li.dropdown.open .dropdown-toggle > i {
   color: #a4b4bb;
@@ -372,7 +372,7 @@ Page Header
 }
 
 /******
-Page Footer 
+Page Footer
 ******/
 .page-prefooter {
   background: #48525e;
