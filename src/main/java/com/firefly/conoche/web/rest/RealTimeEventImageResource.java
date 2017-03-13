@@ -34,7 +34,7 @@ public class RealTimeEventImageResource {
     private final Logger log = LoggerFactory.getLogger(RealTimeEventImageResource.class);
 
     private static final String ENTITY_NAME = "realTimeEventImage";
-        
+
     private final RealTimeEventImageService realTimeEventImageService;
 
     public RealTimeEventImageResource(RealTimeEventImageService realTimeEventImageService) {

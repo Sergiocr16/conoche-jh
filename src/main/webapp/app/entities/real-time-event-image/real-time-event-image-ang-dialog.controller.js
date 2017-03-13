@@ -5,17 +5,15 @@
         .module('conocheApp')
         .controller('RealTimeEventImageAngDialogController', RealTimeEventImageAngDialogController);
 
-    RealTimeEventImageAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'RealTimeEventImage', 'Event'];
+    RealTimeEventImageAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'RealTimeEventImage', 'Event'];
 
-    function RealTimeEventImageAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, RealTimeEventImage, Event) {
+    function RealTimeEventImageAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, RealTimeEventImage, Event) {
         var vm = this;
 
         vm.realTimeEventImage = entity;
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
-        vm.byteSize = DataUtils.byteSize;
-        vm.openFile = DataUtils.openFile;
         vm.save = save;
         vm.events = Event.query();
 
@@ -46,20 +44,6 @@
             vm.isSaving = false;
         }
 
-
-        vm.setImage = function ($file, realTimeEventImage) {
-            if ($file && $file.$error === 'pattern') {
-                return;
-            }
-            if ($file) {
-                DataUtils.toBase64($file, function(base64Data) {
-                    $scope.$apply(function() {
-                        realTimeEventImage.image = base64Data;
-                        realTimeEventImage.imageContentType = $file.type;
-                    });
-                });
-            }
-        };
         vm.datePickerOpenStatus.creationTime = false;
 
         function openCalendar (date) {

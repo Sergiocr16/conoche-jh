@@ -23,13 +23,6 @@ public class RealTimeEventImage implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
-    @Column(name = "image")
-    private byte[] image;
-
-    @Column(name = "image_content_type")
-    private String imageContentType;
-
     @Column(name = "image_url")
     private String imageUrl;
 
@@ -49,32 +42,6 @@ public class RealTimeEventImage implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public RealTimeEventImage image(byte[] image) {
-        this.image = image;
-        return this;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
-    public String getImageContentType() {
-        return imageContentType;
-    }
-
-    public RealTimeEventImage imageContentType(String imageContentType) {
-        this.imageContentType = imageContentType;
-        return this;
-    }
-
-    public void setImageContentType(String imageContentType) {
-        this.imageContentType = imageContentType;
     }
 
     public String getImageUrl() {
@@ -153,8 +120,6 @@ public class RealTimeEventImage implements Serializable {
     public String toString() {
         return "RealTimeEventImage{" +
             "id=" + id +
-            ", image='" + image + "'" +
-            ", imageContentType='" + imageContentType + "'" +
             ", imageUrl='" + imageUrl + "'" +
             ", creationTime='" + creationTime + "'" +
             ", description='" + description + "'" +

@@ -13,28 +13,6 @@
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="vm.realTimeEventImage.id" readonly />
         </div>
-        <div class="form-group" ngf-drop ngf-change="vm.setImage($file, vm.realTimeEventImage)" ngf-pattern="'image/*'">
-            <label class="control-label" data-translate="conocheApp.realTimeEventImage.image" for="field_image">Image</label>
-            <div>
-                <img data-ng-src="{{'data:' + vm.realTimeEventImage.imageContentType + ';base64,' + vm.realTimeEventImage.image}}" style="max-height: 100px;" ng-if="vm.realTimeEventImage.image" alt="realTimeEventImage image"/>
-                <div ng-if="vm.realTimeEventImage.image" class="help-block clearfix">
-                    <span class="pull-left">{{vm.realTimeEventImage.imageContentType}}, {{vm.byteSize(vm.realTimeEventImage.image)}}</span>
-                    <button type="button" ng-click="vm.realTimeEventImage.image=null;vm.realTimeEventImage.imageContentType=null;"
-                            class="btn btn-default btn-xs pull-right">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </div>
-                <button type="button" ngf-select class="btn btn-default btn-block"
-                        ngf-change="vm.setImage($file, vm.realTimeEventImage)" accept="image/*" data-translate="entity.action.addimage">
-                    Add image
-                </button>
-            </div>
-            <input type="hidden" class="form-control" name="image" id="field_image"
-                    ng-model="vm.realTimeEventImage.image"
-                    />
-            <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
-                    ng-model="vm.realTimeEventImage.imageContentType" />
-        </div>
         <div class="form-group">
             <label class="control-label" data-translate="conocheApp.realTimeEventImage.imageUrl" for="field_imageUrl">Image Url</label>
             <input type="text" class="form-control" name="imageUrl" id="field_imageUrl"

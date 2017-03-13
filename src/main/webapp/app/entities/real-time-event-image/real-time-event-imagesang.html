@@ -19,7 +19,6 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="image"><span data-translate="conocheApp.realTimeEventImage.image">Image</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="imageUrl"><span data-translate="conocheApp.realTimeEventImage.imageUrl">Image Url</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="creationTime"><span data-translate="conocheApp.realTimeEventImage.creationTime">Creation Time</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="description"><span data-translate="conocheApp.realTimeEventImage.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -30,12 +29,6 @@
             <tbody>
                 <tr ng-repeat="realTimeEventImage in vm.realTimeEventImages track by realTimeEventImage.id">
                     <td><a ui-sref="real-time-event-image-ang-detail({id:realTimeEventImage.id})">{{realTimeEventImage.id}}</a></td>
-                    <td>
-                        <a ng-if="realTimeEventImage.image" ng-click="vm.openFile(realTimeEventImage.imageContentType, realTimeEventImage.image)">
-                            <img data-ng-src="{{'data:' + realTimeEventImage.imageContentType + ';base64,' + realTimeEventImage.image}}" style="max-height: 30px;" alt="realTimeEventImage image"/>
-                        </a>
-                        <span ng-if="realTimeEventImage.image">{{realTimeEventImage.imageContentType}}, {{vm.byteSize(realTimeEventImage.image)}}</span>
-                    </td>
                     <td>{{realTimeEventImage.imageUrl}}</td>
                     <td>{{realTimeEventImage.creationTime | date:'medium'}}</td>
                     <td>{{realTimeEventImage.description}}</td>

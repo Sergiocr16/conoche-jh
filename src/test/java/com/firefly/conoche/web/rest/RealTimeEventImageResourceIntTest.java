@@ -22,7 +22,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.time.Instant;
@@ -45,11 +44,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ConocheApp.class)
 public class RealTimeEventImageResourceIntTest {
-
-    private static final byte[] DEFAULT_IMAGE = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_IMAGE = TestUtil.createByteArray(2, "1");
-    private static final String DEFAULT_IMAGE_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_IMAGE_CONTENT_TYPE = "image/png";
 
     private static final String DEFAULT_IMAGE_URL = "AAAAAAAAAA";
     private static final String UPDATED_IMAGE_URL = "BBBBBBBBBB";
@@ -103,8 +97,6 @@ public class RealTimeEventImageResourceIntTest {
      */
     public static RealTimeEventImage createEntity(EntityManager em) {
         RealTimeEventImage realTimeEventImage = new RealTimeEventImage()
-                .image(DEFAULT_IMAGE)
-                .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE)
                 .imageUrl(DEFAULT_IMAGE_URL)
                 .creationTime(DEFAULT_CREATION_TIME)
                 .description(DEFAULT_DESCRIPTION);
@@ -133,8 +125,6 @@ public class RealTimeEventImageResourceIntTest {
         List<RealTimeEventImage> realTimeEventImageList = realTimeEventImageRepository.findAll();
         assertThat(realTimeEventImageList).hasSize(databaseSizeBeforeCreate + 1);
         RealTimeEventImage testRealTimeEventImage = realTimeEventImageList.get(realTimeEventImageList.size() - 1);
-        assertThat(testRealTimeEventImage.getImage()).isEqualTo(DEFAULT_IMAGE);
-        assertThat(testRealTimeEventImage.getImageContentType()).isEqualTo(DEFAULT_IMAGE_CONTENT_TYPE);
         assertThat(testRealTimeEventImage.getImageUrl()).isEqualTo(DEFAULT_IMAGE_URL);
         assertThat(testRealTimeEventImage.getCreationTime()).isEqualTo(DEFAULT_CREATION_TIME);
         assertThat(testRealTimeEventImage.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
@@ -191,8 +181,6 @@ public class RealTimeEventImageResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(realTimeEventImage.getId().intValue())))
-            .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))))
             .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DEFAULT_IMAGE_URL.toString())))
             .andExpect(jsonPath("$.[*].creationTime").value(hasItem(sameInstant(DEFAULT_CREATION_TIME))))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
@@ -209,8 +197,6 @@ public class RealTimeEventImageResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(realTimeEventImage.getId().intValue()))
-            .andExpect(jsonPath("$.imageContentType").value(DEFAULT_IMAGE_CONTENT_TYPE))
-            .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)))
             .andExpect(jsonPath("$.imageUrl").value(DEFAULT_IMAGE_URL.toString()))
             .andExpect(jsonPath("$.creationTime").value(sameInstant(DEFAULT_CREATION_TIME)))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
@@ -234,8 +220,6 @@ public class RealTimeEventImageResourceIntTest {
         // Update the realTimeEventImage
         RealTimeEventImage updatedRealTimeEventImage = realTimeEventImageRepository.findOne(realTimeEventImage.getId());
         updatedRealTimeEventImage
-                .image(UPDATED_IMAGE)
-                .imageContentType(UPDATED_IMAGE_CONTENT_TYPE)
                 .imageUrl(UPDATED_IMAGE_URL)
                 .creationTime(UPDATED_CREATION_TIME)
                 .description(UPDATED_DESCRIPTION);
@@ -250,8 +234,6 @@ public class RealTimeEventImageResourceIntTest {
         List<RealTimeEventImage> realTimeEventImageList = realTimeEventImageRepository.findAll();
         assertThat(realTimeEventImageList).hasSize(databaseSizeBeforeUpdate);
         RealTimeEventImage testRealTimeEventImage = realTimeEventImageList.get(realTimeEventImageList.size() - 1);
-        assertThat(testRealTimeEventImage.getImage()).isEqualTo(UPDATED_IMAGE);
-        assertThat(testRealTimeEventImage.getImageContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);
         assertThat(testRealTimeEventImage.getImageUrl()).isEqualTo(UPDATED_IMAGE_URL);
         assertThat(testRealTimeEventImage.getCreationTime()).isEqualTo(UPDATED_CREATION_TIME);
         assertThat(testRealTimeEventImage.getDescription()).isEqualTo(UPDATED_DESCRIPTION);

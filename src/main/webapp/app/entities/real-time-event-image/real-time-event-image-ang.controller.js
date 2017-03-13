@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('RealTimeEventImageAngController', RealTimeEventImageAngController);
 
-    RealTimeEventImageAngController.$inject = ['$state', 'DataUtils', 'RealTimeEventImage', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    RealTimeEventImageAngController.$inject = ['$state', 'RealTimeEventImage', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
 
-    function RealTimeEventImageAngController($state, DataUtils, RealTimeEventImage, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function RealTimeEventImageAngController($state, RealTimeEventImage, ParseLinks, AlertService, paginationConstants, pagingParams) {
 
         var vm = this;
 
@@ -16,8 +16,6 @@
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
-        vm.openFile = DataUtils.openFile;
-        vm.byteSize = DataUtils.byteSize;
 
         loadAll();
 

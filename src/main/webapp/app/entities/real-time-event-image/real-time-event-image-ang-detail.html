@@ -4,15 +4,6 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row jh-entity-details">
-        <dt><span data-translate="conocheApp.realTimeEventImage.image">Image</span></dt>
-        <dd>
-            <div ng-if="vm.realTimeEventImage.image">
-                <a ng-click="vm.openFile(vm.realTimeEventImage.imageContentType, vm.realTimeEventImage.image)">
-                    <img data-ng-src="{{'data:' + vm.realTimeEventImage.imageContentType + ';base64,' + vm.realTimeEventImage.image}}" style="max-width: 100%;" alt="realTimeEventImage image"/>
-                </a>
-                {{vm.realTimeEventImage.imageContentType}}, {{vm.byteSize(vm.realTimeEventImage.image)}}
-            </div>
-        </dd>
         <dt><span data-translate="conocheApp.realTimeEventImage.imageUrl">Image Url</span></dt>
         <dd>
             <span>{{vm.realTimeEventImage.imageUrl}}</span>
