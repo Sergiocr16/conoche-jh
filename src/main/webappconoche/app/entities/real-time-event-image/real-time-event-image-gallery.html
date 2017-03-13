@@ -14,10 +14,9 @@
         </div>
     </div>
 
-
-
-    <div masonry load-images="true">
-        <div class="masonry-brick" ng-repeat="realTimeEventImage in vm.realTimeEventImages track by realTimeEventImage.id">
+    <div infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.infiniteScrollDisable || vm.page >= vm.links['last']" >
+    <div masonry="{ transitionDuration: '0.4s' }" load-images="true" preserve-order="true">
+        <div class="masonry-brick" ng-repeat="realTimeEventImage in vm.realTimeEventImages">
             <div class="view view-first">
                 <cl-image public-id="{{realTimeEventImage.imageUrl}}" class="thumbnail inline">
                     <cl-transformation  width="300" crop="scale" radius="10"/>
@@ -34,9 +33,7 @@
             </div>
         </div>
     </div>
-    <br/>
-    <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
     </div>
-    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+
+    <br/>
 </div>

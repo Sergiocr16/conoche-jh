@@ -17,7 +17,7 @@
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
-                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="imageUrl"><span data-translate="conocheApp.realTimeEventImage.imageUrl">Image Url</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="creationTime"><span data-translate="conocheApp.realTimeEventImage.creationTime">Creation Time</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -26,7 +26,7 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
                 <tr ng-repeat="realTimeEventImage in vm.realTimeEventImages track by realTimeEventImage.id">
                     <td><a ui-sref="real-time-event-image-ang-detail({id:realTimeEventImage.id})">{{realTimeEventImage.id}}</a></td>
                     <td>{{realTimeEventImage.imageUrl}}</td>
@@ -61,8 +61,4 @@
             </tbody>
         </table>
     </div>
-    <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-    </div>
-    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
 </div>
