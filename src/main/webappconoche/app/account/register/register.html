@@ -1,7 +1,6 @@
 <div>
     <div class="row">
         <div class="col-md-12">
-
             <form ng-show="!vm.success" name="form" role="form" novalidate ng-submit="vm.register()" show-validation>
                 <div class="portlet light">
                     <div class="portlet-title">
@@ -35,7 +34,7 @@
                     <div class="col-md-6">
                         <div class="form-group form-md-line-input">
                             <input type="text" class="form-control" id="login" name="login" ng-model="vm.registerAccount.login" ng-minlength=1 ng-maxlength=50 ng-pattern="/^[_'.@A-Za-z0-9-]*$/" required>
-                            <label  for="login" data-translate="global.form.username" class="font-15">Nombre</label>
+                            <label for="login" data-translate="global.form.username" class="font-15">Nombre</label>
 
                             <div ng-show="form.login.$dirty && form.login.$invalid">
                                 <p class="help-block" ng-show="form.login.$error.required" data-translate="register.messages.validate.login.required">
@@ -53,7 +52,7 @@
                             </div>
                         </div>
                         <div class="form-group form-md-line-input">
-                            <input type="password" class="form-control" id="password" name="password"  ng-model="vm.registerAccount.password" ng-minlength=4 ng-maxlength=50 required>
+                            <input type="password" class="form-control" id="password" name="password" ng-model="vm.registerAccount.password" ng-minlength=4 ng-maxlength=50 required>
                             <label class="control-label font-15" for="password" data-translate="global.form.newpassword">New password</label>
                             <div ng-show="form.password.$dirty && form.password.$invalid">
                                 <p class="help-block" ng-show="form.password.$error.required" data-translate="global.messages.validate.newpassword.required">
@@ -95,7 +94,7 @@
                             </div>
                         </div>
                         <div class="form-group form-md-line-input">
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"  ng-model="vm.confirmPassword" ng-minlength=4 ng-maxlength=50 required>
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" ng-model="vm.confirmPassword" ng-minlength=4 ng-maxlength=50 required>
                             <label class="control-label font-15" for="confirmPassword" data-translate="global.form.confirmpassword">New password confirmation</label>
                             <div ng-show="form.confirmPassword.$dirty && form.confirmPassword.$invalid">
                                 <p class="help-block" ng-show="form.confirmPassword.$error.required" data-translate="global.messages.validate.confirmpassword.required">
@@ -110,24 +109,21 @@
                             </div>
                         </div>
 
-                            <h3 class="text-right ">
-
-                                <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary " data-translate="register.form.button">Register</button>
-                            </h3>
-
+                        <h3 class="text-right ">
+                            <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary " data-translate="register.form.button">Register</button>
+                        </h3>
+                        <div class="alert alert-danger" ng-show="vm.doNotMatch" data-translate="global.messages.error.dontmatch">
+                            The password and its confirmation do not match!
+                        </div>
                     </div>
 
-
                 </div>
-
+                <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" data-translate="register.form.button">Register</button>
             </form>
 
+
         </div>
-        <!--<div class="col-md-4">-->
-        <!--<br/>-->
 
-
-        <!--</div>-->
 
     </div>
 </div>

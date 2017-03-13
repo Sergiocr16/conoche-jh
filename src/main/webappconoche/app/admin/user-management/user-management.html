@@ -2,11 +2,16 @@
     <h2 data-translate="userManagement.home.title">Users</h2>
     <jhi-alert></jhi-alert>
     <div class="row">
-      <div class="col-md-4">
-          <button class="btn btn-primary" ui-sref="user-management.new">
+      <div class="col-md-3 col-sm-4 col-xs-12">
+          <button class="btn btn-primary col-md-12 col-xs-12" ui-sref="user-management.new">
               <span class="glyphicon glyphicon-flash"></span> <span data-translate="userManagement.home.createLabel">Create a new User</span>
           </button>
       </div>
+        <div class="col-md-3 col-sm-4 col-xs-12">
+            <button class="btn btn-success col-md-12 col-xs-12" ui-sref="user-management.owner">
+                <span class="glyphicon glyphicon-flash"></span> <span data-translate="userManagement.home.createOwner">Create a new User</span>
+            </button>
+        </div>
     </div>
     <div class="table-responsive">
         <table class="table table-striped">

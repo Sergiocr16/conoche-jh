@@ -374,7 +374,65 @@ Social Buttons
     color: #fff;
 }
 
+
 .font-15{
     font-size: 15px!important;
 }
-/* jhipster-needle-css-add-main JHipster will add new css style */
+
+.input-style{
+    background-color:#EFF0EF !important;
+    color:#5F6060 !important;
+}
+.backgroud-green{
+    background-color:#63BFB3;
+}
+.font-white{
+    color:white;
+}
+
+.modal-body-background{
+    background-color:#F8FAF9;
+}
+.text-center{
+    text-align: center;
+}
+.padding-20{
+    padding:20px;
+}
+.padding-15{
+    padding:15px;
+}
+.padding-10{
+    padding:10px;
+}
+.no-padding{
+    padding:none;
+}
+.no-padding-left{
+    padding-left:none;
+}
+.margin-bottom-15{
+    margin-bottom:15px;
+}
+.margin-bottom-5{
+    margin-bottom:5px;
+}
+.no-padding-bottom{
+    paddin-bottom:none;
+}
+
+#login-down-part{
+    background-color: #F0F0F0;
+    font-weight:bold;
+    color:#A8A9A8;
+    border-top:1px solid #E3E3E3;
+
+}
+
+.font-15{
+    font-size: 15px!important;
+}
+
+.gray-font{
+    font-color: gray;
+}
