@@ -3,7 +3,9 @@
         "home": {
             "title": "Users",
             "createLabel": "Create a new user",
-            "createOrEditLabel": "Create or edit a user"
+            "createOwner": "Create a new owner",
+            "createOrEditLabel": "Create or edit a user",
+            "createOrEditOwner": "Crear o editar un propietario"
         },
         "created": "A new user is created with identifier {{ param }}",
         "updated": "An user is updated with identifier {{ param }}",
