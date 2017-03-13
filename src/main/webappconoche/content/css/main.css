@@ -422,3 +422,11 @@ Social Buttons
     border-top:1px solid #E3E3E3;
 
 }
+
+.font-15{
+    font-size: 15px!important;
+}
+
+.gray-font{
+    font-color: gray;
+}
