@@ -13,56 +13,28 @@
             </div>
         </div>
     </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
-            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="imageUrl"><span data-translate="conocheApp.realTimeEventImage.imageUrl">Image Url</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="creationTime"><span data-translate="conocheApp.realTimeEventImage.creationTime">Creation Time</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="description"><span data-translate="conocheApp.realTimeEventImage.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="eventId"><span data-translate="conocheApp.realTimeEventImage.event">Event</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="realTimeEventImage in vm.realTimeEventImages track by realTimeEventImage.id">
-                <td><a ui-sref="real-time-event-image-ang-detail({id:realTimeEventImage.id})">{{realTimeEventImage.id}}</a></td>
-                <td><cl-image public-id="{{realTimeEventImage.imageUrl}}" class="thumbnail inline" angle="20">
-                    <cl-transformation height="150" width="150" crop="fill" gravity="north" effect="sepia" radius="20"/>
-                </cl-image></td>
-                <td>{{realTimeEventImage.creationTime | date:'medium'}}</td>
-                <td>{{realTimeEventImage.description}}</td>
-                <td>
-                    <a ui-sref="event-ang-detail({id:realTimeEventImage.eventId})">{{realTimeEventImage.eventId}}</a>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                ui-sref="real-time-event-image-ang-detail({id:realTimeEventImage.id})"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>
-                            <span class="hidden-sm-down" data-translate="entity.action.view"></span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="real-time-event-image-ang.edit({id:realTimeEventImage.id})"
-                                class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="real-time-event-image-ang.delete({id:realTimeEventImage.id})"
-                                class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-remove-circle"></span>
-                            <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+
+
+
+    <div masonry load-images="true">
+        <div class="masonry-brick" ng-repeat="realTimeEventImage in vm.realTimeEventImages track by realTimeEventImage.id">
+            <div class="view view-first">
+                <cl-image public-id="{{realTimeEventImage.imageUrl}}" class="thumbnail inline">
+                    <cl-transformation  width="300" crop="scale" radius="10"/>
+                </cl-image>
+                <div class="mask">
+                    <a href="" class="btn btn-icon-only purple pull-left">
+                        <i class="fa fa-times"></i>
+                    </a>
+                    <a href="" class="btn btn-icon-only purple pull-left">
+                        <i class="fa fa-arrows-alt"></i>
+                    </a>
+                    <p ng-if="realTimeEventImage.description">{{realTimeEventImage.description}}</p>
+                </div>
+            </div>
+        </div>
     </div>
+    <br/>
     <div class="text-center">
         <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
     </div>

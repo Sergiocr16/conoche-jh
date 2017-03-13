@@ -1,0 +1,83 @@
+.view {
+    width: 100%;
+    height: 100%;
+    float: left;
+    border: 10px solid #fff;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    box-shadow: 1px 1px 2px #e6e6e6;
+    cursor: default;
+    background: #fff;
+}
+.view .mask, .view .content {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0
+}
+.view img {
+    display: block;
+    position: relative
+}
+.view p {
+    text-transform: uppercase;
+    color: #D1C4E9;
+    text-align: center;
+    position: relative;
+    font-size: 14px;
+    padding: 10px;
+    background: rgba(103, 58, 183, 0.7);
+    margin: 20% 0% 0% 0%;
+    word-wrap: break-word;
+}
+
+.view a {
+    border-radius: 50% !important;
+}
+
+
+.view-first img {
+    transition: all 0.2s linear;
+}
+.view-first .mask {
+    opacity: 0;
+    background-color: rgba(96, 125, 139, 0.4);
+    transition: all 1s ease-in-out;
+}
+.view-first p {
+    transform: translateY(100%);
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.view-first a{
+    transform: rotateX( 90deg );
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.view-first:hover img {
+    transform: scale(1.3);
+}
+.view-first:hover .mask {
+    opacity: 1;
+}
+
+.view-first:hover p {
+    opacity: 1;
+    transform: translateY(0%);
+}
+
+
+.view-first:hover a {
+    opacity: 0.7;
+    transform: rotateX( 0deg );
+}
+
+.view-first:hover p {
+    transition-delay: 0.1s;
+}
+
