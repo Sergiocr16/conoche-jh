@@ -11,15 +11,15 @@
         $stateProvider
         .state('live-messages', {
             parent: 'entity',
-            url: '/live-message-ang/{idEvent}',
+            url: '/live-messages/{idEvent}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_ADMIN'],
                 pageTitle: 'conocheApp.message.home.title'
             },
             views: {
                 'content@': {
                     templateUrl: 'app/entities/message/live-messages.html',
-                    controller: 'LiveMessageAngController',
+                    controller: 'LiveMessagesController',
                     controllerAs: 'vm'
                 }
             },
@@ -44,11 +44,11 @@
 //                        search: $stateParams.search
 //                    };
 //                }],
-//                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-//                    $translatePartialLoader.addPart('message');
-//                    $translatePartialLoader.addPart('global');
-//                    return $translate.refresh();
-//                }]
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('message');
+                    $translatePartialLoader.addPart('global');
+                    return $translate.refresh();
+                }]
             },
             onEnter: ['$stateParams', 'WSRealTimeEventMessages', function($stateParams, WSRealTimeEventMessages) {
                 WSRealTimeEventMessages.subscribe($stateParams.idEvent);
@@ -156,9 +156,9 @@
                 });
             }]
         })
-        .state('message-ang.new', {
-            parent: 'message-ang',
-            url: '/new',
+        .state('event-ang-detail.newComment', {
+            parent: 'event-ang-detail',
+            url: '/newComment/',
             data: {
                 authorities: ['ROLE_USER']
             },
@@ -174,14 +174,20 @@
                             return {
                                 payload: null,
                                 creationTime: null,
-                                id: null
+                                id: null,
+                                eventId: Number($stateParams.id)
                             };
-                        }
+                        },
+                        translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                            $translatePartialLoader.addPart('message');
+                            $translatePartialLoader.addPart('global');
+                            return $translate.refresh();
+                        }]
                     }
                 }).result.then(function() {
-                    $state.go('message-ang', null, { reload: 'message-ang' });
+                    $state.go('event-ang-detail', null, { reload: 'event-ang-detail' });
                 }, function() {
-                    $state.go('message-ang');
+                    $state.go('event-ang-detail');
                 });
             }]
         })

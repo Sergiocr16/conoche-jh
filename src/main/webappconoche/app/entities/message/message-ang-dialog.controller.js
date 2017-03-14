@@ -5,18 +5,19 @@
         .module('conocheApp')
         .controller('MessageAngDialogController', MessageAngDialogController);
 
-    MessageAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Message', 'User', 'Event'];
+    MessageAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Message','Principal'];
 
-    function MessageAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Message, User, Event) {
+    function MessageAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Message, Principal) {
         var vm = this;
 
         vm.message = entity;
+        console.log(vm.message);
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.users = User.query();
-        vm.events = Event.query();
+//        vm.users = User.query();
+//        vm.events = Event.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -27,12 +28,18 @@
         }
 
         function save () {
+        Principal.identity().then(function(account){
             vm.isSaving = true;
+            vm.message.creationTime = new Date();
+            vm.message.userId = account.id;
+            console.log(vm.message)
             if (vm.message.id !== null) {
-                Message.update(vm.message, onSaveSuccess, onSaveError);
-            } else {
-                Message.save(vm.message, onSaveSuccess, onSaveError);
-            }
+                 Message.update(vm.message, onSaveSuccess, onSaveError);
+             } else {
+                 Message.save(vm.message, onSaveSuccess, onSaveError);
+             }
+        })
+
         }
 
         function onSaveSuccess (result) {
