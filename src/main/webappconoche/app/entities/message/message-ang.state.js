@@ -9,6 +9,54 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
+        .state('live-messages', {
+            parent: 'entity',
+            url: '/live-message-ang/{idEvent}',
+            data: {
+                authorities: ['ROLE_USER'],
+                pageTitle: 'conocheApp.message.home.title'
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/entities/message/live-messages.html',
+                    controller: 'LiveMessageAngController',
+                    controllerAs: 'vm'
+                }
+            },
+            params: {
+//                page: {
+//                    value: '1',
+//                    squash: true
+//                },
+//                sort: {
+//                    value: 'id,asc',
+//                    squash: true
+//                },
+//                search: null
+            },
+            resolve: {
+//                pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+//                    return {
+//                        page: PaginationUtil.parsePage($stateParams.page),
+//                        sort: $stateParams.sort,
+//                        predicate: PaginationUtil.parsePredicate($stateParams.sort),
+//                        ascending: PaginationUtil.parseAscending($stateParams.sort),
+//                        search: $stateParams.search
+//                    };
+//                }],
+//                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+//                    $translatePartialLoader.addPart('message');
+//                    $translatePartialLoader.addPart('global');
+//                    return $translate.refresh();
+//                }]
+            },
+            onEnter: ['$stateParams', 'WSRealTimeEventMessages', function($stateParams, WSRealTimeEventMessages) {
+                WSRealTimeEventMessages.subscribe($stateParams.idEvent);
+            }],
+            onExit: ['$stateParams', 'WSRealTimeEventMessages', function($stateParams, WSRealTimeEventMessages) {
+                WSRealTimeEventMessages.unsubscribe($stateParams.idEvent);
+            }]
+        })
         .state('message-ang', {
             parent: 'entity',
             url: '/message-ang?page&sort&search',
