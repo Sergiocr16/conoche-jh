@@ -378,13 +378,25 @@ Social Buttons
 .font-15{
     font-size: 15px!important;
 }
-
+.font-30{
+    font-size: 30px!important;
+}
+.no-border{
+border:0px!important;
+}
 .input-style{
     background-color:#EFF0EF !important;
     color:#5F6060 !important;
 }
 .backgroud-green{
-    background-color:#63BFB3;
+    background-color:rgb(51, 22, 64);
+}
+
+.no-margin-bottom{
+    margin-bottom:0px!important;
+}
+.no-margin-top{
+    margin-top:0px!important;
 }
 .font-white{
     color:white;
