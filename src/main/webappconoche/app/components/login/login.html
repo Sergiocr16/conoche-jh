@@ -1,54 +1,120 @@
-<!-- END THEME STYLES -->
-<link rel="shortcut icon" href="favicon.ico" />
-<div class="login-form backgroud-green" >
-    <div class="modal-header">
+
+<div class=" login login-form">
+    <div class="modal-header no-border">
+
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.cancel()">&times;</button>
-        <div class="col-md-12 text-center form-title no-padding font-white">
-            <h1 data-translate="login.title" >Sign in</h1>
+        <div class=" col-md-offset-2 padding-10">
+            <span class="form-title" data-translate="{{'global.form.welcome' | translate}}">Welcome.</span>
+            <span class="form-subtitle" data-translate="login.title">Please login.</span>
         </div>
     </div>
-    <div class="modal-body modal-body-background no-padding-bottom" >
-        <div class="row">
-            <form class="form " role="form" ng-submit="vm.login($event)">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="alert alert-danger" ng-show="vm.authenticationError" data-translate="login.messages.error.authentication">
-                        <strong>Failed to sign in!</strong> Please check your credentials and try again.
-                    </div>
+    <div class="modal-body content no-margin-bottom no-margin-top">
+        <form class="login-form" action="index.html" method="post" ng-submit="vm.login($event)">
+            <div class="alert alert-danger" ng-show="vm.authenticationError" data-translate="login.messages.error.authentication">
+            <strong>Failed to sign in!</strong> Please check your credentials and try again.
+            </div>
+            <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                <span>
+			Enter any username and password. </span>
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Username</label>
+                <input  placeholder="{{'global.form.username.placeholder' | translate}}" id="username" placeholder="{{'global.form.username.placeholder' | translate}}" ng-model="vm.username" class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Password</label>
+                <input placeholder="{{'login.form.password.placeholder' | translate}}" ng-model="vm.password" class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password"/>
+            </div>
+            <div class="form-actions">
+                <button type="submit" data-translate="login.form.button" class="btn btn-primary btn-block uppercase">Login</button>
+            </div>
+            <div class="form-actions">
+
+                <div class="pull-right forget-password-block">
+                    <a href="javascript:;" ng-click="vm.requestResetPassword()" data-translate="login.password.forgot" id="forget-password"  class="forget-password">Forgot Password?</a>
                 </div>
-                <div class="col-md-offset-1 col-md-10">
+            </div>
+            <div class="login-options">
+                <h4 class="pull-left">Or login with</h4>
+                <ul class="social-icons pull-right">
+                    <li>
+                        <a class="social-icon-color facebook" data-original-title="facebook" href="javascript:;"></a>
+                    </li>
 
-                    <div class="col-md-12 no-padding margin-bottom-15">
-                        <br/>
-                        <jh-social class="col-md-6 no-padding-left border-radius" ng-provider="google"></jh-social>
-                        <jh-social class="col-md-6 no-padding" ng-provider="facebook"></jh-social>
-                        <!-- jhipster-needle-add-social-button -->
-                    </div>
-                    <div class="form-group " style="">
-                        <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-                        <label for="username" data-translate="global.form.username" class="control-label visible-ie8 visible-ie9">Username</label>
-                        <input  id="username" placeholder="{{'global.form.username.placeholder' | translate}}" ng-model="vm.username" class="form-control form-control-solid placeholder-no-fix padding-20 input-style" type="text" autocomplete="off"
-                               placeholder="Username" name="username" />
-                    </div>
+                    <li>
+                        <a class="social-icon-color googleplus" data-original-title="Goole Plus" href="javascript:;"></a>
+                    </li>
 
-                    <div class="form-group ">
-                        <label data-translate="login.form.password" class="control-label visible-ie8 visible-ie9">Password</label>
-                        <input  ng-model="vm.password" class="form-control form-control-solid placeholder-no-fix padding-20 input-style" type="password" autocomplete="off" placeholder="{{'login.form.password.placeholder' | translate}}" name="password" />
-                    </div>
-                    <div class="col-md-12 no-padding margin-bottom-15">
-                        <div class=" col-md-8"><a href="" ng-click="vm.requestResetPassword()" data-translate="login.password.forgot" id="forget-password" class="forget-password">Forgot Password?</a></div>
-                        <button type="submit" class="btn btn-success padding-5 col-md-4" data-translate="login.form.button">Sign in</button>
-                    </div>
-                    <p></p>
+                </ul>
+            </div>
+            <div class="create-account" >
+                <p>
+                    <a href="javascript:;" ng-click="vm.register()" data-translate="global.messages.info.register" id="register-btn">Create an account</a>
+                </p>
+            </div>
+        </form>
 
-
-
-                </div>
-                <div class="col-md-12 " ng-click="vm.register()" id="login-down-part">
-                    <h3 class="text-center padding-10" style="">Crear una cuenta</h3>
-
-                </div>
-            </form>
-        </div>
 
     </div>
 </div>
+
+
+
+
+
+
+
+<!--<link rel="shortcut icon" href="favicon.ico" />-->
+<!--<div class="login-form backgroud-green" >-->
+    <!--<div class="modal-header">-->
+        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.cancel()">&times;</button>-->
+        <!--<div class="col-md-12 text-center form-title no-padding font-white">-->
+            <!--<h1 data-translate="login.title" >Sign in</h1>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="modal-body modal-body-background no-padding-bottom" >-->
+        <!--<div class="row">-->
+            <!--<form class="form " role="form" ng-submit="vm.login($event)">-->
+                <!--<div class="col-md-8 col-md-offset-2">-->
+                    <!--<div class="alert alert-danger" ng-show="vm.authenticationError" data-translate="login.messages.error.authentication">-->
+                        <!--<strong>Failed to sign in!</strong> Please check your credentials and try again.-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-offset-1 col-md-10">-->
+
+                    <!--<div class="col-md-12 no-padding margin-bottom-15">-->
+                        <!--<br/>-->
+                        <!--<jh-social class="col-md-6 no-padding-left border-radius" ng-provider="google"></jh-social>-->
+                        <!--<jh-social class="col-md-6 no-padding" ng-provider="facebook"></jh-social>-->
+                        <!--&lt;!&ndash; jhipster-needle-add-social-button &ndash;&gt;-->
+                    <!--</div>-->
+                    <!--<div class="form-group " style="">-->
+                        <!--&lt;!&ndash;ie8, ie9 does not support html5 placeholder, so we just show field title for that&ndash;&gt;-->
+                        <!--<label for="username" data-translate="global.form.username" class="control-label visible-ie8 visible-ie9">Username</label>-->
+                        <!--<input  id="username" placeholder="{{'global.form.username.placeholder' | translate}}" ng-model="vm.username" class="form-control form-control-solid placeholder-no-fix padding-20 input-style" type="text" autocomplete="off"-->
+                               <!--placeholder="Username" name="username" />-->
+                    <!--</div>-->
+
+                    <!--<div class="form-group ">-->
+                        <!--<label data-translate="login.form.password" class="control-label visible-ie8 visible-ie9">Password</label>-->
+                        <!--<input  ng-model="vm.password" class="form-control form-control-solid placeholder-no-fix padding-20 input-style" type="password" autocomplete="off" placeholder="{{'login.form.password.placeholder' | translate}}" name="password" />-->
+                    <!--</div>-->
+                    <!--<div class="col-md-12 no-padding margin-bottom-15">-->
+                        <!--<div class=" col-md-8"><a href="" ng-click="vm.requestResetPassword()" data-translate="login.password.forgot" id="forget-password" class="forget-password">Forgot Password?</a></div>-->
+                        <!--<button type="submit" class="btn btn-success padding-5 col-md-4" data-translate="login.form.button">Sign in</button>-->
+                    <!--</div>-->
+                    <!--<p></p>-->
+
+
+
+                <!--</div>-->
+                <!--<div class="col-md-12 " ng-click="vm.register()" style="   background-color:rgb(51, 22, 64);" id="login-down-part">-->
+                    <!--<h3 class="text-center padding-10" style="">Crear una cuenta</h3>-->
+
+                <!--</div>-->
+            <!--</form>-->
+        <!--</div>-->
+
+    <!--</div>-->
+<!--</div>
