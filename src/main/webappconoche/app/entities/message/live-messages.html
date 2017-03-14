@@ -1,7 +1,8 @@
 <div>
-<h1>Mensajes</h1>
-    <div ng-repeat="message in vm.liveMessages">
-        {{message.payload}}
+<h1 class="text-center">Live messages</h1>
+    <div id="message" class="col-md-offset-2 col-md-8 live-message">
+       <h1 class="text-center"><img class="img-circle" height="60px" src="content/template/admin/layout3/img/avatar1.jpg" alt=""></h1>
+        <h4 class="text-center"><em>"{{vm.message.payload}}"</em></h4>
+        <h6 class="text-center"><b>-ADMIN</b>-</h6>
     </div>
-
 </div>

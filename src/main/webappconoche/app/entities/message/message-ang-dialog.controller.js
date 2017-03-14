@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('MessageAngDialogController', MessageAngDialogController);
 
-    MessageAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Message','Principal'];
+    MessageAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Message','Principal','WSRealTimeEventMessages'];
 
-    function MessageAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Message, Principal) {
+    function MessageAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Message, Principal,WSRealTimeEventMessages) {
         var vm = this;
 
         vm.message = entity;
@@ -32,12 +32,16 @@
             vm.isSaving = true;
             vm.message.creationTime = new Date();
             vm.message.userId = account.id;
-            console.log(vm.message)
-            if (vm.message.id !== null) {
-                 Message.update(vm.message, onSaveSuccess, onSaveError);
-             } else {
-                 Message.save(vm.message, onSaveSuccess, onSaveError);
-             }
+            vm.message.login = account.login;
+           console.log(vm.message)
+           WSRealTimeEventMessages.sendMessage(vm.message);
+           $scope.$emit('conocheApp:messageUpdate');
+           $uibModalInstance.close();
+//            if (vm.message.id !== null) {
+//                 Message.update(vm.message, onSaveSuccess, onSaveError);
+//             } else {
+//                 Message.save(vm.message, onSaveSuccess, onSaveError);
+//             }
         })
 
         }

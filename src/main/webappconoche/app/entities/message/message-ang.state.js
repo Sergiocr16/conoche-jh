@@ -162,7 +162,8 @@
             data: {
                 authorities: ['ROLE_USER']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+            onEnter: ['WSRealTimeEventMessages','$stateParams', '$state', '$uibModal', function(WSRealTimeEventMessages,$stateParams, $state, $uibModal) {
+              WSRealTimeEventMessages.subscribe(Number($stateParams.id));
                 $uibModal.open({
                     templateUrl: 'app/entities/message/message-ang-dialog.html',
                     controller: 'MessageAngDialogController',
@@ -189,6 +190,9 @@
                 }, function() {
                     $state.go('event-ang-detail');
                 });
+            }],
+            onExit: ['$stateParams', 'WSRealTimeEventMessages', function($stateParams, WSRealTimeEventMessages) {
+                WSRealTimeEventMessages.unsubscribe($stateParams.idEvent);
             }]
         })
         .state('message-ang.edit', {

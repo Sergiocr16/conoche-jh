@@ -37,13 +37,13 @@ public class RealTimeMessageService {
     //cambiar el zoneid
     @SubscribeMapping("/topic/saveRealTimeEventMessage/{idEvent}")
     @SendTo("/topic/RealTimeEventMessage/{idEvent}")
-    public void sendRealTimeEventMessage(@Payload MessageDTO messageDTO,
+    public MessageDTO sendRealTimeEventMessage(@Payload MessageDTO messageDTO,
                                                         @DestinationVariable Long idEvent,
                                                         StompHeaderAccessor stompHeaderAccessor,
                                                         Principal principal) {
         messageDTO.setCreationTime(ZonedDateTime.now());
         messageDTO.setEventId(idEvent);
         messagingTemplate.convertAndSend("/topic/RealTimeEventMessage/{idEvent}", messageDTO);
-//        return realTimeEventImageService.save(messageDTO);
+        return messageDTO;
     }
 }

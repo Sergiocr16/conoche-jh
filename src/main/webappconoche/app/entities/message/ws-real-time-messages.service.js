@@ -18,7 +18,7 @@
 
         var service = {
             receive: receive,
-            sendImage: sendImage,
+            sendMessage: sendMessage,
             subscribe: subscribe,
             unsubscribe: unsubscribe
         };
@@ -29,8 +29,8 @@
             return StompManager.getListener(SUBSCRIBE_TRACKER_URL + idEvent);
         }
 
-        function sendImage(message) {
-            StompManager.send(SEND_ACTIVITY_URL + image.idEvent, message);
+        function sendMessage(message) {
+            StompManager.send(SEND_ACTIVITY_URL + message.eventId, message);
         }
 
         function subscribe (idEvent) {
