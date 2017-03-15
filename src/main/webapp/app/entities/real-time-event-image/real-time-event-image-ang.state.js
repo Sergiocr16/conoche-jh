@@ -106,6 +106,8 @@
                             return {
                                 imageUrl: null,
                                 creationTime: null,
+                                width: null,
+                                height: null,
                                 description: null,
                                 id: null
                             };

@@ -1,14 +1,13 @@
+@import url(http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+
 .view {
     width: 100%;
     height: 100%;
     float: left;
-    border: 10px solid #fff;
     overflow: hidden;
     position: relative;
     text-align: center;
-    box-shadow: 1px 1px 2px #e6e6e6;
     cursor: default;
-    background: #fff;
 }
 .view .mask, .view .content {
     width: 100%;
@@ -18,20 +17,25 @@
     top: 0;
     left: 0
 }
-.view img {
+.view div image{
     display: block;
     position: relative
 }
 .view p {
-    text-transform: uppercase;
-    color: #D1C4E9;
+    color: #FFFFFF;
     text-align: center;
     position: relative;
-    font-size: 14px;
+    font-size: 25px;
     padding: 10px;
-    background: rgba(103, 58, 183, 0.7);
-    margin: 20% 0% 0% 0%;
+    margin: 10% 0% 0% 0%;
     word-wrap: break-word;
+    font-family: 'Amatic SC', cursive;
+}
+
+.view span {
+    color: #FFFFFF;
+    font-size: 15px;
+    font-family: 'Amatic SC', cursive;
 }
 
 .view a {
@@ -39,13 +43,13 @@
 }
 
 
-.view-first img {
+.view-first div image {
     transition: all 0.2s linear;
 }
 .view-first .mask {
     opacity: 0;
-    background-color: rgba(96, 125, 139, 0.4);
-    transition: all 1s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: all 0.5s ease-in-out;
 }
 .view-first p {
     transform: translateY(100%);
@@ -53,15 +57,22 @@
     transition: all 0.2s ease-in-out;
 }
 
+.view-first span {
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+
 .view-first a{
     transform: rotateX( 90deg );
     opacity: 0;
     transition: all 0.2s ease-in-out;
 }
 
-.view-first:hover img {
-    transform: scale(1.3);
-}
+.view-first:hover div image{
+     transform: scale(1.3);
+ }
 .view-first:hover .mask {
     opacity: 1;
 }
@@ -69,6 +80,11 @@
 .view-first:hover p {
     opacity: 1;
     transform: translateY(0%);
+}
+
+.view-first:hover span {
+    opacity: 1;
+    transform: translateX(0%);
 }
 
 
@@ -79,5 +95,112 @@
 
 .view-first:hover p {
     transition-delay: 0.1s;
+}
+
+/*Oder overlay*/
+
+
+.snip1566 {
+    position: relative;
+    display: inline-block;
+    margin: 20px;
+    max-width: 190px;
+    width: 100%;
+    color: #bbb;
+    font-size: 16px;
+    box-shadow: none !important;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    width: 100px;
+    height: 100px;
+}
+
+.snip1566 *,
+.snip1566:before,
+.snip1566:after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+}
+
+.snip1566:before,
+.snip1566:after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: -1;
+    border: 2px solid #bbb;
+    border-color: transparent #bbb;
+}
+
+.snip1566 div {
+    max-width: 100%;
+    backface-visibility: hidden;
+    vertical-align: top;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.snip1566 figcaption {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 50%;
+}
+
+.snip1566 i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 4em;
+    z-index: 1;
+}
+
+.snip1566 a {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.snip1566:hover figcaption,
+.snip1566.hover figcaption {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+
+.snip1566:hover:before,
+.snip1566.hover:before,
+.snip1566:hover:after,
+.snip1566.hover:after {
+    border-width: 10px;
+}
+
+.snip1566:hover:before,
+.snip1566.hover:before {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.snip1566:hover:after,
+.snip1566.hover:after {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
 }
 

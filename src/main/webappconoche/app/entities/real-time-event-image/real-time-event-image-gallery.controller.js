@@ -5,16 +5,16 @@
         .module('conocheApp')
         .controller('RealTimeEventImageGalleryController', RealTimeEventImageGalleryController);
 
-    RealTimeEventImageGalleryController.$inject = ['RealTimeEventImage', 'ParseLinks', 'AlertService', 'paginationConstants', '$stateParams', 'WSRealTimeEventImages', '$timeout'];
+    RealTimeEventImageGalleryController.$inject = ['RealTimeEventImage', 'ParseLinks', 'AlertService', 'idEvent', 'WSRealTimeEventImages', '$timeout'];
 
-    function RealTimeEventImageGalleryController(RealTimeEventImage, ParseLinks, AlertService, paginationConstants, $stateParams, WSRealTimeEventImages, $timeout) {
-
+    function RealTimeEventImageGalleryController(RealTimeEventImage, ParseLinks, AlertService, idEvent, WSRealTimeEventImages, $timeout) {
+        const PADDING        = 20
         const ITEMS_PER_PAGE = 10;
-        const SORT = 'creationTime,desc';
+        const SORT           = 'creationTime,desc';
 
         var vm = this;
-        vm.idEvent = $stateParams.idEvent;
-        vm.realTimeEventImages = [];
+
+        vm.width = 250;
         vm.infiniteScrollDisable = true;
         vm.loadPage = loadPage;
         vm.page = 0;
@@ -22,62 +22,98 @@
             last: 0
         };
         vm.reset = reset;
+        vm.computeDimentions = computeDimentions;
 
-        loadAll();
-        WSRealTimeEventImages.receive(vm.idEvent)
+        init();
+        WSRealTimeEventImages.receive(idEvent)
             .then(null, null, addNewImage);
 
-        function loadAll () {
+
+        function init() {
+            realTimeEventImages(onSuccess, onError);
+            function onSuccess(data, headers) {
+                substractMetadataFromHeaders(headers);
+                vm.realTimeEventImages = data;
+                timeoutDisable();
+            }
+        }
+
+        function computeDimentions(width, height) {
+           var newHeight = Math.round((height / width) * vm.width);
+            return {
+                'width' : vm.width + PADDING,
+                'height' : newHeight + PADDING
+            }
+        }
+
+        function realTimeEventImages(onSuccess, onError) {
             vm.infiniteScrollDisable = true;
             RealTimeEventImage.eventRealTimeImages({
-                idEvent:  vm.idEvent,
+                idEvent: idEvent,
                 page: vm.page,
                 size: ITEMS_PER_PAGE,
                 sort: SORT
             }, onSuccess, onError);
-
-
-            function onSuccess(data, headers) {
-                vm.links = ParseLinks.parse(headers('link'));
-                console.log(JSON.stringify(vm.links));
-                vm.totalItems = headers('X-Total-Count');
-                for (var i = 0; i < data.length; i++) {
-                    vm.realTimeEventImages.push(data[i]);
-                }
-                timeoutDisable()
-            }
-
-            function onError(error) {
-                AlertService.error(error.data.message);
-                timeoutDisable()
-            }
         }
 
-        //solucion sucia pero no encontre
-        // ningun evento para cuando se carga masonry en la directiva.
+
+        function substractMetadataFromHeaders(headers) {
+            vm.links = ParseLinks.parse(headers('link'));
+            console.log(JSON.stringify(vm.links));
+            vm.totalItems = headers('X-Total-Count');
+        }
+
+        function loadAll () {
+            realTimeEventImages(onSuccess, onError);
+            function onSuccess(data, headers) {
+                substractMetadataFromHeaders(headers);
+                vm.realTimeEventImages = vm.realTimeEventImages.concat(data);
+            }
+            timeoutDisable();
+        }
+
+        function onError(error) {
+            AlertService.error(error.data.message);
+        }
+
+        function contains(image) {
+            var item = _.find( vm.realTimeEventImages, function(img) {
+                return img.id === image.id;
+            });
+            return item !== undefined;
+        }
+
         function timeoutDisable() {
-            $timeout(function() {vm.infiniteScrollDisable = false;} , 500);
+            $timeout(function() {vm.infiniteScrollDisable = false;} , 400);
         }
 
         function addNewImage(image) {
-            if(vm.realTimeEventImages.length
-                % ITEMS_PER_PAGE === 0) {
+            if(!vm.realTimeEventImages
+                || contains(image)) {
+                return;
+            }
+            if(vm.realTimeEventImages.length % ITEMS_PER_PAGE === 0) {
                 vm.realTimeEventImages.pop();
             }
-            //tengo que updateriear la ultima pagina
+            vm.links.last = Math.floor(vm.totalItems++ / ITEMS_PER_PAGE);
             vm.realTimeEventImages.unshift(image);
+
+            console.log("page", vm.page, "last", vm.links.last);
+            console.log("total", vm.totalItems);
         }
 
         function reset () {
             vm.page = 0;
-            vm.realTimeEventImages = [];
-            loadAll();
+            init();
         }
 
         function loadPage(page) {
             vm.page = page;
-            console.log("page", page);
+
+
             loadAll();
+            console.log("page", vm.page, "last", vm.links.last);
+            console.log("total", vm.totalItems);
         }
     }
 })();

@@ -20,6 +20,12 @@ public class RealTimeEventImageDTO implements Serializable {
     @NotNull
     private ZonedDateTime creationTime;
 
+    @NotNull
+    private Integer width;
+
+    @NotNull
+    private Integer height;
+
     private String description;
 
     private Long eventId;
@@ -44,6 +50,20 @@ public class RealTimeEventImageDTO implements Serializable {
 
     public void setCreationTime(ZonedDateTime creationTime) {
         this.creationTime = creationTime;
+    }
+    public Integer getWidth() {
+        return width;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
     }
     public String getDescription() {
         return description;
@@ -88,6 +108,8 @@ public class RealTimeEventImageDTO implements Serializable {
             "id=" + id +
             ", imageUrl='" + imageUrl + "'" +
             ", creationTime='" + creationTime + "'" +
+            ", width='" + width + "'" +
+            ", height='" + height + "'" +
             ", description='" + description + "'" +
             '}';
     }

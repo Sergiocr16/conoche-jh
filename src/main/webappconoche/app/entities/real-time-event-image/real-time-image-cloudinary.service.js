@@ -29,6 +29,8 @@
 
             function onSuccess(response) {
                 image.imageUrl = response.data.public_id;
+                image.width    = response.data.width;
+                image.height   = response.data.height;
                 WSRealTimeEventImages.sendImage(image);
                 return image;
             }
