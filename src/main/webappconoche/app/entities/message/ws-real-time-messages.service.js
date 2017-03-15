@@ -15,12 +15,14 @@
     function WSRealTimeEventMessages(StompManager) {
         const SUBSCRIBE_TRACKER_URL = '/topic/RealTimeEventMessage/';
         const SEND_ACTIVITY_URL = '/topic/saveRealTimeEventMessage/';
+        const DISCARD_ACTIVITY_URL = '/topic/RealTimeEventMessageDiscard/';
 
         var service = {
             receive: receive,
             sendMessage: sendMessage,
             subscribe: subscribe,
-            unsubscribe: unsubscribe
+            unsubscribe: unsubscribe,
+            discardViewedMessage,
         };
 
         return service;
@@ -31,6 +33,10 @@
 
         function sendMessage(message) {
             StompManager.send(SEND_ACTIVITY_URL + message.eventId, message);
+        }
+
+        function discardViewedMessage(message) {
+             StompManager.send(DISCARD_ACTIVITY_URL, message);
         }
 
         function subscribe (idEvent) {

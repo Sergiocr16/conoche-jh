@@ -5,53 +5,86 @@
         .module('conocheApp')
         .controller('LiveMessagesController', LiveMessagesController);
 
-    LiveMessagesController.$inject = ['ParseLinks', 'AlertService', 'paginationConstants', '$stateParams', 'WSRealTimeEventMessages', '$timeout','User'];
+    LiveMessagesController.$inject = ['ParseLinks','Message', 'AlertService', 'paginationConstants', '$stateParams', 'WSRealTimeEventMessages', '$timeout','User'];
 
-    function LiveMessagesController(ParseLinks, AlertService, paginationConstants, $stateParams, WSRealTimeEventMessages, $timeout, User) {
+    function LiveMessagesController(ParseLinks, Message, AlertService, paginationConstants, $stateParams, WSRealTimeEventMessages, $timeout, User) {
 
         var vm = this;
         vm.idEvent = $stateParams.idEvent;
         vm.liveMessages = [];
-        console.log(vm.idEvent);
         vm.loadPage = loadPage;
         vm.isShowing = 0;
         vm.totalMessages = 0;
         vm.currentMessage = 0;
-        WSRealTimeEventMessages.receive(vm.idEvent)
-            .then(null, null, addNewMessage);
-        function addNewMessage(message) {
+        loadAll();
+        function loadAll () {
+            Message.query({
+            }, onSuccess, onError);
+            function sort() {
+                var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+                if (vm.predicate !== 'id') {
+                    result.push('id');
+                }
+                return result;
+            }
+            function onSuccess(data, headers) {
+                vm.links = ParseLinks.parse(headers('link'));
+                vm.totalItems = headers('X-Total-Count');
+                vm.queryCount = vm.totalItems;
+                vm.liveMessages = data;
+                if(vm.liveMessages.length>0){
+                vm.totalMessages = vm.liveMessages.length-1;
+                vm.currentMessage = vm.currentMessage+1;
+                showMessage(vm.liveMessages[0]);
+                }
+            }
+            function onError(error) {
+                AlertService.error(error.data.message);
+            }
+        }
 
-        if(vm.isShowing == 1){
-          loadMessage(message);
-          vm.totalMessages = vm.totalMessages + 1;
-        }else{
-          showMessage(message);
-        }
-        }
+         WSRealTimeEventMessages.receive(vm.idEvent).then(null, null, addNewMessage);
+
+         function addNewMessage(message) {
+         console.log("ALGO PASO");
+            if(vm.isShowing == 1){
+              loadMessage(message);
+              console.log("TOTAL MESAGES" +  vm.totalMessages);
+            }else{
+              showMessage(message);
+            }
+         }
 
         function showMessage(message){
+
         vm.isShowing = 1;
           vm.message = message;
           $('#message').fadeIn(700);
           $timeout(function(){
           $('#message').fadeOut(700);
            loopMessages();
-                   console.log("MOSTRANDO "+vm.isShowing)
-                   console.log("CANTIDAD DE MENSAJES "+vm.totalMessages)
-                   console.log("MENSAJE ACTUAL "+vm.currentMessage)
            finishLoop();
            vm.isShowing = 0;
-          },10000)
+           WSRealTimeEventMessages.discardViewedMessage(message);
+             console.log("TOTAL MESAGES" +  vm.totalMessages);
+          },4000)
         }
         function loopMessages(){
+//          console.log("ANTES")
+//           console.log("MENSAJE CURRENT"  +  (vm.currentMessage));
+//           console.log("TOTAL MESAGES" +  vm.totalMessages);
         $timeout(function(){
            if(vm.totalMessages > 0){
-            vm.currentMessage = vm.currentMessage + 1;
+           vm.currentMessage = vm.currentMessage + 1;
            showMessage(vm.liveMessages[vm.currentMessage-1])
            removeItemFromArr(vm.liveMessages,vm.liveMessages[vm.currentMessage-1]);
            vm.totalMessages = vm.totalMessages - 1;
            }
+//            console.log("DESPUES")
+//           console.log("MENSAJE CURRENT"  +  (vm.currentMessage));
+//           console.log("TOTAL MESAGES" +  vm.totalMessages);
         },700)
+         finishLoop();
         }
 
         function finishLoop(){
@@ -66,7 +99,7 @@
         };
         function loadMessage(message){
           vm.liveMessages.push(message);
-          console.log("metiendo msj");
+          vm.totalMessages = vm.totalMessages + 1;
         }
         function loadPage(page) {
             vm.page = page;
