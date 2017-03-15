@@ -21,18 +21,14 @@
             ]
         },
         {
-            "fieldName": "width",
-            "fieldType": "Integer",
+            "fieldName": "aspectRatio",
+            "fieldType": "Double",
             "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "height",
-            "fieldType": "Integer",
-            "fieldValidateRules": [
-                "required"
-            ]
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+
         },
         {
             "fieldName": "description",

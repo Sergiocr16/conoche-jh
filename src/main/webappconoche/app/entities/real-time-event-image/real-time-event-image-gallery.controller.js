@@ -13,7 +13,6 @@
         const SORT           = 'creationTime,desc';
 
         var vm = this;
-
         vm.width = 250;
         vm.infiniteScrollDisable = true;
         vm.loadPage = loadPage;
@@ -38,11 +37,10 @@
             }
         }
 
-        function computeDimentions(width, height) {
-           var newHeight = Math.round((height / width) * vm.width);
+        function computeDimentions(aspectRatio) {
             return {
                 'width' : vm.width + PADDING,
-                'height' : newHeight + PADDING
+                'height' :  (vm.width * aspectRatio) + PADDING
             }
         }
 
@@ -59,7 +57,6 @@
 
         function substractMetadataFromHeaders(headers) {
             vm.links = ParseLinks.parse(headers('link'));
-            console.log(JSON.stringify(vm.links));
             vm.totalItems = headers('X-Total-Count');
         }
 
@@ -97,9 +94,6 @@
             }
             vm.links.last = Math.floor(vm.totalItems++ / ITEMS_PER_PAGE);
             vm.realTimeEventImages.unshift(image);
-
-            console.log("page", vm.page, "last", vm.links.last);
-            console.log("total", vm.totalItems);
         }
 
         function reset () {
@@ -109,11 +103,7 @@
 
         function loadPage(page) {
             vm.page = page;
-
-
             loadAll();
-            console.log("page", vm.page, "last", vm.links.last);
-            console.log("total", vm.totalItems);
         }
     }
 })();
