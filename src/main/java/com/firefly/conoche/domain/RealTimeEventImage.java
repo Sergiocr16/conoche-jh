@@ -30,6 +30,14 @@ public class RealTimeEventImage implements Serializable {
     @Column(name = "creation_time", nullable = false)
     private ZonedDateTime creationTime;
 
+    @NotNull
+    @Column(name = "width", nullable = false)
+    private Integer width;
+
+    @NotNull
+    @Column(name = "height", nullable = false)
+    private Integer height;
+
     @Column(name = "description")
     private String description;
 
@@ -68,6 +76,32 @@ public class RealTimeEventImage implements Serializable {
 
     public void setCreationTime(ZonedDateTime creationTime) {
         this.creationTime = creationTime;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public RealTimeEventImage width(Integer width) {
+        this.width = width;
+        return this;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public RealTimeEventImage height(Integer height) {
+        this.height = height;
+        return this;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
     }
 
     public String getDescription() {
@@ -122,6 +156,8 @@ public class RealTimeEventImage implements Serializable {
             "id=" + id +
             ", imageUrl='" + imageUrl + "'" +
             ", creationTime='" + creationTime + "'" +
+            ", width='" + width + "'" +
+            ", height='" + height + "'" +
             ", description='" + description + "'" +
             '}';
     }

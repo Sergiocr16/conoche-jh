@@ -3,36 +3,43 @@
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="real-time-event-image-gallery.savews({idEvent:  vm.idEvent})">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span  data-translate="conocheApp.realTimeEventImage.home.createLabel">
-                        Create new Real Time Event Image
-                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.infiniteScrollDisable || vm.page >= vm.links['last']" >
-    <div masonry="{ transitionDuration: '0.4s' }" load-images="true" preserve-order="true">
-        <div class="masonry-brick" ng-repeat="realTimeEventImage in vm.realTimeEventImages">
-            <div class="view view-first">
-                <cl-image public-id="{{realTimeEventImage.imageUrl}}" class="thumbnail inline">
-                    <cl-transformation  width="300" crop="scale" radius="10"/>
-                </cl-image>
-                <div class="mask">
-                    <a href="" class="btn btn-icon-only purple pull-left">
-                        <i class="fa fa-times"></i>
-                    </a>
-                    <a href="" class="btn btn-icon-only purple pull-left">
-                        <i class="fa fa-arrows-alt"></i>
-                    </a>
-                    <p ng-if="realTimeEventImage.description">{{realTimeEventImage.description}}</p>
+            <div class="col-sm-12">
+                <div class="text-center">
+                    <figure class="snip1566">
+                        <figcaption><i class="ion-android-add"></i></figcaption>
+                        <a  ui-sref="real-time-event-image-gallery.savews"></a>
+                    </figure>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="container" infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.infiniteScrollDisable || vm.page >= vm.links['last']" >
+        <div masonry="{ transitionDuration: '0.2s' }">
+            <div class=" masonry-brick" ng-repeat="realTimeEventImage in vm.realTimeEventImages">
+                <div class="view view-first" >
+                    <div ng-style="vm.computeDimentions(realTimeEventImage.width, realTimeEventImage.height)">
+                        <cl-image public-id="{{realTimeEventImage.imageUrl}}" class="thumbnail inline">
+                            <cl-transformation  border="5px_solid_rgb:b299cc20" background="rgb:c1add670"
+                                                width="{{vm.width}}"
+                                                crop="scale" radius="5"/>
+                        </cl-image>
+                    </div>
+                    <div class="mask">
+                        <a href="" class="btn btn-icon-only purple pull-left">
+                            <i class="fa fa-times"></i>
+                        </a>
+                        <a href="" class="btn btn-icon-only purple pull-left">
+                            <i class="fa fa-arrows-alt"></i>
+                        </a>
+                        <span href="" class="pull-right">
+                        {{realTimeEventImage.creationTime |  date:'yyyy-MM-dd HH:mm:ss Z' }}
+                    </span>
+                        <p ng-if="realTimeEventImage.description">{{realTimeEventImage.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <br/>

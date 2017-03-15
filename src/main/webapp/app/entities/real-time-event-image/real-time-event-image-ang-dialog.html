@@ -40,6 +40,38 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label" data-translate="conocheApp.realTimeEventImage.width" for="field_width">Width</label>
+            <input type="number" class="form-control" name="width" id="field_width"
+                    ng-model="vm.realTimeEventImage.width"
+                    required/>
+            <div ng-show="editForm.width.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.width.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.width.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="conocheApp.realTimeEventImage.height" for="field_height">Height</label>
+            <input type="number" class="form-control" name="height" id="field_height"
+                    ng-model="vm.realTimeEventImage.height"
+                    required/>
+            <div ng-show="editForm.height.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.height.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.height.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="control-label" data-translate="conocheApp.realTimeEventImage.description" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
                     ng-model="vm.realTimeEventImage.description"

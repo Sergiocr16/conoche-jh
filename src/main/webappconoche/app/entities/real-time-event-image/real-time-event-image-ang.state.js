@@ -28,7 +28,12 @@
                         $translatePartialLoader.addPart('realTimeEventImage');
                         $translatePartialLoader.addPart('global');
                         return $translate.refresh();
+                    }],
+
+                    idEvent: ['$stateParams', function ($stateParams) {
+                       return $stateParams.idEvent;
                     }]
+
                 },
                 onEnter: ['$stateParams', 'WSRealTimeEventImages', function($stateParams, WSRealTimeEventImages) {
                     WSRealTimeEventImages.subscribe($stateParams.idEvent);
@@ -193,7 +198,7 @@
         })
             .state('real-time-event-image-gallery.savews', {
                 parent: 'real-time-event-image-gallery',
-                url: '/{idEvent}/save',
+                url: '/save',
                 data: {
                     authorities: ['ROLE_USER']
                 },

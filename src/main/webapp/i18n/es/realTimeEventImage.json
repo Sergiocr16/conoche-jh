@@ -17,6 +17,8 @@
             },
             "imageUrl": "Image Url",
             "creationTime": "Creation Time",
+            "width": "Width",
+            "height": "Height",
             "description": "Description",
             "event": "Event"
         }
