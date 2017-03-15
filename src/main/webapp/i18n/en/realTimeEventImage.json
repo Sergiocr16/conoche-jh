@@ -17,8 +17,7 @@
             },
             "imageUrl": "Image Url",
             "creationTime": "Creation Time",
-            "width": "Width",
-            "height": "Height",
+            "aspectRatio": "Aspect Ratio",
             "description": "Description",
             "event": "Event"
         }

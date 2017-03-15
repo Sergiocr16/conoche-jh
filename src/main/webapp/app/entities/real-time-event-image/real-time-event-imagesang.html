@@ -21,8 +21,7 @@
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="imageUrl"><span data-translate="conocheApp.realTimeEventImage.imageUrl">Image Url</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="creationTime"><span data-translate="conocheApp.realTimeEventImage.creationTime">Creation Time</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="width"><span data-translate="conocheApp.realTimeEventImage.width">Width</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="height"><span data-translate="conocheApp.realTimeEventImage.height">Height</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="aspectRatio"><span data-translate="conocheApp.realTimeEventImage.aspectRatio">Aspect Ratio</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="description"><span data-translate="conocheApp.realTimeEventImage.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="eventId"><span data-translate="conocheApp.realTimeEventImage.event">Event</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
@@ -33,8 +32,7 @@
                     <td><a ui-sref="real-time-event-image-ang-detail({id:realTimeEventImage.id})">{{realTimeEventImage.id}}</a></td>
                     <td>{{realTimeEventImage.imageUrl}}</td>
                     <td>{{realTimeEventImage.creationTime | date:'medium'}}</td>
-                    <td>{{realTimeEventImage.width}}</td>
-                    <td>{{realTimeEventImage.height}}</td>
+                    <td>{{realTimeEventImage.aspectRatio}}</td>
                     <td>{{realTimeEventImage.description}}</td>
                     <td>
                         <a ui-sref="event-ang-detail({id:realTimeEventImage.eventId})">{{realTimeEventImage.eventId}}</a>

@@ -106,8 +106,7 @@
                             return {
                                 imageUrl: null,
                                 creationTime: null,
-                                width: null,
-                                height: null,
+                                aspectRatio: null,
                                 description: null,
                                 id: null
                             };

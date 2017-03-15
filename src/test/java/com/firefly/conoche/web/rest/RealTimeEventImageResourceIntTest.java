@@ -51,11 +51,8 @@ public class RealTimeEventImageResourceIntTest {
     private static final ZonedDateTime DEFAULT_CREATION_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_CREATION_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
-    private static final Integer DEFAULT_WIDTH = 1;
-    private static final Integer UPDATED_WIDTH = 2;
-
-    private static final Integer DEFAULT_HEIGHT = 1;
-    private static final Integer UPDATED_HEIGHT = 2;
+    private static final Double DEFAULT_ASPECT_RATIO = 1D;
+    private static final Double UPDATED_ASPECT_RATIO = 2D;
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
@@ -105,8 +102,7 @@ public class RealTimeEventImageResourceIntTest {
         RealTimeEventImage realTimeEventImage = new RealTimeEventImage()
                 .imageUrl(DEFAULT_IMAGE_URL)
                 .creationTime(DEFAULT_CREATION_TIME)
-                .width(DEFAULT_WIDTH)
-                .height(DEFAULT_HEIGHT)
+                .aspectRatio(DEFAULT_ASPECT_RATIO)
                 .description(DEFAULT_DESCRIPTION);
         return realTimeEventImage;
     }
@@ -135,8 +131,7 @@ public class RealTimeEventImageResourceIntTest {
         RealTimeEventImage testRealTimeEventImage = realTimeEventImageList.get(realTimeEventImageList.size() - 1);
         assertThat(testRealTimeEventImage.getImageUrl()).isEqualTo(DEFAULT_IMAGE_URL);
         assertThat(testRealTimeEventImage.getCreationTime()).isEqualTo(DEFAULT_CREATION_TIME);
-        assertThat(testRealTimeEventImage.getWidth()).isEqualTo(DEFAULT_WIDTH);
-        assertThat(testRealTimeEventImage.getHeight()).isEqualTo(DEFAULT_HEIGHT);
+        assertThat(testRealTimeEventImage.getAspectRatio()).isEqualTo(DEFAULT_ASPECT_RATIO);
         assertThat(testRealTimeEventImage.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
     }
 
@@ -182,29 +177,10 @@ public class RealTimeEventImageResourceIntTest {
 
     @Test
     @Transactional
-    public void checkWidthIsRequired() throws Exception {
+    public void checkAspectRatioIsRequired() throws Exception {
         int databaseSizeBeforeTest = realTimeEventImageRepository.findAll().size();
         // set the field null
-        realTimeEventImage.setWidth(null);
-
-        // Create the RealTimeEventImage, which fails.
-        RealTimeEventImageDTO realTimeEventImageDTO = realTimeEventImageMapper.realTimeEventImageToRealTimeEventImageDTO(realTimeEventImage);
-
-        restRealTimeEventImageMockMvc.perform(post("/api/real-time-event-images")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(realTimeEventImageDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<RealTimeEventImage> realTimeEventImageList = realTimeEventImageRepository.findAll();
-        assertThat(realTimeEventImageList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkHeightIsRequired() throws Exception {
-        int databaseSizeBeforeTest = realTimeEventImageRepository.findAll().size();
-        // set the field null
-        realTimeEventImage.setHeight(null);
+        realTimeEventImage.setAspectRatio(null);
 
         // Create the RealTimeEventImage, which fails.
         RealTimeEventImageDTO realTimeEventImageDTO = realTimeEventImageMapper.realTimeEventImageToRealTimeEventImageDTO(realTimeEventImage);
@@ -231,8 +207,7 @@ public class RealTimeEventImageResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(realTimeEventImage.getId().intValue())))
             .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DEFAULT_IMAGE_URL.toString())))
             .andExpect(jsonPath("$.[*].creationTime").value(hasItem(sameInstant(DEFAULT_CREATION_TIME))))
-            .andExpect(jsonPath("$.[*].width").value(hasItem(DEFAULT_WIDTH)))
-            .andExpect(jsonPath("$.[*].height").value(hasItem(DEFAULT_HEIGHT)))
+            .andExpect(jsonPath("$.[*].aspectRatio").value(hasItem(DEFAULT_ASPECT_RATIO.doubleValue())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
@@ -249,8 +224,7 @@ public class RealTimeEventImageResourceIntTest {
             .andExpect(jsonPath("$.id").value(realTimeEventImage.getId().intValue()))
             .andExpect(jsonPath("$.imageUrl").value(DEFAULT_IMAGE_URL.toString()))
             .andExpect(jsonPath("$.creationTime").value(sameInstant(DEFAULT_CREATION_TIME)))
-            .andExpect(jsonPath("$.width").value(DEFAULT_WIDTH))
-            .andExpect(jsonPath("$.height").value(DEFAULT_HEIGHT))
+            .andExpect(jsonPath("$.aspectRatio").value(DEFAULT_ASPECT_RATIO.doubleValue()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
 
@@ -274,8 +248,7 @@ public class RealTimeEventImageResourceIntTest {
         updatedRealTimeEventImage
                 .imageUrl(UPDATED_IMAGE_URL)
                 .creationTime(UPDATED_CREATION_TIME)
-                .width(UPDATED_WIDTH)
-                .height(UPDATED_HEIGHT)
+                .aspectRatio(UPDATED_ASPECT_RATIO)
                 .description(UPDATED_DESCRIPTION);
         RealTimeEventImageDTO realTimeEventImageDTO = realTimeEventImageMapper.realTimeEventImageToRealTimeEventImageDTO(updatedRealTimeEventImage);
 
@@ -290,8 +263,7 @@ public class RealTimeEventImageResourceIntTest {
         RealTimeEventImage testRealTimeEventImage = realTimeEventImageList.get(realTimeEventImageList.size() - 1);
         assertThat(testRealTimeEventImage.getImageUrl()).isEqualTo(UPDATED_IMAGE_URL);
         assertThat(testRealTimeEventImage.getCreationTime()).isEqualTo(UPDATED_CREATION_TIME);
-        assertThat(testRealTimeEventImage.getWidth()).isEqualTo(UPDATED_WIDTH);
-        assertThat(testRealTimeEventImage.getHeight()).isEqualTo(UPDATED_HEIGHT);
+        assertThat(testRealTimeEventImage.getAspectRatio()).isEqualTo(UPDATED_ASPECT_RATIO);
         assertThat(testRealTimeEventImage.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
     }
 
