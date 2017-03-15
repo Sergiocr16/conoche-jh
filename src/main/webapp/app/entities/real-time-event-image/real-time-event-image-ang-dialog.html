@@ -40,6 +40,22 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label" data-translate="conocheApp.realTimeEventImage.aspectRatio" for="field_aspectRatio">Aspect Ratio</label>
+            <input type="number" class="form-control" name="aspectRatio" id="field_aspectRatio"
+                    ng-model="vm.realTimeEventImage.aspectRatio"
+                    required/>
+            <div ng-show="editForm.aspectRatio.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.aspectRatio.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.aspectRatio.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="control-label" data-translate="conocheApp.realTimeEventImage.description" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
                     ng-model="vm.realTimeEventImage.description"

@@ -21,6 +21,16 @@
             ]
         },
         {
+            "fieldName": "aspectRatio",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+
+        },
+        {
             "fieldName": "description",
             "fieldType": "String"
         }
@@ -28,7 +38,7 @@
     "changelogDate": "20170307223303",
     "entityTableName": "real_time_event_image",
     "dto": "mapstruct",
-    "pagination": "pager",
+    "pagination": "infinite-scroll",
     "service": "serviceClass",
     "angularJSSuffix": "ang"
 }
