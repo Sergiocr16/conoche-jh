@@ -204,3 +204,7 @@
     transform: rotate(-45deg);
 }
 
+/*Particles*/
+.particle-logo {
+    margin: 22px 0 0 0;
+}

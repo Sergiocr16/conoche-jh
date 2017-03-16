@@ -17,6 +17,11 @@
            $('#loaded').show();
            $('#loading').fadeOut(30);
           });
+
+        let logo = ['Conoche', 'Costa Rica', 'Por la noche'];
+        let current = 0;
+
+        vm.logo = logo[current];
         vm.isNavbarCollapsed = true;
         vm.isAuthenticated = Principal.isAuthenticated;
 
@@ -42,7 +47,8 @@
         }
 
         $rootScope.$on('$stateChangeStart',
-            function(event, toState, toParams, fromState, fromParams){
+            function(event, toState, toParams, fromState, fromParams) {
+                vm.logo = logo[++current % logo.length];
                 vm.pageTitle = toState.data.pageTitle;
             });
 
