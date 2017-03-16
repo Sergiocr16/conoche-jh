@@ -3,7 +3,21 @@
     <div class="container">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a ui-sref="home"><img src="content/template/admin/layout3/img/logo-default.png" alt="logo" class="logo-default"></a>
+            <a ui-sref="home">
+                <div class="particle-logo">
+                    <particle-text
+                        color="#EDE7F6"
+                        motion-color="#B388FF"
+                        spacing="3"
+                        ease="0.05"
+                        size="2"
+                        font-size="27"
+                        height-padding="5"
+                        text="{{vm.logo}}"
+                        font-familly="Bubblegum Sans, cursive"
+                        radius="20"/>
+                </div>
+            </a>
         </div>
         <!-- END LOGO -->
         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
