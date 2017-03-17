@@ -61,7 +61,8 @@ public class RealTimeMessageService {
 
     @SubscribeMapping("/topic/RealTimeEventMessageDiscard/")
     public void removeViewedMessage(MessageDTO messageDTO){
-        if(this.realTimeEventMessageService.findOne(messageDTO.getId())!=null) {
+        MessageDTO message = this.realTimeEventMessageService.findOne(messageDTO.getId());
+        if(message!=null) {
             this.realTimeEventMessageService.delete(messageDTO.getId());
         }
     }

@@ -32,7 +32,7 @@
             vm.isSaving = true;
             vm.message.creationTime = new Date();
             vm.message.userId = account.id;
-            vm.message.eventName = account.login;
+            vm.message.userLogin = account.login;
            WSRealTimeEventMessages.sendMessage(vm.message);
            $scope.$emit('conocheApp:messageUpdate');
            $uibModalInstance.close();

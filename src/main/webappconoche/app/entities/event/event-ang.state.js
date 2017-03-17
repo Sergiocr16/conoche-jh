@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/event-ang?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_ADMIN','ROLE_OWNER','ROLE_USER'],
                 pageTitle: 'conocheApp.event.home.title'
             },
             views: {
@@ -55,7 +55,7 @@
             parent: 'event-ang',
             url: '/event-ang/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_ADMIN','ROLE_OWNER','ROLE_USER'],
                 pageTitle: 'conocheApp.event.detail.title'
             },
             views: {

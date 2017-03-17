@@ -21,6 +21,8 @@ public class MessageDTO implements Serializable {
     @NotNull
     private ZonedDateTime creationTime;
 
+    private String userLogin;
+
     private Long userId;
 
     private Long eventId;
@@ -47,6 +49,13 @@ public class MessageDTO implements Serializable {
 
     public void setCreationTime(ZonedDateTime creationTime) {
         this.creationTime = creationTime;
+    }
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     public Long getUserId() {
@@ -100,6 +109,7 @@ public class MessageDTO implements Serializable {
             "id=" + id +
             ", payload='" + payload + "'" +
             ", creationTime='" + creationTime + "'" +
+            ", userLogin='" + userLogin + "'" +
             '}';
     }
 }

@@ -28,12 +28,16 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "userLogin",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20170307223303",
-    "entityTableName": "message",
     "dto": "mapstruct",
-    "pagination": "pager",
     "service": "serviceClass",
+    "entityTableName": "message",
+    "pagination": "pager",
     "angularJSSuffix": "ang"
 }

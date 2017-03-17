@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/live-messages/{idEvent}',
             data: {
-                authorities: ['ROLE_ADMIN'],
+                authorities: ['ROLE_ADMIN','ROLE_OWNER','ROLE_USER'],
                 pageTitle: 'conocheApp.message.home.title'
             },
             views: {
@@ -160,7 +160,7 @@
             parent: 'event-ang-detail',
             url: '/newComment/',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER','ROLE_ADMIN','ROLE_OWNER']
             },
             onEnter: ['WSRealTimeEventMessages','$stateParams', '$state', '$uibModal', function(WSRealTimeEventMessages,$stateParams, $state, $uibModal) {
               WSRealTimeEventMessages.subscribe(Number($stateParams.id));
