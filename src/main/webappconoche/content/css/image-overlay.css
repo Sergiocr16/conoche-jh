@@ -1,27 +1,20 @@
 @import url(http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 
-.view {
-    width: 100%;
-    height: 100%;
+.masondry-overlay-view {
     float: left;
     overflow: hidden;
     position: relative;
     text-align: center;
     cursor: default;
 }
-.view .mask, .view .content {
-    width: 100%;
-    height: 100%;
+.masondry-overlay-mask {
     position: absolute;
     overflow: hidden;
     top: 0;
     left: 0
 }
-.view div image{
-    display: block;
-    position: relative
-}
-.view p {
+
+.masondry-overlay-view p {
     color: #FFFFFF;
     text-align: center;
     position: relative;
@@ -32,72 +25,67 @@
     font-family: 'Amatic SC', cursive;
 }
 
-.view span {
+.masondry-overlay-view span {
     color: #FFFFFF;
     font-size: 15px;
     font-family: 'Amatic SC', cursive;
 }
 
-.view a {
+.masondry-overlay-view a {
     border-radius: 50% !important;
 }
 
-
-.view-first div image {
-    transition: all 0.2s linear;
-}
-.view-first .mask {
+.masondry-overlay-view-first .masondry-overlay-mask {
     opacity: 0;
     background-color: rgba(0, 0, 0, 0.4);
     transition: all 0.5s ease-in-out;
 }
-.view-first p {
+.masondry-overlay-view-first p {
     transform: translateY(100%);
     opacity: 0;
     transition: all 0.2s ease-in-out;
 }
 
-.view-first span {
+.masondry-overlay-view-first span {
     transform: translateX(100%);
     opacity: 0;
     transition: all 0.2s ease-in-out;
 }
 
-
-.view-first a{
+.masondry-overlay-view-first a{
     transform: rotateX( 90deg );
     opacity: 0;
     transition: all 0.2s ease-in-out;
 }
 
-.view-first:hover div image{
-     transform: scale(1.3);
- }
-.view-first:hover .mask {
+.masondry-overlay-view-first:hover .masondry-overlay-mask {
     opacity: 1;
 }
 
-.view-first:hover p {
+.masondry-overlay-view-first:hover p {
     opacity: 1;
     transform: translateY(0%);
 }
 
-.view-first:hover span {
+.masondry-overlay-view-first:hover span {
     opacity: 1;
     transform: translateX(0%);
 }
 
 
-.view-first:hover a {
+.masondry-overlay-view-first:hover a {
     opacity: 0.7;
     transform: rotateX( 0deg );
 }
 
-.view-first:hover p {
+.masondry-overlay-view-first:hover p {
     transition-delay: 0.1s;
 }
 
+
 /*Oder overlay*/
+
+
 
 
 .snip1566 {
@@ -206,5 +194,101 @@
 
 /*Particles*/
 .particle-logo {
-    margin: 22px 0 0 0;
+    margin: 15px 0 0 0;
 }
+
+/*Centered image overlay*/
+
+.image-overlay-position{
+    text-align: center;
+    cursor: default;
+    margin: 0 0 22px 0;
+}
+
+.image-overlay-container {
+    display: inline-block;
+    position: relative;
+}
+
+.image-overlay-mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    top: 0%;
+    left: 0%;
+}
+.image-overlay-container image{
+    display: block;
+    position: relative
+}
+
+.image-overlay-container p {
+    color: #FFFFFF;
+    text-align: center;
+    position: relative;
+    font-size: 25px;
+    padding: 10px;
+    margin: 10% 0% 0% 0%;
+    word-wrap: break-word;
+    font-family: 'Amatic SC', cursive;
+}
+
+.image-overlay-container span {
+    color: #FFFFFF;
+    font-size: 15px;
+    font-family: 'Amatic SC', cursive;
+}
+
+
+
+.image-overlay-view-first .image-overlay-mask {
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: all 0.5s ease-in-out;
+}
+.image-overlay-view-first p {
+    transform: translateY(100%);
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.image-overlay-view-first span {
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+
+.image-overlay-view-first a{
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+
+.image-overlay-view-first:hover .image-overlay-mask {
+    opacity: 1;
+}
+
+.image-overlay-view-first:hover p {
+    opacity: 1;
+    transform: translateY(0%);
+}
+
+.image-overlay-view-first:hover span {
+    opacity: 1;
+    transform: translateX(0%);
+}
+
+
+.image-overlay-view-first:hover a {
+    opacity: 0.7;
+    transform: translateX(0%);
+}
+
+.image-overlay-view-first:hover p {
+    transition-delay: 0.1s;
+}
+
+

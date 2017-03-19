@@ -15,14 +15,17 @@ public class RealTimeEventImageDTO implements Serializable {
 
     private Long id;
 
+    @NotNull
     private String imageUrl;
 
     @NotNull
     private ZonedDateTime creationTime;
 
     @NotNull
+    @DecimalMin(value = "0")
     private Double aspectRatio;
 
+    @Size(max = 55)
     private String description;
 
     private Long eventId;

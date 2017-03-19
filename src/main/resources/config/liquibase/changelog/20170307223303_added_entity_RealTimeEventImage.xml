@@ -23,7 +23,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="image_url" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="creation_time" type="timestamp">
@@ -34,7 +34,7 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="description" type="varchar(255)">
+            <column name="description" type="varchar(55)">
                 <constraints nullable="true" />
             </column>
 

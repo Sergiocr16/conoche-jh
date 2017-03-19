@@ -17,24 +17,22 @@
     <div class="container" infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.infiniteScrollDisable || vm.page >= vm.links['last']" >
         <div masonry="{ transitionDuration: '0.2s' }">
             <div class=" masonry-brick" ng-repeat="realTimeEventImage in vm.realTimeEventImages">
-                <div class="view view-first" >
-                    <div ng-style="vm.computeDimentions(realTimeEventImage.aspectRatio)">
-                        <cl-image public-id="{{realTimeEventImage.imageUrl}}" class="thumbnail inline">
-                            <cl-transformation  border="5px_solid_rgb:b299cc20" background="rgb:c1add670"
+                <div class="masondry-overlay-view masondry-overlay-view-first" ng-init="dimentions = vm.computeDimentions(realTimeEventImage.aspectRatio)">
+                    <div ng-style="dimentions">
+                        <cl-image public-id="{{realTimeEventImage.imageUrl}}" class="thumbnail">
+                            <cl-transformation  border="{{vm.border}}px_solid_rgb:b299cc20" background="rgb:c1add670"
                                                 width="{{vm.width}}"
                                                 crop="scale" radius="5"/>
                         </cl-image>
                     </div>
-                    <div class="mask">
+                    <div class="masondry-overlay-mask" ng-style="dimentions">
                         <a href="" class="btn btn-icon-only purple pull-left">
                             <i class="fa fa-times"></i>
                         </a>
                         <a href="" class="btn btn-icon-only purple pull-left">
                             <i class="fa fa-arrows-alt"></i>
                         </a>
-                        <span href="" class="pull-right">
-                        {{realTimeEventImage.creationTime |  date:'yyyy-MM-dd HH:mm:ss Z' }}
-                    </span>
+                        <span href="" class="pull-right">{{realTimeEventImage.creationTime |  date:'yyyy-MM-dd HH:mm:ss Z' }}</span>
                         <p ng-if="realTimeEventImage.description">{{realTimeEventImage.description}}</p>
                     </div>
                 </div>

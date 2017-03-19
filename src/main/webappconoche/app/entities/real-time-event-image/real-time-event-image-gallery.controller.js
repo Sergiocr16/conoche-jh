@@ -8,12 +8,13 @@
     RealTimeEventImageGalleryController.$inject = ['RealTimeEventImage', 'ParseLinks', 'AlertService', 'idEvent', 'WSRealTimeEventImages', '$timeout'];
 
     function RealTimeEventImageGalleryController(RealTimeEventImage, ParseLinks, AlertService, idEvent, WSRealTimeEventImages, $timeout) {
-        const PADDING        = 20
-        const ITEMS_PER_PAGE = 10;
-        const SORT           = 'creationTime,desc';
+        const THUMBNAIL_PADDING = 10
+        const ITEMS_PER_PAGE    = 10;
+        const SORT = 'creationTime,desc';
 
         var vm = this;
         vm.width = 250;
+        vm.border = 5;
         vm.infiniteScrollDisable = true;
         vm.loadPage = loadPage;
         vm.page = 0;
@@ -38,9 +39,10 @@
         }
 
         function computeDimentions(aspectRatio) {
+            var borderOffset = 2 * vm.border + THUMBNAIL_PADDING;
             return {
-                'width' : vm.width + PADDING,
-                'height' :  (vm.width * aspectRatio) + PADDING
+                'width' : vm.width + borderOffset,
+                'height' :  (vm.width * aspectRatio) + borderOffset
             }
         }
 

@@ -23,7 +23,8 @@ public class RealTimeEventImage implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "image_url")
+    @NotNull
+    @Column(name = "image_url", nullable = false)
     private String imageUrl;
 
     @NotNull
@@ -31,10 +32,12 @@ public class RealTimeEventImage implements Serializable {
     private ZonedDateTime creationTime;
 
     @NotNull
+    @DecimalMin(value = "0")
     @Column(name = "aspect_ratio", nullable = false)
     private Double aspectRatio;
 
-    @Column(name = "description")
+    @Size(max = 55)
+    @Column(name = "description", length = 55)
     private String description;
 
     @ManyToOne

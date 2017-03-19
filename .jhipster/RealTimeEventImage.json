@@ -11,7 +11,10 @@
     "fields": [
         {
             "fieldName": "imageUrl",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "creationTime",
@@ -32,7 +35,11 @@
         },
         {
             "fieldName": "description",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 55
         }
     ],
     "changelogDate": "20170307223303",
