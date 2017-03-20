@@ -5,15 +5,15 @@
         .module('conocheApp')
         .controller('RealTimeEventImageGalleryController', RealTimeEventImageGalleryController);
 
-    RealTimeEventImageGalleryController.$inject = ['RealTimeEventImage', 'ParseLinks', 'AlertService', 'idEvent', 'WSRealTimeEventImages', '$timeout'];
+    RealTimeEventImageGalleryController.$inject = ['$scope', 'RealTimeEventImage', 'ParseLinks', 'AlertService', 'idEvent', 'WSRealTimeEventImages', '$timeout'];
 
-    function RealTimeEventImageGalleryController(RealTimeEventImage, ParseLinks, AlertService, idEvent, WSRealTimeEventImages, $timeout) {
+    function RealTimeEventImageGalleryController($scope, RealTimeEventImage, ParseLinks, AlertService, idEvent, WSRealTimeEventImages, $timeout) {
         const THUMBNAIL_PADDING = 10
         const ITEMS_PER_PAGE    = 10;
         const SORT = 'creationTime,desc';
 
         var vm = this;
-        vm.width = 250;
+        vm.width = 190;
         vm.border = 5;
         vm.infiniteScrollDisable = true;
         vm.loadPage = loadPage;
@@ -23,7 +23,7 @@
         };
         vm.reset = reset;
         vm.computeDimentions = computeDimentions;
-
+        vm.toggleFullScreen = toggleFullScreen;
         init();
         WSRealTimeEventImages.receive(idEvent)
             .then(null, null, addNewImage);
@@ -36,6 +36,10 @@
                 vm.realTimeEventImages = data;
                 timeoutDisable();
             }
+        }
+
+        function toggleFullScreen(image) {
+            image.fullScreen = !image.fullScreen;
         }
 
         function computeDimentions(aspectRatio) {
@@ -67,8 +71,9 @@
             function onSuccess(data, headers) {
                 substractMetadataFromHeaders(headers);
                 vm.realTimeEventImages = vm.realTimeEventImages.concat(data);
+                timeoutDisable();
             }
-            timeoutDisable();
+
         }
 
         function onError(error) {
@@ -83,7 +88,9 @@
         }
 
         function timeoutDisable() {
-            $timeout(function() {vm.infiniteScrollDisable = false;} , 400);
+            $timeout(function() {
+                vm.infiniteScrollDisable = false;
+            } , 400);
         }
 
         function addNewImage(image) {

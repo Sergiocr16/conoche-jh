@@ -2,10 +2,6 @@
 
 .masondry-overlay-view {
     float: left;
-    overflow: hidden;
-    position: relative;
-    text-align: center;
-    cursor: default;
 }
 .masondry-overlay-mask {
     position: absolute;
@@ -16,13 +12,13 @@
 
 .masondry-overlay-view p {
     color: #FFFFFF;
-    text-align: center;
+    text-align: center !important;
     position: relative;
-    font-size: 25px;
+    font-size: 22px;
     padding: 10px;
-    margin: 10% 0% 0% 0%;
     word-wrap: break-word;
     font-family: 'Amatic SC', cursive;
+    margin: 15% 0% 0% 0% !important;
 }
 
 .masondry-overlay-view span {
