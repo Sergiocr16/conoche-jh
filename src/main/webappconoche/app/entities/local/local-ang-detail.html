@@ -1,59 +1,59 @@
-
-<div>
-    <h2><span data-translate="conocheApp.local.detail.title">Local</span> {{vm.local.id}}</h2>
+<div class="gray-font">
+    <h2 style="font-size:35px; " class="bold">{{vm.local.name}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
-    <dl class="row jh-entity-details">
-        <dt><span data-translate="conocheApp.local.name">Name</span></dt>
-        <dd>
-            <span>{{vm.local.name}}</span>
-        </dd>
-        <dt><span data-translate="conocheApp.local.longitud">Longitud</span></dt>
-        <dd>
-            <span>{{vm.local.longitud}}</span>
-        </dd>
-        <dt><span data-translate="conocheApp.local.banner">Banner</span></dt>
-        <dd>
-            <div ng-if="vm.local.banner">
+    <div class="row">
+        <div class="col-md-12 margin-top-20">
+            <div ng-if="vm.local.banner" class="col-md-9 no-padding-left margin-bottom-40">
                 <a ng-click="vm.openFile(vm.local.bannerContentType, vm.local.banner)">
-                    <img data-ng-src="{{'data:' + vm.local.bannerContentType + ';base64,' + vm.local.banner}}" style="max-width: 100%;" alt="local image"/>
+                    <img data-ng-src="{{'data:' + vm.local.bannerContentType + ';base64,' + vm.local.banner}}" class="col-md-12" alt="local image" />
                 </a>
-                {{vm.local.bannerContentType}}, {{vm.byteSize(vm.local.banner)}}
             </div>
-        </dd>
-        <dt><span data-translate="conocheApp.local.bannerUrl">Banner Url</span></dt>
-        <dd>
-            <span>{{vm.local.bannerUrl}}</span>
-        </dd>
-        <dt><span data-translate="conocheApp.local.latitud">Latitud</span></dt>
-        <dd>
-            <span>{{vm.local.latitud}}</span>
-        </dd>
-        <dt><span data-translate="conocheApp.local.descripcion">Descripcion</span></dt>
-        <dd>
-            <span>{{vm.local.descripcion}}</span>
-        </dd>
-        <dt><span data-translate="conocheApp.local.provincia">Provincia</span></dt>
-        <dd>
-            <span data-translate="{{'conocheApp.Provincia.' + vm.local.provincia}}">{{vm.local.provincia}}</span>
-        </dd>
-        <dt><span data-translate="conocheApp.local.services">Services</span></dt>
-        <dd>
-            <span ng-repeat="services in vm.local.services">
-                <a ui-sref="servicio-ang-detail({id: services.id})">{{services.id}}</a>{{$last ? '' : ', '}}
-            </span>
-        </dd>
-        <dt><span data-translate="conocheApp.local.subcribers">Subcribers</span></dt>
-        <dd>
-            <span ng-repeat="subcribers in vm.local.subcribers">
-                {{subcribers.id}}{{$last ? '' : ', '}}
-            </span>
-        </dd>
-    </dl>
 
-    <button type="submit"
-            ui-sref="{{ vm.previousState }}"
-            class="btn btn-info">
+            <div class="col-md-3 no-padding-left">
+                <div class=" no-padding E0E0E0-background" id="local-info">
+                    <h4 class="padding-10 text-center bold" >Información de local</h4>
+                </div>
+                <div class="padding-15 font-15 white-background margin-bottom-20" id="local-info-content">
+                    <ul class="no-list-style no-padding-left ">
+                        <li class="margin-10">
+                            <i class="fa fa-calendar" aria-hidden="true"></i> <span> 31 de marzo, 2017</span>
+                        </li>
+                        <li class="margin-10">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i> <span> 20:00 - 22:00</span>
+                        </li>
+                        <li class="margin-10">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i> <span> Desamparados, San José</span>
+                        </li>
+                        <li class="margin-10">
+                            <i class="fa fa-usd" aria-hidden="true"></i> <span> 3000 colones</span>
+                        </li>
+
+                    </ul>
+                </div>
+                <a href="" class="btn btn-success btn-block btn-lg 5cb85c-background border-radius-6"
+                   style="background-color:#5cb85c!Important">Ver actividad en vivo</a>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-9">
+                <h2 class="bold font-20 margin-bottom-40 ">Detalles</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae, voluptatum, amet, eius esse sit praesentium similique tenetur accusamus deserunt modi dignissimos debitis consequatur facere unde sint quasi quae architecto eum!
+
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, nesciunt, sapiente, distinctio obcaecati dolores perspiciatis eveniet adipisci repellendus consequatur ab officiis ipsa laudantium! Provident expedita odio iste corporis nam natus illum. Cupiditate, quis libero distinctio reiciendis quos adipisci eius animi.
+                </p>
+            </div>
+            <div class=" col-md-3 no-padding">
+                <h2 class="font-20 margin-bottom-20 ">Ubicación</h2>
+                <div style="background:url('content/images/mapa.png')"></div>
+                <img src="content/images/mapa.png" class="col-md-12 no-padding-left" alt="">
+            </div>
+        </div>
+
+    </div>
+
+    <button type="submit" ui-sref="{{ vm.previousState }}" class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
     </button>
 
