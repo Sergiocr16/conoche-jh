@@ -1,6 +1,12 @@
 {
     "conocheApp": {
         "message" : {
+            "liveMessages":{
+                "title": "Live comments",
+                "noMessages": "No one is commenting :(",
+                "comment": "Comment live",
+                "commentButton": "Comment live!"
+            },
             "home": {
                 "title": "Messages",
                 "createLabel": "Create a new Message",
@@ -15,7 +21,7 @@
             "detail": {
                 "title": "Message"
             },
-            "payload": "Payload",
+            "payload": "What do you want to say to the world?",
             "creationTime": "Creation Time",
             "user": "User",
             "event": "Event"

@@ -22,7 +22,8 @@
                 }
             },
             'update': { method:'PUT' },
-            'delete': { method:'DELETE' }
+            'delete': { method:'DELETE' },
+            'findByEventId': { method: 'GET', isArray: true, url: 'api/messages/findByEventId/:eventId'}
         });
     }
 })();

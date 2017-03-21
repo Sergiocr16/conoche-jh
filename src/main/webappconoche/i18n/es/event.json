@@ -13,7 +13,9 @@
                 "question": "¿Seguro que quiere eliminar Event {{ id }}?"
             },
             "detail": {
-                "title": "Event"
+                "title": "Event",
+                "vieMessages": "Ver comentarios en vivo",
+                "commentButton": "Comenta el evento"
             },
             "name": "Name",
             "details": "Details",

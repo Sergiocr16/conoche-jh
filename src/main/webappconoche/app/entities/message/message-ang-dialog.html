@@ -5,8 +5,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
         <div class="caption font-red-sunglo">
-            <i class="icon-settings font-red-sunglo"></i>
-            <span id="myUserLabel"  class="caption-subject bold uppercase" data-translate="conocheApp.message.home.createOrEditLabel"> Create or edit a Message</span>
+            <i class="icon-bubbles font-red-sunglo"></i>
+            <span id="myUserLabel"  class="caption-subject bold uppercase" data-translate="conocheApp.message.liveMessages.comment"> Comment live</span>
         </div>
     </div>
     <div class="modal-body">
@@ -18,7 +18,7 @@
         <!--</div>-->
         <div class="form-group form-md-line-input">
             <textarea type="text" class="form-control" name="payload" id="field_payload"
-                    ng-model="vm.message.payload"
+                    ng-model="vm.message.payload" maxlength="255"
                     required/>
             <label class="control-label" data-translate="conocheApp.message.payload" for="field_payload">Payload</label>
             <div ng-show="editForm.payload.$invalid">
@@ -64,10 +64,10 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+         <span data-translate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-danger">
+            <span class="glyphicon glyphicon-fire"></span>&nbsp;<span data-translate="conocheApp.message.liveMessages.commentButton">Save</span>
         </button>
     </div>
 </form>

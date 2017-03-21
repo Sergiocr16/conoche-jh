@@ -37,17 +37,19 @@ public class RealTimeMessageService {
 
     private final SimpMessageSendingOperations messagingTemplate;
     private MessageService realTimeEventMessageService;
-    private int totalMessagues;
-    private int currentMessague;
-    private List<MessageDTO> messaguesList;
 
     public RealTimeMessageService(SimpMessageSendingOperations messagingTemplate,
                                   MessageService realTimeEventMessageService) {
         this.messagingTemplate = messagingTemplate;
         this.realTimeEventMessageService = realTimeEventMessageService;
-        this.totalMessagues = 0;
-        this.currentMessague = 0;
-        this.messaguesList = new ArrayList<MessageDTO>();
+    }
+
+    @SubscribeMapping("/topic/RealTimeEventMessageDiscard/")
+    public void removeViewedMessage(MessageDTO messageDTO){
+        MessageDTO message = this.realTimeEventMessageService.findOne(messageDTO.getId());
+        if(message!=null) {
+            this.realTimeEventMessageService.delete(messageDTO.getId());
+        }
     }
 
     //cambiar el zoneid
@@ -59,37 +61,6 @@ public class RealTimeMessageService {
         return this.realTimeEventMessageService.save(messageDTO);
     }
 
-    @SubscribeMapping("/topic/RealTimeEventMessageDiscard/")
-    public void removeViewedMessage(MessageDTO messageDTO){
-        MessageDTO message = this.realTimeEventMessageService.findOne(messageDTO.getId());
-        if(message!=null) {
-            this.realTimeEventMessageService.delete(messageDTO.getId());
-        }
-    }
-
-//    @Async
-//    @SendTo("/topic/RealTimeEventMessage/{idEvent}")
-//    public MessageDTO sendInstantMessage(@Payload MessageDTO messageDTO) throws InterruptedException{
-//        this.isBeingView = true;
-//        Thread.sleep(3000);
-//        this.isBeingView = false;
-////        messagingTemplate.convertAndSend("/topic/RealTimeEventMessage/{idEvent}", messageDTO);
-//        return messageDTO;
-//    }
-//
-//   public boolean isBeingView() throws InterruptedException {
-//        Thread.sleep(1000);
-//        return true;
-//   }
-//
-//
-//    private void loadMessage(MessageDTO messague){
-//     this.messaguesList.add(messague);
-//    }
-//
-    private void removeMessage(MessageDTO messague){
-        this.messaguesList.remove(messague);
-    }
 
 
 
