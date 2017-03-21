@@ -447,13 +447,13 @@ line-height: 24px
 .white-background{
     background-color:white;
 }
-#event-info{
+#event-info,#local-info{
     border-radius: 7px 7px 0px 0px !important;
     -moz-border-radius: 7px 7px 0px 0px !important;
     -webkit-border-radius: 7px 7px 0px 0px !important;
     border: 1px solid #C9C9C9 !important;
 }
-#event-info-content{
+#event-info-content,#local-info{
     border-radius: 0px 0px 7px 7px !important;
     -moz-border-radius:0px 0px 7px 7px !important;
     -webkit-border-radius:0px 0px 7px 7px !important;
