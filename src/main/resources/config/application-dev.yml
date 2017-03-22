@@ -144,3 +144,7 @@ jhipster:
 # ===================================================================
 
 application:
+    cloudinary:
+        cloud-name: "dgh2svgxo"
+        api-key: "526662361431646"
+        api-secret: "fuzokP7eDuLhZtaN1JbiK8ojSHQ"

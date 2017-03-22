@@ -130,3 +130,7 @@ jhipster:
 # ===================================================================
 
 application:
+    cloudinary:
+        cloud-name: ""
+        api-key: ""
+        api-secret: "secret"
