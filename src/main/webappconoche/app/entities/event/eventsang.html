@@ -26,13 +26,12 @@
 
     <div class="col-md-9">
         <div ng-repeat="event in vm.events track by event.id" >
-            <div class="col-md-12 E0E0E0-background margin-bottom-20 border-radius-6 bottom-border-gray "
+            <div class="col-md-12 E0E0E0-background margin-bottom-20 bottom-border-gray "
                  ui-sref="event-ang-detail({id:event.id})">
-                <div class="col-md-5 no-padding-left padding-15" style="position: relative;" >
-
-                    <img class="col-md-12 crop no-padding"  data-ng-src="{{'data:' + event.bannerContentType + ';base64,' +
+                <div class="col-md-5 no-padding-left padding-15 position-relative font-18 text-center" >
+                    <div id="info-date-event" class="col-md-2 padding-10 font-white"><span><span class="font-24">{{event.initialTime| date:'d'}} </span>{{event.initialTime| date:'MMM'}}</span></div>
+                    <img class="col-md-12 crop no-padding"  style="z-index: 0;" data-ng-src="{{'data:' + event.bannerContentType + ';base64,' +
                          event.banner}}" alt="event image"/>
-                    <div style="position: absolute;   background-color: red; top: 25px; left: 25px;">16 abr</div>
                 </div>
                 <div class="col-md-7 gray-font">
                     <h1 class="font-24 bold" style="color: #5cb9ff">{{event.name}}</h1>
