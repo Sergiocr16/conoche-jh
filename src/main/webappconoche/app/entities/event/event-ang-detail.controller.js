@@ -7,9 +7,8 @@
 
     EventAngDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Event', 'Promotion', 'EventImage', 'RealTimeEventImage', 'User', 'Servicio', 'Local', 'Message'];
 
-    function EventAngDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Event, Promotion, EventImage, RealTimeEventImage, User, Servicio, Local, Message) {
+    function EventAngDetailController($scope, $rootScope, $stateParams, previousState,  DataUtils, entity, Event, Promotion, EventImage, RealTimeEventImage, User, Servicio, Local, Message) {
         var vm = this;
-
         vm.event = entity;
         vm.previousState = previousState.name;
         vm.byteSize = DataUtils.byteSize;
@@ -19,5 +18,12 @@
             vm.event = result;
         });
         $scope.$on('$destroy', unsubscribe);
+
+        Local.get({id: vm.event.localId},onSuccess);
+        function onSuccess(data, headers) {
+          vm.local = data;
+
+        }
+
     }
 })();

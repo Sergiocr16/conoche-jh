@@ -17,16 +17,24 @@
                 <div class="padding-15 font-15 white-background margin-bottom-20" id="event-info-content">
                     <ul class="no-list-style no-padding-left ">
                         <li class="margin-10">
-                            <i class="fa fa-calendar" aria-hidden="true"></i> <span> 31 de marzo, 2017</span>
+                            <i class="fa fa-calendar" aria-hidden="true"></i> <span>{{vm.event.initialTime | date:
+                            'MMMM d, y'
+                            }}</span>
                         </li>
                         <li class="margin-10">
-                            <i class="fa fa-clock-o" aria-hidden="true"></i> <span> 20:00 - 22:00</span>
+                            <i class="fa fa-clock-o" aria-hidden="true"></i> <span> {{vm.event.initialTime | date:'h:mm a'}} - {{vm.event.finalTime | date:'h:mm a'}}</span>
                         </li>
                         <li class="margin-10">
-                            <i class="fa fa-map-marker" aria-hidden="true"></i> <span> Desamparados, San José</span>
+                            <i class="fa fa-home" aria-hidden="true"></i> <span> {{vm.event.localName}}</span>
+                        </li>
+
+                        <li class="margin-10">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i> <span
+                            data-translate="conocheApp.event.{{vm.local.provincia}}"> provincia</span>
+
                         </li>
                         <li class="margin-10">
-                            <i class="fa fa-usd" aria-hidden="true"></i> <span> 3000 colones</span>
+                            <i class="fa fa-usd" aria-hidden="true"></i> <span> {{vm.event.price}} colones</span>
                         </li>
 
                     </ul>
@@ -36,23 +44,31 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-9">
-                <h2 class="bold font-20 margin-bottom-40 ">Detalles</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae, voluptatum, amet, eius esse sit praesentium similique tenetur accusamus deserunt modi dignissimos debitis consequatur facere unde sint quasi quae architecto eum!
+            <div class="col-md-9 font-15">
+                <h2 class="bold font-24 margin-bottom-40 " data-translate="conocheApp.event.details">Detalles</h2>
+                <p class="margin-bottom-40 ">{{vm.event.details}}</p>
 
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, nesciunt, sapiente, distinctio obcaecati dolores perspiciatis eveniet adipisci repellendus consequatur ab officiis ipsa laudantium! Provident expedita odio iste corporis nam natus illum. Cupiditate, quis libero distinctio reiciendis quos adipisci eius animi.
-                </p>
+                <h2 class="font-18 bold margin-bottom-20 ">Servicios</h2>
+                <ul  ng-repeat="services in vm.event.services" class="no-list-style no-padding-left">
+                    <li><i class="{{services.icon}}"></i> {{services.descripcion}}</li>
+
+                </ul>
+
+
             </div>
             <div class=" col-md-3 no-padding">
-                <h2 class="font-20 margin-bottom-20 ">Ubicación</h2>
-                <div style="background:url('content/images/mapa.png')"></div>
-                <img src="content/images/mapa.png" class="col-md-12 no-padding-left" alt="">
+                <h2 class="font-24 margin-bottom-20 ">Ubicación</h2>
+                <!--<div style="background:url('content/images/mapa.png')"></div>-->
+                <!---->
+                <!--<img src="content/images/mapa.png" class="col-md-12 no-padding-left" alt="">-->
+                <iframe
+                    class="col-md-12"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7860.830055475477!2d-84.07131672659627!3d9.899349254780143!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe95f682d645a8951!2sMulticentro+Desamparados!5e0!3m2!1ses!2scr!4v1489628377455" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
             </div>
         </div>
 
 
-        <!---->
+
         <!--<dt><span data-translate="conocheApp.event.name">Name</span></dt>-->
         <!--<dd>-->
         <!--<span>{{vm.event.name}}</span>-->
@@ -90,7 +106,7 @@
         <!--<dt><span data-translate="conocheApp.event.services">Services</span></dt>-->
         <!--<dd>-->
         <!--<span ng-repeat="services in vm.event.services">-->
-        <!--<a ui-sref="servicio-ang-detail({id: services.id})">{{services.id}}</a>{{$last ? '' : ', '}}-->
+        <!--<a ui-sref="servicio-ang-detail({id: services.id})">{{services.descripcion}}</a>{{$last ? '' : ', '}}-->
         <!--</span>-->
         <!--</dd>-->
         <!--<dt><span data-translate="conocheApp.event.local">Local</span></dt>-->

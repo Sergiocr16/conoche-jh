@@ -380,12 +380,25 @@ line-height: 24px
 .border-radius-6{
     border-radius:6px!important;
 }
+.bottom-border-gray{
+    border-bottom: 5px solid #D5F5E5 !important;
+}
 
 .5cb85c-background{
  background-color:#5cb85c!Important;
 }
+
+.E0E0E0-background:hover{
+    background-color:#E8E8E8!Important;
+    cursor: pointer;
+
+}
 .margin-top-20{
     margin-top: 20px;
+}
+
+.margin-top-40{
+    margin-top: 40px;
 }
 .margin-bottom-20{
     margin-bottom: 20px;
@@ -393,14 +406,21 @@ line-height: 24px
 .margin-bottom-40{
     margin-bottom: 40px;
 }
+
 .font-15{
     font-size: 15px!important;
 }
 .font-30{
     font-size: 30px!important;
 }
-.font-20{
+.font-24{
     font-size: 24px!important;
+}
+.font-18{
+      font-size: 18px!important;
+}
+.font-20{
+    font-size: 20px!important;
 }
 .no-border{
     border:0px!important;
@@ -430,16 +450,22 @@ line-height: 24px
     padding:10px;
 }
 .no-padding{
-    padding:none;
+    padding:none !important;
 }
 .no-padding-left{
     padding-left:none;
+}
+.no-padding-right{
+    padding-right:none;
 }
 .margin-bottom-15{
     margin-bottom:15px;
 }
 .margin-bottom-5{
     margin-bottom:5px;
+}
+.margin-top-5{
+    margin-top:254px;
 }
 .gray-font{
     color: #565656;
@@ -460,6 +486,24 @@ line-height: 24px
     border: 1px solid #C9C9C9 !important;
     border-top: 0px !important;
 }
+
+#search-event-info{
+    border-radius: 7px 7px 0px 0px !important;
+    -moz-border-radius: 7px 7px 0px 0px !important;
+    -webkit-border-radius: 7px 7px 0px 0px !important;
+      border: 1px solid #5cb9ff !important;
+}
+
+#search-event-content{
+    border-radius: 0px 0px 7px 7px !important;
+    -moz-border-radius:0px 0px 7px 7px !important;
+    -webkit-border-radius:0px 0px 7px 7px !important;
+       border: 1px solid #5cb9ff !important;
+    border-top: 0px !important;
+}
+
+
+
 .back-font{
     color:black
 }
@@ -468,8 +512,14 @@ line-height: 24px
 }
 
 .no-list-style{
-list-style-type: none;
+    list-style-type: none;
 }
 .margin-10{
     margin:10px;
+}
+
+ .crop {
+
+    height: 250px;
+    object-fit:cover;
 }

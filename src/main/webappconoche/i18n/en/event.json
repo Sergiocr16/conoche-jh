@@ -28,7 +28,14 @@
             "attendingUsers": "Attending Users",
             "services": "Services",
             "local": "Local",
-            "messages": "Messages"
+            "messages": "Messages",
+            "SAN_JOSE": "San Jose",
+            "ALAJUELA": "Alajuela",
+            "CARTAGO": "Cartago",
+            "GUANACASTE": "Guanacaste",
+            "LIMON": "Limon",
+            "HEREDIA": "Heredia",
+            "PUNTARENAS": "Puntarenas"
         }
     }
 }

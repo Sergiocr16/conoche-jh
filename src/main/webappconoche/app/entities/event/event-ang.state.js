@@ -53,7 +53,7 @@
         })
         .state('event-ang-detail', {
             parent: 'event-ang',
-            url: '/event-ang/{id}',
+            url: '/{id}',
             data: {
                 authorities: ['ROLE_USER'],
                 pageTitle: 'conocheApp.event.detail.title'
