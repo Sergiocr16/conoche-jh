@@ -15,32 +15,56 @@
     WSRealTimeEventImages.$inject = ['StompManager'];
 
     function WSRealTimeEventImages(StompManager) {
-        const SUBSCRIBE_TRACKER_URL = '/topic/RealTimeEventImage/';
-        const SEND_ACTIVITY_URL = '/topic/saveRealTimeEventImage/';
+        const SAVE_SUBSCRIBE_IMAGE_URL = '/topic/RealTimeEventImage/';
+        const SAVE_SEND_IMAGE_URL = '/topic/saveRealTimeEventImage/';
+        const DELETE_SUBSCRIBE_IMAGE_URL = '/topic/deletedRealTimeEventImage/';
+        const DELETE_SEND_IMAGE_URL = '/topic/deleteRealTimeEventImage/';
+
 
         var service = {
-            receive: receive,
+            receiveNewImages: receiveNewImages,
             sendImage: sendImage,
-            subscribe: subscribe,
-            unsubscribe: unsubscribe
+            subscribeNewImages: subscribeNewImages,
+            unsubscribeNewImages: unsubscribeNewImages,
+            receiveDeleteImages: receiveDeleteImages,
+            deleteImage: deleteImage,
+            subscribeDeleteImages: subscribeDeleteImages,
+            unsubscribeDeleteImages: unsubscribeDeleteImages
+
         };
 
         return service;
 
-        function receive (idEvent) {
-            return StompManager.getListener(SUBSCRIBE_TRACKER_URL + idEvent);
+        function receiveNewImages (idEvent) {
+            return StompManager.getListener(SAVE_SUBSCRIBE_IMAGE_URL + idEvent);
         }
 
         function sendImage(image) {
-            StompManager.send(SEND_ACTIVITY_URL + image.idEvent, image);
+            StompManager.send(SAVE_SEND_IMAGE_URL + image.idEvent, image);
         }
 
-        function subscribe (idEvent) {
-            StompManager.subscribe(SUBSCRIBE_TRACKER_URL + idEvent);
+        function subscribeNewImages (idEvent) {
+            StompManager.subscribe(SAVE_SUBSCRIBE_IMAGE_URL + idEvent);
         }
 
-        function unsubscribe (idEvent) {
-            StompManager.unsubscribe(SUBSCRIBE_TRACKER_URL + idEvent);
+        function unsubscribeNewImages (idEvent) {
+            StompManager.unsubscribe(SAVE_SUBSCRIBE_IMAGE_URL + idEvent);
+        }
+
+        function receiveDeleteImages (idEvent) {
+            return StompManager.getListener(DELETE_SUBSCRIBE_IMAGE_URL + idEvent);
+        }
+
+        function deleteImage(image) {
+            StompManager.send(DELETE_SEND_IMAGE_URL + image.idEvent, image);
+        }
+
+        function subscribeDeleteImages (idEvent) {
+            StompManager.subscribe(DELETE_SUBSCRIBE_IMAGE_URL + idEvent);
+        }
+
+        function unsubscribeDeleteImages (idEvent) {
+            StompManager.unsubscribe(DELETE_SUBSCRIBE_IMAGE_URL + idEvent);
         }
     }
 })();

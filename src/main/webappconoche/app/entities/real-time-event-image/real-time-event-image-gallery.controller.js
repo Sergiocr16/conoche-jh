@@ -13,7 +13,7 @@
         const SORT = 'creationTime,desc';
 
         var vm = this;
-        vm.width = 190;
+        vm.width = 330;
         vm.border = 5;
         vm.infiniteScrollDisable = true;
         vm.loadPage = loadPage;
@@ -24,17 +24,18 @@
         vm.reset = reset;
         vm.computeDimentions = computeDimentions;
         vm.toggleFullScreen = toggleFullScreen;
+
         init();
-        WSRealTimeEventImages.receive(idEvent)
+        WSRealTimeEventImages.receiveNewImages(idEvent)
             .then(null, null, addNewImage);
 
+        WSRealTimeEventImages.receiveDeleteImages(idEvent)
+            .then(null, null, onImageDeleted);
 
         function init() {
             realTimeEventImages(onSuccess, onError);
-            function onSuccess(data, headers) {
-                substractMetadataFromHeaders(headers);
+            function onSuccess(data) {
                 vm.realTimeEventImages = data;
-                timeoutDisable();
             }
         }
 
@@ -58,6 +59,12 @@
                 size: ITEMS_PER_PAGE,
                 sort: SORT
             }, onSuccess, onError);
+
+            function onSuccess(data, headers) {
+                substractMetadataFromHeaders(headers);
+                onSuccess(data);
+                timeoutDisable();
+            }
         }
 
 
@@ -68,16 +75,14 @@
 
         function loadAll () {
             realTimeEventImages(onSuccess, onError);
-            function onSuccess(data, headers) {
-                substractMetadataFromHeaders(headers);
+            function onSuccess(data) {
                 vm.realTimeEventImages = vm.realTimeEventImages.concat(data);
-                timeoutDisable();
             }
-
         }
 
         function onError(error) {
             AlertService.error(error.data.message);
+            vm.infiniteScrollDisable = false;
         }
 
         function contains(image) {
@@ -88,9 +93,7 @@
         }
 
         function timeoutDisable() {
-            $timeout(function() {
-                vm.infiniteScrollDisable = false;
-            } , 400);
+            $timeout(function() { vm.infiniteScrollDisable = false; } , 400);
         }
 
         function addNewImage(image) {
@@ -103,6 +106,41 @@
             }
             vm.links.last = Math.floor(vm.totalItems++ / ITEMS_PER_PAGE);
             vm.realTimeEventImages.unshift(image);
+        }
+
+        function deleteImage(image) {
+
+        }
+
+        function onImageDeleted(image) {
+            var index = findIndex(vm.realTimeEventImages, image.id);
+            if(index < 0) { return; }
+
+            vm.infiniteScrollDisable = true;
+            vm.realTimeEventImages.splice(index, 1)
+            if(vm.page < vm.links.last) {
+                addNextImage(vm.realTimeEventImages);
+            }
+            vm.links.last = Math.floor(vm.totalItems-- / ITEMS_PER_PAGE);
+        }
+
+        function findIndex(items, id) {
+           return _.findIndex(items, function(current) {
+                return current.id === id;
+            });
+        }
+
+        function addNextImage(images) {
+            RealTimeEventImage.eventRealTimeImages({
+                idEvent: idEvent,
+                page: images.length,
+                size: 1,
+                sort: SORT
+            }, onSuccessNextImage, onError);
+            function onSuccessNextImage(data) {
+                images.push(data[0]);
+                vm.infiniteScrollDisable = false;
+            }
         }
 
         function reset () {

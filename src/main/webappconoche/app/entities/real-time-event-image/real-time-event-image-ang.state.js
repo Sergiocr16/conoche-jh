@@ -36,10 +36,14 @@
 
                 },
                 onEnter: ['$stateParams', 'WSRealTimeEventImages', function($stateParams, WSRealTimeEventImages) {
-                    WSRealTimeEventImages.subscribe($stateParams.idEvent);
+                    var idEvent = $stateParams.idEvent;
+                    WSRealTimeEventImages.subscribeNewImages(idEvent);
+                    WSRealTimeEventImages.subscribeDeleteImages(idEvent);
                 }],
                 onExit: ['$stateParams', 'WSRealTimeEventImages', function($stateParams, WSRealTimeEventImages) {
-                    WSRealTimeEventImages.unsubscribe($stateParams.idEvent);
+                    var idEvent = $stateParams.idEvent;
+                    WSRealTimeEventImages.unsubscribeNewImages(idEvent);
+                    WSRealTimeEventImages.unsubscribeDeleteImages(idEvent);
                 }]
             })
         .state('real-time-event-image-ang', {

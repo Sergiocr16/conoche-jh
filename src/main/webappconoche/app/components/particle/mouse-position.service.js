@@ -19,7 +19,7 @@
         return services;
 
         function createMouseEvents(element) {
-            var mouse = { x: 0, y: 0 };
+            var mouse = { x: element.width, y: element.height };
             function setMouse(x, y) {
                 var rect = element.getBoundingClientRect();
                 mouse.x = x - rect.left;
