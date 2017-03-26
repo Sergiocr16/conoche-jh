@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class MessageService {
 
     private final Logger log = LoggerFactory.getLogger(MessageService.class);
-    
+
     private final MessageRepository messageRepository;
 
     private final MessageMapper messageMapper;
@@ -49,7 +49,7 @@ public class MessageService {
 
     /**
      *  Get all the messages.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -57,6 +57,13 @@ public class MessageService {
     public Page<MessageDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Messages");
         Page<Message> result = messageRepository.findAll(pageable);
+        return result.map(message -> messageMapper.messageToMessageDTO(message));
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MessageDTO> findByEventId(Pageable pageable,Long eventId) {
+        log.debug("Request to get all Messages");
+        Page<Message> result = messageRepository.findByEventId(pageable,eventId);
         return result.map(message -> messageMapper.messageToMessageDTO(message));
     }
 

@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="content/template/admin/layout3/css/custom.css">
     <link rel="stylesheet" href="content/template/admin/layout3/css/login2.css">
     <link rel="stylesheet" href="content/template/global/css/components-rounded.css">
+    <link rel="stylesheet" href="content/template/admin/layout3/css/custom.css">
+    <link href="https://fonts.googleapis.com/css?family=Ranga" rel="stylesheet">
     <link rel="stylesheet" href="content/css/image-overlay.css">
     <!--end template css-->
 
@@ -59,7 +61,7 @@
         <!--</div>-->
         <!-- END PAGE HEAD -->
         <div class="container" style="padding:20px">
-            <div class="well" ui-view="content" style="border-radius:5px;background-color:rgba(255,255,255,1)">
+            <div class="well col-md-12" ui-view="content" style="border-radius:5px;background-color:rgba(255,255,255,1)">
                 <!-- Angular views -->
             </div>
         </div>
@@ -147,6 +149,7 @@
 
     <!-- optional -->
     <script src="bower_components/imagesloaded/imagesloaded.js"></script>
+    <script src="content/template/global/scripts/moment.js"></script>
     <!-- /optional -->
 
     <script src="bower_components/angular-masonry/angular-masonry.js"></script>
@@ -220,10 +223,12 @@
     <script src="app/entities/message/message-ang-delete-dialog.controller.js"></script>
     <script src="app/entities/message/message-ang.state.js"></script>
     <script src="app/entities/message/message-ang.service.js"></script>
+    <script src="app/entities/message/ws-real-time-messages.service.js"></script>
     <script src="app/entities/message/message-ang.controller.js"></script>
     <script src="app/entities/local/local-ang-dialog.controller.js"></script>
     <script src="app/entities/local/local-ang-detail.controller.js"></script>
     <script src="app/entities/local/local-ang-delete-dialog.controller.js"></script>
+    <script src="app/entities/message/live-messages.controller.js"></script>
     <script src="app/entities/local/local-ang.state.js"></script>
     <script src="app/entities/local/local-ang.service.js"></script>
     <script src="app/entities/local/local-ang.controller.js"></script>

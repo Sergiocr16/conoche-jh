@@ -1,0 +1,10 @@
+<div>
+<h1 class="text-center" data-translate="conocheApp.message.liveMessages.title">Live messages</h1>
+    <h5 class="text-center" id="no-message" style="padding:30px;height:150px;" data-translate="conocheApp.message.liveMessages.noMessages">No messages are being send :(</h5>
+    <div id="message" class="col-md-offset-2 col-md-8 live-message">
+       <h1 class="text-center"><img class="img-circle" height="60px" src="content/template/admin/layout3/img/avatar1.jpg" alt=""></h1>
+        <h4 class="text-center"><em>"{{vm.message.payload}}"</em></h4>
+        <h6 class="text-center">-<b>{{vm.message.userLogin | uppercase}}</b>-</h6>
+        <h6 class="text-center"><span style="font-size:12px">{{vm.message.fromNow}}</span></h6>
+    </div>
+</div>
