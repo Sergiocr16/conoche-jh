@@ -28,7 +28,11 @@
                 .then(onSuccess);
 
             function onSuccess(response) {
-                image.imageUrl = response.data.public_id;
+                var height        = response.data.height;
+                var width         = response.data.width;
+                image.imageUrl    = response.data.public_id;
+                image.aspectRatio = height / width;
+
                 WSRealTimeEventImages.sendImage(image);
                 return image;
             }

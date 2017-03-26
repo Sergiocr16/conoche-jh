@@ -1,6 +1,3 @@
-/**
- * Created by melvin on 3/11/2017.
- */
 (function() {
     'use strict';
 
@@ -8,57 +5,105 @@
         .module('conocheApp')
         .controller('RealTimeEventImageGalleryController', RealTimeEventImageGalleryController);
 
-    RealTimeEventImageGalleryController.$inject = ['$state', '$stateParams', 'RealTimeEventImage', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    RealTimeEventImageGalleryController.$inject = ['RealTimeEventImage', 'ParseLinks', 'AlertService', 'idEvent', 'WSRealTimeEventImages', '$timeout'];
 
-    function RealTimeEventImageGalleryController($state, $stateParams, RealTimeEventImage, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function RealTimeEventImageGalleryController(RealTimeEventImage, ParseLinks, AlertService, idEvent, WSRealTimeEventImages, $timeout) {
+        const PADDING        = 20
+        const ITEMS_PER_PAGE = 10;
+        const SORT           = 'creationTime,desc';
 
         var vm = this;
-        vm.idEvent = $stateParams.idEvent;
+        vm.width = 250;
+        vm.infiniteScrollDisable = true;
         vm.loadPage = loadPage;
-        vm.predicate = pagingParams.predicate;
-        vm.reverse = pagingParams.ascending;
-        vm.transition = transition;
-        vm.itemsPerPage = paginationConstants.itemsPerPage;
+        vm.page = 0;
+        vm.links = {
+            last: 0
+        };
+        vm.reset = reset;
+        vm.computeDimentions = computeDimentions;
 
-        loadAll();
+        init();
+        WSRealTimeEventImages.receive(idEvent)
+            .then(null, null, addNewImage);
+
+
+        function init() {
+            realTimeEventImages(onSuccess, onError);
+            function onSuccess(data, headers) {
+                substractMetadataFromHeaders(headers);
+                vm.realTimeEventImages = data;
+                timeoutDisable();
+            }
+        }
+
+        function computeDimentions(aspectRatio) {
+            return {
+                'width' : vm.width + PADDING,
+                'height' :  (vm.width * aspectRatio) + PADDING
+            }
+        }
+
+        function realTimeEventImages(onSuccess, onError) {
+            vm.infiniteScrollDisable = true;
+            RealTimeEventImage.eventRealTimeImages({
+                idEvent: idEvent,
+                page: vm.page,
+                size: ITEMS_PER_PAGE,
+                sort: SORT
+            }, onSuccess, onError);
+        }
+
+
+        function substractMetadataFromHeaders(headers) {
+            vm.links = ParseLinks.parse(headers('link'));
+            vm.totalItems = headers('X-Total-Count');
+        }
 
         function loadAll () {
-            RealTimeEventImage.eventRealTimeImages({
-                idEvent: vm.idEvent,
-                page: pagingParams.page - 1,
-                size: vm.itemsPerPage,
-                sort: sort()
-            }, onSuccess, onError);
-            function sort() {
-                var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
-                if (vm.predicate !== 'id') {
-                    result.push('id');
-                }
-                return result;
-            }
+            realTimeEventImages(onSuccess, onError);
             function onSuccess(data, headers) {
-                vm.links = ParseLinks.parse(headers('link'));
-                vm.totalItems = headers('X-Total-Count');
-                vm.queryCount = vm.totalItems;
-                vm.realTimeEventImages = data;
-                vm.page = pagingParams.page;
+                substractMetadataFromHeaders(headers);
+                vm.realTimeEventImages = vm.realTimeEventImages.concat(data);
             }
-            function onError(error) {
-                AlertService.error(error.data.message);
+            timeoutDisable();
+        }
+
+        function onError(error) {
+            AlertService.error(error.data.message);
+        }
+
+        function contains(image) {
+            var item = _.find( vm.realTimeEventImages, function(img) {
+                return img.id === image.id;
+            });
+            return item !== undefined;
+        }
+
+        function timeoutDisable() {
+            $timeout(function() {vm.infiniteScrollDisable = false;} , 400);
+        }
+
+        function addNewImage(image) {
+            if(!vm.realTimeEventImages
+                || contains(image)) {
+                return;
             }
+            if(vm.realTimeEventImages.length % ITEMS_PER_PAGE === 0) {
+                vm.realTimeEventImages.pop();
+            }
+            vm.links.last = Math.floor(vm.totalItems++ / ITEMS_PER_PAGE);
+            vm.realTimeEventImages.unshift(image);
+        }
+
+        function reset () {
+            vm.page = 0;
+            init();
         }
 
         function loadPage(page) {
             vm.page = page;
-            vm.transition();
-        }
-
-        function transition() {
-            $state.transitionTo($state.$current, {
-                page: vm.page,
-                sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
-                search: vm.currentSearch
-            });
+            loadAll();
         }
     }
 })();

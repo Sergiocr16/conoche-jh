@@ -30,6 +30,10 @@ public class RealTimeEventImage implements Serializable {
     @Column(name = "creation_time", nullable = false)
     private ZonedDateTime creationTime;
 
+    @NotNull
+    @Column(name = "aspect_ratio", nullable = false)
+    private Double aspectRatio;
+
     @Column(name = "description")
     private String description;
 
@@ -68,6 +72,19 @@ public class RealTimeEventImage implements Serializable {
 
     public void setCreationTime(ZonedDateTime creationTime) {
         this.creationTime = creationTime;
+    }
+
+    public Double getAspectRatio() {
+        return aspectRatio;
+    }
+
+    public RealTimeEventImage aspectRatio(Double aspectRatio) {
+        this.aspectRatio = aspectRatio;
+        return this;
+    }
+
+    public void setAspectRatio(Double aspectRatio) {
+        this.aspectRatio = aspectRatio;
     }
 
     public String getDescription() {
@@ -122,6 +139,7 @@ public class RealTimeEventImage implements Serializable {
             "id=" + id +
             ", imageUrl='" + imageUrl + "'" +
             ", creationTime='" + creationTime + "'" +
+            ", aspectRatio='" + aspectRatio + "'" +
             ", description='" + description + "'" +
             '}';
     }

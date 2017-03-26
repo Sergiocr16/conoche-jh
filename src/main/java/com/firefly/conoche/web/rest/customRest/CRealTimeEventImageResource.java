@@ -40,7 +40,7 @@ public class CRealTimeEventImageResource {
         throws URISyntaxException {
         log.debug("REST request to get mesages from Event : {}", idEvent);
         Page<RealTimeEventImageDTO> page = realTimeEventImageService.findEventRealTimeImages(idEvent, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/real-time-event-images/event");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/real-time-event-images/event/" + idEvent);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

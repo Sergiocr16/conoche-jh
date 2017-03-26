@@ -20,6 +20,9 @@ public class RealTimeEventImageDTO implements Serializable {
     @NotNull
     private ZonedDateTime creationTime;
 
+    @NotNull
+    private Double aspectRatio;
+
     private String description;
 
     private Long eventId;
@@ -44,6 +47,13 @@ public class RealTimeEventImageDTO implements Serializable {
 
     public void setCreationTime(ZonedDateTime creationTime) {
         this.creationTime = creationTime;
+    }
+    public Double getAspectRatio() {
+        return aspectRatio;
+    }
+
+    public void setAspectRatio(Double aspectRatio) {
+        this.aspectRatio = aspectRatio;
     }
     public String getDescription() {
         return description;
@@ -88,6 +98,7 @@ public class RealTimeEventImageDTO implements Serializable {
             "id=" + id +
             ", imageUrl='" + imageUrl + "'" +
             ", creationTime='" + creationTime + "'" +
+            ", aspectRatio='" + aspectRatio + "'" +
             ", description='" + description + "'" +
             '}';
     }
