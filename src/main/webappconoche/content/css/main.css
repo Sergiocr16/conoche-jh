@@ -513,6 +513,10 @@ line-height: 24px
     position: relative;
 }
 
+.green-font{
+    color:green;
+}
+
 .back-font{
     color:black
 }
@@ -520,6 +524,13 @@ line-height: 24px
     background-color: #F2F2F2;
 }
 
+.green-2-background{
+    background-color:#5cb85c!Important;
+}
+
+.cursor-default{
+cursor: default !important;
+}
 .no-list-style{
     list-style-type: none;
 }

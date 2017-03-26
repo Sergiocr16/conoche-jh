@@ -35,9 +35,9 @@
                 </div>
                 <div class="col-md-7 gray-font">
                     <h1 class="font-24 bold" style="color: #5cb9ff">{{event.name}}</h1>
-                    <span class="margin-top-5"> <i class="fa fa-clock-o" aria-hidden="true"></i> {{event.initialTime
-                        | date:'h:mm a'}}</span> - <span class="margin-top-5">{{event.finalTime | date:'h:mm a'}}</span>&nbsp&nbsp/&nbsp&nbsp<span class="margin-top-5"> <i class="fa fa-map-marker" aria-hidden="true"> </i> San Jose</span>
-                    &nbsp&nbsp/&nbsp&nbsp<span class="margin-top-20">Categoria: restaurante</span>
+                    <span class="margin-top-5"> <i class="fa fa-clock-o" aria-hidden="true" style="color:#C5C341"></i> {{event.initialTime
+                        | date:'h:mm a'}}</span> - <span class="margin-top-5">{{event.finalTime | date:'h:mm a'}}</span>&nbsp&nbsp/&nbsp&nbsp<span class="margin-top-5"> <i class="fa fa-money green-font" aria-hidden="true" ></i> </i> {{event.price}} colones</span>
+                    &nbsp&nbsp
                     <p class="margin-top-40 ">{{event.details | limitTo:200}}{{event.details.length > 20 ? '...' : ''}}</p>
 
                     <button type="submit "
