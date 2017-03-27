@@ -406,22 +406,27 @@ line-height: 24px
 .margin-bottom-40{
     margin-bottom: 40px;
 }
-
-.font-15{
-    font-size: 15px!important;
-}
 .font-30{
     font-size: 30px!important;
+}
+.font-34{
+    font-size: 34px!important;
 }
 .font-24{
     font-size: 24px!important;
 }
-.font-18{
-      font-size: 18px!important;
-}
 .font-20{
     font-size: 20px!important;
 }
+.font-18{
+      font-size: 18px!important;
+}
+.font-15{
+    font-size: 15px!important;
+}
+
+
+
 .no-border{
     border:0px!important;
 }
@@ -468,7 +473,7 @@ line-height: 24px
     margin-top:254px;
 }
 .gray-font{
-    color: #565656;
+    color: #565656 !important;
 }
 .white-background{
     background-color:white;
@@ -542,4 +547,7 @@ cursor: default !important;
 
     height: 250px;
     object-fit:cover;
+}
+.no-display{
+    display: none;
 }

@@ -22,6 +22,9 @@
         Local.get({id: vm.event.localId},onSuccess);
         function onSuccess(data, headers) {
           vm.local = data;
+           setTimeout(function() {
+              $("#container").fadeIn(500);
+          }, 200)
 
         }
 

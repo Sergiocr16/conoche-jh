@@ -1,12 +1,16 @@
 <div>
-    <h1 class="font-green-haze bold margin-bottom-40 " >Lista de eventos</h1>
-    <!--<button class="btn btn-primary col-md-4" ui-sref="event-ang.new" >-->
-    <!--<span class="glyphicon glyphicon-plus"></span>-->
-    <!--<span  data-translate="conocheApp.event.home.createLabel">-->
-    <!--Create new Event-->
-    <!--</span>-->
-    <!--</button>-->
+    <div class="col-md-12">
+    <h1 class="font-green-haze bold margin-bottom-40 col-md-9 no-padding" >Lista de eventos</h1>
+
+
+        <div class="col-md-3">
+        <div has-authority="ROLE_ADMIN" ui-sref="event-ang.new" class="btn btn-primary btn-block btn-lg border-radius-6 col-md-3">    <span class="glyphicon glyphicon-plus"></span>
+            <span  data-translate="conocheApp.event.home.createLabel"></span></div>
+        </div>
+
+    </div>
     <jhi-alert></jhi-alert>
+
     <div class="col-md-3 no-padding bottom-border-5cb9ff" >
         <div class="col-md-12 padding-10" id="search-event-info"
              style="background-color: #5cb9ff;">
@@ -24,7 +28,7 @@
         </div>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-md-9 no-display" id="tableData">
         <div ng-repeat="event in vm.events track by event.id" >
             <div class="col-md-12 E0E0E0-background margin-bottom-20 bottom-border-gray "
                  ui-sref="event-ang-detail({id:event.id})">
@@ -34,7 +38,7 @@
                          event.banner}}" alt="event image"/>
                 </div>
                 <div class="col-md-7 gray-font">
-                    <h1 class="font-24 bold" style="color: #5cb9ff">{{event.name}}</h1>
+                    <h1 class="font-24 bold" style="color: #5cb9ff; text-transform: uppercase;">{{event.name}}</h1>
                     <span class="margin-top-5"> <i class="fa fa-clock-o" aria-hidden="true" style="color:#C5C341"></i> {{event.initialTime
                         | date:'h:mm a'}}</span> - <span class="margin-top-5">{{event.finalTime | date:'h:mm a'}}</span>&nbsp&nbsp/&nbsp&nbsp<span class="margin-top-5"> <i class="fa fa-money green-font" aria-hidden="true" ></i> </i> {{event.price}} colones</span>
                     &nbsp&nbsp
@@ -42,22 +46,22 @@
 
                     <button type="submit "
                     ui-sref="event-ang-detail({id:event.id})"
-                    class="btn btn-danger btn-sm border-radius-6 padding-10 col-md-offset-10">
+                    class="btn btn-danger green-2-background btn-sm border-radius-6 padding-10 col-md-offset-10">
                     <span class="glyphicon glyphicon-eye-open"></span>
                     <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                     </button>
-                    <!--<button type="submit"-->
-                    <!--ui-sref="event-ang.edit({id:event.id})"-->
-                    <!--class="btn btn-primary btn-sm border-radius-6 padding-10">-->
-                    <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                    <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
-                    <!--</button>-->
-                    <!--<button type="submit"-->
-                    <!--ui-sref="event-ang.delete({id:event.id})"-->
-                    <!--class="btn btn-danger btn-sm border-radius-6 padding-10">-->
-                    <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
-                    <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
-                    <!--</button>-->
+                    <button has-authority="ROLE_ADMIN"  type="submit"
+                    ui-sref="event-ang.edit({id:event.id})"
+                    class="btn btn-primary btn-sm border-radius-6 padding-10">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                    </button>
+                    <button has-authority="ROLE_ADMIN" type="submit"
+                    ui-sref="event-ang.delete({id:event.id})"
+                    class="btn btn-danger btn-sm border-radius-6 padding-10">
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                    <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                    </button>
                 </div>
 
             </div>

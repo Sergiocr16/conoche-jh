@@ -1,8 +1,16 @@
 <div class="gray-font">
-    <h2 style="font-size:35px; " class="bold">{{vm.event.name}}</h2>
-    <hr>
+    <h2 class="bold col-md-10 font-34">{{vm.event.name}}</h2>
+    <div class="col-md-2">
+
+        <div has-authority="ROLE_ADMIN" ui-sref="event-ang-detail.edit({id:vm.event.id})" class="btn btn-primary btn-block btn-lg border-radius-6 col-md-2">                    <span class="glyphicon glyphicon-pencil"></span>
+            <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span></div>
+
+
+    </div>
+
+    <hr class="col-md-12">
     <jhi-alert-error></jhi-alert-error>
-    <div class="row">
+    <div class="row no-display" id="container">
         <div class="col-md-12 margin-top-20">
             <div ng-if="vm.event.banner" class="col-md-9 no-padding-left margin-bottom-40">
                 <a ng-click="vm.openFile(vm.event.bannerContentType, vm.event.banner)">
@@ -38,10 +46,11 @@
                     </ul>
                 </div>
                 <div class="btn btn-success btn-block btn-lg 5cb85c-background border-radius-6 green-2-background cursor-default"><span>Entrada: {{vm.event.price}} colones</span></div>
+
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-9 font-15">
+            <div class="col-md-9 font-15 max-height-300px">
                 <h2 class="bold font-24 margin-bottom-40 " data-translate="conocheApp.event.details">Detalles</h2>
                 <p class="margin-bottom-40 ">{{vm.event.details}}</p>
 
@@ -112,12 +121,5 @@
         <!--</dd>-->
     </div>
 
-    <button type="submit" ui-sref="{{ vm.previousState }}" class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-    </button>
 
-    <button type="button" ui-sref="event-ang-detail.edit({id:vm.event.id})" class="btn btn-primary">
-        <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
-    </button>
 </div>
