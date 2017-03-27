@@ -53,7 +53,7 @@
         })
         .state('event-ang-detail', {
             parent: 'event-ang',
-            url: '/event-ang/{id}',
+            url: '/{id}',
             data: {
                 authorities: ['ROLE_ADMIN','ROLE_OWNER','ROLE_USER'],
                 pageTitle: 'conocheApp.event.detail.title'
@@ -128,8 +128,6 @@
                                 details: null,
                                 price: null,
                                 banner: null,
-                                bannerContentType: null,
-                                bannerUrl: null,
                                 initialTime: null,
                                 finalTime: null,
                                 id: null

@@ -2,13 +2,13 @@
     "conocheApp": {
         "Provincia" : {
             "null": "",
-            "SAN_JOSE": "SAN_JOSE",
-            "ALAJUELA": "ALAJUELA",
-            "CARTAGO": "CARTAGO",
-            "GUANACASTE": "GUANACASTE",
-            "LIMON": "LIMON",
-            "HEREDIA": "HEREDIA",
-            "PUNTARENAS": "PUNTARENAS"
+            "SAN_JOSE": "San Jose",
+            "ALAJUELA": "Alajuela",
+            "CARTAGO": "Cartago",
+            "GUANACASTE": "Guanacaste",
+            "LIMON": "Limon",
+            "HEREDIA": "Heredia",
+            "PUNTARENAS": "Puntarenas"
         }
     }
 }

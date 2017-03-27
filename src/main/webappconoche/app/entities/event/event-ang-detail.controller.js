@@ -8,8 +8,8 @@
     EventAngDetailController.$inject = ['$scope','$state', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Event', 'Promotion', 'EventImage', 'RealTimeEventImage', 'User', 'Servicio', 'Local', 'Message'];
 
     function EventAngDetailController($scope,$state, $rootScope, $stateParams, previousState, DataUtils, entity, Event, Promotion, EventImage, RealTimeEventImage, User, Servicio, Local, Message) {
-        var vm = this;
 
+        var vm = this;
         vm.event = entity;
         vm.previousState = previousState.name;
         vm.byteSize = DataUtils.byteSize;
@@ -27,5 +27,15 @@
          $state.go('event-ang-detail.newComment',{ idEvent: event.id})
         }
         $scope.$on('$destroy', unsubscribe);
+
+        Local.get({id: vm.event.localId},onSuccess);
+        function onSuccess(data, headers) {
+          vm.local = data;
+           setTimeout(function() {
+              $("#container").fadeIn(500);
+          }, 200)
+
+        }
+
     }
 })();

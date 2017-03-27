@@ -1,76 +1,124 @@
+<div class="gray-font">
+    <h2 class="bold col-md-10 font-34">{{vm.event.name}}</h2>
+    <div class="col-md-2">
 
-<div>
-    <h2><span data-translate="conocheApp.event.detail.title">Event</span> {{vm.event.id}}</h2>
-    <hr>
+        <div has-authority="ROLE_ADMIN" ui-sref="event-ang-detail.edit({id:vm.event.id})" class="btn btn-primary btn-block btn-lg border-radius-6 col-md-2">                    <span class="glyphicon glyphicon-pencil"></span>
+            <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span></div>
+
+
+    </div>
+
+    <hr class="col-md-12">
     <jhi-alert-error></jhi-alert-error>
-    <dl class="row jh-entity-details">
-        <dt><span data-translate="conocheApp.event.name">Name</span></dt>
-        <dd>
-            <span>{{vm.event.name}}</span>
-        </dd>
-        <dt><span data-translate="conocheApp.event.details">Details</span></dt>
-        <dd>
-            <span>{{vm.event.details}}</span>
-        </dd>
-        <dt><span data-translate="conocheApp.event.price">Price</span></dt>
-        <dd>
-            <span>{{vm.event.price}}</span>
-        </dd>
-        <dt><span data-translate="conocheApp.event.banner">Banner</span></dt>
-        <dd>
-            <div ng-if="vm.event.banner">
+    <div class="row no-display" id="container">
+        <div class="col-md-12 margin-top-20">
+            <div ng-if="vm.event.banner" class="col-md-9 no-padding-left margin-bottom-40">
                 <a ng-click="vm.openFile(vm.event.bannerContentType, vm.event.banner)">
-                    <img data-ng-src="{{'data:' + vm.event.bannerContentType + ';base64,' + vm.event.banner}}" style="max-width: 100%;" alt="event image"/>
+                    <img data-ng-src="{{'data:' + vm.event.bannerContentType + ';base64,' + vm.event.banner}}" class="col-md-12" alt="event image" />
                 </a>
-                {{vm.event.bannerContentType}}, {{vm.byteSize(vm.event.banner)}}
             </div>
-        </dd>
-        <dt><span data-translate="conocheApp.event.bannerUrl">Banner Url</span></dt>
-        <dd>
-            <span>{{vm.event.bannerUrl}}</span>
-        </dd>
-        <dt><span data-translate="conocheApp.event.initialTime">Initial Time</span></dt>
-        <dd>
-            <span>{{vm.event.initialTime | date:'medium'}}</span>
-        </dd>
-        <dt><span data-translate="conocheApp.event.finalTime">Final Time</span></dt>
-        <dd>
-            <span>{{vm.event.finalTime | date:'medium'}}</span>
-        </dd>
-        <dt><span data-translate="conocheApp.event.attendingUsers">Attending Users</span></dt>
-        <dd>
-            <span ng-repeat="attendingUsers in vm.event.attendingUsers">
-                {{attendingUsers.id}}{{$last ? '' : ', '}}
-            </span>
-        </dd>
-        <dt><span data-translate="conocheApp.event.services">Services</span></dt>
-        <dd>
-            <span ng-repeat="services in vm.event.services">
-                <a ui-sref="servicio-ang-detail({id: services.id})">{{services.id}}</a>{{$last ? '' : ', '}}
-            </span>
-        </dd>
-        <dt><span data-translate="conocheApp.event.local">Local</span></dt>
-        <dd>
-            <a ui-sref="local-ang-detail({id:vm.event.localId})">{{vm.event.localName}}</a>
-        </dd>
-    </dl>
 
-    <button type="submit"
-            ui-sref="{{ vm.previousState }}"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-    </button>
+            <div class="col-md-3 no-padding-left">
+                <div class=" no-padding E0E0E0-background" id="event-info">
+                    <h4 class="padding-10 text-center bold" >Información de evento</h4>
+                </div>
+                <div class="padding-15 font-15 white-background margin-bottom-20" id="event-info-content">
+                    <ul class="no-list-style no-padding-left ">
+                        <li class="margin-10">
+                            <i class="fa fa-calendar" aria-hidden="true"></i> <span>{{vm.event.initialTime | date:
+                            'MMMM d, y'
+                            }}</span>
+                        </li>
+                        <li class="margin-10">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i> <span> {{vm.event.initialTime | date:'h:mm a'}} - {{vm.event.finalTime | date:'h:mm a'}}</span>
+                        </li>
+                        <li class="margin-10">
+                            <i class="fa fa-home" aria-hidden="true"></i> <span> {{vm.event.localName}}</span>
+                        </li>
 
-    <button type="button" ui-sref="event-ang-detail.edit({id:vm.event.id})" class="btn btn-primary">
-        <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
-    </button>
-    <button type="button" ng-click="vm.createComment(vm.event)" class="btn btn-danger">
-        <span class="glyphicon glyphicon-eye"></span>
-        <span class="hidden-sm-down" data-translate="conocheApp.event.detail.commentButton"> Create comment</span>
-    </button>
-    <button type="button" ng-click="vm.viewLiveMessages(vm.event)" class="btn btn-success">
-        <span class="glyphicon glyphicon-eye"></span>
-        <span class="hidden-sm-down" data-translate="conocheApp.event.detail.vieMessages"> View live messages</span>
-    </button>
-</div>
+                        <li class="margin-10">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i> <span
+                            data-translate="conocheApp.event.{{vm.local.provincia}}"> provincia</span>
+
+                        </li>
+
+
+                    </ul>
+                </div>
+                <div class="btn btn-success btn-block btn-lg 5cb85c-background border-radius-6 green-2-background cursor-default"><span>Entrada: {{vm.event.price}} colones</span></div>
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-9 font-15 max-height-300px">
+                <h2 class="bold font-24 margin-bottom-40 " data-translate="conocheApp.event.details">Detalles</h2>
+                <p class="margin-bottom-40 ">{{vm.event.details}}</p>
+
+                <h2 class="font-18 bold margin-bottom-20 ">Servicios</h2>
+                <ul  ng-repeat="services in vm.event.services" class="no-list-style no-padding-left">
+                    <li><i class="{{services.icon}}"></i> {{services.descripcion}}</li>
+
+                </ul>
+
+
+            </div>
+            <div class=" col-md-3 no-padding">
+                <h2 class="font-24 margin-bottom-20 ">Ubicación</h2>
+                <!--<div style="background:url('content/images/mapa.png')"></div>-->
+                <!---->
+                <!--<img src="content/images/mapa.png" class="col-md-12 no-padding-left" alt="">-->
+                <iframe
+                    class="col-md-12"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7860.830055475477!2d-84.07131672659627!3d9.899349254780143!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe95f682d645a8951!2sMulticentro+Desamparados!5e0!3m2!1ses!2scr!4v1489628377455" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+
+
+        <!--<dt><span data-translate="conocheApp.event.name">Name</span></dt>-->
+        <!--<dd>-->
+        <!--<span>{{vm.event.name}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span data-translate="conocheApp.event.details">Details</span></dt>-->
+        <!--<dd>-->
+        <!--<span>{{vm.event.details}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span data-translate="conocheApp.event.price">Price</span></dt>-->
+        <!--<dd>-->
+        <!--<span>{{vm.event.price}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span data-translate="conocheApp.event.banner">Banner</span></dt>-->
+        <!--<dd>-->
+
+        <!--</dd>-->
+        <!--<dt><span data-translate="conocheApp.event.bannerUrl">Banner Url</span></dt>-->
+        <!--<dd>-->
+        <!--<span>{{vm.event.bannerUrl}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span data-translate="conocheApp.event.initialTime">Initial Time</span></dt>-->
+        <!--<dd>-->
+        <!--<span>{{vm.event.initialTime | date:'medium'}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span data-translate="conocheApp.event.finalTime">Final Time</span></dt>-->
+        <!--<dd>-->
+        <!--<span>{{vm.event.finalTime | date:'medium'}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span data-translate="conocheApp.event.attendingUsers">Attending Users</span></dt>-->
+        <!--<dd>-->
+        <!--<span ng-repeat="attendingUsers in vm.event.attendingUsers">-->
+        <!--{{attendingUsers.id}}{{$last ? '' : ', '}}-->
+        <!--</span>-->
+        <!--</dd>-->
+        <!--<dt><span data-translate="conocheApp.event.services">Services</span></dt>-->
+        <!--<dd>-->
+        <!--<span ng-repeat="services in vm.event.services">-->
+        <!--<a ui-sref="servicio-ang-detail({id: services.id})">{{services.descripcion}}</a>{{$last ? '' : ', '}}-->
+        <!--</span>-->
+        <!--</dd>-->
+        <!--<dt><span data-translate="conocheApp.event.local">Local</span></dt>-->
+        <!--<dd>-->
+        <!--<a ui-sref="local-ang-detail({id:vm.event.localId})">{{vm.event.localName}}</a>-->
+        <!--</dd>-->
+    </div>
+
+

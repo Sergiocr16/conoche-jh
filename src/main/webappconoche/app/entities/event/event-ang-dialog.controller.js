@@ -17,13 +17,9 @@
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
         vm.save = save;
-        vm.promotions = Promotion.query();
-        vm.eventimages = EventImage.query();
-        vm.realtimeeventimages = RealTimeEventImage.query();
-        vm.users = User.query();
         vm.servicios = Servicio.query();
         vm.locals = Local.query();
-        vm.messages = Message.query();
+
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

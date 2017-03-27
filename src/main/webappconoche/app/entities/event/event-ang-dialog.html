@@ -8,61 +8,43 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.event.id">
-            <label for="id" data-translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.event.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="conocheApp.event.name" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="vm.event.name"
-                    required/>
-            <div ng-show="editForm.name.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.name.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
+        <div class="form-body ">
+
+            <div class="form-group form-md-line-input has-info ">
+                <select class="form-control gray-font" id="field_house" name="house"  ng-model="vm.event.localId" ng-options="local.id as local.name for local in vm.locals"  required>
+                    <option value="">Seleccione un local</option>
+                </select>
+                <label data-translate="conocheApp.event.local" for="field_local">Local</label>
+            </div>
+            <div class="form-group">
+                <div class="form-group form-md-line-input">
+                    <input type="text" class="form-control gray-font" name="name" id="field_name" ng-model="vm.event.name">
+                    <label class="control-label" data-translate="conocheApp.event.name" for="field_name">Name</label>
+                    <span ng-show="editForm.name.$invalid" class="help-block" ng-show="editForm.name.$error.required" data-translate="entity.validation.required">
+                </span>
+                </div>
+            </div>
+
+            <div class="form-group form-md-line-input">
+                <textarea class="form-control gray-font" rows="2" name="details" id="field_details"
+                          ng-model="vm.event.details"></textarea>
+                <label class="control-label" data-translate="conocheApp.event.details" for="field_details">Details</label>
+            </div>
+            <div class="form-group">
+                <div class="form-group form-md-line-input">
+                    <input type="text" class="form-control gray-font" name="price" id="field_price" ng-model="vm.event.price" >
+                    <label class="control-label" data-translate="conocheApp.event.price" for="field_price">Price</label>
+
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="conocheApp.event.details" for="field_details">Details</label>
-            <input type="text" class="form-control" name="details" id="field_details"
-                    ng-model="vm.event.details"
-                    required/>
-            <div ng-show="editForm.details.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.details.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="conocheApp.event.price" for="field_price">Price</label>
-            <input type="number" class="form-control" name="price" id="field_price"
-                    ng-model="vm.event.price"
-                    required/>
-            <div ng-show="editForm.price.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.price.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.price.$error.number" data-translate="entity.validation.number">
-                    This field should be a number.
-                </p>
-            </div>
-        </div>
+
         <div class="form-group" ngf-drop ngf-change="vm.setBanner($file, vm.event)" ngf-pattern="'image/*'">
-            <label class="control-label" data-translate="conocheApp.event.banner" for="field_banner">Banner</label>
+            <label class="control-label gray-font" data-translate="conocheApp.event.banner" for="field_banner">Banner</label>
             <div>
-                <img data-ng-src="{{'data:' + vm.event.bannerContentType + ';base64,' + vm.event.banner}}" style="max-height: 100px;" ng-if="vm.event.banner" alt="event image"/>
+                <img data-ng-src="{{'data:' + vm.event.bannerContentType + ';base64,' + vm.event.banner}}" class="col-md-12" style="max-height: 400px" ng-if="vm.event.banner" alt="event image"/>
                 <div ng-if="vm.event.banner" class="help-block clearfix">
-                    <span class="pull-left">{{vm.event.bannerContentType}}, {{vm.byteSize(vm.event.banner)}}</span>
-                    <button type="button" ng-click="vm.event.banner=null;vm.event.bannerContentType=null;"
-                            class="btn btn-default btn-xs pull-right">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
+
                 </div>
                 <button type="button" ngf-select class="btn btn-default btn-block"
                         ngf-change="vm.setBanner($file, vm.event)" accept="image/*" data-translate="entity.action.addimage">
@@ -75,12 +57,7 @@
             <input type="hidden" class="form-control" name="bannerContentType" id="field_bannerContentType"
                     ng-model="vm.event.bannerContentType" />
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="conocheApp.event.bannerUrl" for="field_bannerUrl">Banner Url</label>
-            <input type="text" class="form-control" name="bannerUrl" id="field_bannerUrl"
-                    ng-model="vm.event.bannerUrl"
-                    />
-        </div>
+
         <div class="form-group">
             <label class="control-label" data-translate="conocheApp.event.initialTime" for="field_initialTime">Initial Time</label>
                 <div class="input-group">
@@ -123,19 +100,11 @@
         </div>
 
         <div class="form-group">
-            <label data-translate="conocheApp.event.attendingUsers" for="field_attendingUsers">Attending Users</label>
-            <select class="form-control" id="field_attendingUsers" multiple name="attendingUsers" ng-model="vm.event.attendingUsers" ng-options="user as user.id for user in vm.users track by user.id"></select>
-        </div>
-        <div class="form-group">
             <label data-translate="conocheApp.event.services" for="field_services">Services</label>
             <select class="form-control" id="field_services" multiple name="services" ng-model="vm.event.services" ng-options="servicio as servicio.id for servicio in vm.servicios track by servicio.id"></select>
         </div>
-        <div class="form-group">
-            <label data-translate="conocheApp.event.local" for="field_local">Local</label>
-            <select class="form-control" id="field_local" name="local" ng-model="vm.event.localId" ng-options="local.id as local.name for local in vm.locals"            >
-                <option value=""></option>
-            </select>
-        </div>
+
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
