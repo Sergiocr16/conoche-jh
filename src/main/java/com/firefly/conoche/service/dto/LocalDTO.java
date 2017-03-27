@@ -37,6 +37,10 @@ public class LocalDTO implements Serializable {
 
     private Set<UserDTO> subcribers = new HashSet<>();
 
+    private Long localCategoryId;
+
+    private String localCategoryName;
+
     public Long getId() {
         return id;
     }
@@ -116,6 +120,22 @@ public class LocalDTO implements Serializable {
 
     public void setSubcribers(Set<UserDTO> users) {
         this.subcribers = users;
+    }
+
+    public Long getLocalCategoryId() {
+        return localCategoryId;
+    }
+
+    public void setLocalCategoryId(Long categoryId) {
+        this.localCategoryId = categoryId;
+    }
+
+    public String getLocalCategoryName() {
+        return localCategoryName;
+    }
+
+    public void setLocalCategoryName(String categoryName) {
+        this.localCategoryName = categoryName;
     }
 
     @Override

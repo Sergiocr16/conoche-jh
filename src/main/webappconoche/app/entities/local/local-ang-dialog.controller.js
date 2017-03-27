@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('LocalAngDialogController', LocalAngDialogController);
 
-    LocalAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Local', 'ImagenLocal', 'Event', 'Schedule', 'Servicio', 'User', 'RatingLocal'];
+    LocalAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Local', 'ImagenLocal', 'Event', 'Schedule', 'Servicio', 'User', 'RatingLocal','Category'];
 
-    function LocalAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Local, ImagenLocal, Event, Schedule, Servicio, User, RatingLocal) {
+    function LocalAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Local, ImagenLocal, Event, Schedule, Servicio, User, RatingLocal,Category) {
         var vm = this;
 
         vm.local = entity;
@@ -21,6 +21,7 @@
         vm.servicios = Servicio.query();
         vm.users = User.query();
         vm.ratinglocals = RatingLocal.query();
+        vm.categories = Category.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

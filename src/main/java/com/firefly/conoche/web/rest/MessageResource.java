@@ -34,7 +34,7 @@ public class MessageResource {
     private final Logger log = LoggerFactory.getLogger(MessageResource.class);
 
     private static final String ENTITY_NAME = "message";
-        
+
     private final MessageService messageService;
 
     public MessageResource(MessageService messageService) {
@@ -96,6 +96,16 @@ public class MessageResource {
         throws URISyntaxException {
         log.debug("REST request to get a page of Messages");
         Page<MessageDTO> page = messageService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/messages");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/messages/findByEventId/{eventId}")
+    @Timed
+    public ResponseEntity<List<MessageDTO>> getAllMessagesById(@ApiParam Pageable pageable,@PathVariable Long eventId)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Messages");
+        Page<MessageDTO> page = messageService.findByEventId(pageable,eventId);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/messages");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

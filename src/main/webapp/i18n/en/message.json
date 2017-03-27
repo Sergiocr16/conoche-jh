@@ -17,6 +17,7 @@
             },
             "payload": "Payload",
             "creationTime": "Creation Time",
+            "userLogin": "User Login",
             "user": "User",
             "event": "Event"
         }

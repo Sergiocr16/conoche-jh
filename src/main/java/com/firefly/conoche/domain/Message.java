@@ -31,6 +31,9 @@ public class Message implements Serializable {
     @Column(name = "creation_time", nullable = false)
     private ZonedDateTime creationTime;
 
+    @Column(name = "user_login")
+    private String userLogin;
+
     @ManyToOne
     private User user;
 
@@ -69,6 +72,19 @@ public class Message implements Serializable {
 
     public void setCreationTime(ZonedDateTime creationTime) {
         this.creationTime = creationTime;
+    }
+
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public Message userLogin(String userLogin) {
+        this.userLogin = userLogin;
+        return this;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     public User getUser() {
@@ -123,6 +139,7 @@ public class Message implements Serializable {
             "id=" + id +
             ", payload='" + payload + "'" +
             ", creationTime='" + creationTime + "'" +
+            ", userLogin='" + userLogin + "'" +
             '}';
     }
 }

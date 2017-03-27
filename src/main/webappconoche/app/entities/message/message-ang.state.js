@@ -9,6 +9,54 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
+        .state('live-messages', {
+            parent: 'entity',
+            url: '/live-messages/{idEvent}',
+            data: {
+                authorities: ['ROLE_ADMIN','ROLE_OWNER','ROLE_USER'],
+                pageTitle: 'conocheApp.message.home.title'
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/entities/message/live-messages.html',
+                    controller: 'LiveMessagesController',
+                    controllerAs: 'vm'
+                }
+            },
+            params: {
+//                page: {
+//                    value: '1',
+//                    squash: true
+//                },
+//                sort: {
+//                    value: 'id,asc',
+//                    squash: true
+//                },
+//                search: null
+            },
+            resolve: {
+//                pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+//                    return {
+//                        page: PaginationUtil.parsePage($stateParams.page),
+//                        sort: $stateParams.sort,
+//                        predicate: PaginationUtil.parsePredicate($stateParams.sort),
+//                        ascending: PaginationUtil.parseAscending($stateParams.sort),
+//                        search: $stateParams.search
+//                    };
+//                }],
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('message');
+                    $translatePartialLoader.addPart('global');
+                    return $translate.refresh();
+                }]
+            },
+            onEnter: ['$stateParams', 'WSRealTimeEventMessages', function($stateParams, WSRealTimeEventMessages) {
+                WSRealTimeEventMessages.subscribe($stateParams.idEvent);
+            }],
+            onExit: ['$stateParams', 'WSRealTimeEventMessages', function($stateParams, WSRealTimeEventMessages) {
+                WSRealTimeEventMessages.unsubscribe($stateParams.idEvent);
+            }]
+        })
         .state('message-ang', {
             parent: 'entity',
             url: '/message-ang?page&sort&search',
@@ -108,13 +156,14 @@
                 });
             }]
         })
-        .state('message-ang.new', {
-            parent: 'message-ang',
-            url: '/new',
+        .state('event-ang-detail.newComment', {
+            parent: 'event-ang-detail',
+            url: '/newComment/',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER','ROLE_ADMIN','ROLE_OWNER']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+            onEnter: ['WSRealTimeEventMessages','$stateParams', '$state', '$uibModal', function(WSRealTimeEventMessages,$stateParams, $state, $uibModal) {
+              WSRealTimeEventMessages.subscribe(Number($stateParams.id));
                 $uibModal.open({
                     templateUrl: 'app/entities/message/message-ang-dialog.html',
                     controller: 'MessageAngDialogController',
@@ -126,15 +175,24 @@
                             return {
                                 payload: null,
                                 creationTime: null,
-                                id: null
+                                id: null,
+                                eventId: Number($stateParams.id)
                             };
-                        }
+                        },
+                        translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                            $translatePartialLoader.addPart('message');
+                            $translatePartialLoader.addPart('global');
+                            return $translate.refresh();
+                        }]
                     }
                 }).result.then(function() {
-                    $state.go('message-ang', null, { reload: 'message-ang' });
+                    $state.go('event-ang-detail', null, { reload: 'event-ang-detail' });
                 }, function() {
-                    $state.go('message-ang');
+                    $state.go('event-ang-detail');
                 });
+            }],
+            onExit: ['$stateParams', 'WSRealTimeEventMessages', function($stateParams, WSRealTimeEventMessages) {
+                WSRealTimeEventMessages.unsubscribe($stateParams.idEvent);
             }]
         })
         .state('message-ang.edit', {

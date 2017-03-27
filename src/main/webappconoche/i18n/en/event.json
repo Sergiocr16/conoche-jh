@@ -13,7 +13,9 @@
                 "question": "Are you sure you want to delete Event {{ id }}?"
             },
             "detail": {
-                "title": "Event"
+                "title": "Event",
+                "vieMessages": "View live comments",
+                "commentButton": "Comment the event"
             },
             "name": "Name",
             "details": "Details",

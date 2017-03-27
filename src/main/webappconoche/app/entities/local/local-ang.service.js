@@ -20,6 +20,11 @@
                     return data;
                 }
             },
+            'getByCategory':{
+             url: 'api/locals/byCategory/:categoryId',
+             method: 'GET',
+             isArray: 'TRUE'
+            },
             'update': { method:'PUT' }
         });
     }

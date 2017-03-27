@@ -27,7 +27,8 @@
             "schedules": "Schedules",
             "services": "Services",
             "subcribers": "Subcribers",
-            "ratings": "Ratings"
+            "ratings": "Ratings",
+            "localCategory": "Local Category"
         }
     }
 }

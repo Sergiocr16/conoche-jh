@@ -21,7 +21,9 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'delete': { method:'DELETE' },
+            'findByEventId': { method: 'GET', isArray: true, url: 'api/messages/findByEventId/:eventId'}
         });
     }
 })();
