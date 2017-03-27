@@ -11,7 +11,7 @@
         $stateProvider
             .state('real-time-event-image-gallery', {
                 parent: 'entity',
-                url: '/real-time-event-image-gallery/{idEvent}',
+                url: '/real-time-event-image-gallery/{idEvent}?page',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'conocheApp.realTimeEventImage.Gallery.title'
@@ -23,7 +23,16 @@
                         controllerAs: 'vm'
                     }
                 },
+                params: {
+                    page: {
+                        value: '1',
+                        squash: true
+                    }
+                },
                 resolve: {
+                    page: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+                        return PaginationUtil.parsePage($stateParams.page);
+                    }],
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('realTimeEventImage');
                         $translatePartialLoader.addPart('global');
@@ -72,7 +81,7 @@
                 search: null
             },
             resolve: {
-                pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+                page: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
                     return {
                         page: PaginationUtil.parsePage($stateParams.page),
                         sort: $stateParams.sort,

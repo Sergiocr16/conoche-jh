@@ -5,14 +5,121 @@
         .module('conocheApp')
         .controller('RealTimeEventImageGalleryController', RealTimeEventImageGalleryController);
 
-    RealTimeEventImageGalleryController.$inject = ['$scope', 'RealTimeEventImage', 'ParseLinks', 'AlertService', 'idEvent', 'WSRealTimeEventImages', '$timeout'];
+    RealTimeEventImageGalleryController.$inject = ['$state', 'RealTimeEventImage', 'ParseLinks', 'AlertService', 'paginationConstants', 'page', 'idEvent', 'WSRealTimeEventImages'];
 
+    function RealTimeEventImageGalleryController($state, RealTimeEventImage, ParseLinks,
+                                                 AlertService, paginationConstants,
+                                                 page, idEvent, WSRealTimeEventImages) {
+        const SORT = 'creationTime,desc';
+        const THUMBNAIL_PADDING = 10;
+
+        var vm = this;
+
+
+        vm.page = page;
+
+        vm.width  = 330;
+        vm.border = 5;
+
+        //vm.loadPage          = loadPage;
+        vm.transition        = transition;
+        vm.computeDimentions = computeDimentions;
+        vm.toggleFullScreen  = toggleFullScreen;
+        vm.itemsPerPage      = paginationConstants.itemsPerPage;
+        vm.deleteImage       = deleteImage;
+        loadAll();
+
+        WSRealTimeEventImages.receiveNewImages(idEvent)
+            .then(null, null, addNewImage);
+
+        WSRealTimeEventImages.receiveDeleteImages(idEvent)
+            .then(null, null, onImageDeleted);
+
+        function loadAll () {
+            RealTimeEventImage.query({
+                page: page - 1,
+                size: vm.itemsPerPage,
+                sort: SORT
+            }, onSuccess, onError);
+
+            function onSuccess(data, headers) {
+                vm.links = ParseLinks.parse(headers('link'));
+                vm.totalItems = headers('X-Total-Count');
+                vm.queryCount = vm.totalItems;
+                vm.realTimeEventImages = data;
+                vm.page = page;
+            }
+            function onError(error) {
+                AlertService.error(error.data.message);
+            }
+        }
+
+        function deleteImage(image) {
+            WSRealTimeEventImages.deleteImage(image);
+        }
+
+        function addNewImage(image) {
+            if(!vm.realTimeEventImages) {
+                return;
+            }
+
+            if(vm.page != 1) {
+                loadAll()
+            }
+            else if(!contains(image)){
+                if (vm.realTimeEventImages.length % vm.itemsPerPage === 0) {
+                    vm.realTimeEventImages.pop();
+                }
+                vm.links.last = Math.floor(vm.totalItems++ / vm.itemsPerPage);
+                vm.realTimeEventImages.unshift(image);
+            }
+        }
+
+        function onImageDeleted(image) {
+            var last = vm.realTimeEventImages[vm.realTimeEventImages.length - 1];
+            if(Date.parse(image.creationTime) < Date.parse(last.creationTime)) {
+                return;
+            }
+            loadAll();
+        }
+
+        function toggleFullScreen(image) {
+            image.fullScreen = !image.fullScreen;
+        }
+
+        function computeDimentions(aspectRatio) {
+            var borderOffset = 2 * vm.border + THUMBNAIL_PADDING;
+            return {
+                'width' : vm.width + borderOffset,
+                'height' :  (vm.width * aspectRatio) + borderOffset
+            }
+        }
+
+        function transition() {
+            $state.transitionTo($state.$current, {
+                idEvent: idEvent,
+                page: vm.page
+            });
+        }
+
+        function contains(image) {
+            var item = _.find( vm.realTimeEventImages, function(img) {
+                return img.id === image.id;
+            });
+            return item !== undefined;
+        }
+    }
+/*
     function RealTimeEventImageGalleryController($scope, RealTimeEventImage, ParseLinks, AlertService, idEvent, WSRealTimeEventImages, $timeout) {
         const THUMBNAIL_PADDING = 10
         const ITEMS_PER_PAGE    = 10;
         const SORT = 'creationTime,desc';
 
         var vm = this;
+        var deleteQueue = [];
+        var createQueue = [];
+        var loadingPage = false;
+
         vm.width = 330;
         vm.border = 5;
         vm.infiniteScrollDisable = true;
@@ -24,6 +131,7 @@
         vm.reset = reset;
         vm.computeDimentions = computeDimentions;
         vm.toggleFullScreen = toggleFullScreen;
+        vm.deleteImage = deleteImage;
 
         init();
         WSRealTimeEventImages.receiveNewImages(idEvent)
@@ -51,7 +159,8 @@
             }
         }
 
-        function realTimeEventImages(onSuccess, onError) {
+        function realTimeEventImages(callback, onError) {
+            loadingPage = true;
             vm.infiniteScrollDisable = true;
             RealTimeEventImage.eventRealTimeImages({
                 idEvent: idEvent,
@@ -62,11 +171,20 @@
 
             function onSuccess(data, headers) {
                 substractMetadataFromHeaders(headers);
-                onSuccess(data);
+                callback(data);
+                clearDeleteQueue();
+                loadingPage = false;
                 timeoutDisable();
             }
         }
 
+        function clearDeleteQueue() {
+            console.log(deleteQueue.length, deleteQueue);
+            _.forEach(deleteQueue, function(callback) {
+                callback();
+            });
+            deleteQueue = [];
+        }
 
         function substractMetadataFromHeaders(headers) {
             vm.links = ParseLinks.parse(headers('link'));
@@ -77,12 +195,14 @@
             realTimeEventImages(onSuccess, onError);
             function onSuccess(data) {
                 vm.realTimeEventImages = vm.realTimeEventImages.concat(data);
+                $scope.$emit('masonry.reloaded');
             }
         }
 
         function onError(error) {
             AlertService.error(error.data.message);
             vm.infiniteScrollDisable = false;
+            loadingPage = false;
         }
 
         function contains(image) {
@@ -109,10 +229,19 @@
         }
 
         function deleteImage(image) {
-
+            WSRealTimeEventImages.deleteImage(image);
         }
 
         function onImageDeleted(image) {
+            if(loadingPage) {
+                deleteQueue.push(function () { addDeletedImage(image); });
+            }
+            else {
+                addDeletedImage(image);
+            }
+        }
+
+        function addDeletedImage(image) {
             var index = findIndex(vm.realTimeEventImages, image.id);
             if(index < 0) { return; }
 
@@ -122,6 +251,7 @@
                 addNextImage(vm.realTimeEventImages);
             }
             vm.links.last = Math.floor(vm.totalItems-- / ITEMS_PER_PAGE);
+            vm.page = Math.min(vm.page, vm.links.last);
         }
 
         function findIndex(items, id) {
@@ -130,16 +260,18 @@
             });
         }
 
-        function addNextImage(images) {
+        function addNextImage() {
             RealTimeEventImage.eventRealTimeImages({
                 idEvent: idEvent,
-                page: images.length,
+                page:  vm.realTimeEventImages.length,
                 size: 1,
                 sort: SORT
             }, onSuccessNextImage, onError);
             function onSuccessNextImage(data) {
-                images.push(data[0]);
-                vm.infiniteScrollDisable = false;
+               if(vm.realTimeEventImages.length % ITEMS_PER_PAGE !== 0) {
+                   vm.realTimeEventImages.push(data[0]);
+               }
+               vm.infiniteScrollDisable = false;
             }
         }
 
@@ -153,4 +285,6 @@
             loadAll();
         }
     }
+
+    */
 })();

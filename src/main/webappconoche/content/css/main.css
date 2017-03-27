@@ -448,3 +448,10 @@ border:0px!important;
 .gray-font{
     font-color: gray;
 }
+
+.info-pagination {
+    font-family: 'Amatic SC', cursive;
+    color: #000000;
+    font-size: 30px;
+    margin: 10% 0 0 0;
+}
