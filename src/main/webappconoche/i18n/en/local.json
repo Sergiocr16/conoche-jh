@@ -15,6 +15,10 @@
             "detail": {
                 "title": "Local"
             },
+            "filter": {
+                "filterBy": "Filter by Category",
+                "allOptions": "All"
+            },
             "name": "Name",
             "longitud": "Longitud",
             "banner": "Banner",
@@ -27,7 +31,8 @@
             "schedules": "Schedules",
             "services": "Services",
             "subcribers": "Subcribers",
-            "ratings": "Ratings"
+            "ratings": "Ratings",
+            "localCategory": "Local Category"
         }
     }
 }

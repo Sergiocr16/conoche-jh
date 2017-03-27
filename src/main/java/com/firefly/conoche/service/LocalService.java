@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class LocalService {
 
     private final Logger log = LoggerFactory.getLogger(LocalService.class);
-    
+
     private final LocalRepository localRepository;
 
     private final LocalMapper localMapper;
@@ -49,7 +49,7 @@ public class LocalService {
 
     /**
      *  Get all the locals.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -57,6 +57,13 @@ public class LocalService {
     public Page<LocalDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Locals");
         Page<Local> result = localRepository.findAll(pageable);
+        return result.map(local -> localMapper.localToLocalDTO(local));
+    }
+
+    @Transactional(readOnly = true)
+    public Page<LocalDTO> findByCategoryId(Long categoryId,Pageable pageable) {
+        log.debug("Request to get all Locals");
+        Page<Local> result = localRepository.findBylocalCategoryId(categoryId,pageable);
         return result.map(local -> localMapper.localToLocalDTO(local));
     }
 

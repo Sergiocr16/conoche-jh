@@ -40,6 +40,12 @@
             "relationshipName": "ratings",
             "otherEntityName": "ratingLocal",
             "otherEntityRelationshipName": "local"
+        },
+        {
+            "relationshipName": "localCategory",
+            "otherEntityName": "category",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
         }
     ],
     "fields": [
@@ -78,9 +84,9 @@
         }
     ],
     "changelogDate": "20170307223303",
-    "entityTableName": "local",
     "dto": "mapstruct",
-    "pagination": "pager",
     "service": "serviceClass",
+    "entityTableName": "local",
+    "pagination": "pager",
     "angularJSSuffix": "ang"
 }

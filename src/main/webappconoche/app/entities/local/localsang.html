@@ -14,7 +14,42 @@
         </div>
     </div>
     <br/>
-    <div class="table-responsive">
+    <div class="col-md-3 no-padding">
+        <div class="portlet box blue-hoki">
+        <div class="portlet-title">
+            <div class="caption font-blue-sunglo">
+                <i class="icon-list font-blue-sunglo"></i>
+                <span class="caption-subject bold" style="font-size:12px" data-translate="conocheApp.local.filter.filterBy"> Filtrar por categoria</span>
+            </div>
+        </div>
+            <div class="portlet-body">
+    <div class="form-group form-md-radios">
+        <div class="md-radio-list">
+            <div ng-repeat="category in vm.categories">
+            <div class="md-radio">
+                <input ng-click="vm.loadByCategory(category.id)" type="radio" id="{{category.id}}" name="category" class="md-radiobtn">
+                <label for="{{category.id}}" style="font-size:12px">
+                    <span class="inc"></span>
+                    <span class="check"></span>
+                    <span class="box"></span>
+                    {{category.name}} </label>
+            </div>
+            </div>
+            <div class="md-radio">
+                <input ng-click="vm.reloadAll()" type="radio" id="all" name="category" class="md-radiobtn">
+                <label for="all" style="font-size:12px">
+                    <span class="inc"></span>
+                    <span class="check"></span>
+                    <span class="box"></span>
+                    <p data-translate="conocheApp.local.filter.allOptions">Todas</p> </label>
+            </div>
+        </div>
+        </div>
+            </div>
+    </div>
+
+    </div>
+    <div class="table-responsive col-md-9">
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
@@ -69,9 +104,10 @@
                 </tr>
             </tbody>
         </table>
+        <div class="text-center">
+            <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        </div>
+        <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
     </div>
-    <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-    </div>
-    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+
 </div>
