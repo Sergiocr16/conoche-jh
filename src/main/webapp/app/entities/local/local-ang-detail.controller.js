@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('LocalAngDetailController', LocalAngDetailController);
 
-    LocalAngDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Local', 'ImagenLocal', 'Event', 'Schedule', 'Servicio', 'User', 'RatingLocal'];
+    LocalAngDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Local', 'ImagenLocal', 'Event', 'Schedule', 'Servicio', 'User', 'RatingLocal', 'Category'];
 
-    function LocalAngDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Local, ImagenLocal, Event, Schedule, Servicio, User, RatingLocal) {
+    function LocalAngDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Local, ImagenLocal, Event, Schedule, Servicio, User, RatingLocal, Category) {
         var vm = this;
 
         vm.local = entity;

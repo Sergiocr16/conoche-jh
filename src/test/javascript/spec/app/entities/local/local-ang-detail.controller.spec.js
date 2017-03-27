@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('Local Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockLocal, MockImagenLocal, MockEvent, MockSchedule, MockServicio, MockUser, MockRatingLocal;
+        var MockEntity, MockPreviousState, MockLocal, MockImagenLocal, MockEvent, MockSchedule, MockServicio, MockUser, MockRatingLocal, MockCategory;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -19,6 +19,7 @@ describe('Controller Tests', function() {
             MockServicio = jasmine.createSpy('MockServicio');
             MockUser = jasmine.createSpy('MockUser');
             MockRatingLocal = jasmine.createSpy('MockRatingLocal');
+            MockCategory = jasmine.createSpy('MockCategory');
             
 
             var locals = {
@@ -32,7 +33,8 @@ describe('Controller Tests', function() {
                 'Schedule': MockSchedule,
                 'Servicio': MockServicio,
                 'User': MockUser,
-                'RatingLocal': MockRatingLocal
+                'RatingLocal': MockRatingLocal,
+                'Category': MockCategory
             };
             createController = function() {
                 $injector.get('$controller')("LocalAngDetailController", locals);

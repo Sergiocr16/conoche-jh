@@ -34,7 +34,7 @@ public class LocalResource {
     private final Logger log = LoggerFactory.getLogger(LocalResource.class);
 
     private static final String ENTITY_NAME = "local";
-        
+
     private final LocalService localService;
 
     public LocalResource(LocalService localService) {
@@ -100,6 +100,15 @@ public class LocalResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/locals/byCategory/{categoryId}")
+    @Timed
+    public ResponseEntity<List<LocalDTO>> getAllByCategory(@PathVariable Long categoryId,@ApiParam Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Locals");
+        Page<LocalDTO> page = localService.findByCategoryId(categoryId,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/locals");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
     /**
      * GET  /locals/:id : get the "id" local.
      *

@@ -20,6 +20,7 @@
                 "realTimeEventImageAng": "Real Time Event Image",
                 "scheduleAng": "Schedule",
                 "servicioAng": "Servicio",
+                "category": "Category",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

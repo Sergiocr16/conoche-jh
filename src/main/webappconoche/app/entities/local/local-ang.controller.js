@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('LocalAngController', LocalAngController);
 
-    LocalAngController.$inject = ['$state', 'DataUtils', 'Local', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    LocalAngController.$inject = ['$state', 'DataUtils', 'Local', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','Category'];
 
-    function LocalAngController($state, DataUtils, Local, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function LocalAngController($state, DataUtils, Local, ParseLinks, AlertService, paginationConstants, pagingParams,Category) {
 
         var vm = this;
 
@@ -18,8 +18,53 @@
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
+        vm.reloadAll = loadAll;
 
         loadAll();
+        loadCategories();
+        function loadCategories(){
+            Category.query({}, onSuccess, onError);
+            function sort() {
+                var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+                if (vm.predicate !== 'id') {
+                    result.push('id');
+                }
+                return result;
+            }
+            function onSuccess(data, headers) {
+                vm.categories = data;
+            }
+            function onError(error) {
+                AlertService.error(error.data.message);
+            }
+        }
+
+
+         vm.loadByCategory = function(categoryId) {
+                    Local.getByCategory({
+                        categoryId: categoryId,
+                        page: pagingParams.page - 1,
+                        size: vm.itemsPerPage,
+                        sort: sort()
+                    }, onSuccess, onError);
+                    function sort() {
+                        var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+                        if (vm.predicate !== 'id') {
+                            result.push('id');
+                        }
+                        return result;
+                    }
+                    function onSuccess(data, headers) {
+                       vm.links = ParseLinks.parse(headers('link'));
+                       vm.totalItems = headers('X-Total-Count');
+                       vm.queryCount = vm.totalItems;
+                       vm.locals = data;
+                       vm.page = pagingParams.page;
+                    }
+                    function onError(error) {
+                        AlertService.error(error.data.message);
+                    }
+                }
 
         function loadAll () {
             Local.query({

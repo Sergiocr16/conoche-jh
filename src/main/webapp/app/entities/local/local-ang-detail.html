@@ -49,6 +49,10 @@
                 {{subcribers.id}}{{$last ? '' : ', '}}
             </span>
         </dd>
+        <dt><span data-translate="conocheApp.local.localCategory">Local Category</span></dt>
+        <dd>
+            <a ui-sref="category-detail({id:vm.local.localCategoryId})">{{vm.local.localCategoryName}}</a>
+        </dd>
     </dl>
 
     <button type="submit"

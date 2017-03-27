@@ -88,6 +88,9 @@ public class Local implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<RatingLocal> ratings = new HashSet<>();
 
+    @ManyToOne
+    private Category localCategory;
+
     public Long getId() {
         return id;
     }
@@ -344,6 +347,19 @@ public class Local implements Serializable {
 
     public void setRatings(Set<RatingLocal> ratingLocals) {
         this.ratings = ratingLocals;
+    }
+
+    public Category getLocalCategory() {
+        return localCategory;
+    }
+
+    public Local localCategory(Category category) {
+        this.localCategory = category;
+        return this;
+    }
+
+    public void setLocalCategory(Category category) {
+        this.localCategory = category;
     }
 
     @Override
