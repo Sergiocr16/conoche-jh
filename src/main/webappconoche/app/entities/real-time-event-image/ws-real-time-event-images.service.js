@@ -56,7 +56,7 @@
         }
 
         function deleteImage(image) {
-            StompManager.send(DELETE_SEND_IMAGE_URL + image.eventId, image);
+            StompManager.send(DELETE_SEND_IMAGE_URL + image.eventId + '/' + image.id);
         }
 
         function subscribeDeleteImages (idEvent) {

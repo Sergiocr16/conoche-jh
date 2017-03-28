@@ -2,7 +2,6 @@
 
 
 <div>
-
     <div class="container">
         <h2 class="pull-left"data-translate="conocheApp.realTimeEventImage.home.title">Real Time Event Images</h2>
         <figure class="pull-left snip1566">
@@ -21,7 +20,7 @@
                         <cl-image public-id="{{realTimeEventImage.imageUrl}}" class="thumbnail">
                             <cl-transformation  border="{{vm.border}}px_solid_rgb:b299cc20" background="rgb:c1add670"
                                                 width="{{vm.width}}"
-                                                quality="60"
+                                                quality="70"
                                                 crop="scale" radius="5"/>
                         </cl-image>
 
@@ -31,7 +30,7 @@
                         </cl-image>
                     </div>
                     <div class="masondry-overlay-mask" ng-style="dimentions">
-                        <a ng-click="vm.deleteImage(realTimeEventImage)" class="btn btn-icon-only purple pull-left">
+                        <a  ui-sref="real-time-event-image-gallery.delete({id:realTimeEventImage.id})" class="btn btn-icon-only purple pull-left">
                             <i class="fa fa-times"></i>
                         </a>
                         <a ng-click="vm.toggleFullScreen(realTimeEventImage)" class="btn btn-icon-only purple pull-left">

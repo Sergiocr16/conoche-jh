@@ -81,7 +81,7 @@
                 search: null
             },
             resolve: {
-                page: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+                pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
                     return {
                         page: PaginationUtil.parsePage($stateParams.page),
                         sort: $stateParams.sort,
@@ -223,7 +223,7 @@
                         backdrop: 'static',
                         size: 'lg',
                     }).result.then(function() {
-                        $state.go('real-time-event-image-gallery', null, { reload: 'real-time-event-image-gallery' });
+                        $state.go('^');
                     }, function() {
                         $state.go('^');
                     });
@@ -252,7 +252,31 @@
                     $state.go('^');
                 });
             }]
-        });
+        })
+            .state('real-time-event-image-gallery.delete', {
+                parent: 'real-time-event-image-gallery',
+                url: '/{id}/delete',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/real-time-event-image/real-time-event-image-gallery-delete-dialog.html',
+                        controller: 'RealTimeEventImageGalleryDeleteController',
+                        controllerAs: 'vm',
+                        size: 'md',
+                        resolve: {
+                            entity: ['RealTimeEventImage', function(RealTimeEventImage) {
+                                return RealTimeEventImage.get({id : $stateParams.id}).$promise;
+                            }]
+                        }
+                    }).result.then(function() {
+                        $state.go('^');
+                    }, function() {
+                        $state.go('^');
+                    });
+                }]
+            });
     }
 
 })();

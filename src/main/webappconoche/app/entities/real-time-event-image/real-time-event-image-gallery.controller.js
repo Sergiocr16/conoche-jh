@@ -10,23 +10,18 @@
     function RealTimeEventImageGalleryController($state, RealTimeEventImage, ParseLinks,
                                                  AlertService, paginationConstants,
                                                  page, idEvent, WSRealTimeEventImages) {
-        const SORT = 'creationTime,desc';
+        const SORT              = 'creationTime,desc';
         const THUMBNAIL_PADDING = 10;
 
-        var vm = this;
-
-
-        vm.page = page;
-
+        var vm    = this;
+        vm.page   = page;
         vm.width  = 330;
         vm.border = 5;
 
-        //vm.loadPage          = loadPage;
         vm.transition        = transition;
         vm.computeDimentions = computeDimentions;
         vm.toggleFullScreen  = toggleFullScreen;
         vm.itemsPerPage      = paginationConstants.itemsPerPage;
-        vm.deleteImage       = deleteImage;
         loadAll();
 
         WSRealTimeEventImages.receiveNewImages(idEvent)
@@ -43,19 +38,15 @@
             }, onSuccess, onError);
 
             function onSuccess(data, headers) {
-                vm.links = ParseLinks.parse(headers('link'));
-                vm.totalItems = headers('X-Total-Count');
-                vm.queryCount = vm.totalItems;
+                vm.links               = ParseLinks.parse(headers('link'));
+                vm.totalItems          = headers('X-Total-Count');
+                vm.queryCount          = vm.totalItems;
                 vm.realTimeEventImages = data;
-                vm.page = page;
+                vm.page                = page;
             }
             function onError(error) {
                 AlertService.error(error.data.message);
             }
-        }
-
-        function deleteImage(image) {
-            WSRealTimeEventImages.deleteImage(image);
         }
 
         function addNewImage(image) {
