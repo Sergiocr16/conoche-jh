@@ -11,7 +11,7 @@
         $stateProvider
             .state('real-time-event-image-gallery', {
                 parent: 'entity',
-                url: '/real-time-event-image-gallery/{idEvent}',
+                url: '/real-time-event-image-gallery/{idEvent}?page',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'conocheApp.realTimeEventImage.Gallery.title'
@@ -23,7 +23,16 @@
                         controllerAs: 'vm'
                     }
                 },
+                params: {
+                    page: {
+                        value: '1',
+                        squash: true
+                    }
+                },
                 resolve: {
+                    page: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+                        return PaginationUtil.parsePage($stateParams.page);
+                    }],
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('realTimeEventImage');
                         $translatePartialLoader.addPart('global');
@@ -36,10 +45,14 @@
 
                 },
                 onEnter: ['$stateParams', 'WSRealTimeEventImages', function($stateParams, WSRealTimeEventImages) {
-                    WSRealTimeEventImages.subscribe($stateParams.idEvent);
+                    var idEvent = $stateParams.idEvent;
+                    WSRealTimeEventImages.subscribeNewImages(idEvent);
+                    WSRealTimeEventImages.subscribeDeleteImages(idEvent);
                 }],
                 onExit: ['$stateParams', 'WSRealTimeEventImages', function($stateParams, WSRealTimeEventImages) {
-                    WSRealTimeEventImages.unsubscribe($stateParams.idEvent);
+                    var idEvent = $stateParams.idEvent;
+                    WSRealTimeEventImages.unsubscribeNewImages(idEvent);
+                    WSRealTimeEventImages.unsubscribeDeleteImages(idEvent);
                 }]
             })
         .state('real-time-event-image-ang', {
@@ -210,7 +223,7 @@
                         backdrop: 'static',
                         size: 'lg',
                     }).result.then(function() {
-                        $state.go('real-time-event-image-gallery', null, { reload: 'real-time-event-image-gallery' });
+                        $state.go('^');
                     }, function() {
                         $state.go('^');
                     });
@@ -239,7 +252,31 @@
                     $state.go('^');
                 });
             }]
-        });
+        })
+            .state('real-time-event-image-gallery.delete', {
+                parent: 'real-time-event-image-gallery',
+                url: '/{id}/delete',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/real-time-event-image/real-time-event-image-gallery-delete-dialog.html',
+                        controller: 'RealTimeEventImageGalleryDeleteController',
+                        controllerAs: 'vm',
+                        size: 'md',
+                        resolve: {
+                            entity: ['RealTimeEventImage', function(RealTimeEventImage) {
+                                return RealTimeEventImage.get({id : $stateParams.id}).$promise;
+                            }]
+                        }
+                    }).result.then(function() {
+                        $state.go('^');
+                    }, function() {
+                        $state.go('^');
+                    });
+                }]
+            });
     }
 
 })();

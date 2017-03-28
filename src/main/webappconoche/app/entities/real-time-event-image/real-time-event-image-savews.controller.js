@@ -39,7 +39,6 @@
         }
 
         function onSaveSuccess (result) {
-            $scope.$emit('conocheApp:realTimeEventImageUpdate', result);
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }

@@ -19,7 +19,8 @@
             "imageUrl": "Image Url",
             "creationTime": "Creation Time",
             "description": "Description",
-            "event": "Event"
+            "event": "Event",
+            "required" : "Debe selecionar una imagen."
         }
     }
 }

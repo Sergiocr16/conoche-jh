@@ -51,8 +51,8 @@ public class RealTimeEventImageResourceIntTest {
     private static final ZonedDateTime DEFAULT_CREATION_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_CREATION_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
-    private static final Double DEFAULT_ASPECT_RATIO = 1D;
-    private static final Double UPDATED_ASPECT_RATIO = 2D;
+    private static final Double DEFAULT_ASPECT_RATIO = 0D;
+    private static final Double UPDATED_ASPECT_RATIO = 1D;
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
@@ -154,6 +154,25 @@ public class RealTimeEventImageResourceIntTest {
         // Validate the Alice in the database
         List<RealTimeEventImage> realTimeEventImageList = realTimeEventImageRepository.findAll();
         assertThat(realTimeEventImageList).hasSize(databaseSizeBeforeCreate);
+    }
+
+    @Test
+    @Transactional
+    public void checkImageUrlIsRequired() throws Exception {
+        int databaseSizeBeforeTest = realTimeEventImageRepository.findAll().size();
+        // set the field null
+        realTimeEventImage.setImageUrl(null);
+
+        // Create the RealTimeEventImage, which fails.
+        RealTimeEventImageDTO realTimeEventImageDTO = realTimeEventImageMapper.realTimeEventImageToRealTimeEventImageDTO(realTimeEventImage);
+
+        restRealTimeEventImageMockMvc.perform(post("/api/real-time-event-images")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(realTimeEventImageDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<RealTimeEventImage> realTimeEventImageList = realTimeEventImageRepository.findAll();
+        assertThat(realTimeEventImageList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test

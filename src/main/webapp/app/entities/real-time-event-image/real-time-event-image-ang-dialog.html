@@ -17,7 +17,13 @@
             <label class="control-label" data-translate="conocheApp.realTimeEventImage.imageUrl" for="field_imageUrl">Image Url</label>
             <input type="text" class="form-control" name="imageUrl" id="field_imageUrl"
                     ng-model="vm.realTimeEventImage.imageUrl"
-                    />
+                    required/>
+            <div ng-show="editForm.imageUrl.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.imageUrl.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="conocheApp.realTimeEventImage.creationTime" for="field_creationTime">Creation Time</label>
@@ -43,11 +49,15 @@
             <label class="control-label" data-translate="conocheApp.realTimeEventImage.aspectRatio" for="field_aspectRatio">Aspect Ratio</label>
             <input type="number" class="form-control" name="aspectRatio" id="field_aspectRatio"
                     ng-model="vm.realTimeEventImage.aspectRatio"
-                    required/>
+                    required min="0"/>
             <div ng-show="editForm.aspectRatio.$invalid">
                 <p class="help-block"
                     ng-show="editForm.aspectRatio.$error.required" data-translate="entity.validation.required">
                     This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.aspectRatio.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                    This field should be at least 0.
                 </p>
                 <p class="help-block"
                     ng-show="editForm.aspectRatio.$error.number" data-translate="entity.validation.number">
@@ -59,7 +69,13 @@
             <label class="control-label" data-translate="conocheApp.realTimeEventImage.description" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
                     ng-model="vm.realTimeEventImage.description"
-                    />
+                    ng-maxlength="55"/>
+            <div ng-show="editForm.description.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.description.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="55">
+                    This field cannot be longer than 55 characters.
+                </p>
+            </div>
         </div>
 
         <div class="form-group">

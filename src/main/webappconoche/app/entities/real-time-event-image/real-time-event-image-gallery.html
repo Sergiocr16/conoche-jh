@@ -1,46 +1,50 @@
+
+
+
 <div>
-    <h2 data-translate="conocheApp.realTimeEventImage.home.title">Real Time Event Images</h2>
-    <jhi-alert></jhi-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="text-center">
-                    <figure class="snip1566">
-                        <figcaption><i class="ion-android-add"></i></figcaption>
-                        <a  ui-sref="real-time-event-image-gallery.savews"></a>
-                    </figure>
-                </div>
-            </div>
-        </div>
+    <div class="container">
+        <h2 class="pull-left"data-translate="conocheApp.realTimeEventImage.home.title">Real Time Event Images</h2>
+        <figure class="pull-left snip1566">
+            <figcaption><i class="fa fa-plus"></i></figcaption>
+            <a  ui-sref="real-time-event-image-gallery.savews"></a>
+        </figure>
     </div>
 
-    <div class="container" infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.infiniteScrollDisable || vm.page >= vm.links['last']" >
-        <div masonry="{ transitionDuration: '0.2s' }">
-            <div class=" masonry-brick" ng-repeat="realTimeEventImage in vm.realTimeEventImages">
-                <div class="view view-first" >
-                    <div ng-style="vm.computeDimentions(realTimeEventImage.aspectRatio)">
-                        <cl-image public-id="{{realTimeEventImage.imageUrl}}" class="thumbnail inline">
-                            <cl-transformation  border="5px_solid_rgb:b299cc20" background="rgb:c1add670"
+    <jhi-alert></jhi-alert>
+
+    <div class="container">
+        <div masonry="{ transitionDuration: '0.3s' }" preserve-order="true">
+            <div class=" masonry-brick" ng-repeat="realTimeEventImage in vm.realTimeEventImages track by realTimeEventImage.id">
+                <div class="masondry-overlay-view masondry-overlay-view-first" ng-init="dimentions = vm.computeDimentions(realTimeEventImage.aspectRatio)">
+                    <div ng-style="dimentions">
+                        <cl-image public-id="{{realTimeEventImage.imageUrl}}" class="thumbnail">
+                            <cl-transformation  border="{{vm.border}}px_solid_rgb:b299cc20" background="rgb:c1add670"
                                                 width="{{vm.width}}"
+                                                quality="70"
                                                 crop="scale" radius="5"/>
                         </cl-image>
+
+                        <cl-image ng-if="realTimeEventImage.fullScreen"
+                                  fullscreen="realTimeEventImage.fullScreen"
+                                  full-screen public-id="{{realTimeEventImage.imageUrl}}">
+                        </cl-image>
                     </div>
-                    <div class="mask">
-                        <a href="" class="btn btn-icon-only purple pull-left">
+                    <div class="masondry-overlay-mask" ng-style="dimentions">
+                        <a  ui-sref="real-time-event-image-gallery.delete({id:realTimeEventImage.id})" class="btn btn-icon-only purple pull-left">
                             <i class="fa fa-times"></i>
                         </a>
-                        <a href="" class="btn btn-icon-only purple pull-left">
+                        <a ng-click="vm.toggleFullScreen(realTimeEventImage)" class="btn btn-icon-only purple pull-left">
                             <i class="fa fa-arrows-alt"></i>
                         </a>
-                        <span href="" class="pull-right">
-                        {{realTimeEventImage.creationTime |  date:'yyyy-MM-dd HH:mm:ss Z' }}
-                    </span>
+                        <span href="" class="pull-right">{{realTimeEventImage.creationTime |  date:'yyyy-MM-dd HH:mm:ss Z' }}</span>
                         <p ng-if="realTimeEventImage.description">{{realTimeEventImage.description}}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <br/>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
 </div>
