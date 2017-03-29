@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Spring Data JPA repository for the Local entity.
+ * Mover findBylocalCategoryId a otro servicio para evitar perderlos
  */
 @SuppressWarnings("unused")
 public interface LocalRepository extends JpaRepository<Local,Long> {
