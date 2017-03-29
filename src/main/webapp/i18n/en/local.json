@@ -28,7 +28,8 @@
             "services": "Services",
             "subcribers": "Subcribers",
             "ratings": "Ratings",
-            "localCategory": "Local Category"
+            "localCategory": "Local Category",
+            "owner": "Owner"
         }
     }
 }

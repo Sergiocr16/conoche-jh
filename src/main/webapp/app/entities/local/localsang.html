@@ -27,6 +27,7 @@
                     <th jh-sort-by="descripcion"><span data-translate="conocheApp.local.descripcion">Descripcion</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="provincia"><span data-translate="conocheApp.local.provincia">Provincia</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="localCategoryName"><span data-translate="conocheApp.local.localCategory">Local Category</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ownerLogin"><span data-translate="conocheApp.local.owner">Owner</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -47,6 +48,9 @@
                     <td data-translate="{{'conocheApp.Provincia.' + local.provincia}}">{{local.provincia}}</td>
                     <td>
                         <a ui-sref="category-detail({id:local.localCategoryId})">{{local.localCategoryName}}</a>
+                    </td>
+                    <td>
+                        {{local.ownerLogin}}
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

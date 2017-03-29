@@ -3,10 +3,10 @@ package com.firefly.conoche.repository;
 import com.firefly.conoche.domain.Local;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 
-import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
@@ -14,6 +14,9 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface LocalRepository extends JpaRepository<Local,Long> {
+
+    @Query("select local from Local local where local.owner.login = ?#{principal.username}")
+    List<Local> findByOwnerIsCurrentUser();
 
     @Query("select distinct local from Local local left join fetch local.services left join fetch local.subcribers")
     List<Local> findAllWithEagerRelationships();

@@ -91,6 +91,10 @@ public class Local implements Serializable {
     @ManyToOne
     private Category localCategory;
 
+    @ManyToOne(optional = false)
+    @NotNull
+    private User owner;
+
     public Long getId() {
         return id;
     }
@@ -360,6 +364,19 @@ public class Local implements Serializable {
 
     public void setLocalCategory(Category category) {
         this.localCategory = category;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public Local owner(User user) {
+        this.owner = user;
+        return this;
+    }
+
+    public void setOwner(User user) {
+        this.owner = user;
     }
 
     @Override

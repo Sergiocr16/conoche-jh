@@ -19,13 +19,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
- * REST controller for managing Local.
+ * Mover los metodos createLocal y getAllByCategory a otro archivo para evitar perder datos al regenerar la entidad
  */
 @RestController
 @RequestMapping("/api")
@@ -36,6 +34,7 @@ public class LocalResource {
     private static final String ENTITY_NAME = "local";
 
     private final LocalService localService;
+
 
     public LocalResource(LocalService localService) {
         this.localService = localService;
@@ -55,7 +54,7 @@ public class LocalResource {
         if (localDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new local cannot already have an ID")).body(null);
         }
-        LocalDTO result = localService.save(localDTO);
+        LocalDTO result = localService.saveWithCurrentUser(localDTO);
         return ResponseEntity.created(new URI("/api/locals/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);

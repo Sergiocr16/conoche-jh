@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Local.
+ * Mover saveWithCurrentUser y findByCategoryId a otro servicio para evitar perderlos
  */
 @Service
 @Transactional
@@ -28,9 +29,17 @@ public class LocalService {
 
     private final LocalMapper localMapper;
 
-    public LocalService(LocalRepository localRepository, LocalMapper localMapper) {
+    private final UserService userService;
+
+    public LocalService(LocalRepository localRepository, LocalMapper localMapper, UserService userService) {
         this.localRepository = localRepository;
         this.localMapper = localMapper;
+        this.userService = userService;
+    }
+
+    public LocalDTO saveWithCurrentUser(LocalDTO localDTO) {
+        localDTO.setOwnerId(userService.getUserWithAuthorities().getId());
+        return save(localDTO);
     }
 
     /**
