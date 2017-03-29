@@ -41,6 +41,10 @@ public class LocalDTO implements Serializable {
 
     private String localCategoryName;
 
+    private Long ownerId;
+
+    private String ownerLogin;
+
     public Long getId() {
         return id;
     }
@@ -136,6 +140,22 @@ public class LocalDTO implements Serializable {
 
     public void setLocalCategoryName(String categoryName) {
         this.localCategoryName = categoryName;
+    }
+
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Long userId) {
+        this.ownerId = userId;
+    }
+
+    public String getOwnerLogin() {
+        return ownerLogin;
+    }
+
+    public void setOwnerLogin(String userLogin) {
+        this.ownerLogin = userLogin;
     }
 
     @Override

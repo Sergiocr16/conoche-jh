@@ -53,6 +53,10 @@
         <dd>
             <a ui-sref="category-detail({id:vm.local.localCategoryId})">{{vm.local.localCategoryName}}</a>
         </dd>
+        <dt><span data-translate="conocheApp.local.owner">Owner</span></dt>
+        <dd>
+            {{vm.local.ownerLogin}}
+        </dd>
     </dl>
 
     <button type="submit"

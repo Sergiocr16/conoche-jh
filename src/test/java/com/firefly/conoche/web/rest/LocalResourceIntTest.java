@@ -3,6 +3,7 @@ package com.firefly.conoche.web.rest;
 import com.firefly.conoche.ConocheApp;
 
 import com.firefly.conoche.domain.Local;
+import com.firefly.conoche.domain.User;
 import com.firefly.conoche.repository.LocalRepository;
 import com.firefly.conoche.service.LocalService;
 import com.firefly.conoche.service.dto.LocalDTO;
@@ -116,6 +117,11 @@ public class LocalResourceIntTest {
                 .latitud(DEFAULT_LATITUD)
                 .descripcion(DEFAULT_DESCRIPCION)
                 .provincia(DEFAULT_PROVINCIA);
+        // Add required entity
+        User owner = UserResourceIntTest.createEntity(em);
+        em.persist(owner);
+        em.flush();
+        local.setOwner(owner);
         return local;
     }
 

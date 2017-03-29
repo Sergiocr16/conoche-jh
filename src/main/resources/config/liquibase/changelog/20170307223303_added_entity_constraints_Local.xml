@@ -36,5 +36,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="category"/>
 
+        <addForeignKeyConstraint baseColumnNames="owner_id"
+                                 baseTableName="local"
+                                 constraintName="fk_local_owner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
     </changeSet>
 </databaseChangeLog>
