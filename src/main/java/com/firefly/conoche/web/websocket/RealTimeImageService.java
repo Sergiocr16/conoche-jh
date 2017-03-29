@@ -1,6 +1,8 @@
 package com.firefly.conoche.web.websocket;
 
+import com.firefly.conoche.security.SecurityUtils;
 import com.firefly.conoche.service.RealTimeEventImageService;
+import com.firefly.conoche.service.customService.CAuthOwnerService;
 import com.firefly.conoche.service.customService.CRealTimeEventImageService;
 import com.firefly.conoche.service.dto.RealTimeEventImageDTO;
 import com.firefly.conoche.web.websocket.dto.ActivityDTO;
@@ -24,6 +26,7 @@ import java.util.Optional;
 
 /**
  * Created by melvin on 3/10/2017.
+ * Utilizar rest + SimpMessageSendingOperations vs Stomp
  */
 @Controller
 public class RealTimeImageService {
@@ -31,16 +34,19 @@ public class RealTimeImageService {
     private static final Logger log = LoggerFactory.getLogger(ActivityService.class);
 
     private final SimpMessageSendingOperations messagingTemplate;
-    private RealTimeEventImageService realTimeEventImageService;
-    private CRealTimeEventImageService crealTimeEventImageService;
+    private final RealTimeEventImageService realTimeEventImageService;
+    private final CRealTimeEventImageService crealTimeEventImageService;
+    private final CAuthOwnerService cAuthOwnerService;
 
     public RealTimeImageService(SimpMessageSendingOperations messagingTemplate,
                                 RealTimeEventImageService realTimeEventImageService,
-                                CRealTimeEventImageService crealTimeEventImageService) {
+                                CRealTimeEventImageService crealTimeEventImageService,
+                                CAuthOwnerService cAuthOwnerService ) {
 
         this.messagingTemplate          = messagingTemplate;
         this.realTimeEventImageService  = realTimeEventImageService;
         this.crealTimeEventImageService = crealTimeEventImageService;
+        this.cAuthOwnerService          = cAuthOwnerService;
     }
 
     //Mejorar despues.
@@ -63,15 +69,9 @@ public class RealTimeImageService {
         return realTimeEventImageService.save(RTEimageDTO);
     }
 
-    @SubscribeMapping("/topic/deleteRealTimeEventImage/{idEvent}/{idRealTimeImage}")
-    @SendTo("/topic/deletedRealTimeEventImage/{idEvent}")
-    public RealTimeEventImageDTO deleteRealTimeEventImage(@DestinationVariable Long idRealTimeImage) throws IOException {
-        RealTimeEventImageDTO imageDTO = realTimeEventImageService.findOne(idRealTimeImage);
-        imageDTO = Optional
-            .ofNullable(imageDTO)
-            .orElseThrow(() -> new RuntimeException(
-                String.format("There is no image with id: %s ", idRealTimeImage)));
-        crealTimeEventImageService.delete(imageDTO);
-        return imageDTO;
+    @SubscribeMapping("/topic/deleteRealTimeEventImage/{idRealTimeImage}")
+    public void deleteRealTimeEventImage(@DestinationVariable Long idRealTimeImage) throws IOException {
+        RealTimeEventImageDTO imageDTO = crealTimeEventImageService.delete(idRealTimeImage);
+        messagingTemplate.convertAndSend("/topic/deletedRealTimeEventImage/" + imageDTO.getEventId(), imageDTO);
     }
 }

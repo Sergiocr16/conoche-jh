@@ -8,21 +8,15 @@
         .module('conocheApp')
         .controller('RealTimeEventImageGalleryDeleteController', RealTimeEventImageGalleryDeleteController);
 
-    RealTimeEventImageGalleryDeleteController.$inject = ['$uibModalInstance', 'entity', 'WSRealTimeEventImages', 'Principal'];
+    RealTimeEventImageGalleryDeleteController.$inject = ['$uibModalInstance', 'entity', 'WSRealTimeEventImages'];
 
-    function RealTimeEventImageGalleryDeleteController($uibModalInstance, entity, WSRealTimeEventImages, Principal) {
+    function RealTimeEventImageGalleryDeleteController($uibModalInstance, entity, WSRealTimeEventImages) {
         var vm = this;
-
 
         vm.realTimeEventImage = entity;
         vm.clear = clear;
         vm.confirmDelete = confirmDelete;
 
-
-
-        function CheckIfOwner(account) {
-
-        }
 
         function clear () {
             $uibModalInstance.dismiss('cancel');

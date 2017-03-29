@@ -5,18 +5,20 @@
         .module('conocheApp')
         .controller('RealTimeEventImageGalleryController', RealTimeEventImageGalleryController);
 
-    RealTimeEventImageGalleryController.$inject = ['$state', 'RealTimeEventImage', 'ParseLinks', 'AlertService', 'paginationConstants', 'page', 'idEvent', 'WSRealTimeEventImages'];
+    RealTimeEventImageGalleryController.$inject = ['$state', 'RealTimeEventImage', 'ParseLinks', 'AlertService',
+        'paginationConstants', 'page', 'idEvent', 'WSRealTimeEventImages', 'isOwner'];
 
     function RealTimeEventImageGalleryController($state, RealTimeEventImage, ParseLinks,
                                                  AlertService, paginationConstants,
-                                                 page, idEvent, WSRealTimeEventImages) {
+                                                 page, idEvent, WSRealTimeEventImages, isOwner) {
         const SORT              = 'creationTime,desc';
         const THUMBNAIL_PADDING = 10;
 
-        var vm    = this;
-        vm.page   = page;
-        vm.width  = 330;
-        vm.border = 5;
+        var vm     = this;
+        vm.page    = page;
+        vm.width   = 330;
+        vm.border  = 5;
+        vm.isOwner = isOwner;
 
         vm.transition        = transition;
         vm.computeDimentions = computeDimentions;
@@ -31,7 +33,8 @@
             .then(null, null, onImageDeleted);
 
         function loadAll () {
-            RealTimeEventImage.query({
+            RealTimeEventImage.eventRealTimeImages({
+                idEvent: idEvent,
                 page: page - 1,
                 size: vm.itemsPerPage,
                 sort: SORT
@@ -40,7 +43,6 @@
             function onSuccess(data, headers) {
                 vm.links               = ParseLinks.parse(headers('link'));
                 vm.totalItems          = headers('X-Total-Count');
-                vm.queryCount          = vm.totalItems;
                 vm.realTimeEventImages = data;
                 vm.page                = page;
             }

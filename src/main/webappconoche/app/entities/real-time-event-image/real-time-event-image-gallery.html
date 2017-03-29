@@ -30,7 +30,7 @@
                         </cl-image>
                     </div>
                     <div class="masondry-overlay-mask" ng-style="dimentions">
-                        <a  ui-sref="real-time-event-image-gallery.delete({id:realTimeEventImage.id})" class="btn btn-icon-only purple pull-left">
+                        <a  ng-if="vm.isOwner" ui-sref="real-time-event-image-gallery.delete({id:realTimeEventImage.id})" class="btn btn-icon-only purple pull-left">
                             <i class="fa fa-times"></i>
                         </a>
                         <a ng-click="vm.toggleFullScreen(realTimeEventImage)" class="btn btn-icon-only purple pull-left">
@@ -44,7 +44,7 @@
         </div>
     </div>
     <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <jhi-item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></jhi-item-count>
     </div>
     <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
 </div>

@@ -30,6 +30,11 @@
                     }
                 },
                 resolve: {
+
+                    isOwner: ['$stateParams', 'Owner', function ($stateParams, Owner) {
+                        return Owner.isOwner($stateParams.idEvent);
+                    }],
+
                     page: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
                         return PaginationUtil.parsePage($stateParams.page);
                     }],
@@ -259,7 +264,11 @@
                 data: {
                     authorities: ['ROLE_USER']
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                onEnter: ['$stateParams', '$state', '$uibModal', 'isOwner', function($stateParams, $state, $uibModal, isOwner) {
+                    if(!isOwner) {
+                        $state.go('real-time-event-image-gallery');
+                        return;
+                    }
                     $uibModal.open({
                         templateUrl: 'app/entities/real-time-event-image/real-time-event-image-gallery-delete-dialog.html',
                         controller: 'RealTimeEventImageGalleryDeleteController',
