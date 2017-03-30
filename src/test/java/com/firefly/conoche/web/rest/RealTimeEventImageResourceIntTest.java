@@ -50,7 +50,6 @@ public class RealTimeEventImageResourceIntTest {
 
     private static final ZonedDateTime DEFAULT_CREATION_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_CREATION_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-
     private static final Double DEFAULT_ASPECT_RATIO = 0D;
     private static final Double UPDATED_ASPECT_RATIO = 1D;
 
