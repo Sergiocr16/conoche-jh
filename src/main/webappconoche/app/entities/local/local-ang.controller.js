@@ -33,6 +33,17 @@
             }
             function onSuccess(data, headers) {
                 vm.categories = data;
+
+
+                 vm.links = ParseLinks.parse(headers('link'));
+                 vm.totalItems = headers('X-Total-Count');
+                 vm.queryCount = vm.totalItems;
+                 vm.events = data;
+                 vm.page = pagingParams.page;
+                 setTimeout(function() {
+                    $("#tableData").fadeIn(500);
+                 }, 200)
+
             }
             function onError(error) {
                 AlertService.error(error.data.message);

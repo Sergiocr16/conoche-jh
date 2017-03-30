@@ -249,6 +249,33 @@
            return _.findIndex(items, function(current) {
                 return current.id === id;
             });
+            return item !== undefined;
+        }
+
+        function timeoutDisable() {
+            $timeout(function() {vm.infiniteScrollDisable = false;} , 400);
+        }
+
+        function addNewImage(image) {
+            if(!vm.realTimeEventImages
+                || contains(image)) {
+                return;
+            }
+            if(vm.realTimeEventImages.length % ITEMS_PER_PAGE === 0) {
+                vm.realTimeEventImages.pop();
+            }
+            vm.links.last = Math.floor(vm.totalItems++ / ITEMS_PER_PAGE);
+            vm.realTimeEventImages.unshift(image);
+        }
+
+        function reset () {
+            vm.page = 0;
+            init();
+        }
+
+        function loadPage(page) {
+            vm.page = page;
+            loadAll();
         }
 
         function addNextImage() {

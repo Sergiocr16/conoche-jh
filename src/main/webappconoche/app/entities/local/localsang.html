@@ -1,39 +1,29 @@
 <div>
-    <h2 data-translate="conocheApp.local.home.title">Locals</h2>
-    <jhi-alert></jhi-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="local-ang.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span  data-translate="conocheApp.local.home.createLabel">
-                        Create new Local
-                    </span>
-                </button>
-            </div>
+    <div class="col-md-12">
+        <h1 class="font-green-haze bold margin-bottom-40 col-md-9 no-padding" >Lista de Locales</h1>
+
+
+        <div class="col-md-3">
+            <div has-authority="ROLE_ADMIN" ui-sref="local-ang.new" class="btn btn-primary btn-block btn-lg border-radius-6 col-md-3">    <span class="glyphicon glyphicon-plus"></span>
+                <span  data-translate="conocheApp.local.home.createLabel"></span></div>
         </div>
     </div>
-    <br/>
-    <div class="col-md-3 no-padding">
-        <div class="portlet box blue-hoki">
-        <div class="portlet-title">
-            <div class="caption font-blue-sunglo">
-                <i class="icon-list font-blue-sunglo"></i>
-                <span class="caption-subject bold" style="font-size:12px" data-translate="conocheApp.local.filter.filterBy"> Filtrar por categoria</span>
-            </div>
+    <jhi-alert></jhi-alert>
+    <div class="col-md-3 no-padding bottom-border-5cb9ff" >
+        <div class="col-md-12 padding-10" id="search-local-info"
+             style="background-color: #5cb9ff;">
+            <span class="font-18 font-white">Filtrar por:</span>
         </div>
-            <div class="portlet-body">
-    <div class="form-group form-md-radios">
-        <div class="md-radio-list">
+        <div class="md-radio-list" style="margin:50px 0 0 0;">
             <div ng-repeat="category in vm.categories">
-            <div class="md-radio">
-                <input ng-click="vm.loadByCategory(category.id)" type="radio" id="{{category.id}}" name="category" class="md-radiobtn">
-                <label for="{{category.id}}" style="font-size:12px">
-                    <span class="inc"></span>
-                    <span class="check"></span>
-                    <span class="box"></span>
-                    {{category.name}} </label>
-            </div>
+                <div class="md-radio">
+                    <input ng-click="vm.loadByCategory(category.id)" type="radio" id="{{category.id}}" name="category" class="md-radiobtn">
+                    <label for="{{category.id}}" style="font-size:12px">
+                        <span class="inc"></span>
+                        <span class="check"></span>
+                        <span class="box"></span>
+                        {{category.name}} </label>
+                </div>
             </div>
             <div class="md-radio">
                 <input ng-click="vm.reloadAll()" type="radio" id="all" name="category" class="md-radiobtn">
@@ -44,70 +34,59 @@
                     <p data-translate="conocheApp.local.filter.allOptions">Todas</p> </label>
             </div>
         </div>
+        <!--
+        <div class="col-md-12 font-15 padding-20 " id="search-local-content">
+            <button class="btn btn-primary col-md-12 margin-top-40" ui-sref="local-ang.new" >
+                <span class="glyphicon glyphicon-plus"></span>
+                <span>
+                      Buscar
+                    </span>
+            </button>
         </div>
+        -->
+    </div>
+    <div class="col-md-9 no-display" id="tableData">
+        <div ng-repeat="local in vm.locals track by local.id" >
+            <div class="col-md-12 E0E0E0-background margin-bottom-20 bottom-border-gray "
+                 ui-sref="local-ang-detail({id:local.id})">
+                <div class="col-md-5 no-padding-left padding-15 position-relative font-18 text-center" >
+                    <div id="info-date-local" class="col-md-2 padding-10 font-white"><span><span class="font-24">{{local.local_category_id}} </span>{{local.initialTime| date:'MMM'}}</span></div>
+                    <img class="col-md-12 crop no-padding"  style="z-index: 0;" data-ng-src="{{'data:' + local.bannerContentType + ';base64,' +
+                         local.banner}}" alt="local image"/>
+                </div>
+                <div class="col-md-7 gray-font">
+                    <h1 class="font-24 bold" style="color: #5cb9ff; text-transform: uppercase;">{{local.name}}</h1>
+                    <span class="margin-top-5"> <i class="fa fa-clock-o" aria-hidden="true" style="color:#C5C341"></i> {{local.initialTime
+                        | date:'h:mm a'}}</span> - <span class="margin-top-5">{{local.finalTime | date:'h:mm a'}}</span>&nbsp&nbsp/&nbsp&nbsp<span class="margin-top-5"> <i class="fa fa-money green-font" aria-hidden="true" ></i> </i> {{event.price}} colones</span>
+                    &nbsp&nbsp
+                    <p class="margin-top-40 ">{{local.descripcion | limitTo:200}}{{local.descripcion.length > 20 ? '...' : ''}}</p>
+
+                    <button type="submit "
+                            ui-sref="local-ang-detail({id:local.id})"
+                            class="btn btn-danger green-2-background btn-sm border-radius-6 padding-10 col-md-offset-10"
+                            style="margin:0;">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                        <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                    </button>
+                    <button has-authority="ROLE_ADMIN"  type="submit"
+                            ui-sref="local-ang.edit({id:local.id})"
+                            class="btn btn-primary btn-sm border-radius-6 padding-10">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                    </button>
+                    <button has-authority="ROLE_ADMIN" type="submit"
+                            ui-sref="event-ang.delete({id:local.id})"
+                            class="btn btn-danger btn-sm border-radius-6 padding-10">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                        <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                    </button>
+                </div>
+
             </div>
-    </div>
-
-    </div>
-    <div class="table-responsive col-md-9">
-        <table class="jh-table table table-striped">
-            <thead>
-                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span data-translate="conocheApp.local.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="longitud"><span data-translate="conocheApp.local.longitud">Longitud</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="banner"><span data-translate="conocheApp.local.banner">Banner</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="bannerUrl"><span data-translate="conocheApp.local.bannerUrl">Banner Url</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="latitud"><span data-translate="conocheApp.local.latitud">Latitud</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="descripcion"><span data-translate="conocheApp.local.descripcion">Descripcion</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="provincia"><span data-translate="conocheApp.local.provincia">Provincia</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="local in vm.locals track by local.id">
-                    <td><a ui-sref="local-ang-detail({id:local.id})">{{local.id}}</a></td>
-                    <td>{{local.name}}</td>
-                    <td>{{local.longitud}}</td>
-                    <td>
-                        <a ng-if="local.banner" ng-click="vm.openFile(local.bannerContentType, local.banner)">
-                            <img data-ng-src="{{'data:' + local.bannerContentType + ';base64,' + local.banner}}" style="max-height: 30px;" alt="local image"/>
-                        </a>
-                        <span ng-if="local.banner">{{local.bannerContentType}}, {{vm.byteSize(local.banner)}}</span>
-                    </td>
-                    <td>{{local.bannerUrl}}</td>
-                    <td>{{local.latitud}}</td>
-                    <td>{{local.descripcion}}</td>
-                    <td data-translate="{{'conocheApp.Provincia.' + local.provincia}}">{{local.provincia}}</td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="local-ang-detail({id:local.id})"
-                                    class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="local-ang.edit({id:local.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="local-ang.delete({id:local.id})"
-                                    class="btn btn-danger btn-sm">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="text-center">
-            <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
         </div>
-        <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
     </div>
-
+    <div class="col-md-12 text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
 </div>
