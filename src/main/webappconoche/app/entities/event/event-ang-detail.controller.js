@@ -26,7 +26,7 @@
         }
         vm.createComment = function(event){
 
-         $state.go('event-ang-detail.newComment',{ idEvent: event.id})
+         $state.go('event-ang-detail.live-messages.newComment',{ idEvent: event.id})
         }
         $scope.$on('$destroy', unsubscribe);
 
