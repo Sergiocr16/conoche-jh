@@ -9,15 +9,15 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('live-messages', {
-            parent: 'entity',
-            url: '/live-messages/{idEvent}',
+        .state('event-ang-detail.live-messages', {
+            parent: 'event-ang-detail',
+            url: '/real-time-event-messages',
             data: {
                 authorities: ['ROLE_ADMIN','ROLE_OWNER','ROLE_USER'],
                 pageTitle: 'conocheApp.message.home.title'
             },
             views: {
-                'content@': {
+                'eventContent@event-ang-detail': {
                     templateUrl: 'app/entities/message/live-messages.html',
                     controller: 'LiveMessagesController',
                     controllerAs: 'vm'
@@ -50,11 +50,11 @@
                     return $translate.refresh();
                 }]
             },
-            onEnter: ['$stateParams', 'WSRealTimeEventMessages', function($stateParams, WSRealTimeEventMessages) {
-                WSRealTimeEventMessages.subscribe($stateParams.idEvent);
+            onEnter: ['$stateParams', 'WSRealTimeEventMessages','idEvent', function($stateParams, WSRealTimeEventMessages,idEvent) {
+                WSRealTimeEventMessages.subscribe(idEvent);
             }],
-            onExit: ['$stateParams', 'WSRealTimeEventMessages', function($stateParams, WSRealTimeEventMessages) {
-                WSRealTimeEventMessages.unsubscribe($stateParams.idEvent);
+            onExit: ['$stateParams', 'WSRealTimeEventMessages','idEvent', function($stateParams, WSRealTimeEventMessages,idEvent) {
+                WSRealTimeEventMessages.unsubscribe(idEvent);
             }]
         })
         .state('message-ang', {
@@ -156,8 +156,8 @@
                 });
             }]
         })
-        .state('event-ang-detail.newComment', {
-            parent: 'event-ang-detail',
+        .state('event-ang-detail.live-messages.newComment', {
+            parent: 'event-ang-detail.live-messages',
             url: '/newComment/',
             data: {
                 authorities: ['ROLE_USER','ROLE_ADMIN','ROLE_OWNER']
@@ -186,9 +186,9 @@
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('event-ang-detail', null, { reload: 'event-ang-detail' });
+                    $state.go('event-ang-detail.live-messages', null, { reload: false });
                 }, function() {
-                    $state.go('event-ang-detail');
+                    $state.go('event-ang-detail.live-messages');
                 });
             }],
             onExit: ['$stateParams', 'WSRealTimeEventMessages', function($stateParams, WSRealTimeEventMessages) {

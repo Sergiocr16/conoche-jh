@@ -5,12 +5,12 @@
         .module('conocheApp')
         .controller('LiveMessagesController', LiveMessagesController);
 
-    LiveMessagesController.$inject = ['ParseLinks','Message', 'AlertService', 'paginationConstants', '$stateParams', 'WSRealTimeEventMessages','$scope', '$timeout','User','$rootScope'];
+    LiveMessagesController.$inject = ['ParseLinks','Message', 'AlertService', 'paginationConstants', '$stateParams', 'WSRealTimeEventMessages','$scope', '$timeout','User','$rootScope','idEvent'];
 
-    function LiveMessagesController(ParseLinks, Message, AlertService, paginationConstants, $stateParams, WSRealTimeEventMessages,$scope, $timeout, User, $rootScope) {
+    function LiveMessagesController(ParseLinks, Message, AlertService, paginationConstants, $stateParams, WSRealTimeEventMessages,$scope, $timeout, User, $rootScope,idEvent) {
 
         var vm = this;
-        vm.idEvent = $stateParams.idEvent;
+        vm.idEvent = idEvent;
         vm.liveMessages = [];
         vm.loadPage = loadPage;
         vm.isShowing = 0;
