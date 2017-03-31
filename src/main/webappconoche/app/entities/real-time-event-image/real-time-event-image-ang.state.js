@@ -9,15 +9,15 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-            .state('real-time-event-image-gallery', {
-                parent: 'entity',
-                url: '/real-time-event-image-gallery/{idEvent}?page',
+            .state('event-ang-detail.real-time-event-image-gallery', {
+                parent: 'event-ang-detail',
+                url: '/real-time-event-image-gallery',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'conocheApp.realTimeEventImage.Gallery.title'
                 },
                 views: {
-                    'content@': {
+                    'eventContent@event-ang-detail': {
                         templateUrl: 'app/entities/real-time-event-image/real-time-event-image-gallery.html',
                         controller: 'RealTimeEventImageGalleryController',
                         controllerAs: 'vm'
@@ -30,9 +30,8 @@
                     }
                 },
                 resolve: {
-
-                    isOwner: ['$stateParams', 'Owner', function ($stateParams, Owner) {
-                        return Owner.isOwner($stateParams.idEvent);
+                    isOwner: ['idEvent', 'Owner', function (idEvent, Owner) {
+                        return Owner.isOwner(idEvent);
                     }],
 
                     page: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
@@ -44,18 +43,12 @@
                         return $translate.refresh();
                     }],
 
-                    idEvent: ['$stateParams', function ($stateParams) {
-                       return $stateParams.idEvent;
-                    }]
-
                 },
-                onEnter: ['$stateParams', 'WSRealTimeEventImages', function($stateParams, WSRealTimeEventImages) {
-                    var idEvent = $stateParams.idEvent;
+                onEnter: ['idEvent', 'WSRealTimeEventImages', function(idEvent, WSRealTimeEventImages) {
                     WSRealTimeEventImages.subscribeNewImages(idEvent);
                     WSRealTimeEventImages.subscribeDeleteImages(idEvent);
                 }],
-                onExit: ['$stateParams', 'WSRealTimeEventImages', function($stateParams, WSRealTimeEventImages) {
-                    var idEvent = $stateParams.idEvent;
+                onExit: ['idEvent', 'WSRealTimeEventImages', function(idEvent, WSRealTimeEventImages) {
                     WSRealTimeEventImages.unsubscribeNewImages(idEvent);
                     WSRealTimeEventImages.unsubscribeDeleteImages(idEvent);
                 }]
@@ -214,19 +207,24 @@
                 });
             }]
         })
-            .state('real-time-event-image-gallery.savews', {
-                parent: 'real-time-event-image-gallery',
+            .state('event-ang-detail.real-time-event-image-gallery.savews', {
+                parent: 'event-ang-detail.real-time-event-image-gallery',
                 url: '/save',
                 data: {
                     authorities: ['ROLE_USER']
                 },
-                onEnter: [ '$state', '$uibModal', function($state, $uibModal) {
+                onEnter: [ '$state', '$uibModal', 'idEvent', function($state, $uibModal, idEvent) {
                     $uibModal.open({
                         templateUrl: 'app/entities/real-time-event-image/real-time-event-image-savews.html',
                         controller: 'RealTimeEventImageSaveWS',
                         controllerAs: 'vm',
                         backdrop: 'static',
                         size: 'lg',
+                        resolve: {
+                            idEvent: [function() {
+                                return idEvent;
+                            }]
+                        }
                     }).result.then(function() {
                         $state.go('^');
                     }, function() {
@@ -258,15 +256,15 @@
                 });
             }]
         })
-            .state('real-time-event-image-gallery.delete', {
-                parent: 'real-time-event-image-gallery',
-                url: '/{id}/delete',
+            .state('event-ang-detail.real-time-event-image-gallery.delete', {
+                parent: 'event-ang-detail.real-time-event-image-gallery',
+                url: '/{idImage}/delete',
                 data: {
                     authorities: ['ROLE_USER']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', 'isOwner', function($stateParams, $state, $uibModal, isOwner) {
                     if(!isOwner) {
-                        $state.go('real-time-event-image-gallery');
+                        $state.go('event-ang-detail.real-time-event-image-gallery');
                         return;
                     }
                     $uibModal.open({
@@ -276,7 +274,7 @@
                         size: 'md',
                         resolve: {
                             entity: ['RealTimeEventImage', function(RealTimeEventImage) {
-                                return RealTimeEventImage.get({id : $stateParams.id}).$promise;
+                                return RealTimeEventImage.get({id : $stateParams.idImage}).$promise;
                             }]
                         }
                     }).result.then(function() {

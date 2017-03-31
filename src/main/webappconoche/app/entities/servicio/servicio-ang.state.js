@@ -185,7 +185,32 @@
                     $state.go('^');
                 });
             }]
-        });
+        })
+            .state('event-ang-detail.services', {
+                parent: 'event-ang-detail',
+                url: '/services',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'conocheApp.realTimeEventImage.Gallery.title'
+                },
+                views: {
+                    'eventContent@event-ang-detail': {
+                        templateUrl: 'app/entities/servicio/event-services.html',
+                        controller: 'EventServicesController',
+                        controllerAs: 'vm'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('servicio');
+                        return $translate.refresh();
+                    }],
+
+                    event: ['idEvent', 'Event', function(idEvent, Event) {
+                        return Event.get({id : idEvent}).$promise;
+                    }],
+                }
+            });
     }
 
 })();

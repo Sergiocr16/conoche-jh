@@ -53,14 +53,6 @@
             <div class="col-md-9 font-15 max-height-300px">
                 <h2 class="bold font-24 margin-bottom-40 " data-translate="conocheApp.event.details">Detalles</h2>
                 <p class="margin-bottom-40 ">{{vm.event.details}}</p>
-
-                <h2 class="font-18 bold margin-bottom-20 ">Servicios</h2>
-                <ul  ng-repeat="services in vm.event.services" class="no-list-style no-padding-left">
-                    <li><i class="{{services.icon}}"></i> {{services.descripcion}}</li>
-
-                </ul>
-
-
             </div>
             <div class=" col-md-3 no-padding">
                 <h2 class="font-24 margin-bottom-20 ">Ubicación</h2>
@@ -73,8 +65,19 @@
             </div>
         </div>
 
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li ui-sref-active="active"><a ui-sref="event-ang-detail.services">Services</a></li>
+            <li ui-sref-active="active"><a ui-sref="event-ang-detail.real-time-event-image-gallery">Images</a></li>
+            <li ui-sref-active="active"><a>Messages</a></li>
+        </ul>
 
 
+</div>
+    <div class="tab-content">
+        <div class="tab-pane active">
+            <div ui-view="eventContent"></div>
+        </div>
+    </div>
         <!--<dt><span data-translate="conocheApp.event.name">Name</span></dt>-->
         <!--<dd>-->
         <!--<span>{{vm.event.name}}</span>-->
