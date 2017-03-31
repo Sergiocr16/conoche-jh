@@ -262,9 +262,9 @@
                 data: {
                     authorities: ['ROLE_USER']
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', 'isOwner', function($stateParams, $state, $uibModal, isOwner) {
+                onEnter: ['$stateParams', '$state', '$uibModal', 'isOwner', 'idEvent', function($stateParams, $state, $uibModal, isOwner, idEvent) {
                     if(!isOwner) {
-                        $state.go('event-ang-detail.real-time-event-image-gallery');
+                        $state.go('event-ang-detail.real-time-event-image-gallery', { id: idEvent});
                         return;
                     }
                     $uibModal.open({
