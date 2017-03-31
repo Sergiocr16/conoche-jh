@@ -138,7 +138,7 @@
                 <!-- BEGIN USER LOGIN DROPDOWN -->
                 <li class="dropdown dropdown-user dropdown-dark" ng-switch="vm.isAuthenticated()">
                     <a href="javascript:;" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
-                        <img alt="" class="img-circle" src="content/template/admin/layout3/img/no-one.jpg">
+                        <img alt="" class="img-circle" ng-src="{{vm.account.imageUrl || 'content/template/admin/layout3/img/no-one.jpg'}}">
                         <span ng-switch-when="true" class="username username-hide-mobile">{{vm.account.login}}</span>
                         <span ng-switch-when="false" class="username username-hide-mobile" data-translate="global.menu.account.main">Account</span>
                     </a>
