@@ -5,21 +5,22 @@
         .module('conocheApp')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService', '$rootScope'];
+    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService', '$rootScope', '$scope'];
 
-    function NavbarController ($state, Auth, Principal, ProfileService, LoginService, $rootScope) {
+    function NavbarController ($state, Auth, Principal, ProfileService, LoginService, $rootScope, $scope) {
         var vm = this;
          angular.element(document).ready(function () {
            Layout.initHeader();
-           Principal.identity().then(function(account) {
-               vm.account = account;
-           });
+           getAccount();
            $('#loaded').show();
            $('#loading').fadeOut(30);
           });
 
-        let logo = ['Conoche', 'Costa Rica', 'Por la noche'];
-        let current = 0;
+
+        var unsubLogin = $scope.$on('authenticationSuccess', getAccount);
+        var unsubLogo  = $rootScope.$on('$stateChangeStart', logoChange);
+        var logo       = ['Conoche', 'Costa Rica', 'Por la noche'];
+        var current    = 0;
 
         vm.logo = logo[current];
         vm.isNavbarCollapsed = true;
@@ -30,27 +31,33 @@
             vm.swaggerEnabled = response.swaggerEnabled;
         });
 
-        vm.login = login;
-        vm.logout = logout;
-        vm.$state = $state;
+        vm.login     = login;
+        vm.logout    = logout;
+        vm.$state    = $state;
         vm.pageTitle = $state.current.data.pageTitle;
 
         function login() {
             LoginService.open();
+        }
 
+        function getAccount() {
+            Principal.identity().then(function(account) {
+                vm.account = account;
+            });
         }
 
         function logout() {
             Auth.logout();
-
+            vm.account = undefined;
             $state.go('home');
         }
 
-        $rootScope.$on('$stateChangeStart',
-            function(event, toState, toParams, fromState, fromParams) {
-                vm.logo = logo[++current % logo.length];
-                vm.pageTitle = toState.data.pageTitle;
-            });
+        function logoChange(event, toState) {
+            vm.logo = logo[++current % logo.length];
+            vm.pageTitle = toState.data.pageTitle;
+        }
 
+        $scope.$on('$destroy', unsubLogin);
+        $scope.$on('$destroy', unsubLogo);
     }
 })();

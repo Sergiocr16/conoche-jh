@@ -6,11 +6,16 @@
 Login page
 ***/
 /* bg color */
+
+.login-font {
+    font-family: 'Amatic SC', cursive;
+}
+
 .login {
-  background-color: #5c97bd;
+  background-color: #444d58;
 }
 .login a {
-  color: #edf4f8 !important;
+  color: #FFFFFF !important;
 }
 
 .login .logo {
@@ -30,24 +35,24 @@ Login page
 }
 
 .login .form-title {
-  color: #edf4f8;
+  color: #FFFFFF;
   font-size: 19px;
   font-weight: 400 !important;
 }
 
 .login .form-subtitle {
-  color: #c9dce9;
+  color: #FFFFFF;
   font-size: 17px;
   font-weight: 300 !important;
   padding-left: 10px;
 }
 
 .login .content h4 {
-  color: #555;
+  color: #52550f;
 }
 
 .login .content .hint {
-  color: #b7d1e2;
+  color: #FFFFFF;
   padding: 0;
   font-size: 14px;
   margin: 15px 0 7px 0;
@@ -61,23 +66,25 @@ Login page
 
 .login .content .form-control {
   border: none;
-  background-color: #6ba3c8;
-  border: 1px solid #6ba3c8;
+  background-color: #667485;
+  border: 1px solid #667485;
   height: 43px;
-  color: #d9ecf9;
+  color: #FFFFFF;
+    border-radius: 10px !important;
 }
 .login .content .form-control:focus, .login .content .form-control:active {
-  border: 1px solid #83b8db;
+  border: 1px solid #5B6775;
+
 }
 .login .content .form-control::-moz-placeholder {
-  color: #d9ecf9;
+  color: #FFFFFF;
   opacity: 1;
 }
 .login .content .form-control:-ms-input-placeholder {
-  color: #d9ecf9;
+  color: #FFFFFF;
 }
 .login .content .form-control::-webkit-input-placeholder {
-  color: #d9ecf9;
+  color: #FFFFFF;
 }
 
 .login .content select.form-control {
@@ -114,15 +121,15 @@ Login page
   margin-top: 30px;
   padding-top: 20px;
   padding-bottom: 50px;
-  border-top: 1px solid #69a0c4;
-  border-bottom: 1px solid #69a0c4;
+  border-top: 1px solid #B388FF;
+  border-bottom: 1px solid #B388FF;
 }
 
 .login-options h4 {
   margin-top: 8px;
   font-weight: 600;
   font-size: 15px;
-  color: #b7d1e2 !important;
+  color: #FFFFFF !important;
 }
 
 .login .forget-password {
@@ -162,16 +169,13 @@ Login page
 }
 
 .login .btn-primary {
-  background-color: #5995bb;
-  border: 1px solid #72a9cc;
-  color: #8fc4e5;
+  background-color: #B388FF;
+  color: #ffffff;
   font-weight: 600;
   padding: 10px 25px !important;
 }
 .login .btn-primary:hover {
-  border: 1px solid #90bbd7;
-  background-color: #5995bb;
-  color: #8fc4e5;
+  background-color: #B674FF;
 }
 
 .login .btn-default {
@@ -197,7 +201,7 @@ Login page
 }
 
 .login .content .check {
-  color: #c9dce9 !important;
+  color: #ffffff !important;
 }
 
 .login .content .create-account {

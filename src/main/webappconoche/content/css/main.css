@@ -1,3 +1,15 @@
+.button-clear-style {
+    padding: 0;
+    border: none;
+    background: none;
+}
+.button-clear-style:focus {
+    outline: none;
+}
+
+.social-button-margin {
+    margin-left: 10px;
+}
 
 body {
     background: #fafafa;

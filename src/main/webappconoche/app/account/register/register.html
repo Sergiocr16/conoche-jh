@@ -67,11 +67,8 @@
                             </div>
                             <password-strength-bar password-to-check="vm.registerAccount.password"></password-strength-bar>
                         </div>
-
-
-                        <jh-social class="col-md-6 no-padding-left" ng-provider="google"></jh-social>
-                        <jh-social class="col-md-6 no-padding" ng-provider="facebook"></jh-social>
                     </div>
+
 
                     <div class="col-md-6">
                         <div class="form-group form-md-line-input">
@@ -120,10 +117,12 @@
                 </div>
 
             </form>
-
-
         </div>
-
-
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-5">
+            <jh-social class="pull-left social-button-margin" ng-provider="google"></jh-social>
+            <jh-social class="pull-left social-button-margin" ng-provider="facebook"></jh-social>
+        </div>
     </div>
 </div>
