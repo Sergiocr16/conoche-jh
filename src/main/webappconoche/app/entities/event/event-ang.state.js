@@ -73,6 +73,9 @@
                 entity: ['$stateParams', 'Event', function($stateParams, Event) {
                     return Event.get({id : $stateParams.id}).$promise;
                 }],
+                idEvent: ['$stateParams', function($stateParams, Event) {
+                    return $stateParams.id;
+                }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
                         name: $state.current.name || 'event-ang',

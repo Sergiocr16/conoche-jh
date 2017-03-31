@@ -5,23 +5,32 @@
         .module('conocheApp')
         .controller('RealTimeEventImageGalleryController', RealTimeEventImageGalleryController);
 
-    RealTimeEventImageGalleryController.$inject = ['$state', 'RealTimeEventImage', 'ParseLinks', 'AlertService', 'paginationConstants', 'page', 'idEvent', 'WSRealTimeEventImages'];
+    RealTimeEventImageGalleryController.$inject = ['$scope', '$state', 'RealTimeEventImage', 'ParseLinks', 'AlertService',
+        'paginationConstants', 'page', 'idEvent', 'WSRealTimeEventImages', 'isOwner'];
 
-    function RealTimeEventImageGalleryController($state, RealTimeEventImage, ParseLinks,
+    function RealTimeEventImageGalleryController($scope, $state, RealTimeEventImage, ParseLinks,
                                                  AlertService, paginationConstants,
-                                                 page, idEvent, WSRealTimeEventImages) {
+                                                 page, idEvent, WSRealTimeEventImages, isOwner) {
         const SORT              = 'creationTime,desc';
         const THUMBNAIL_PADDING = 10;
 
-        var vm    = this;
-        vm.page   = page;
-        vm.width  = 330;
-        vm.border = 5;
+        var vm         = this;
+        vm.page        = page;
+        vm.width       = 330;
+        vm.border      = 5;
+        vm.isOwner     = isOwner;
+        vm.showGallery = false;
 
         vm.transition        = transition;
         vm.computeDimentions = computeDimentions;
         vm.toggleFullScreen  = toggleFullScreen;
         vm.itemsPerPage      = paginationConstants.itemsPerPage;
+
+        var unsubscribe = $scope.$on('masonry.created', function(element) {
+            vm.showGallery = true;
+        });
+        $scope.$on('$destroy', unsubscribe);
+
         loadAll();
 
         WSRealTimeEventImages.receiveNewImages(idEvent)
@@ -31,16 +40,17 @@
             .then(null, null, onImageDeleted);
 
         function loadAll () {
-            RealTimeEventImage.query({
-                page: page - 1,
+            RealTimeEventImage.eventRealTimeImages({
+                idEvent: idEvent,
+                page: vm.page - 1,
                 size: vm.itemsPerPage,
                 sort: SORT
             }, onSuccess, onError);
 
             function onSuccess(data, headers) {
-                vm.links               = ParseLinks.parse(headers('link'));
+                var link = ParseLinks.parse(headers('link'));
+                vm.links               = link;
                 vm.totalItems          = headers('X-Total-Count');
-                vm.queryCount          = vm.totalItems;
                 vm.realTimeEventImages = data;
                 vm.page                = page;
             }
@@ -87,10 +97,13 @@
         }
 
         function transition() {
-            $state.transitionTo($state.$current, {
-                idEvent: idEvent,
-                page: vm.page
-            });
+            var current = $state.$current;
+            var options = {
+                inherit: true,
+                reload: current.name
+            };
+            $state.transitionTo(current,
+                { page: vm.page }, options);
         }
 
         function contains(image) {

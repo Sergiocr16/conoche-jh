@@ -5,9 +5,16 @@
         .module('conocheApp')
         .factory('Auth', Auth);
 
-    Auth.$inject = ['$rootScope', '$state', '$sessionStorage', '$q', '$translate', 'Principal', 'AuthServerProvider', 'Account', 'LoginService', 'Register', 'Activate', 'Password', 'PasswordResetInit', 'PasswordResetFinish', 'JhiTrackerService'];
+    Auth.$inject = ['$rootScope', '$state', '$sessionStorage', '$q', '$translate',
+        'Principal', 'AuthServerProvider', 'Account', 'LoginService',
+        'Register', 'Activate', 'Password', 'PasswordResetInit',
+        'PasswordResetFinish', 'JhiTrackerService', 'StompManager'];
 
-    function Auth ($rootScope, $state, $sessionStorage, $q, $translate, Principal, AuthServerProvider, Account, LoginService, Register, Activate, Password, PasswordResetInit, PasswordResetFinish, JhiTrackerService) {
+    function Auth ($rootScope, $state, $sessionStorage, $q, $translate,
+                   Principal, AuthServerProvider, Account, LoginService,
+                   Register, Activate, Password, PasswordResetInit,
+                   PasswordResetFinish, JhiTrackerService, StompManager) {
+
         var service = {
             activateAccount: activateAccount,
             authorize: authorize,
@@ -47,7 +54,11 @@
                 var isAuthenticated = Principal.isAuthenticated();
 
                 // an authenticated user can't access to login and register pages
-                if (isAuthenticated && $rootScope.toState.parent === 'account' && ($rootScope.toState.name === 'login' || $rootScope.toState.name === 'register' || $rootScope.toState.name === 'social-auth')) {
+                if (isAuthenticated
+                    && $rootScope.toState.parent === 'account'
+                    && ($rootScope.toState.name === 'login'
+                        || $rootScope.toState.name === 'register'
+                        || $rootScope.toState.name === 'social-auth')) {
                     $state.go('home');
                 }
 
@@ -58,7 +69,9 @@
                     $state.go(previousState.name, previousState.params);
                 }
 
-                if ($rootScope.toState.data.authorities && $rootScope.toState.data.authorities.length > 0 && !Principal.hasAnyAuthority($rootScope.toState.data.authorities)) {
+                if ($rootScope.toState.data.authorities
+                        && $rootScope.toState.data.authorities.length > 0
+                        && !Principal.hasAnyAuthority($rootScope.toState.data.authorities)) {
                     if (isAuthenticated) {
                         // user is signed in but not authorized for desired state
                         $state.go('accessdenied');
@@ -137,6 +150,7 @@
         function logout () {
             AuthServerProvider.logout();
             Principal.authenticate(null);
+            StompManager.disconnect();
         }
 
         function resetPasswordFinish (keyAndPassword, callback) {

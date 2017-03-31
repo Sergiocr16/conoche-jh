@@ -18,9 +18,10 @@
     function StompManager ($window, $q, AuthServerProvider) {
 
         const END_POINT = 'websocket/tracker';
+        const RECONECT_TIME = 1000;
 
         let stompClient = null;
-        let connected = $q.defer();
+        let connected = null;
         let subscribeMap = new Map();
 
 
@@ -38,11 +39,12 @@
         return service;
 
         function connect (headers = {}) {
+            connected = $q.defer();
             let socket = new SockJS(buildUrl());
             stompClient = Stomp.over(socket);
             stompClient.connect(headers,
                 () => connected.resolve('success'),
-                () => connect(headers));
+                () => setTimeout(() => reconnect(headers), RECONECT_TIME));
 
             return connected.promise;
         }
@@ -66,7 +68,6 @@
             if (stompClient !== null) {
                 stompClient.disconnect();
                 stompClient = null;
-                connected = $q.defer();
             }
         }
 
@@ -81,17 +82,17 @@
         function send(url, payload, headers = {}) {
             connected.promise.then(() => {
                 if (isConnected()) {
-                stompClient.send(url, headers, angular.toJson(payload));
-            }
-        });
+                    stompClient.send(url, headers, angular.toJson(payload));
+                }
+            });
         }
 
         function reconnect(headers = {}) {
-            disconnect();
+            connect(headers);
             for (let [url, value] of subscribeMap) {
                 subscribeKeyValue(url, value);
             }
-            return connect(headers);
+            return connected;
         }
 
         function subscribe (url) {
@@ -102,9 +103,9 @@
         function subscribeKeyValue(url, value) {
             subscribeMap.set(url, value);
             connected.promise.then(() => {
-                value.subscriber = stompClient.subscribe(url, data =>
-                value.listener.notify(angular.fromJson(data.body)));
-        });
+                value.subscriber = stompClient.subscribe(url,
+                    data => value.listener.notify(angular.fromJson(data.body)));
+            });
         }
 
         function unsubscribe (url) {

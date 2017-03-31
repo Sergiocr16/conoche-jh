@@ -8,13 +8,13 @@
         .module('conocheApp')
         .controller('RealTimeEventImageSaveWS', RealTimeEventImageAngDialogController);
 
-    RealTimeEventImageAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'Event', 'RealTimeEventImageCloudinary'];
+    RealTimeEventImageAngDialogController.$inject = ['$timeout', '$scope', 'idEvent', '$uibModalInstance', 'DataUtils', 'Event', 'RealTimeEventImageCloudinary'];
 
-    function RealTimeEventImageAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, Event, RealTimeEventImageCloudinary) {
+    function RealTimeEventImageAngDialogController ($timeout, $scope, idEvent, $uibModalInstance, DataUtils, Event, RealTimeEventImageCloudinary) {
         var vm = this;
         var fileImage = null;
 
-        vm.realTimeEventImage = {idEvent: $stateParams.idEvent};
+        vm.realTimeEventImage = {idEvent: idEvent};
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;

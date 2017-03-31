@@ -6,13 +6,13 @@
         <h2 class="pull-left"data-translate="conocheApp.realTimeEventImage.home.title">Real Time Event Images</h2>
         <figure class="pull-left snip1566">
             <figcaption><i class="fa fa-plus"></i></figcaption>
-            <a  ui-sref="real-time-event-image-gallery.savews"></a>
+            <a  ui-sref="event-ang-detail.real-time-event-image-gallery.savews"></a>
         </figure>
     </div>
 
     <jhi-alert></jhi-alert>
 
-    <div class="container">
+    <div ng-show="vm.showGallery" class="container">
         <div masonry="{ transitionDuration: '0.3s' }" preserve-order="true">
             <div class=" masonry-brick" ng-repeat="realTimeEventImage in vm.realTimeEventImages track by realTimeEventImage.id">
                 <div class="masondry-overlay-view masondry-overlay-view-first" ng-init="dimentions = vm.computeDimentions(realTimeEventImage.aspectRatio)">
@@ -30,7 +30,8 @@
                         </cl-image>
                     </div>
                     <div class="masondry-overlay-mask" ng-style="dimentions">
-                        <a  ui-sref="real-time-event-image-gallery.delete({id:realTimeEventImage.id})" class="btn btn-icon-only purple pull-left">
+                        <a  ng-if="vm.isOwner" ui-sref="event-ang-detail.real-time-event-image-gallery.delete({idImage:realTimeEventImage.id})"
+                            class="btn btn-icon-only purple pull-left">
                             <i class="fa fa-times"></i>
                         </a>
                         <a ng-click="vm.toggleFullScreen(realTimeEventImage)" class="btn btn-icon-only purple pull-left">
@@ -44,7 +45,7 @@
         </div>
     </div>
     <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <jhi-item-count page="vm.page" total="vm.totalItems" items-per-page="vm.itemsPerPage"></jhi-item-count>
     </div>
     <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
 </div>

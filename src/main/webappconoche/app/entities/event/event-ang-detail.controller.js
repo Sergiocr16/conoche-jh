@@ -19,6 +19,8 @@
             vm.event = result;
         });
 
+        console.log("load controller");
+
         vm.viewLiveMessages = function(event){
         $state.go('live-messages',{ idEvent: event.id })
         }
