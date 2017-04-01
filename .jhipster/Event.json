@@ -58,7 +58,8 @@
         },
         {
             "fieldName": "details",
-            "fieldType": "String",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
             "fieldValidateRules": [
                 "required"
             ]
