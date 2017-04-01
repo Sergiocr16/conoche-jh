@@ -2,18 +2,18 @@
     "conocheApp": {
         "event" : {
             "home": {
-                "title": "Events",
+                "title": "Eventos",
                 "createLabel": "Crear nuevo evento",
-                "createOrEditLabel": "Crear o editar Event"
+                "createOrEditLabel": "Crear o editar Evento"
             },
-            "created": "Un nuevo Event ha sido creado con el identificador {{ param }}",
-            "updated": "Un Event ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Event ha sido eliminado con el identificador {{ param }}",
+            "created": "Un nuevo evento ha sido creado con el identificador {{ param }}",
+            "updated": "Un evento ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un evento ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Event {{ id }}?"
+                "question": "¿Seguro que quiere eliminar el evento {{ id }}?"
             },
             "detail": {
-                "title": "Event",
+                "title": "Evento",
                 "vieMessages": "Ver comentarios en vivo",
                 "commentButton": "Comenta el evento"
             },
@@ -24,13 +24,13 @@
             "bannerUrl": "Banner Url",
             "initialTime": "Inicio",
             "finalTime": "Final",
-            "promotions": "Promotions",
-            "images": "Images",
-            "realTimeImages": "Real Time Images",
-            "attendingUsers": "Attending Users",
-            "services": "Services",
+            "promotions": "Promociones",
+            "images": "Imágenes",
+            "realTimeImages": "Imágenes del evento en tiempo real",
+            "attendingUsers": "Usuarios que atenderán",
+            "services": "Servicios",
             "local": "Local",
-            "messages": "Messages",
+            "messages": "Mensajes",
             "SAN_JOSE": "San José",
             "ALAJUELA": "Alajuela",
             "CARTAGO": "Cartago",
