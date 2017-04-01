@@ -169,30 +169,30 @@ Login page
 }
 
 .login .btn-primary {
-  background-color: #B388FF;
+  background-color: #B388FF !important;
   color: #ffffff;
   font-weight: 600;
   padding: 10px 25px !important;
 }
 .login .btn-primary:hover {
-  background-color: #B674FF;
+  background-color: #B674FF !important;
 }
 
 .login .btn-default {
-  background-color: #5995bb;
-  border: 1px solid #72a9cc;
-  color: #8fc4e5;
+  background-color: #B674FF;
+  border: 1px solid #B388FF;
+  color: #B388FF;
   font-weight: 600;
   padding: 10px 25px !important;
 }
 .login .btn-default:hover {
-  border: 1px solid #90bbd7;
-  background-color: #5995bb;
-  color: #8fc4e5;
+  border: 1px solid #B388FF;
+  background-color: #B674FF;
+  color: #B388FF;
 }
 
 .login .content .forget-password {
-  color: #d7eaf7;
+  color: #ffffff;
   font-size: 15px;
 }
 
