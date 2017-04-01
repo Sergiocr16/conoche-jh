@@ -16,6 +16,11 @@
                     controller: 'NavbarController',
                     controllerAs: 'vm'
                 },
+               'home@': {
+                    templateUrl: 'app/home/home.html',
+                    controller: 'HomeController',
+                    controllerAs: 'vm'
+                },
                 'head@': {
                     templateUrl: 'app/layouts/header/header.html',
                     controller: 'NavbarController',

@@ -2,7 +2,10 @@
     "conocheApp": {
         "event" : {
             "home": {
+
+                "myEvents": "Mis eventos",
                 "title": "Eventos",
+
                 "createLabel": "Crear nuevo evento",
                 "createOrEditLabel": "Crear o editar Evento"
             },

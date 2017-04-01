@@ -15,7 +15,7 @@
                 authorities: []
             },
             views: {
-                'content@': {
+                'home@': {
                     templateUrl: 'app/home/home.html',
                     controller: 'HomeController',
                     controllerAs: 'vm'
@@ -25,8 +25,9 @@
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
                     $translatePartialLoader.addPart('home');
                     return $translate.refresh();
-                }]
+                }],
             }
+
         });
     }
 })();

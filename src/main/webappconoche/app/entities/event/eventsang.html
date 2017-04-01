@@ -4,31 +4,14 @@
 
 
         <div class="col-md-3">
-        <div has-authority="ROLE_ADMIN" ui-sref="event-ang.new" class="btn btn-primary btn-block btn-lg border-radius-6 col-md-3">    <span class="glyphicon glyphicon-plus"></span>
+        <div has-authority="ROLE_OWNER" ui-sref="event-ang.new" class="btn btn-primary btn-block btn-lg border-radius-6 col-md-3">    <span class="glyphicon glyphicon-plus"></span>
             <span  data-translate="conocheApp.event.home.createLabel"></span></div>
         </div>
 
     </div>
     <jhi-alert></jhi-alert>
-
-    <div class="col-md-3 no-padding bottom-border-5cb9ff" >
-        <div class="col-md-12 padding-10" id="search-event-info"
-             style="background-color: #5cb9ff;">
-            <span class="font-18 font-white">Filtrar por:</span>
-        </div>
-
-        <div class="col-md-12 font-15 padding-20 " id="search-event-content">
-                <button class="btn btn-primary col-md-12 margin-top-40" ui-sref="event-ang.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span>
-                      Buscar
-                    </span>
-                </button>
-
-        </div>
-    </div>
-
-    <div class="col-md-9 no-display" id="tableData">
+    <div class="no-display" id="tableData">
+    <div class="col-md-9 ">
         <div ng-repeat="event in vm.events track by event.id" >
             <div class="col-md-12 E0E0E0-background margin-bottom-20 bottom-border-gray "
                  ui-sref="event-ang-detail({id:event.id})">
@@ -39,96 +22,31 @@
                 </div>
                 <div class="col-md-7 gray-font">
                     <h1 class="font-24 bold" style="color: #5cb9ff; text-transform: uppercase;">{{event.name}}</h1>
-                    <span class="margin-top-5"> <i class="fa fa-clock-o" aria-hidden="true" style="color:#C5C341"></i> {{event.initialTime
-                        | date:'h:mm a'}}</span> - <span class="margin-top-5">{{event.finalTime | date:'h:mm a'}}</span>&nbsp&nbsp/&nbsp&nbsp<span class="margin-top-5"> <i class="fa fa-money green-font" aria-hidden="true" ></i> </i> {{event.price}} colones</span>
+                    <span class="margin-top-5 light-gray-font"> <i class="fa fa-clock-o" aria-hidden="true" ></i> {{event.initialTime
+                        | date:'h:mm a'}}</span> - <span class="margin-top-5 light-gray-font">{{event.finalTime | date:'h:mm a'}}</span>&nbsp&nbsp/&nbsp&nbsp<span class="margin-top-5 light-gray-font"> <i class="fa fa-money " aria-hidden="true" ></i> </i> {{event.price}} colones</span>
                     &nbsp&nbsp
                     <p class="margin-top-40 ">{{event.details | limitTo:200}}{{event.details.length > 20 ? '...' : ''}}</p>
 
                     <button type="submit "
                     ui-sref="event-ang-detail({id:event.id})"
-                    class="btn btn-danger green-2-background btn-sm border-radius-6 padding-10 col-md-offset-10">
+                    class="btn btn-danger  btn-sm border-radius-6 padding-10 col-md-offset-10">
                     <span class="glyphicon glyphicon-eye-open"></span>
                     <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                     </button>
-                    <button has-authority="ROLE_ADMIN"  type="submit"
-                    ui-sref="event-ang.edit({id:event.id})"
-                    class="btn btn-primary btn-sm border-radius-6 padding-10">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                    <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
-                    </button>
-                    <button has-authority="ROLE_ADMIN" type="submit"
-                    ui-sref="event-ang.delete({id:event.id})"
-                    class="btn btn-danger btn-sm border-radius-6 padding-10">
-                    <span class="glyphicon glyphicon-remove-circle"></span>
-                    <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
-                    </button>
+
                 </div>
 
             </div>
         </div>
     </div>
+    <div class="col-md-3 no-padding " >
+        <div class="col-md-12 padding-10"
+             style="background-color: #5cb9ff;">
+            <span class="font-18 font-white">Promociones</span>
+        </div>
 
-    <!--<br/>-->
-    <!--<div class="table-responsive">-->
-        <!--<table class="jh-table table table-striped">-->
-            <!--<thead>-->
-                <!--<tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">-->
-                    <!--<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>-->
-                    <!--<th jh-sort-by="name"><span data-translate="conocheApp.event.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>-->
-                    <!--<th jh-sort-by="details"><span data-translate="conocheApp.event.details">Details</span> <span class="glyphicon glyphicon-sort"></span></th>-->
-                    <!--<th jh-sort-by="price"><span data-translate="conocheApp.event.price">Price</span> <span class="glyphicon glyphicon-sort"></span></th>-->
-                    <!--<th jh-sort-by="banner"><span data-translate="conocheApp.event.banner">Banner</span> <span class="glyphicon glyphicon-sort"></span></th>-->
-                    <!--<th jh-sort-by="bannerUrl"><span data-translate="conocheApp.event.bannerUrl">Banner Url</span> <span class="glyphicon glyphicon-sort"></span></th>-->
-                    <!--<th jh-sort-by="initialTime"><span data-translate="conocheApp.event.initialTime">Initial Time</span> <span class="glyphicon glyphicon-sort"></span></th>-->
-                    <!--<th jh-sort-by="finalTime"><span data-translate="conocheApp.event.finalTime">Final Time</span> <span class="glyphicon glyphicon-sort"></span></th>-->
-                    <!--<th jh-sort-by="localName"><span data-translate="conocheApp.event.local">Local</span> <span class="glyphicon glyphicon-sort"></span></th>-->
-                    <!--<th></th>-->
-                <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody>-->
-                <!--<tr ng-repeat="event in vm.events track by event.id">-->
-                    <!--<td><a ui-sref="event-ang-detail({id:event.id})">{{event.id}}</a></td>-->
-                    <!--<td>{{event.name}}</td>-->
-                    <!--<td>{{event.details}}</td>-->
-                    <!--<td>{{event.price}}</td>-->
-                    <!--<td>-->
-                        <!--<a ng-if="event.banner" ng-click="vm.openFile(event.bannerContentType, event.banner)">-->
-                            <!--<img data-ng-src="{{'data:' + event.bannerContentType + ';base64,' + event.banner}}" style="max-height: 30px;" alt="event image"/>-->
-                        <!--</a>-->
-                        <!--<span ng-if="event.banner">{{event.bannerContentType}}, {{vm.byteSize(event.banner)}}</span>-->
-                    <!--</td>-->
-                    <!--<td>{{event.bannerUrl}}</td>-->
-                    <!--<td>{{event.initialTime | date:'medium'}}</td>-->
-                    <!--<td>{{event.finalTime | date:'medium'}}</td>-->
-                    <!--<td>-->
-                        <!--<a ui-sref="local-ang-detail({id:event.localId})">{{event.localName}}</a>-->
-                    <!--</td>-->
-                    <!--<td class="text-right">-->
-                        <!--<div class="btn-group flex-btn-group-container">-->
-                            <!--<button type="submit"-->
-                                    <!--ui-sref="event-ang-detail({id:event.id})"-->
-                                    <!--class="btn btn-info btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-eye-open"></span>-->
-                                <!--<span class="hidden-sm-down" data-translate="entity.action.view"></span>-->
-                            <!--</button>-->
-                            <!--<button type="submit"-->
-                                    <!--ui-sref="event-ang.edit({id:event.id})"-->
-                                    <!--class="btn btn-primary btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                                <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
-                            <!--</button>-->
-                            <!--<button type="submit"-->
-                                    <!--ui-sref="event-ang.delete({id:event.id})"-->
-                                    <!--class="btn btn-danger btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
-                                <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
-                            <!--</button>-->
-                        <!--</div>-->
-                    <!--</td>-->
-                <!--</tr>-->
-            <!--</tbody>-->
-        <!--</table>-->
-    <!--</div>-->
+    </div>
+    </div>
     <div class="col-md-12 text-center">
         <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
     </div>

@@ -51,6 +51,48 @@
                 }]
             }
         })
+             .state('event-ang-by-owner', {
+                    parent: 'entity',
+                    url: '/event-ang-by-owner?page&sort&search',
+                    data: {
+                        authorities: ['ROLE_OWNER'],
+                        pageTitle: 'conocheApp.event.home.title'
+                    },
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/entities/event/event-ang-by-owner.html',
+                            controller: 'EventAngByOwnerController',
+                            controllerAs: 'vm'
+                        }
+                    },
+                    params: {
+                        page: {
+                            value: '1',
+                            squash: true
+                        },
+                        sort: {
+                            value: 'id,asc',
+                            squash: true
+                        },
+                        search: null
+                    },
+                    resolve: {
+                        pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+                            return {
+                                page: PaginationUtil.parsePage($stateParams.page),
+                                sort: $stateParams.sort,
+                                predicate: PaginationUtil.parsePredicate($stateParams.sort),
+                                ascending: PaginationUtil.parseAscending($stateParams.sort),
+                                search: $stateParams.search
+                            };
+                        }],
+                        translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                            $translatePartialLoader.addPart('event');
+                            $translatePartialLoader.addPart('global');
+                            return $translate.refresh();
+                        }]
+                    }
+                })
         .state('event-ang-detail', {
             parent: 'event-ang',
             url: '/{id}',
@@ -115,7 +157,7 @@
             parent: 'event-ang',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_OWNER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -138,9 +180,9 @@
                         }
                     }
                 }).result.then(function() {
-                    $state.go('event-ang', null, { reload: 'event-ang' });
+                    $state.go('event-ang-by-owner', null, { reload: 'event-ang-by-owner' });
                 }, function() {
-                    $state.go('event-ang');
+                    $state.go('event-ang-by-owner');
                 });
             }]
         })
@@ -148,7 +190,7 @@
             parent: 'event-ang',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
+                  authorities: ['ROLE_OWNER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
