@@ -1,5 +1,6 @@
 <!doctype html>
 <html class="no-js">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,13 +18,13 @@
     <!--begin template css-->
     <link href="https://fonts.googleapis.com/css?family=Bubblegum+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
-    <link href="content/template/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <link href="content/template/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
-    <link href="content/template/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
-    <link href="content/template/global/css/plugins.css" rel="stylesheet" type="text/css"/>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="content/template/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="content/template/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="content/template/global/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
+    <link href="content/template/global/css/plugins.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="content/template/admin/layout3/css/layout.css">
-    <link href="content/template/admin/layout3/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+    <link href="content/template/admin/layout3/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color" />
     <link rel="stylesheet" href="content/template/admin/layout3/css/themes/purple-studio.css">
     <link rel="stylesheet" href="content/template/admin/layout3/css/custom.css">
     <link rel="stylesheet" href="content/template/admin/layout3/css/login2.css">
@@ -45,85 +46,57 @@
     <link rel="stylesheet" href="content/css/main.css">
     <!-- endbuild -->
 </head>
+
 <body ng-app="conocheApp" class="page-header-menu-fixed" ng-strict-di>
 
-    <!--[if lt IE 9]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <!--<page-ribbon></page-ribbon>-->
-    <div class="col-md-12" id="loading" style="background-color:black;height:100%;width:100%;position:absolute">
-        <div ng-spinner-bar class="page-spinner-bar" >
-            <div class="bounce1"></div>
-            <div class="bounce2"></div>
-            <div class="bounce3"></div>
-        </div>
+<!--[if lt IE 9]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!--<page-ribbon></page-ribbon>-->
+<div class="col-md-12" id="loading" style="background-color:black;height:100%;width:100%;position:absolute">
+    <div ng-spinner-bar class="page-spinner-bar">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
     </div>
-    <div ui-view="landingPage" ng-show="$state.includes('landing-page')"></div>
-    <div id="loaded" style="display:none">
+</div>
+<div ui-view="landingPage" ng-show="$state.includes('landing-page')"></div>
+<div id="loaded" style="display:none">
     <!--<div ui-view="navbar" ng-cloak class="page-header" style="background:url('content/images/bg1.jpg')"></div>-->
-        <div ui-view="navbar" ng-show="!$state.includes('landing-page')" ng-cloak class="page-header" style="color:black!important"></div>
+    <div ui-view="navbar" ng-show="!$state.includes('landing-page')" ng-cloak class="page-header" style="color:black!important"></div>
     <div class="clearfix">
     </div>
-        <div ng-show="$state.includes('home')" ui-view="home" style="padding-none;">
-
-            <!-- Angular views -->
-        </div>
-    <div class="page-content" style="background-color:white">
-        <!-- BEGIN PAGE HEAD -->
-        <!--<div ui-view="head" class="page-head">-->
-        <!--</div>-->
-        <!-- END PAGE HEAD -->
-        <div ui-view="head" style="background-color:#F2F2F2;">
-
-            <!-- Angular views -->
-        </div>
-
-
-        <div class="container" ng-class="" >
-
-            <div class="well" ui-view="content" style="background-color:rgba(255,255,255,1); padding:none!important;">
-
-        </div>
-
-        <div ui-view="footer"  ng-show="!$state.includes('landing-page')">
-        </div>
+    <div ng-show="$state.includes('home')" ui-view="home" style="padding-none;">
     </div>
+    <div class="page-content" style="background-color:white ">
+        <div ui-view="head" style="background-color:#F2F2F2;"></div>
+        <div class="container" >
+            <div  ng-show="!$state.includes('home')" class="well" ui-view="content" style="background-color:rgba(255,255,255,1); padding:none!important;"></div>
+        </div>
+        <div ui-view="footer" ng-show="!$state.includes('landing-page')"></div>
     </div>
+</div>
+<!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
+<script>
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+    function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+    e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+    e.src='//www.google-analytics.com/analytics.js';
+    r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-XXXXX-X');ga('send','pageview');
+</script>-->
 
-    <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
-    <script>
-        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-        e.src='//www.google-analytics.com/analytics.js';
-        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-        ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>-->
+<!-- build:js app/vendor.js -->
+<!-- bower:js -->
 
-    <!-- build:js app/vendor.js -->
-    <!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
 
-    <script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/messageformat/messageformat.js"></script>
 
-    <script src="bower_components/messageformat/messageformat.js"></script>
+<script src="bower_components/json3/lib/json3.js"></script>
 
-    <script src="bower_components/json3/lib/json3.js"></script>
+<script src="bower_components/lodash/lodash.js"></script>
 
-    <script src="bower_components/lodash/lodash.js"></script>
-
-    <script src="bower_components/sockjs-client/dist/sockjs.js"></script>
-
-    <script src="bower_components/stomp-websocket/lib/stomp.min.js"></script>
-
-    <script src="bower_components/cloudinary-core/cloudinary-core.js"></script>
-
-    <script src="bower_components/angular/angular.js"></script>
-
-    <script src="bower_components/angular-aria/angular-aria.js"></script>
-
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-
-    <script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
 
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
 
@@ -402,5 +375,7 @@
     <script src="content/template/admin/layout3/scripts/demo.js" type="text/javascript"></script>
     <script src="content/template/admin/layout3/scripts/quick-sidebar.js"></script>
     <!--end template scripts-->
+
 </body>
+
 </html>

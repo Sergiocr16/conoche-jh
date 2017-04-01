@@ -5,12 +5,15 @@
         .module('conocheApp')
         .controller('LocalAngDetailController', LocalAngDetailController);
 
-    LocalAngDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Local', 'ImagenLocal', 'Event', 'Schedule', 'Servicio', 'User', 'RatingLocal'];
+    LocalAngDetailController.$inject = ['$state','$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Local', 'ImagenLocal', 'Event', 'Schedule', 'Servicio', 'User', 'RatingLocal'];
 
-    function LocalAngDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Local, ImagenLocal, Event, Schedule, Servicio, User, RatingLocal) {
+    function LocalAngDetailController($state,$scope, $rootScope, $stateParams, previousState, DataUtils, entity, Local, ImagenLocal, Event, Schedule, Servicio, User, RatingLocal) {
         var vm = this;
 
         vm.local = entity;
+
+          $state.current.data.pageTitle = vm.local.name;
+
         vm.previousState = previousState.name;
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;

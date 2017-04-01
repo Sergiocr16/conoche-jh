@@ -2,8 +2,9 @@
     "conocheApp": {
         "local" : {
             "home": {
-                "title": "Locals",
+                "title": "Locals list",
                 "createLabel": "Create a new Local",
+                "phrase": "Meet the best locals in Costa Rica",
                 "createOrEditLabel": "Create or edit a Local"
             },
             "created": "A new Local is created with identifier {{ param }}",

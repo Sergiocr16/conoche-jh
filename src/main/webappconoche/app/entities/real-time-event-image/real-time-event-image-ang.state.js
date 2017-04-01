@@ -13,8 +13,9 @@
                 parent: 'event-ang-detail',
                 url: '/real-time-event-image-gallery',
                 data: {
-                    authorities: ['ROLE_ADMIN','ROLE_OWNER','ROLE_USER'],
-                    pageTitle: 'conocheApp.realTimeEventImage.Gallery.title'
+
+                    authorities: ['ROLE_ADMIN','ROLE_OWNER','ROLE_USER']
+
                 },
                 views: {
                     'eventContent@event-ang-detail': {

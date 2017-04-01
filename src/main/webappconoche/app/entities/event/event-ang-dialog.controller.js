@@ -20,7 +20,24 @@
         vm.servicios = Servicio.query();
         vm.locals = Local.query();
 
-
+        vm.updatePicker = function() {
+            vm.picker1 = {
+                datepickerOptions: {
+                    maxDate: vm.event.finalTime,
+                    minDate: new Date(),
+                    enableTime: false,
+                    showWeeks: false,
+                }
+            };
+            vm.picker2 = {
+                datepickerOptions: {
+                    minDate: vm.event.initialTime == undefined ? new Date() : vm.event.initialTime,
+                    enableTime: false,
+                    showWeeks: false,
+                }
+            }
+        }
+vm.updatePicker()
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });

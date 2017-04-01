@@ -1,7 +1,5 @@
 <div>
     <div class="col-md-12">
-        <h1 class="font-green-haze bold margin-bottom-40 col-md-9 no-padding" >Lista de Locales</h1>
-
 
         <div class="col-md-3">
             <div has-authority="ROLE_ADMIN" ui-sref="local-ang.new" class="btn btn-primary btn-block btn-lg border-radius-6 col-md-3">    <span class="glyphicon glyphicon-plus"></span>
@@ -9,7 +7,7 @@
         </div>
     </div>
     <jhi-alert></jhi-alert>
-    <div class="col-md-3 no-padding bottom-border-5cb9ff" >
+    <div class="col-md-3  bottom-border-5cb9ff" >
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption font-blue-sunglo">
@@ -31,12 +29,12 @@
                             </div>
                         </div>
                         <div class="md-radio">
-                            <input ng-click="vm.reloadAll()" type="radio" id="all" name="category" class="md-radiobtn">
-                            <label for="all" style="font-size:12px">
+                            <input ng-click="vm.reloadAll()" type="radio" id="a" name="category" class="md-radiobtn">
+                            <label for="a" style="font-size:12px">
                                 <span class="inc"></span>
                                 <span class="check"></span>
                                 <span class="box"></span>
-                                <p data-translate="conocheApp.local.filter.allOptions">Todas</p> </label>
+                                Todas</label>
                         </div>
                     </div>
                 </div>
@@ -45,41 +43,36 @@
     </div>
     <div class="col-md-9 no-display" id="tableData">
         <div ng-repeat="local in vm.locals track by local.id" >
-            <div class="col-md-12 E0E0E0-background margin-bottom-20 bottom-border-gray "
-                 ui-sref="local-ang-detail({id:local.id})">
-                <div class="col-md-5 no-padding-left padding-15 position-relative font-18 text-center" >
-                    <div id="info-date-local" class="col-md-2 padding-10 font-white"><span><span class="font-24">{{local.local_category_id}} </span>{{local.initialTime| date:'MMM'}}</span></div>
-                    <img class="col-md-12 crop no-padding"  style="z-index: 0;" data-ng-src="{{'data:' + local.bannerContentType + ';base64,' +
+            <div class="col-md-6 E0E0E0-background padding-20 bottom-border-gray"
+                 style="height:470px;">
+                <img class="col-md-12 crop no-padding margin-bottom-20"  style="z-index: 0;" data-ng-src="{{'data:' + local.bannerContentType + ';base64,' +
                          local.banner}}" alt="local image"/>
-                </div>
-                <div class="col-md-7 gray-font">
-                    <h1 class="font-24 bold" style="color: #5cb9ff; text-transform: uppercase;">{{local.name}}</h1>
-                    <span class="margin-top-5"> <i class="fa fa-clock-o" aria-hidden="true" style="color:#C5C341"></i> {{local.initialTime
-                        | date:'h:mm a'}}</span> - <span class="margin-top-5">{{local.finalTime | date:'h:mm a'}}</span>&nbsp&nbsp/&nbsp&nbsp<span class="margin-top-5"> <i class="fa fa-money green-font" aria-hidden="true" ></i> </i> {{event.price}} colones</span>
-                    &nbsp&nbsp
-                    <p class="margin-top-40 ">{{local.descripcion | limitTo:200}}{{local.descripcion.length > 20 ? '...' : ''}}</p>
+                <h1 class="text-center font-24 Raleway" style="text-transform: uppercase; margin-top:10px!important">{{local.name}}</h1>
+                <p class="text-center">{{local.descripcion | limitTo:200}}{{local.descripcion.length > 20 ? '...' : ''}}</p>
 
+                <h1 class="text-center no-padding">
                     <button type="submit "
                             ui-sref="local-ang-detail({id:local.id})"
-                            class="btn btn-danger green-2-background btn-sm border-radius-6 padding-10 col-md-offset-10"
+                            class="btn btn-danger  btn-sm border-radius-6 padding-10 col-md-offset-10"
                             style="margin:0;">
                         <span class="glyphicon glyphicon-eye-open"></span>
                         <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                     </button>
-                    <button has-authority="ROLE_ADMIN"  type="submit"
+
+                    <button has-authority="ROLE_OWNER"  type="submit"
                             ui-sref="local-ang.edit({id:local.id})"
                             class="btn btn-primary btn-sm border-radius-6 padding-10">
                         <span class="glyphicon glyphicon-pencil"></span>
                         <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
                     </button>
-                    <button has-authority="ROLE_ADMIN" type="submit"
-                            ui-sref="event-ang.delete({id:local.id})"
+                    <button has-authority="ROLE_OWNER" type="submit"
+                            ui-sref="local-ang.delete({id:local.id})"
                             class="btn btn-danger btn-sm border-radius-6 padding-10">
                         <span class="glyphicon glyphicon-remove-circle"></span>
                         <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
                     </button>
-                </div>
-
+                </h1>
+                <div class="clear-fix"></div>
             </div>
         </div>
     </div>
