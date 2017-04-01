@@ -40,7 +40,15 @@
             "GUANACASTE": "Guanacaste",
             "LIMON": "Limón",
             "HEREDIA": "Heredia",
-            "PUNTARENAS": "Puntarenas"
+            "PUNTARENAS": "Puntarenas",
+            "Location": "Ubicación",
+
+            "tabs": {
+                "services" :"Servicios",
+                "location" :"Ubicación",
+                "images" : "Imágenes",
+                "messages" : "Mensages"
+            }
         }
     }
 }

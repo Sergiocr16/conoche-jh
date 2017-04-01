@@ -153,6 +153,27 @@
                 });
             }]
         })
+            .state('event-ang-detail.event-location', {
+                parent: 'event-ang-detail',
+                url: '/location',
+                data: {
+                    authorities: ['ROLE_ADMIN','ROLE_OWNER','ROLE_USER'],
+                    pageTitle: 'conocheApp.event.Location'
+                },
+                views: {
+                    'eventContent@event-ang-detail': {
+                        templateUrl: 'app/entities/event/event-location.html',
+                        controller: 'EventLocationController',
+                        controllerAs: 'vm'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('event');
+                        return $translate.refresh();
+                    }]
+                }
+            })
         .state('event-ang.new', {
             parent: 'event-ang',
             url: '/new',

@@ -16,7 +16,7 @@
 
         var vm         = this;
         vm.page        = page;
-        vm.width       = 330;
+        vm.width       = 340;
         vm.border      = 5;
         vm.isOwner     = isOwner;
         vm.showGallery = false;
