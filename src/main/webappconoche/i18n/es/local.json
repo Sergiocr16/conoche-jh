@@ -2,7 +2,7 @@
     "conocheApp": {
         "local" : {
             "home": {
-                "title": "Locals",
+                "title": "Locales",
                 "createLabel": "Crear nuevo Local",
                 "createOrEditLabel": "Crear o editar Local"
             },
@@ -26,13 +26,13 @@
             "latitud": "Latitud",
             "descripcion": "Descripcion",
             "provincia": "Provincia",
-            "images": "Images",
-            "events": "Events",
-            "schedules": "Schedules",
-            "services": "Services",
-            "subcribers": "Subcribers",
-            "ratings": "Ratings",
-            "localCategory": "Local Category"
+            "images": "Imágenes",
+            "events": "Eventos",
+            "schedules": "Horarios",
+            "services": "Servicios",
+            "subcribers": "Suscriptores",
+            "ratings": "Calificaciones",
+            "localCategory": "Categoría del local"
         }
     }
 }
