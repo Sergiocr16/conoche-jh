@@ -598,6 +598,12 @@ line-height: 24px
     height: 250px;
     object-fit:cover;
 }
+
+ .crop-400 {
+
+    height: 400px;
+    object-fit:cover;
+}
 .no-display{
     display: none;
 }

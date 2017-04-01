@@ -10,10 +10,10 @@
 
     <jhi-alert-error></jhi-alert-error>
     <div class="row no-display" id="container">
-        <div class="col-md-12 margin-top-20">
-            <div ng-if="vm.event.banner" class="col-md-9 no-padding-left margin-bottom-40">
+        <div class="col-md-12 col-xs-12 margin-top-20">
+            <div ng-if="vm.event.banner" class="col-md-9 col-xs-12 no-padding-left margin-bottom-40">
                 <a ng-click="vm.openFile(vm.event.bannerContentType, vm.event.banner)">
-                    <img data-ng-src="{{'data:' + vm.event.bannerContentType + ';base64,' + vm.event.banner}}" class="col-md-12" alt="event image" />
+                    <img data-ng-src="{{'data:' + vm.event.bannerContentType + ';base64,' + vm.event.banner}}" class="col-md-12 col-xs-12 crop-400" alt="event image" />
                 </a>
             </div>
 

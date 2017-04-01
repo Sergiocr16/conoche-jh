@@ -1,8 +1,7 @@
 <div>
-    <div class="col-md-12">
-
-        <div class="col-md-3">
-            <div has-authority="ROLE_ADMIN" ui-sref="local-ang.new" class="btn btn-primary btn-block btn-lg border-radius-6 col-md-3">    <span class="glyphicon glyphicon-plus"></span>
+    <div class="col-md-12 margin-bottom-20">
+        <div class="col-md-offset-9 col-md-3">
+            <div has-any-authority="ROLE_ADMIN,ROLE_OWNER" ui-sref="local-ang.new" class="btn btn-primary btn-block btn-lg border-radius-6 col-md-3">    <span class="glyphicon glyphicon-plus"></span>
                 <span  data-translate="conocheApp.local.home.createLabel"></span></div>
         </div>
     </div>
@@ -43,14 +42,15 @@
     </div>
     <div class="col-md-9 no-display" id="tableData">
         <div ng-repeat="local in vm.locals track by local.id" >
-            <div class="col-md-6 E0E0E0-background padding-20 bottom-border-gray"
-                 style="height:470px;">
+            <div class="col-md-6">
+            <div class="E0E0E0-background padding-20 bottom-border-gray"
+                 style="height:470px;margin-bottom:20px;">
                 <img class="col-md-12 crop no-padding margin-bottom-20"  style="z-index: 0;" data-ng-src="{{'data:' + local.bannerContentType + ';base64,' +
                          local.banner}}" alt="local image"/>
                 <h1 class="text-center font-24 Raleway" style="text-transform: uppercase; margin-top:10px!important">{{local.name}}</h1>
-                <p class="text-center">{{local.descripcion | limitTo:200}}{{local.descripcion.length > 20 ? '...' : ''}}</p>
+                <p class="text-center">{{local.descripcion | limitTo:75}}{{local.descripcion.length > 20 ? '...' : ''}}</p>
 
-                <h1 class="text-center no-padding">
+                <h1 class="text-center no-padding no-margin">
                     <button type="submit "
                             ui-sref="local-ang-detail({id:local.id})"
                             class="btn btn-danger  btn-sm border-radius-6 padding-10 col-md-offset-10"
@@ -73,6 +73,7 @@
                     </button>
                 </h1>
                 <div class="clear-fix"></div>
+            </div>
             </div>
         </div>
     </div>

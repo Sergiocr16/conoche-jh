@@ -13,7 +13,7 @@
                  ui-sref="event-ang-detail({id:event.id})">
                 <div class="col-md-5 no-padding-left padding-15 position-relative font-18 text-center" >
                     <div id="info-date-event" class="col-md-2 padding-10 font-white"><span><span class="font-24">{{event.initialTime| date:'d'}} </span>{{event.initialTime| date:'MMM'}}</span></div>
-                    <img class="col-md-12 crop no-padding"  style="z-index: 0;" data-ng-src="{{'data:' + event.bannerContentType + ';base64,' +
+                    <img class="col-md-12 col-xs-12 crop no-padding"  style="z-index: 0;" data-ng-src="{{'data:' + event.bannerContentType + ';base64,' +
                          event.banner}}" alt="event image"/>
                 </div>
                 <div class="col-md-7 gray-font">
