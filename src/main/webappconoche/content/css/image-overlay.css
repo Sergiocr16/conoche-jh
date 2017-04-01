@@ -29,6 +29,14 @@
 
 .masondry-overlay-view a {
     border-radius: 50% !important;
+
+    /* width: 100%; */
+    /* border: 0; */
+    /* padding: 1em 1.5em; */
+    /* margin: 0 1em 0 0; */
+    /* font-size: 1em; */
+    /* line-height: 3em; */
+    /* border: solid 1px #06507b; */
 }
 
 .masondry-overlay-view-first .masondry-overlay-mask {
