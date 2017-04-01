@@ -27,9 +27,8 @@
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="conocheApp.event.details" for="field_details">Details</label>
-            <input type="text" class="form-control" name="details" id="field_details"
-                    ng-model="vm.event.details"
-                    required/>
+                <textarea class="form-control" name="details" id="field_details"
+                    ng-model="vm.event.details" required></textarea>
             <div ng-show="editForm.details.$invalid">
                 <p class="help-block"
                     ng-show="editForm.details.$error.required" data-translate="entity.validation.required">
