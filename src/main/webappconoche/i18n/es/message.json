@@ -8,23 +8,23 @@
                 "commentButton": "¡Comenta en vivo!"
             },
             "home": {
-                "title": "Messages",
+                "title": "Mensajes",
                 "createLabel": "Crear nuevo Message",
                 "createOrEditLabel": "Crear o editar Message"
             },
-            "created": "Un nuevo Message ha sido creado con el identificador {{ param }}",
-            "updated": "Un Message ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Message ha sido eliminado con el identificador {{ param }}",
+            "created": "Un nuevo mensaje ha sido creado con el identificador {{ param }}",
+            "updated": "Un mensaje ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un mensaje ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Message {{ id }}?"
+                "question": "¿Seguro que quiere eliminar el mensaje {{ id }}?"
             },
             "detail": {
-                "title": "Message"
+                "title": "Mensaje"
             },
             "payload": "¿Qué le quieres decir al mundo?",
             "creationTime": "Creation Time",
-            "user": "User",
-            "event": "Event"
+            "user": "Usuario",
+            "event": "Evento"
         }
     }
 }
