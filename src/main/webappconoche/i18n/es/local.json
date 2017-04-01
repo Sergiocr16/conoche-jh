@@ -2,8 +2,9 @@
     "conocheApp": {
         "local" : {
             "home": {
-                "title": "Locales",
+                "title": "Lista de locales",
                 "createLabel": "Crear nuevo Local",
+                "phrase": "Conoce los mejores eventos exclusivos en Costa Rica.",
                 "createOrEditLabel": "Crear o editar Local"
             },
             "created": "Un nuevo Local ha sido creado con el identificador {{ param }}",

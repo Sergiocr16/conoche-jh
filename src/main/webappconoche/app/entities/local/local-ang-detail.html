@@ -1,6 +1,5 @@
 <div class="gray-font">
-    <h2 style="font-size:35px; " class="bold">{{vm.local.name}}</h2>
-    <hr>
+
     <jhi-alert-error></jhi-alert-error>
     <div class="row">
         <div class="col-md-12 margin-top-20">
@@ -8,63 +7,36 @@
                 <a ng-click="vm.openFile(vm.local.bannerContentType, vm.local.banner)">
                     <img data-ng-src="{{'data:' + vm.local.bannerContentType + ';base64,' + vm.local.banner}}" class="col-md-12" alt="local image" />
                 </a>
+
+                    <div class="col-md-9 margin-top-40">
+                        <h2 class="bold font-20 margin-bottom-40 ">Detalles</h2>
+                        <p>{{vm.local.descripcion}}</p>
+
+                    </div>
+
             </div>
 
             <div class="col-md-3 no-padding-left">
-                <div class=" no-padding E0E0E0-background" id="local-info">
-                    <h4 class="padding-10 text-center bold" >Información de local</h4>
+
+                <button type="button" class="btn btn-danger btn-block btn-lg  cursor-default"><span>Suscribete al {{vm.local.localCategoryName}}!</span></button>
+                <button type="button" ng-click="vm.createComment(vm.event)" class="btn btn-warning btn-block btn-lg no-margin-left">
+                    <span class="glyphicon glyphicon-eye"></span>
+                    <span class="hidden-sm-down" >Calificar local</span>
+                </button>
+
+                <div class="row">
+                    <h2 style="margin-top: 20px;" >Ubicación</h2>
+                    <iframe class="center-block" style="width: 100%; border:0;"
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7860.830055475477!2d-84.07131672659627!3d9.899349254780143!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe95f682d645a8951!2sMulticentro+Desamparados!5e0!3m2!1ses!2scr!4v1489628377455"
+                            height="300" frameborder="0" allowfullscreen></iframe>
+
+
                 </div>
-                <div class="padding-15 font-15 white-background margin-bottom-20" id="local-info-content">
-                    <ul class="no-list-style no-padding-left ">
-                        <!--
-                        <li class="margin-10">
-                            <i class="fa fa-calendar" aria-hidden="true"></i> <span> 31 de marzo, 2017</span>
-                        </li>
-                        <li class="margin-10">
-                            <i class="fa fa-clock-o" aria-hidden="true"></i> <span> 20:00 - 22:00</span>
-                        </li>
-                        <li class="margin-10">
-                            <i class="fa fa-map-marker" aria-hidden="true"></i> <span> Desamparados, San José</span>
-                        </li>
-                        <li class="margin-10">
-                            <i class="fa fa-usd" aria-hidden="true"></i> <span> 3000 colones</span>
-                        </li>
-                        -->
-                    </ul>
-                </div>
-                <a href="" class="btn btn-success btn-block btn-lg 5cb85c-background border-radius-6"
-                   style="background-color:#5cb85c!Important">Ver actividad en vivo</a>
-
-                <a href="" class="btn btn-success btn-block btn-lg 5cb85c-background border-radius-6"
-                   style="background-color:#5cb85c!Important">Suscribete al {{vm.local.localCategoryName}}!</a>
-                <a href="" class="btn btn-success btn-block btn-lg 5cb85c-background border-radius-6"
-                   style="background-color:#5cb85c!Important">Ver eventos de este local</a>
-
-
 
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="col-md-9">
-                <h2 class="bold font-20 margin-bottom-40 ">Detalles</h2>
-                <p>{{vm.local.descripcion}}</p>
 
-            </div>
-            <div class=" col-md-3 no-padding">
-                <h2 class="font-20 margin-bottom-20 ">Ubicación</h2>
-                <div style="background:url('content/images/mapa.png')"></div>
-                <img src="content/images/mapa.png" class="col-md-12 no-padding-left" alt="">
-            </div>
-        </div>
 
     </div>
 
-    <button type="submit" ui-sref="{{ vm.previousState }}" class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-    </button>
-
-    <button type="button" ui-sref="local-ang-detail.edit({id:vm.local.id})" class="btn btn-primary">
-        <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
-    </button>
 </div>

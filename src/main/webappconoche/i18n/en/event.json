@@ -3,7 +3,7 @@
         "event" : {
             "home": {
                 "title": "Events List",
-                "phrase": "Meet the best events in Costa Rica",
+                "phrase": "Look at the best events in Costa Rica",
                 "myEvents": "My events",
                 "createLabel": "Create a new Event",
                 "createOrEditLabel": "Create or edit a Event"
