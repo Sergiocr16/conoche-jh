@@ -193,7 +193,50 @@
                     $state.go('^');
                 });
             }]
-        });
+        })
+        .state('local-ang-Owner', {
+                    parent: 'entity',
+                    url: '/local-ang-owner/{ownerId}',
+                    data: {
+                        authorities: ['ROLE_USER'],
+                        pageTitle: 'conocheApp.local.home.title'
+                    },
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/entities/local/localsangOwner.html',
+                            controller: 'LocalAngController',
+                            controllerAs: 'vm'
+                        }
+                    },
+                    params: {
+                        page: {
+                            value: '1',
+                            squash: true
+                        },
+                        sort: {
+                            value: 'id,asc',
+                            squash: true
+                        },
+                        search: null
+                    },
+                    resolve: {
+                        pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+                            return {
+                                page: PaginationUtil.parsePage($stateParams.page),
+                                sort: $stateParams.sort,
+                                predicate: PaginationUtil.parsePredicate($stateParams.sort),
+                                ascending: PaginationUtil.parseAscending($stateParams.sort),
+                                search: $stateParams.search
+                            };
+                        }],
+                        translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                            $translatePartialLoader.addPart('local');
+                            $translatePartialLoader.addPart('provincia');
+                            $translatePartialLoader.addPart('global');
+                            return $translate.refresh();
+                        }]
+                    }
+                });
     }
 
 })();
