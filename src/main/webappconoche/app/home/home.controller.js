@@ -23,6 +23,9 @@
             Principal.identity().then(function(account) {
                 vm.account = account;
                 vm.isAuthenticated = Principal.isAuthenticated;
+                 setTimeout(function() {
+                    $("#homeContainer").fadeIn(1000);
+                }, 200)
             });
         }
         function register () {

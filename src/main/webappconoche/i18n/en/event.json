@@ -2,7 +2,8 @@
     "conocheApp": {
         "event" : {
             "home": {
-                "title": "Events",
+                "title": "Events List",
+                "phrase": "Meet the best events in Costa Rica",
                 "myEvents": "My events",
                 "createLabel": "Create a new Event",
                 "createOrEditLabel": "Create or edit a Event"

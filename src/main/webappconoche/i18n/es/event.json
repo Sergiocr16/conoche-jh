@@ -3,9 +3,11 @@
         "event" : {
             "home": {
 
-                "myEvents": "Mis eventos",
-                "title": "Eventos",
+                "title": "Lista de eventos",
+                "phrase": "Conoce los mejores eventos exclusivos en Costa Rica.",
 
+                "myEvents": "Mis eventos",
+           
                 "createLabel": "Crear nuevo evento",
                 "createOrEditLabel": "Crear o editar Evento"
             },

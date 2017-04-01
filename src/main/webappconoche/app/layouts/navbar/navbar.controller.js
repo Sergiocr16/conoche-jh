@@ -14,11 +14,14 @@
            getAccount();
            $('#loaded').show();
            $('#loading').fadeOut(30);
+             var unsubLogo  = $rootScope.$on('$stateChangeStart', logoChange);
           });
 
 
         var unsubLogin = $scope.$on('authenticationSuccess', getAccount);
         var unsubLogo  = $rootScope.$on('$stateChangeStart', logoChange);
+
+
         var logo       = ['Conoche', 'Costa Rica', 'Por la noche'];
         var current    = 0;
 
@@ -55,6 +58,7 @@
         function logoChange(event, toState) {
             vm.logo = logo[++current % logo.length];
             vm.pageTitle = toState.data.pageTitle;
+            vm.phrase = toState.data.phrase;
         }
 
         $scope.$on('$destroy', unsubLogin);
