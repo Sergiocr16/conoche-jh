@@ -36,12 +36,17 @@
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css">
     <!--end template css-->
 
-
+    <!--begin landing-page css-->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700" rel="stylesheet" type="text/css">
+    <link href="content/landing-page/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+    <!--end landing-page css-->
     <!-- build:css content/css/main.css -->
     <link rel="stylesheet" href="content/css/main.css">
     <!-- endbuild -->
 </head>
 <body ng-app="conocheApp" class="page-header-menu-fixed" ng-strict-di>
+
     <!--[if lt IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -53,9 +58,10 @@
             <div class="bounce3"></div>
         </div>
     </div>
+    <div ui-view="landingPage" ng-show="$state.includes('landing-page')"></div>
     <div id="loaded" style="display:none">
     <!--<div ui-view="navbar" ng-cloak class="page-header" style="background:url('content/images/bg1.jpg')"></div>-->
-        <div ui-view="navbar" ng-cloak class="page-header" style="color:black!important"></div>
+        <div ui-view="navbar" ng-show="!$state.includes('landing-page')" ng-cloak class="page-header" style="color:black!important"></div>
     <div class="clearfix">
     </div>
         <div ng-show="$state.includes('home')" ui-view="home" style="padding-none;">
@@ -69,15 +75,16 @@
         <!-- END PAGE HEAD -->
 
 
-        <div class="container" style="padding:20px no-padding-bottom">
+        <div class="container"  style="padding:20px no-padding-bottom">
 
-            <div class="well" ui-view="content" style="border-radius:10px;background-color:rgba(255,255,255,1)">
+
+            <div class="well"  ng-show="!$state.includes('landing-page')" ui-view="content" style="border-radius:10px;background-color:rgba(255,255,255,1)">
 
                 <!-- Angular views -->
             </div>
         </div>
 
-        <div ui-view="footer">
+        <div ui-view="footer"  ng-show="!$state.includes('landing-page')">
         </div>
     </div>
     </div>
@@ -188,6 +195,8 @@
     <script src="app/layouts/navbar/navbar.controller.js"></script>
     <script src="app/layouts/navbar/active-menu.directive.js"></script>
     <script src="app/layouts/error/error.state.js"></script>
+    <script src="app/layouts/landing-page/landing-page.state.js"></script>
+    <script src="app/layouts/landing-page/landing-page.controller.js"></script>
     <script src="app/home/home.state.js"></script>
     <script src="app/home/home.controller.js"></script>
     <script src="app/entities/servicio/servicio-ang-dialog.controller.js"></script>
