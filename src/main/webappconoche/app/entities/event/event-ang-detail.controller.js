@@ -11,6 +11,12 @@
 
         var vm = this;
         vm.event = entity;
+
+        setTimeout(function(){
+             $state.current.data.pageTitle = vm.event.name;
+             $scope.apply();
+        },100)
+
         vm.previousState = previousState.name;
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
@@ -33,6 +39,7 @@
         Local.get({id: vm.event.localId},onSuccess);
         function onSuccess(data, headers) {
           vm.local = data;
+
            setTimeout(function() {
               $("#container").fadeIn(500);
           }, 200)

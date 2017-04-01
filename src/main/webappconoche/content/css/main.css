@@ -416,10 +416,14 @@ line-height: 24px
 
 .E0E0E0-background{
     background-color: #F9F9F9;
+
 }
 .E0E0E0-background:hover{
     background-color:#F2F2F2!Important;
     cursor: pointer;
+}
+.E0E0E0-background:hover h1{
+  color: #1ABC9C;
 
 }
 .margin-top-20{
@@ -434,7 +438,7 @@ line-height: 24px
 }
 
 .margin-bottom-20{
-    margin-bottom: 20px;
+    margin-bottom: 20px !important;
 }
 .margin-bottom-40{
     margin-bottom: 40px;
@@ -486,6 +490,9 @@ line-height: 24px
 .padding-20{
     padding:20px;
 }
+.padding-40{
+    padding:40px;
+}
 .padding-15{
     padding:15px;
 }
@@ -494,6 +501,10 @@ line-height: 24px
 }
 .no-padding{
     padding:none !important;
+}
+
+.padding-left-10{
+    padding-left:10px!important;
 }
 .no-padding-left{
     padding-left:none!important;
@@ -573,7 +584,7 @@ line-height: 24px
 }
 
 .cursor-default{
-cursor: default !important;
+    cursor: default !important;
 }
 .no-list-style{
     list-style-type: none;
@@ -634,4 +645,33 @@ cursor: default !important;
 .page-header .page-header-menu .hor-menu .navbar-nav > li.active > a, .page-header .page-header-menu .hor-menu .navbar-nav > li.active > a:hover, .page-header .page-header-menu .hor-menu .navbar-nav > li.current > a, .page-header .page-header-menu .hor-menu .navbar-nav > li.current > a{
  color:#FF8000!important;
   background-color: white!important;
+}
+
+
+.well{
+    padding: 0px!important;
+}
+.Raleway{
+     font-family: Raleway,sans-serif;
+         font-weight: 500;
+
+}
+#pageTitleAnyPage{
+
+ font-family: Raleway,sans-serif;
+      color: #333;
+      font-weight: 600;
+      font-size: 28px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+}
+.spantitleAnyPage{
+    display: block !important;
+     margin-top: 10px!important;
+     font-weight: 300!important;
+     line-height: 1.5;
+     color: #777;
+     font-size: 19px!important;
+     font-family: Lato,sans-serif;
+
 }

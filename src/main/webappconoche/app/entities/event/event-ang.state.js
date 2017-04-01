@@ -14,7 +14,8 @@
             url: '/event-ang?page&sort&search',
             data: {
                 authorities: ['ROLE_ADMIN','ROLE_OWNER','ROLE_USER'],
-                pageTitle: 'conocheApp.event.home.title'
+                pageTitle: 'conocheApp.event.home.title',
+                phrase: 'conocheApp.event.home.phrase'
             },
             views: {
                 'content@': {
@@ -56,7 +57,8 @@
                     url: '/event-ang-by-owner?page&sort&search',
                     data: {
                         authorities: ['ROLE_OWNER'],
-                        pageTitle: 'conocheApp.event.home.title'
+                        pageTitle: 'conocheApp.event.home.myEvents',
+                        phrase: 'conocheApp.event.home.phrase'
                     },
                     views: {
                         'content@': {
@@ -97,8 +99,8 @@
             parent: 'event-ang',
             url: '/{id}',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_OWNER','ROLE_USER'],
-                pageTitle: 'conocheApp.event.detail.title'
+                authorities: ['ROLE_ADMIN','ROLE_OWNER','ROLE_USER']
+
             },
             views: {
                 'content@': {

@@ -1,5 +1,5 @@
 <!-- BEGIN HEADER TOP -->
-<div class="page-header-top">
+<div class="page-header-top " style="padding-left:40px;">
     <div class="container">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
@@ -202,7 +202,7 @@
 </div>
 <!-- END HEADER TOP -->
 <!-- BEGIN HEADER MENU -->
-<div class="page-header-menu" style="background-color:white!important; color: black!important;">
+<div class="page-header-menu " style="background-color:white!important; color: black!important; ">
     <div class="container">
         <!-- BEGIN HEADER SEARCH BOX -->
 
@@ -213,36 +213,36 @@
         <div class="hor-menu" style="text-transform:uppercase;">
             <ul class="nav navbar-nav"  ng-switch="vm.isAuthenticated()" style=" color: #1C1C1C!important;">
 
-                <li ui-sref="home" class="active">
+                <li ui-sref="home" ng-class="{'active' : $state.includes('home')}">
                     <a data-translate="global.menu.home">Home</a>
                 </li>
                 <!--<li ui-sref="home" class="active">-->
                     <!--<a data-translate="global.menu.home">Home</a>-->
                 <!--</li>-->
 
-                <li has-authority="ROLE_OWNER" ui-sref="event-ang-by-owner">
+                <li has-authority="ROLE_OWNER" ui-sref="event-ang-by-owner" ng-class="{'active' : $state.includes('event-ang-by-owner')}">
 
                         <a data-translate="global.menu.entities.myEventAng" > Event Ang</a>
 
                 </li>
-                <li has-authority="ROLE_OWNER"class="dark-gray-font" ui-sref="local-ang">
+                <li has-authority="ROLE_OWNER"class="dark-gray-font" ui-sref="local-ang" ng-class="{'active' : $state.includes('event-ang-by-owner')}">
 
                         <a data-translate="global.menu.entities.myLocalAng" > Local Ang  </a>
 
                 </li>
-                <li has-authority="ROLE_OWNER" ui-sref="promotion-ang">
+                <li has-authority="ROLE_OWNER" ui-sref="promotion-ang" >
 
                         <a data-translate="global.menu.entities.promotionAng">
                          Promotion Ang
                         </a>
 
                 </li>
-                <li has-authority="ROLE_USER" ui-sref="event-ang">
+                <li has-authority="ROLE_USER" ui-sref="event-ang" ng-class="{'active' : $state.includes('event-ang')}">
 
                         <a data-translate="global.menu.entities.eventAng"> Event Ang</a>
 
                 </li>
-                <li has-authority="ROLE_USER" ui-sref="local-ang">
+                <li has-authority="ROLE_USER" ui-sref="local-ang" ng-class="{'active' : $state.includes('local-ang')}">
 
                         <a data-translate="global.menu.entities.localAng"> Local Ang  </a>
 

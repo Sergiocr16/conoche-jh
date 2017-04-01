@@ -5,12 +5,12 @@
         .module('conocheApp')
         .controller('EventAngController', EventAngController);
 
-    EventAngController.$inject = ['$state', 'DataUtils', 'Event', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    EventAngController.$inject = ['$rootScope','$state', 'DataUtils', 'Event', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
 
-    function EventAngController($state, DataUtils, Event, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function EventAngController($rootScope,$state, DataUtils, Event, ParseLinks, AlertService, paginationConstants, pagingParams) {
+
 
         var vm = this;
-
         vm.loadPage = loadPage;
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;

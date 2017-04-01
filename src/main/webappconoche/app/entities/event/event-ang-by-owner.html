@@ -1,9 +1,6 @@
 <div>
-    <div class="col-md-12">
-        <h1 class="font-green-haze bold margin-bottom-40 col-md-9 no-padding" data-translate="conocheApp.event.home.myEvents">Lista de eventos</h1>
-
-
-        <div class="col-md-3">
+    <div class="col-md-12 margin-bottom-20">
+        <div class="col-md-offset-9 col-md-3">
             <div has-authority="ROLE_OWNER" ui-sref="event-ang.new" class="btn btn-primary btn-block btn-lg border-radius-6 col-md-3">    <span class="glyphicon glyphicon-plus"></span>
                 <span  data-translate="conocheApp.event.home.createLabel"></span></div>
         </div>
@@ -12,15 +9,14 @@
     <jhi-alert></jhi-alert>
     <div class="col-md-12 no-display" id="tableData">
         <div ng-repeat="event in vm.events track by event.id" >
-            <div class="col-md-12 F9F9F9-background margin-bottom-20 bottom-border-gray " style="padding:20px;"
-                 >
+            <div class="col-md-12 F9F9F9-background margin-bottom-20 bottom-border-gray " style="padding:20px;" >
                 <div class="col-md-5 no-padding-left padding-15 position-relative font-18 text-center" >
                     <div id="info-date-event" class="col-md-2 padding-10 font-white"><span><span class="font-24">{{event.initialTime| date:'d'}} </span>{{event.initialTime| date:'MMM'}}</span></div>
                     <img class="col-md-12 crop no-padding"  style="z-index: 0;" data-ng-src="{{'data:' + event.bannerContentType + ';base64,' +
                          event.banner}}" alt="event image"/>
                 </div>
                 <div class="col-md-7 gray-font">
-                    <h1 class="font-24 bold" style="color: #5cb9ff; text-transform: uppercase;">{{event.name}}</h1>
+                    <h1 class="font-24  Raleway" style="color: #5cb9ff; text-transform: uppercase;">{{event.name}}</h1>
                     <span class="margin-top-5"> <i class="fa fa-clock-o" aria-hidden="true" ></i> {{event.initialTime
                         | date:'h:mm a'}}</span> - <span class="margin-top-5">{{event.finalTime | date:'h:mm a'}}</span>&nbsp&nbsp/&nbsp&nbsp<span class="margin-top-5"> <i class="fa fa-money " aria-hidden="true" ></i> </i> {{event.price}} colones</span>
                     &nbsp&nbsp
