@@ -21,6 +21,9 @@
                     controller: 'HomeController',
                     controllerAs: 'vm'
                 },
+                'landingPage@': {
+                    templateUrl: 'app/layouts/landing-page/landing-page.html',
+                },
                 'head@': {
                     templateUrl: 'app/layouts/header/header.html',
                     controller: 'NavbarController',

@@ -10,40 +10,38 @@
     </div>
     <jhi-alert></jhi-alert>
     <div class="col-md-3 no-padding bottom-border-5cb9ff" >
-        <div class="col-md-12 padding-10" id="search-local-info"
-             style="background-color: #5cb9ff;">
-            <span class="font-18 font-white">Filtrar por:</span>
-        </div>
-        <div class="md-radio-list" style="margin:50px 0 0 0;">
-            <div ng-repeat="category in vm.categories">
-                <div class="md-radio">
-                    <input ng-click="vm.loadByCategory(category.id)" type="radio" id="{{category.id}}" name="category" class="md-radiobtn">
-                    <label for="{{category.id}}" style="font-size:12px">
-                        <span class="inc"></span>
-                        <span class="check"></span>
-                        <span class="box"></span>
-                        {{category.name}} </label>
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption font-blue-sunglo">
+                    <i class="icon-list font-blue-sunglo"></i>
+                    <span class="caption-subject bold" style="font-size:12px" data-translate="conocheApp.local.filter.filterBy"> Filtrar por categoria</span>
                 </div>
             </div>
-            <div class="md-radio">
-                <input ng-click="vm.reloadAll()" type="radio" id="all" name="category" class="md-radiobtn">
-                <label for="all" style="font-size:12px">
-                    <span class="inc"></span>
-                    <span class="check"></span>
-                    <span class="box"></span>
-                    <p data-translate="conocheApp.local.filter.allOptions">Todas</p> </label>
+            <div class="portlet-body">
+                <div class="form-group form-md-radios">
+                    <div class="md-radio-list">
+                        <div ng-repeat="category in vm.categories">
+                            <div class="md-radio">
+                                <input ng-click="vm.loadByCategory(category.id)" type="radio" id="{{category.id}}" name="category" class="md-radiobtn">
+                                <label for="{{category.id}}" style="font-size:12px">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                    {{category.name}} </label>
+                            </div>
+                        </div>
+                        <div class="md-radio">
+                            <input ng-click="vm.reloadAll()" type="radio" id="all" name="category" class="md-radiobtn">
+                            <label for="all" style="font-size:12px">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                <p data-translate="conocheApp.local.filter.allOptions">Todas</p> </label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <!--
-        <div class="col-md-12 font-15 padding-20 " id="search-local-content">
-            <button class="btn btn-primary col-md-12 margin-top-40" ui-sref="local-ang.new" >
-                <span class="glyphicon glyphicon-plus"></span>
-                <span>
-                      Buscar
-                    </span>
-            </button>
-        </div>
-        -->
     </div>
     <div class="col-md-9 no-display" id="tableData">
         <div ng-repeat="local in vm.locals track by local.id" >
