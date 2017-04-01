@@ -1,10 +1,9 @@
 
+<div class="row">
+    <h2 class="text-center" style="margin-bottom: 20px;" translate="conocheApp.servicio.home.title">Services</h2>
 
-<div class="container">
-    <h2 class="pull-left"data-translate="conocheApp.servicio.home.title">Services</h2>
-</div>
-<div class="container">
-    <ul  ng-repeat="service in vm.event.services track by service.id" class="no-list-style no-padding-left">
-        <li><i class="{{service.icon}}"></i> {{service.descripcion}}</li>
-    </ul>
+            <ul class="no-list-style no-padding-left">
+                <li class="text-center" ng-repeat="service in vm.event.services track by service.id" >
+                    <i class="{{service.icon}}"></i> {{service.descripcion}}</li>
+            </ul>
 </div>

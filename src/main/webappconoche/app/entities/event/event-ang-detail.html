@@ -52,33 +52,26 @@
             <div class="col-md-9 font-15 max-height-300px">
                 <h2 class="bold font-24 margin-bottom-40 " data-translate="conocheApp.event.details">Detalles</h2>
                 <p class="margin-bottom-40 ">{{vm.event.details}}</p>
-
-                <ul class="nav nav-tabs nav-justified" role="tablist">
-                    <li ui-sref-active="active"><a ui-sref="event-ang-detail.real-time-event-image-gallery">Images</a></li>
-                    <li ui-sref-active="active"><a ui-sref="event-ang-detail.live-messages">Messages</a></li>
-                </ul>
-                <div class="tab-content no-padding">
-                    <div class="tab-pane active col-md-10">
-                        <div ui-view="eventContent"></div>
-                    </div>
-                </div>
-
-
-            </div>
-            <div class=" col-md-3 no-padding" style="border-radius:8px!important">
-                <h2 class="font-24 margin-bottom-20 ">Servicios</h2>
-                <ul class="no-list-style no-padding" ng-repeat=" service in vm.event.services">
-                    <li><i class="{{service.icon}}"></i> {{service.descripcion}}</li>
-                </ul>
-                <br>
-                <h2 class="font-24 margin-bottom-20 ">Ubicación</h2>
-
-                <iframe class="col-md-12" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7860.830055475477!2d-84.07131672659627!3d9.899349254780143!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe95f682d645a8951!2sMulticentro+Desamparados!5e0!3m2!1ses!2scr!4v1489628377455"
-                        height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
-
             </div>
         </div>
+
     </div>
+
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li ui-sref-active="active" ><a ui-sref="event-ang-detail.real-time-event-image-gallery"
+                                            translate="conocheApp.event.tabs.images">Images</a></li>
+            <li ui-sref-active="active"><a ui-sref="event-ang-detail.live-messages"
+                                           translate="conocheApp.event.tabs.messages">Messages</a></li>
+            <li ui-sref-active="active"><a ui-sref="event-ang-detail.event-location"
+                                           translate="conocheApp.event.tabs.location">Location</a></li>
+            <li ui-sref-active="active"><a ui-sref="event-ang-detail.services"
+                                           translate="conocheApp.event.tabs.services">Services</a></li>
+        </ul>
+        <div class="tab-content no-padding">
+            <div class="tab-pane active">
+                <div ui-view="eventContent"></div>
+            </div>
+        </div>
 
 </div>
 
