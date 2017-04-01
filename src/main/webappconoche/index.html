@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="content/css/image-overlay.css">
     <link rel="stylesheet" href="content/css/social.css">
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css">
     <!--end template css-->
 
 
@@ -55,15 +56,21 @@
     </div>
     <div id="loaded" style="display:none">
     <!--<div ui-view="navbar" ng-cloak class="page-header" style="background:url('content/images/bg1.jpg')"></div>-->
-        <div ui-view="navbar" ng-cloak class="page-header" style="background-color: #444d58;"></div>
+        <div ui-view="navbar" ng-cloak class="page-header" style="color:black!important"></div>
     <div class="clearfix">
     </div>
+        <div ng-show="$state.includes('home')" ui-view="home" style="padding-none;">
+
+            <!-- Angular views -->
+        </div>
     <div class="page-content" style="background-color:#eff3f8">
         <!-- BEGIN PAGE HEAD -->
         <!--<div ui-view="head" class="page-head">-->
         <!--</div>-->
         <!-- END PAGE HEAD -->
-        <div class="container" style="padding:20px">
+
+
+        <div class="container" ng-class="padding-20: " style="padding:20px no-padding-bottom">
 
             <div class="well" ui-view="content" style="border-radius:10px;background-color:rgba(255,255,255,1)">
 
@@ -258,6 +265,7 @@
     <script src="app/entities/event/event-ang.state.js"></script>
     <script src="app/entities/event/event-ang.service.js"></script>
     <script src="app/entities/event/event-ang.controller.js"></script>
+    <script src="app/entities/event/event-ang-by-owner.controller.js"></script>
     <script src="app/entities/entity.state.js"></script>
     <script src="app/entities/category/category-dialog.controller.js"></script>
     <script src="app/entities/category/category-detail.controller.js"></script>

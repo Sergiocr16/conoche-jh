@@ -6,12 +6,12 @@
             <a ui-sref="home">
                 <div class="particle-logo">
                     <particle-text
-                        color="#EDE7F6"
+                        color="#5F04B4"
                         motion-color="#B388FF"
                         spacing="3"
                         ease="0.3"
                         size="2"
-                        font-size="27"
+                        font-size="30"
                         height-padding="5"
                         text="{{vm.logo}}"
                         font-familly="Bubblegum Sans, cursive"
@@ -202,28 +202,60 @@
 </div>
 <!-- END HEADER TOP -->
 <!-- BEGIN HEADER MENU -->
-<div class="page-header-menu">
+<div class="page-header-menu" style="background-color:white!important; color: black!important;">
     <div class="container">
         <!-- BEGIN HEADER SEARCH BOX -->
-        <form class="search-form" action="extra_search.html" method="GET">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search" name="query">
-                <span class="input-group-btn">
-				<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
-				</span>
-            </div>
-        </form>
+
         <!-- END HEADER SEARCH BOX -->
         <!-- BEGIN MEGA MENU -->
         <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
         <!-- DOC: Remove dropdown-menu-hover and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
-        <div class="hor-menu">
-            <ul class="nav navbar-nav"  ng-switch="vm.isAuthenticated()">
+        <div class="hor-menu" style="text-transform:uppercase;">
+            <ul class="nav navbar-nav"  ng-switch="vm.isAuthenticated()" style=" color: #1C1C1C!important;">
+
                 <li ui-sref="home" class="active">
                     <a data-translate="global.menu.home">Home</a>
                 </li>
+                <!--<li ui-sref="home" class="active">-->
+                    <!--<a data-translate="global.menu.home">Home</a>-->
+                <!--</li>-->
+
+                <li has-authority="ROLE_OWNER" ui-sref="event-ang-by-owner">
+
+                        <a data-translate="global.menu.entities.myEventAng" > Event Ang</a>
+
+                </li>
+                <li has-authority="ROLE_OWNER"class="dark-gray-font" ui-sref="local-ang">
+
+                        <a data-translate="global.menu.entities.myLocalAng" > Local Ang  </a>
+
+                </li>
+                <li has-authority="ROLE_OWNER" ui-sref="promotion-ang">
+
+                        <a data-translate="global.menu.entities.promotionAng">
+                         Promotion Ang
+                        </a>
+
+                </li>
+                <li has-authority="ROLE_USER" ui-sref="event-ang">
+
+                        <a data-translate="global.menu.entities.eventAng"> Event Ang</a>
+
+                </li>
+                <li has-authority="ROLE_USER" ui-sref="local-ang">
+
+                        <a data-translate="global.menu.entities.localAng"> Local Ang  </a>
+
+                </li>
+                <li has-authority="ROLE_USER" ui-sref="promotion-ang">
+
+                        <a data-translate="global.menu.entities.promotionAng">
+                         Promotion Ang
+                        </a>
+
+                </li>
                 <!--BEGIN ENTITIES MENU-->
-                <li class="menu-dropdown mega-menu-dropdown" ng-switch-when="true">
+                <li has-authority="ROLE_ADMIN" class="menu-dropdown mega-menu-dropdown" ng-switch-when="true">
                     <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" class="dropdown-toggle">
                         <span data-translate="global.menu.entities.main">Entities</span> <i class="fa fa-angle-down"></i>
                     </a>
@@ -262,6 +294,14 @@
                                                     <i class="icon-fire"></i>
                                                     <span data-translate="global.menu.entities.actionAng">
                                                      Action Ang
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li has-authority="ROLE_OWNER" ui-sref="event-ang-by-owner">
+                                                <a class="iconify">
+                                                    <i class="icon-fire"></i>
+                                                    <span data-translate="global.menu.entities.eventAng">
+                                                     Event Ang
                                                     </span>
                                                 </a>
                                             </li>

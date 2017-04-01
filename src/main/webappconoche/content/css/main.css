@@ -410,9 +410,15 @@ line-height: 24px
 .5cb85c-background{
  background-color:#5cb85c!Important;
 }
+.F9F9F9-background{
+    background-color: #F9F9F9;
+}
 
+.E0E0E0-background{
+    background-color: #F9F9F9;
+}
 .E0E0E0-background:hover{
-    background-color:#E8E8E8!Important;
+    background-color:#F2F2F2!Important;
     cursor: pointer;
 
 }
@@ -423,11 +429,18 @@ line-height: 24px
 .margin-top-40{
     margin-top: 40px;
 }
+.margin-top-150{
+    margin-top: 150px;
+}
+
 .margin-bottom-20{
     margin-bottom: 20px;
 }
 .margin-bottom-40{
     margin-bottom: 40px;
+}
+.font-40{
+    font-size: 40px!important;
 }
 .font-30{
     font-size: 30px!important;
@@ -448,7 +461,9 @@ line-height: 24px
     font-size: 15px!important;
 }
 
-
+.light-gray-font{
+    color: #A4A4A4!important;
+}
 
 .no-border{
     border:0px!important;
@@ -481,7 +496,10 @@ line-height: 24px
     padding:none !important;
 }
 .no-padding-left{
-    padding-left:none;
+    padding-left:none!important;
+}
+.no-margin-left{
+    margin-left:0px!important;
 }
 .no-padding-right{
     padding-right:none;
@@ -548,9 +566,7 @@ line-height: 24px
 .back-font{
     color:black
 }
-.E0E0E0-background{
-    background-color: #F2F2F2;
-}
+
 
 .green-2-background{
     background-color:#5cb85c!Important;
@@ -580,4 +596,42 @@ cursor: default !important;
     color: #000000;
     font-size: 30px;
     margin: 10% 0 0 0;
+}
+
+#home_search{
+    background: url('/content/images/home-background.jpg')!important;
+    color: white;
+
+}
+
+.height-83vh{
+  height: 83vh;
+}
+
+.dark-gray-font{
+
+}
+
+.page-header .page-header-menu .hor-menu .navbar-nav > li > a{
+     font-family: Raleway,sans-serif;
+      color: #444;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+}
+
+.page-header .page-header-menu .hor-menu .navbar-nav > li > a:hover{
+ color:#823e9e!important;
+ background-color: white!important;
+}
+
+.purple-font{
+   color:#823e9e!important;
+}
+
+
+.page-header .page-header-menu .hor-menu .navbar-nav > li.active > a, .page-header .page-header-menu .hor-menu .navbar-nav > li.active > a:hover, .page-header .page-header-menu .hor-menu .navbar-nav > li.current > a, .page-header .page-header-menu .hor-menu .navbar-nav > li.current > a{
+ color:#FF8000!important;
+  background-color: white!important;
 }

@@ -3,6 +3,7 @@
         "event" : {
             "home": {
                 "title": "Events",
+                "myEvents": "My events",
                 "createLabel": "Create a new Event",
                 "createOrEditLabel": "Create or edit a Event"
             },

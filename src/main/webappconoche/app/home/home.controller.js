@@ -19,7 +19,6 @@
         });
 
         getAccount();
-
         function getAccount() {
             Principal.identity().then(function(account) {
                 vm.account = account;
