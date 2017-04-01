@@ -31,6 +31,7 @@ public class Event implements Serializable {
     private String name;
 
     @NotNull
+    @Lob
     @Column(name = "details", nullable = false)
     private String details;
 

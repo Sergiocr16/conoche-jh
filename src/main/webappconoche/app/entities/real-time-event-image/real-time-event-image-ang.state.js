@@ -13,7 +13,9 @@
                 parent: 'event-ang-detail',
                 url: '/real-time-event-image-gallery',
                 data: {
-                    authorities: ['ROLE_USER']
+
+                    authorities: ['ROLE_ADMIN','ROLE_OWNER','ROLE_USER']
+
                 },
                 views: {
                     'eventContent@event-ang-detail': {
@@ -210,7 +212,7 @@
                 parent: 'event-ang-detail.real-time-event-image-gallery',
                 url: '/save',
                 data: {
-                    authorities: ['ROLE_USER']
+                    authorities: ['ROLE_ADMIN','ROLE_OWNER','ROLE_USER']
                 },
                 onEnter: [ '$state', '$uibModal', 'idEvent', function($state, $uibModal, idEvent) {
                     $uibModal.open({
@@ -255,11 +257,12 @@
                 });
             }]
         })
+            //quitar ROLE_USER luego
             .state('event-ang-detail.real-time-event-image-gallery.delete', {
                 parent: 'event-ang-detail.real-time-event-image-gallery',
                 url: '/{idImage}/delete',
                 data: {
-                    authorities: ['ROLE_USER']
+                    authorities: ['ROLE_ADMIN','ROLE_OWNER','ROLE_USER']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', 'isOwner', 'idEvent', function($stateParams, $state, $uibModal, isOwner, idEvent) {
                     if(!isOwner) {

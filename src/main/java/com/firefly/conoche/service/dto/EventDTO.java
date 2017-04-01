@@ -20,6 +20,7 @@ public class EventDTO implements Serializable {
     private String name;
 
     @NotNull
+    @Lob
     private String details;
 
     @NotNull
