@@ -191,7 +191,7 @@
                 url: '/services',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'conocheApp.realTimeEventImage.Gallery.title'
+                    pageTitle: 'conocheApp.servicio.home.title'
                 },
                 views: {
                     'eventContent@event-ang-detail': {
