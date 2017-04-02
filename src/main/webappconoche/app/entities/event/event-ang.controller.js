@@ -41,7 +41,7 @@
                 vm.events = data;
                 vm.page = pagingParams.page;
                 setTimeout(function() {
-                    $("#tableData").fadeIn(500);
+                    $("#tableData").fadeIn(700);
                 }, 200)
             }
             function onError(error) {

@@ -6,6 +6,7 @@
         </div>
     </div>
     <jhi-alert></jhi-alert>
+    <div class=" no-display no-padding" id="tableData">
     <div class="col-md-3  bottom-border-5cb9ff" >
         <div class="portlet box blue">
             <div class="portlet-title">
@@ -40,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-9 no-display" id="tableData">
+    <div class="col-md-9">
         <div ng-repeat="local in vm.locals track by local.id" >
             <div class="col-md-6">
             <div class="E0E0E0-background padding-20 bottom-border-gray"
@@ -77,6 +78,7 @@
             </div>
         </div>
     </div>
+</div>
     <div class="col-md-12 text-center">
         <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
     </div>

@@ -12,8 +12,7 @@
 
         vm.local = entity;
 
-          $state.current.data.pageTitle = vm.local.name;
-
+        $rootScope.pageTitle = vm.local.name;
         vm.previousState = previousState.name;
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;

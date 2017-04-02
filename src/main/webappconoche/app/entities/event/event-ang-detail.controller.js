@@ -11,11 +11,11 @@
 
         var vm = this;
         vm.event = entity;
-
-        setTimeout(function(){
-             $state.current.data.pageTitle = vm.event.name;
-             $scope.apply();
-        },100)
+        $rootScope.pageTitle = vm.event.name;
+//        setTimeout(function(){
+//             $state.current.data.pageTitle = vm.event.name;
+//             $scope.apply();
+//        },100)
 
         vm.previousState = previousState.name;
         vm.byteSize = DataUtils.byteSize;

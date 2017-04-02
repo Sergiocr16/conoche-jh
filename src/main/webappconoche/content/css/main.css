@@ -592,7 +592,9 @@ line-height: 24px
 .margin-10{
     margin:10px;
 }
-
+. margin-bottom-10{
+    margin-bottom:10px;
+}
  .crop {
 
     height: 250px;
@@ -662,7 +664,7 @@ line-height: 24px
          font-weight: 500;
 
 }
-#pageTitleAnyPage{
+.pageTitleAnyPage{
 
  font-family: Raleway,sans-serif;
       color: #333;
