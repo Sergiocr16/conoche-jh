@@ -22,7 +22,22 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'search': {
+                method: 'GET',
+                isArray: true,
+                url: 'api/event/search'
+            },
+            'countFuture': {
+                method: 'GET',
+                url: 'api/event/count',
+                transformResponse: function (data) {
+                    if (data) {
+                        data = angular.fromJson(data);
+                    }
+                    return data;
+                }
+            }
         });
     }
 })();
