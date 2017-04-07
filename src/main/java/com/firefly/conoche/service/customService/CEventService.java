@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
+
 @Service
 @Transactional
 public class CEventService {
@@ -20,8 +22,12 @@ public class CEventService {
         this.eventMapper = eventMapper;
     }
 
-    public Page<EventDTO> findByProvincia(Pageable page, Provincia provincia, String name) {
-        return ceventRepository.findByLocalProvinciaAndNameContainingIgnoreCase(page, provincia, name)
+    public Page<EventDTO> findByProvincia(Pageable page, Provincia provincia, String name, ZonedDateTime zonedDateTime) {
+        return ceventRepository.findByProvincia(page, provincia, name, zonedDateTime)
             .map(eventMapper::eventToEventDTO);
+    }
+
+    public Long countEventAfter(ZonedDateTime zonedDateTime) {
+        return ceventRepository.countByFinalTimeGreaterThan(zonedDateTime);
     }
 }

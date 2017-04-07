@@ -27,4 +27,8 @@ public class CLocalService {
        return clocalRepository.findByOwnerId(id, page)
             .map(localmapper::localToLocalDTO);
    }
+
+   public Long count() {
+        return clocalRepository.count();
+   }
 }

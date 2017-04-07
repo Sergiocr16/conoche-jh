@@ -25,7 +25,11 @@
              method: 'GET',
              isArray: 'TRUE'
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'count': {
+                method: 'GET',
+                url: 'api/local/count'
+            }
         });
     }
 })();

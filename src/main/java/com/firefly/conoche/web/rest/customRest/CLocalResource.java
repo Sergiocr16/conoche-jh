@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.firefly.conoche.service.customService.CLocalService;
 import com.firefly.conoche.service.dto.LocalDTO;
 import com.firefly.conoche.service.dto.RealTimeEventImageDTO;
+import com.firefly.conoche.service.dto.WrapperDTO;
 import com.firefly.conoche.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
 import org.springframework.data.domain.Page;
@@ -45,5 +46,12 @@ public class CLocalResource {
         Page<LocalDTO> page = cLocalService.findLocalsByOwner(ownerId, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/local/owner/" +ownerId);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/local/count")
+    @Timed
+    public ResponseEntity<WrapperDTO<Long>> getMesageByEvent() {
+        Long count = cLocalService.count();
+        return ResponseEntity.ok().body(new WrapperDTO<>(count));
     }
 }
