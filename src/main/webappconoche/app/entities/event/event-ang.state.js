@@ -35,7 +35,10 @@
                 },
                 search: null,
                 provincia: null,
-                history: 'false',
+                history: {
+                    value: 'false',
+                    squash: true
+                },
             },
             resolve: {
                 optionalParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
@@ -54,7 +57,30 @@
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
-            }
+            },
+            onEnter: ['$stateParams', '$state', function($stateParams, $state) {
+                //podria hacer una constante
+                if(!$stateParams.provincia) {
+                    return;
+                }
+
+                var provincias = [
+                    'SAN_JOSE',
+                    'ALAJUELA',
+                    'CARTAGO',
+                    'GUANACASTE',
+                    'LIMON',
+                    'HEREDIA',
+                    'PUNTARENAS'
+                ];
+                var found =_.find(provincias, function(p) {
+                    return p === $stateParams.provincia;
+                });
+                if(!found) {
+                    $state.go('home');
+                }
+            }]
+
         })
              .state('event-ang-by-owner', {
                     parent: 'entity',
