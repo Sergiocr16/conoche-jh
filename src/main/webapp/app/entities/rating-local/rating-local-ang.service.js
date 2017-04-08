@@ -4,9 +4,9 @@
         .module('conocheApp')
         .factory('RatingLocal', RatingLocal);
 
-    RatingLocal.$inject = ['$resource'];
+    RatingLocal.$inject = ['$resource', 'DateUtils'];
 
-    function RatingLocal ($resource) {
+    function RatingLocal ($resource, DateUtils) {
         var resourceUrl =  'api/rating-locals/:id';
 
         return $resource(resourceUrl, {}, {
@@ -16,6 +16,7 @@
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
+                        data.creationDate = DateUtils.convertDateTimeFromServer(data.creationDate);
                     }
                     return data;
                 }

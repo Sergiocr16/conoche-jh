@@ -34,7 +34,7 @@ public class RatingLocalResource {
     private final Logger log = LoggerFactory.getLogger(RatingLocalResource.class);
 
     private static final String ENTITY_NAME = "ratingLocal";
-        
+
     private final RatingLocalService ratingLocalService;
 
     public RatingLocalResource(RatingLocalService ratingLocalService) {
@@ -83,19 +83,19 @@ public class RatingLocalResource {
             .body(result);
     }
 
-    /**
-     * GET  /rating-locals : get all the ratingLocals.
-     *
-     * @param pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of ratingLocals in body
-     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
-     */
+//    /**
+//     * GET  /rating-locals : get all the ratingLocals.
+//     *
+//     * @param pageable the pagination information
+//     * @return the ResponseEntity with status 200 (OK) and the list of ratingLocals in body
+//     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+//     */
     @GetMapping("/rating-locals")
     @Timed
-    public ResponseEntity<List<RatingLocalDTO>> getAllRatingLocals(@ApiParam Pageable pageable)
+    public ResponseEntity<List<RatingLocalDTO>> getAllRatingLocals(@ApiParam Pageable pageable,Long localId)
         throws URISyntaxException {
         log.debug("REST request to get a page of RatingLocals");
-        Page<RatingLocalDTO> page = ratingLocalService.findAll(pageable);
+        Page<RatingLocalDTO> page = ratingLocalService.findAll(localId);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/rating-locals");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -113,7 +113,14 @@ public class RatingLocalResource {
         RatingLocalDTO ratingLocalDTO = ratingLocalService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(ratingLocalDTO));
     }
-
+    @GetMapping("/rating-locals/findByUserAndLocal/{userLogin}/{localId}")
+    @Timed
+    public ResponseEntity<RatingLocalDTO> getRatingLocalByUserAndLocal(@PathVariable (value = "localId")  Long localId,
+                                                                       @PathVariable(value = "userLogin")  String  userLogin) {
+        log.debug("REST request to get RatingLocal by local and user : {}", localId,userLogin);
+        RatingLocalDTO ratingLocalDTO = ratingLocalService.findOneByLoginAndLocalId(userLogin,localId);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(ratingLocalDTO));
+    }
     /**
      * DELETE  /rating-locals/:id : delete the "id" ratingLocal.
      *

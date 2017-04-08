@@ -1,6 +1,7 @@
 package com.firefly.conoche.service.dto;
 
 
+import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -20,6 +21,12 @@ public class RatingLocalDTO implements Serializable {
     private Integer rating;
 
     private String description;
+
+
+    private String userLogin;
+
+
+    private ZonedDateTime creationDate;
 
     private Long userDetailsId;
 
@@ -47,6 +54,20 @@ public class RatingLocalDTO implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
+    }
+    public ZonedDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(ZonedDateTime creationDate) {
+        this.creationDate = creationDate;
     }
 
     public Long getUserDetailsId() {
@@ -100,6 +121,8 @@ public class RatingLocalDTO implements Serializable {
             "id=" + id +
             ", rating='" + rating + "'" +
             ", description='" + description + "'" +
+            ", userLogin='" + userLogin + "'" +
+            ", creationDate='" + creationDate + "'" +
             '}';
     }
 }

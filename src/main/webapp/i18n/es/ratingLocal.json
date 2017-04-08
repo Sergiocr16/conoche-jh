@@ -17,6 +17,8 @@
             },
             "rating": "Rating",
             "description": "Description",
+            "userLogin": "User Login",
+            "creationDate": "Creation Date",
             "userDetails": "User Details",
             "local": "Local"
         }

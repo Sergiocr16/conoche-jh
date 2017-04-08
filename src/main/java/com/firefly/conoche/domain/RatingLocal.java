@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -30,6 +31,14 @@ public class RatingLocal implements Serializable {
 
     @Column(name = "description")
     private String description;
+
+    @NotNull
+    @Column(name = "user_login", nullable = false)
+    private String userLogin;
+
+    @NotNull
+    @Column(name = "creation_date", nullable = false)
+    private ZonedDateTime creationDate;
 
     @ManyToOne
     private User userDetails;
@@ -69,6 +78,32 @@ public class RatingLocal implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public RatingLocal userLogin(String userLogin) {
+        this.userLogin = userLogin;
+        return this;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
+    }
+
+    public ZonedDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public RatingLocal creationDate(ZonedDateTime creationDate) {
+        this.creationDate = creationDate;
+        return this;
+    }
+
+    public void setCreationDate(ZonedDateTime creationDate) {
+        this.creationDate = creationDate;
     }
 
     public User getUserDetails() {
@@ -123,6 +158,8 @@ public class RatingLocal implements Serializable {
             "id=" + id +
             ", rating='" + rating + "'" +
             ", description='" + description + "'" +
+            ", userLogin='" + userLogin + "'" +
+            ", creationDate='" + creationDate + "'" +
             '}';
     }
 }

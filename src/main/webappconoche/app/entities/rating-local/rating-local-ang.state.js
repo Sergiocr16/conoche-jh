@@ -9,15 +9,15 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('rating-local-ang', {
-            parent: 'entity',
+        .state('local-ang-detail.rating-local-ang', {
+            parent: 'local-ang-detail',
             url: '/rating-local-ang?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN'],
                 pageTitle: 'conocheApp.ratingLocal.home.title'
             },
             views: {
-                'content@': {
+                'localContent@local-ang-detail': {
                     templateUrl: 'app/entities/rating-local/rating-localsang.html',
                     controller: 'RatingLocalAngController',
                     controllerAs: 'vm'
@@ -108,9 +108,9 @@
                 });
             }]
         })
-        .state('rating-local-ang.new', {
-            parent: 'rating-local-ang',
-            url: '/new',
+        .state('local-ang-detail.newRating', {
+            parent: 'local-ang-detail',
+            url: '/rate',
             data: {
                 authorities: ['ROLE_USER']
             },
@@ -120,7 +120,7 @@
                     controller: 'RatingLocalAngDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
-                    size: 'lg',
+                    size: 'md',
                     resolve: {
                         entity: function () {
                             return {
@@ -131,9 +131,9 @@
                         }
                     }
                 }).result.then(function() {
-                    $state.go('rating-local-ang', null, { reload: 'rating-local-ang' });
+                    $state.go('local-ang-detail', null, { reload: true });
                 }, function() {
-                    $state.go('rating-local-ang');
+                    $state.go('local-ang-detail');
                 });
             }]
         })

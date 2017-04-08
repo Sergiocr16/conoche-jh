@@ -66,6 +66,9 @@ public class LocalResourceIntTest {
     private static final Provincia DEFAULT_PROVINCIA = Provincia.SAN_JOSE;
     private static final Provincia UPDATED_PROVINCIA = Provincia.ALAJUELA;
 
+    private static final Double DEFAULT_RATING = 1D;
+    private static final Double UPDATED_RATING = 2D;
+
     @Autowired
     private LocalRepository localRepository;
 
@@ -116,7 +119,8 @@ public class LocalResourceIntTest {
                 .bannerUrl(DEFAULT_BANNER_URL)
                 .latitud(DEFAULT_LATITUD)
                 .descripcion(DEFAULT_DESCRIPCION)
-                .provincia(DEFAULT_PROVINCIA);
+                .provincia(DEFAULT_PROVINCIA)
+                .rating(DEFAULT_RATING);
         // Add required entity
         User owner = UserResourceIntTest.createEntity(em);
         em.persist(owner);
@@ -155,6 +159,7 @@ public class LocalResourceIntTest {
         assertThat(testLocal.getLatitud()).isEqualTo(DEFAULT_LATITUD);
         assertThat(testLocal.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
         assertThat(testLocal.getProvincia()).isEqualTo(DEFAULT_PROVINCIA);
+        assertThat(testLocal.getRating()).isEqualTo(DEFAULT_RATING);
     }
 
     @Test
@@ -215,7 +220,8 @@ public class LocalResourceIntTest {
             .andExpect(jsonPath("$.[*].bannerUrl").value(hasItem(DEFAULT_BANNER_URL.toString())))
             .andExpect(jsonPath("$.[*].latitud").value(hasItem(DEFAULT_LATITUD.doubleValue())))
             .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION.toString())))
-            .andExpect(jsonPath("$.[*].provincia").value(hasItem(DEFAULT_PROVINCIA.toString())));
+            .andExpect(jsonPath("$.[*].provincia").value(hasItem(DEFAULT_PROVINCIA.toString())))
+            .andExpect(jsonPath("$.[*].rating").value(hasItem(DEFAULT_RATING.doubleValue())));
     }
 
     @Test
@@ -236,7 +242,8 @@ public class LocalResourceIntTest {
             .andExpect(jsonPath("$.bannerUrl").value(DEFAULT_BANNER_URL.toString()))
             .andExpect(jsonPath("$.latitud").value(DEFAULT_LATITUD.doubleValue()))
             .andExpect(jsonPath("$.descripcion").value(DEFAULT_DESCRIPCION.toString()))
-            .andExpect(jsonPath("$.provincia").value(DEFAULT_PROVINCIA.toString()));
+            .andExpect(jsonPath("$.provincia").value(DEFAULT_PROVINCIA.toString()))
+            .andExpect(jsonPath("$.rating").value(DEFAULT_RATING.doubleValue()));
     }
 
     @Test
@@ -264,7 +271,8 @@ public class LocalResourceIntTest {
                 .bannerUrl(UPDATED_BANNER_URL)
                 .latitud(UPDATED_LATITUD)
                 .descripcion(UPDATED_DESCRIPCION)
-                .provincia(UPDATED_PROVINCIA);
+                .provincia(UPDATED_PROVINCIA)
+                .rating(UPDATED_RATING);
         LocalDTO localDTO = localMapper.localToLocalDTO(updatedLocal);
 
         restLocalMockMvc.perform(put("/api/locals")
@@ -284,6 +292,7 @@ public class LocalResourceIntTest {
         assertThat(testLocal.getLatitud()).isEqualTo(UPDATED_LATITUD);
         assertThat(testLocal.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
         assertThat(testLocal.getProvincia()).isEqualTo(UPDATED_PROVINCIA);
+        assertThat(testLocal.getRating()).isEqualTo(UPDATED_RATING);
     }
 
     @Test

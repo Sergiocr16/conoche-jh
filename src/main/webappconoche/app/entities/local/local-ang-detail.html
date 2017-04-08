@@ -1,6 +1,6 @@
 <div class="gray-font">
 
-    <jhi-alert-error></jhi-alert-error>
+    <!--<jhi-alert-error></jhi-alert-error>-->
     <div class="row">
         <div class="col-md-12 margin-top-20">
             <div ng-if="vm.local.banner" class="col-md-9 no-padding-left margin-bottom-40">
@@ -18,11 +18,8 @@
 
             <div class="col-md-3 no-padding-left">
 
-                <button type="button" class="btn btn-danger btn-block btn-lg  cursor-default"><span>Suscribete al {{vm.local.localCategoryName}}!</span></button>
-                <button type="button" ng-click="vm.createComment(vm.event)" class="btn btn-warning btn-block btn-lg no-margin-left">
-                    <span class="glyphicon glyphicon-eye"></span>
-                    <span class="hidden-sm-down" >Calificar local</span>
-                </button>
+                <button type="button" class="btn btn-danger btn-block btn-lg">Suscribete!</button>
+                <button has-authority="ROLE_USER"  type="button" ui-sref="local-ang-detail.newRating" class="btn btn-warning btn-block btn-lg" style="margin: 5px 0!important" translate="conocheApp.local.rate">Calificar</button>
 
                 <div class="row">
                     <h2 style="margin-top: 20px;" >Ubicación</h2>
@@ -34,6 +31,20 @@
                 </div>
 
             </div>
+
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+                <li ui-sref-active="active"><a ui-sref="local-ang-detail.event-location"
+                                               translate="conocheApp.local.tabs.location">Location</a></li>
+                <li ui-sref-active="active"><a ui-sref="local-ang-detail.rating-local-ang"
+                                               translate="conocheApp.local.tabs.comments">Comments</a></li>
+            </ul>
+            <div class="tab-content no-padding">
+                <div class="tab-pane active">
+                    <div ui-view="localContent"></div>
+                </div>
+            </div>
+
+
         </div>
 
 

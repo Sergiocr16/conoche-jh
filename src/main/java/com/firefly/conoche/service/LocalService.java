@@ -1,13 +1,16 @@
 package com.firefly.conoche.service;
 
 import com.firefly.conoche.domain.Local;
+import com.firefly.conoche.domain.RatingLocal;
 import com.firefly.conoche.repository.LocalRepository;
+import com.firefly.conoche.repository.RatingLocalRepository;
 import com.firefly.conoche.service.dto.LocalDTO;
 import com.firefly.conoche.service.mapper.LocalMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -31,10 +34,13 @@ public class LocalService {
 
     private final UserService userService;
 
-    public LocalService(LocalRepository localRepository, LocalMapper localMapper, UserService userService) {
+    private RatingLocalRepository ratingLocalRepository;
+
+    public LocalService(LocalRepository localRepository, LocalMapper localMapper, UserService userService,RatingLocalRepository ratingLocalRepository) {
         this.localRepository = localRepository;
         this.localMapper = localMapper;
         this.userService = userService;
+        this.ratingLocalRepository = ratingLocalRepository;
     }
 
     public LocalDTO saveWithCurrentUser(LocalDTO localDTO) {
@@ -99,4 +105,7 @@ public class LocalService {
         log.debug("Request to delete Local : {}", id);
         localRepository.delete(id);
     }
+
+
+
 }
