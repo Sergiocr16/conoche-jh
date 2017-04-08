@@ -19,7 +19,8 @@
             'angular-loading-bar',
             'cloudinary',
             'wu.masonry',
-            'FBAngular'
+            'FBAngular',
+            'timer'
         ])
         .run(run);
 

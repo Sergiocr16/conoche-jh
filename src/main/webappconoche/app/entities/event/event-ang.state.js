@@ -134,7 +134,7 @@
             parent: 'event-ang-detail',
             url: '/detail/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_OWNER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -176,8 +176,34 @@
                     }]
                 }
             })
-        .state('event-ang.new', {
-            parent: 'event-ang',
+
+         .state('event-ang.promotionDetail', {
+             parent: 'event-ang',
+             url: '/{id}/edit',
+             data: {
+                 authorities: ['ROLE_USER']
+             },
+             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                 $uibModal.open({
+                     templateUrl: 'app/entities/promotion/promotion-ang-idetail-in-events.html',
+                     controller: 'PromotionAngDialogController',
+                     controllerAs: 'vm',
+                     backdrop: 'static',
+                     size: 'lg',
+                     resolve: {
+                         entity: ['Promotion', function(Promotion) {
+                             return Promotion.get({id : $stateParams.id}).$promise;
+                         }]
+                     }
+                 }).result.then(function() {
+                     $state.go('event-ang', null, { reload: 'event-ang' });
+                 }, function() {
+                     $state.go('^');
+                 });
+             }]
+         })
+        .state('event-ang-by-owner.new', {
+            parent: 'event-ang-by-owner',
             url: '/new',
             data: {
                 authorities: ['ROLE_OWNER']
@@ -238,7 +264,7 @@
             parent: 'event-ang',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                  authorities: ['ROLE_OWNER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

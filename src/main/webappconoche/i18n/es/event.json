@@ -20,11 +20,12 @@
             "detail": {
                 "title": "Evento",
                 "vieMessages": "Ver comentarios en vivo",
-                "commentButton": "Comenta el evento"
+                "commentButton": "Comenta el evento",
+                "addPromotionButton": "Agregar promoción"
             },
             "name": "Nombre",
             "details": "Detalles",
-            "price": "Precio",
+            "price": "Precio (en colones)",
             "banner": "Banner",
             "bannerUrl": "Banner Url",
             "initialTime": "Inicio",

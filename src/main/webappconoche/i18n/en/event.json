@@ -17,7 +17,8 @@
             "detail": {
                 "title": "Event",
                 "vieMessages": "View live comments",
-                "commentButton": "Comment the event"
+                "commentButton": "Comment the event",
+                "addPromotionButton": "Add new promotion"
             },
             "name": "Name",
             "details": "Details",

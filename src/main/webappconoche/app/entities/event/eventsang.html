@@ -1,33 +1,30 @@
 <!--<div class="col-md-12 no-padding margin-bottom-15" style="height: 100px; background-color:#eff3f8;">-->
-    <!--<h1 class="font-green-haze bold margin-bottom-40 col-md-9 no-padding" >Lista de eventos</h1>-->
+<!--<h1 class="font-green-haze bold margin-bottom-40 col-md-9 no-padding" >Lista de eventos</h1>-->
 
 <!--</div>-->
 
 <!--<div>-->
 
-    <jhi-alert></jhi-alert>
-    <div class="no-display" id="tableData">
-    <div class="col-md-9 ">
-        <div ng-repeat="event in vm.events track by event.id" >
-            <div class="col-md-12 E0E0E0-background margin-bottom-20 bottom-border-gray "
-                 ui-sref="event-ang-detail({id:event.id})">
-                <div class="col-md-5 no-padding-left padding-15 position-relative font-18 text-center" >
-                    <div id="info-date-event" class="col-md-2 padding-10 font-white"><span><span class="font-24">{{event.initialTime| date:'d'}} </span>{{event.initialTime| date:'MMM'}}</span></div>
-                    <img class="col-md-12 col-xs-12 crop no-padding"  style="z-index: 0;" data-ng-src="{{'data:' + event.bannerContentType + ';base64,' +
-                         event.banner}}" alt="event image"/>
+<jhi-alert></jhi-alert>
+<div class="no-display" id="tableData">
+    <div class="col-md-9 col-sm-9 col-xs-12">
+        <div ng-repeat="event in vm.events track by event.id">
+            <div class="col-md-12 E0E0E0-background margin-bottom-20 bottom-border-gray " ui-sref="event-ang-detail({id:event.id})">
+                <div class="col-md-5 no-padding-left padding-15 position-relative font-18 text-center">
+                    <div id="info-date-event" class="col-md-2 padding-10 font-white"><span><span class="font-24">{{event.initialTime| date:'d'}} </span>{{event.initialTime| date:'MMM'}}</span>
+                    </div>
+                    <img class="col-md-12 col-xs-12 crop no-padding" style="z-index: 0;" data-ng-src="{{'data:' + event.bannerContentType + ';base64,' +
+                         event.banner}}" alt="event image" />
                 </div>
                 <div class="col-md-7 gray-font">
                     <h1 class="font-24 Raleway" style="text-transform: uppercase; padding-top:10px">{{event.name}}</h1>
                     <span class="margin-top-5 light-gray-font"> <i class="fa fa-clock-o" aria-hidden="true" ></i> {{event.initialTime
-                        | date:'h:mm a'}}</span> - <span class="margin-top-5 light-gray-font">{{event.finalTime | date:'h:mm a'}}</span>&nbsp&nbsp/&nbsp&nbsp<span class="margin-top-5 light-gray-font"> <i class="fa fa-money " aria-hidden="true" ></i> </i> {{event.price}} colones</span>
-                    &nbsp&nbsp
+                        | date:'h:mm a'}}</span> - <span class="margin-top-5 light-gray-font">{{event.finalTime | date:'h:mm a'}}</span>&nbsp&nbsp/&nbsp&nbsp<span class="margin-top-5 light-gray-font"> <i class="fa fa-money " aria-hidden="true" ></i> </i> {{event.price}} colones</span>                    &nbsp&nbsp
                     <p class="margin-top-40 ">{{event.details | limitTo:150}}{{event.details.length > 20 ? '...' : ''}}</p>
 
-                    <button type="submit "
-                    ui-sref="event-ang-detail({id:event.id})"
-                    class="btn btn-danger  btn-sm border-radius-6 padding-10 col-md-offset-9 col-md-3 margin-bottom-10">
-                    <span class="glyphicon glyphicon-eye-open"></span>
-                    <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                    <button type="submit " ui-sref="event-ang-detail({id:event.id})" class="btn btn-danger  btn-sm border-radius-6 padding-10 col-md-offset-9 col-md-3 margin-bottom-10">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                        <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                     </button>
 
                 </div>
@@ -35,15 +32,25 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3 " >
-
-            <span class="font-18 ">Promociones</span>
+    <div class="col-md-3 col-sm-3 col-xs-12">
 
 
+        <span class="font-18 col-md-12 no-padding margin-bottom-20" style="letter-spacing:1px; font-weight:600px">PROMOCIONES</span>
+
+        <div class="col-md-12 col-sm-12 col-xs-12 no-padding  margin-bottom-20 " ui-sref="event-ang.promotionDetail({id:promotion.id})" ng-repeat="promotion in vm.promotions track by promotion.id">
+            <div  class="no-padding font-white">
+                <div id="image-promotion-in-events" class="col-md-12 col-xs-12 col-sm-12 "><span class="col-md-12 no-padding Raleway font-18  Raleway text-center margin-top-40" style="opacity:0">Ver promocion</span></div>
+                <div id="info-time-promotion" class="col-md-12 padding-10 "><span class="font-16 Raleway">Tiempo restante <timer end-time="promotion.finalTime">{{hours}}:{{minutes}}:{{seconds}}</timer></span>
+                </div>
+                <img class="col-md-12 col-sm-12 col-xs-12 no-padding crop-150" style="z-index: 0;"  data-ng-src="{{'data:' + promotion.imageContentType + ';base64,' + promotion.image}}"  alt="promotion image" />
+            </div>
+            <span class="col-md-12 no-padding Raleway font-15">{{promotion.description}}</span>
+        </div>
+
     </div>
-    </div>
-    <div class="col-md-12 text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-    </div>
-    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+</div>
+<div class="col-md-12 text-center">
+    <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+</div>
+<uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
 </div>
