@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('LocalAngController', LocalAngController);
 
-    LocalAngController.$inject = ['$state', 'DataUtils', 'Local', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','Category'];
+    LocalAngController.$inject = ['$state', 'DataUtils', 'Local', 'ParseLinks', 'AlertService', 'paginationConstants', 'optionalParams','Category'];
 
-    function LocalAngController($state, DataUtils, Local, ParseLinks, AlertService, paginationConstants, pagingParams,Category) {
+    function LocalAngController($state, DataUtils, Local, ParseLinks, AlertService, paginationConstants, optionalParams,Category) {
 
         var vm = this;
 
@@ -19,6 +19,9 @@
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
         vm.reloadAll = loadAll;
+
+        vm.predicate = optionalParams.predicate;
+        vm.reverse = optionalParams.ascending;
 
         loadAll();
         loadCategories();
@@ -78,8 +81,12 @@
                 }
 
         function loadAll () {
-            Local.query({
-                page: pagingParams.page - 1,
+            Local.search({
+
+                provincia: optionalParams.provincia,
+                search: optionalParams.search,
+                page: optionalParams.page - 1,
+
                 size: vm.itemsPerPage,
                 sort: sort()
             }, onSuccess, onError);
@@ -95,7 +102,7 @@
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
                 vm.locals = data;
-                vm.page = pagingParams.page;
+                vm.page = optionalParams.page;
             }
             function onError(error) {
                 AlertService.error(error.data.message);
@@ -111,7 +118,7 @@
             $state.transitionTo($state.$current, {
                 page: vm.page,
                 sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
-                search: vm.currentSearch
+                search: optionalParams.search
             });
         }
     }

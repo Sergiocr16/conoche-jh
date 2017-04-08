@@ -52,7 +52,11 @@
         }
 
         function localSearch() {
-            alert("Local search");
+            $state.go('local-ang', {
+                history: vm.history,
+                provincia: vm.provincia,
+                search: vm.name,
+            });
         }
 
         function search(event) {
