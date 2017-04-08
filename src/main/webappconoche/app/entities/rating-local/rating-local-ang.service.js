@@ -20,6 +20,20 @@
                     return data;
                 }
             },
+            'getByUserAndLocal': {
+                    method: 'GET',
+                    url: 'api/rating-locals/findByUserAndLocal/:userLogin/:localId',
+                    params:{
+                      userLogin:'@userLogin',
+                      localId: '@localId'
+                    },
+                    transformResponse: function (data) {
+                        if (data) {
+                            data = angular.fromJson(data);
+                        }
+                        return data;
+                }
+            },
             'update': { method:'PUT' }
         });
     }

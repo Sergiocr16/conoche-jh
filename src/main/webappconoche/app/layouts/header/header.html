@@ -1,7 +1,8 @@
 <div class="container col-md-offset-1 col-xs-offset-1 padding-40 " >
-
-
-        <h1 ng-hide="$state.includes('event-ang-detail') || $state.includes('local-ang-detail')" class="pageTitleAnyPage"><span data-translate="{{vm.pageTitle}}">{{vm.pageTitle}}</span></h1>
-        <h1 ng-show="$state.includes('event-ang-detail') || $state.includes('local-ang-detail')" class="pageTitleAnyPage"><span>{{pageTitle}}</span></h1>
-        <span class="spantitleAnyPage" data-translate="{{vm.phrase}}"></span>
+        <h1 ng-hide="$state.includes('event-ang-detail') || $state.includes('local-ang-detail')" class="pageTitleAnyPage col-lg-9 col-md-9 col-sm-8"><span data-translate="{{vm.pageTitle}}">{{vm.pageTitle}}</span></h1>
+        <h1  ng-show="$state.includes('event-ang-detail') || $state.includes('local-ang-detail')" class="pageTitleAnyPage col-lg-9 col-md-9 col-sm-8"><span>{{pageTitle}}</span></h1>
+        <h6  ng-show="$state.includes('local-ang-detail')" class="pageTitleAnyPage col-lg-3 col-md-3 col-sm-4">
+            <i ng-repeat = "star in currentLocal.stars track by $index" class="{{star.class}}" style="font-size:25px!important;"></i>
+        </h6>
+    <span class="spantitleAnyPage col-lg-12" data-translate="{{vm.phrase}}"></span>
 </div>

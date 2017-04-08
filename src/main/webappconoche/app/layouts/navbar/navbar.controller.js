@@ -61,6 +61,8 @@
             vm.phrase = toState.data.phrase;
         }
 
+
+
         $scope.$on('$destroy', unsubLogin);
         $scope.$on('$destroy', unsubLogo);
     }

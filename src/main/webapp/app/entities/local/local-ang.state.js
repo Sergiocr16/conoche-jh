@@ -134,6 +134,7 @@
                                 latitud: null,
                                 descripcion: null,
                                 provincia: null,
+                                rating: null,
                                 id: null
                             };
                         }

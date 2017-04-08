@@ -12,6 +12,8 @@
 
         vm.ratingLocal = entity;
         vm.clear = clear;
+        vm.datePickerOpenStatus = {};
+        vm.openCalendar = openCalendar;
         vm.save = save;
         vm.users = User.query();
         vm.locals = Local.query();
@@ -43,6 +45,10 @@
             vm.isSaving = false;
         }
 
+        vm.datePickerOpenStatus.creationDate = false;
 
+        function openCalendar (date) {
+            vm.datePickerOpenStatus[date] = true;
+        }
     }
 })();

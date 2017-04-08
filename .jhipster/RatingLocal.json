@@ -29,12 +29,26 @@
         {
             "fieldName": "description",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "userLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "creationDate",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20170307223303",
-    "entityTableName": "rating_local",
     "dto": "mapstruct",
-    "pagination": "pager",
     "service": "serviceClass",
+    "entityTableName": "rating_local",
+    "pagination": "pager",
     "angularJSSuffix": "ang"
 }

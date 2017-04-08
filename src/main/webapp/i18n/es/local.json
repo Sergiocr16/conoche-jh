@@ -22,6 +22,7 @@
             "latitud": "Latitud",
             "descripcion": "Descripcion",
             "provincia": "Provincia",
+            "rating": "Rating",
             "images": "Images",
             "events": "Events",
             "schedules": "Schedules",
