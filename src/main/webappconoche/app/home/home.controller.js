@@ -53,7 +53,6 @@
 
         function localSearch() {
             $state.go('local-ang', {
-                history: vm.history,
                 provincia: vm.provincia,
                 search: vm.name,
             });

@@ -20,7 +20,7 @@
                     <div class="md-radio-list">
                         <div ng-repeat="category in vm.categories">
                             <div class="md-radio">
-                                <input ng-click="vm.loadByCategory(category.id)" type="radio" id="{{category.id}}" name="category" class="md-radiobtn">
+                                <input ng-click ="vm.transitionCategory()"  ng-model="vm.idCategoria"  ng-value="category.id" type="radio" id="{{category.id}}" name="category" class="md-radiobtn">
                                 <label for="{{category.id}}" style="font-size:12px">
                                     <span class="inc"></span>
                                     <span class="check"></span>
@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="md-radio">
-                            <input ng-click="vm.reloadAll()" type="radio" id="a" name="category" class="md-radiobtn">
+                            <input ng-click="vm.transitionCategory()" value="" ng-model="vm.idCategoria" type="radio" id="a" name="category" class="md-radiobtn">
                             <label for="a" style="font-size:12px">
                                 <span class="inc"></span>
                                 <span class="check"></span>

@@ -11,7 +11,7 @@
         $stateProvider
         .state('local-ang', {
             parent: 'entity',
-            url: '/local-ang?page&sort&search&provincia',
+            url: '/local-ang?page&sort&search&provincia&idCategory',
             data: {
                 authorities: ['ROLE_USER','ROLE_OWNER'],
                 pageTitle: 'conocheApp.local.home.title',
@@ -34,7 +34,8 @@
                     squash: true
                 },
                 search: null,
-                provincia: null
+                provincia: null,
+                idCategory: null
             },
             resolve: {
                 optionalParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
@@ -44,7 +45,8 @@
                         predicate: PaginationUtil.parsePredicate($stateParams.sort),
                         ascending: PaginationUtil.parseAscending($stateParams.sort),
                         search: $stateParams.search,
-                        provincia: $stateParams.provincia
+                        provincia: $stateParams.provincia,
+                        idCategory: $stateParams.idCategory
                     };
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {

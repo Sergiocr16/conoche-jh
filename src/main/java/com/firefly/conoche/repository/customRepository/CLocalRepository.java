@@ -26,5 +26,5 @@ public interface CLocalRepository extends JpaRepository<Local,Long> {
     Page<Local> findByProvinciaAndName(Pageable page,
                                 @Param("prov") Provincia provincia,
                                 @Param("name") String name,
-                                @Param("IdCategory") Long idCategory);
+                                @Param("idCategory") Long idCategory);
 }
