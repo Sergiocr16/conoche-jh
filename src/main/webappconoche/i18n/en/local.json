@@ -33,7 +33,11 @@
             "services": "Services",
             "subcribers": "Subcribers",
             "ratings": "Ratings",
-            "localCategory": "Local Category"
+            "localCategory": "Local Category",
+            "tabs": {
+                "comments": "View local's comments"
+            },
+            "rate": "Rate local"
         }
     }
 }

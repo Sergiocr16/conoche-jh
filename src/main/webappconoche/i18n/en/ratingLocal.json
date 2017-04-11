@@ -4,7 +4,7 @@
             "home": {
                 "title": "Rating Locals",
                 "createLabel": "Create a new Rating Local",
-                "createOrEditLabel": "Create or edit a Rating Local"
+                "createOrEditLabel": "Give us your opinion"
             },
             "created": "A new Rating Local is created with identifier {{ param }}",
             "updated": "A Rating Local is updated with identifier {{ param }}",
@@ -15,10 +15,18 @@
             "detail": {
                 "title": "Rating Local"
             },
-            "rating": "Rating",
-            "description": "Description",
+            "save": "Rate",
+            "rating": "How many stars this local deserves?",
+            "description": "Do you have any comments?",
             "userDetails": "User Details",
-            "local": "Local"
+            "local": "Local",
+            "califications": {
+                "1":"Very bad",
+                "2":"Bad",
+                "3":"Average",
+                "4":"Good",
+                "5":"Excellent"
+            }
         }
     }
 }

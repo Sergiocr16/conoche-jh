@@ -3,8 +3,8 @@
         "ratingLocal" : {
             "home": {
                 "title": "Rating Locals",
-                "createLabel": "Crear nuevo Rating Local",
-                "createOrEditLabel": "Crear o editar Rating Local"
+                "createLabel": "Danos tu opinión sobre este local",
+                "createOrEditLabel": "Opiná sobre este local"
             },
             "created": "Un nuevo Rating Local ha sido creado con el identificador {{ param }}",
             "updated": "Un Rating Local ha sido actualizado con el identificador {{ param }}",
@@ -15,10 +15,18 @@
             "detail": {
                 "title": "Rating Local"
             },
-            "rating": "Rating",
-            "description": "Description",
+            "save": "Calificar",
+            "rating": "¿Con cuantás estrellas lo calificas?",
+            "description": "¿Tienes algún comentario?",
             "userDetails": "User Details",
-            "local": "Local"
+            "local": "Local",
+            "califications": {
+                "1":"Terrible",
+                "2":"Malo",
+                "3":"Mediana calidad",
+                "4":"Bastante bueno",
+                "5":"Excelente"
+            }
         }
     }
 }

@@ -75,6 +75,7 @@
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('local');
                     $translatePartialLoader.addPart('provincia');
+                    $translatePartialLoader.addPart('ratingLocal');
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'Local', function($stateParams, Local) {

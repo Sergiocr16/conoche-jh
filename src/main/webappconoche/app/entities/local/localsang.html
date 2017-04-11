@@ -48,7 +48,10 @@
                  style="height:470px;margin-bottom:20px;">
                 <img class="col-md-12 crop no-padding margin-bottom-20"  style="z-index: 0;" data-ng-src="{{'data:' + local.bannerContentType + ';base64,' +
                          local.banner}}" alt="local image"/>
-                <h1 class="text-center font-24 Raleway" style="text-transform: uppercase; margin-top:10px!important">{{local.name}}</h1>
+                <h1 class="text-center font-24 Raleway" style="text-transform: uppercase; margin:10px 0 0 0!important">{{local.name}}</h1>
+                <h6 class="text-center no-margin no-padding">
+                    <i ng-repeat = "star in local.stars track by $index"  class="{{star.class}}" style="font-size:15px!important; margin-bottom:8px!important;"></i>
+                </h6>
                 <p class="text-center">{{local.descripcion | limitTo:75}}{{local.descripcion.length > 20 ? '...' : ''}}</p>
 
                 <h1 class="text-center no-padding no-margin">

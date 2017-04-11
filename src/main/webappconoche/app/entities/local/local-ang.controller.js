@@ -69,6 +69,44 @@
                 }
                 */
 
+
+
+
+        function populateStars(rating){
+
+         var stars = [];
+
+         function paintFullStars(quan){
+              for(var i = 0;i<quan;i++){
+                 stars.push({class:'fa fa-star yellow-star'})
+              }
+          }
+
+          function paintEmptyStars(quan){
+            for(var i = 0;i<quan;i++){
+               stars.push({class:'fa fa-star-o yellow-star'})
+            }
+        }
+            var fullStars = Math.floor(rating);
+            var rest = fullStars - rating;
+            var noStar = 5 -fullStars;
+            if(rest == 0){
+              paintFullStars(fullStars);
+              paintEmptyStars(noStar);
+              return stars;
+            }else{
+             paintFullStars(fullStars);
+             if(rest<=0){
+             stars.push({class:'fa fa-star-half-o yellow-star'})
+             paintEmptyStars((noStar-1));
+             }else{
+              paintEmptyStars(noStar);
+             }
+            }
+            return stars;
+        }
+
+
         function loadAll () {
             Local.getByProvincia({
                 idCategory : optionalParams.idCategory,
@@ -91,7 +129,13 @@
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
                 vm.locals = data;
+
                 vm.page = optionalParams.page;
+        
+                angular.forEach(data,function(local,key){
+                 local.stars = populateStars(local.rating);
+                })
+
             }
             function onError(error) {
                 AlertService.error(error.data.message);
@@ -113,6 +157,7 @@
             });
         }
 
+
         function transitionCategory() {
               $state.transitionTo($state.$current, {
                     idCategory: vm.idCategoria,
@@ -120,6 +165,9 @@
                     sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
                     search: optionalParams.search
                 });
+
+        vm.paintStarsRating = function(rating){
+
         }
     }
 })();

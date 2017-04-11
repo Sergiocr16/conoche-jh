@@ -21,6 +21,8 @@
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="rating"><span data-translate="conocheApp.ratingLocal.rating">Rating</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="description"><span data-translate="conocheApp.ratingLocal.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="userLogin"><span data-translate="conocheApp.ratingLocal.userLogin">User Login</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="creationDate"><span data-translate="conocheApp.ratingLocal.creationDate">Creation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="userDetailsId"><span data-translate="conocheApp.ratingLocal.userDetails">User Details</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="localName"><span data-translate="conocheApp.ratingLocal.local">Local</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
@@ -31,6 +33,8 @@
                     <td><a ui-sref="rating-local-ang-detail({id:ratingLocal.id})">{{ratingLocal.id}}</a></td>
                     <td>{{ratingLocal.rating}}</td>
                     <td>{{ratingLocal.description}}</td>
+                    <td>{{ratingLocal.userLogin}}</td>
+                    <td>{{ratingLocal.creationDate | date:'medium'}}</td>
                     <td>
                         {{ratingLocal.userDetailsId}}
                     </td>
