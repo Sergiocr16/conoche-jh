@@ -54,6 +54,9 @@ public class Local implements Serializable {
     @Column(name = "provincia")
     private Provincia provincia;
 
+    @Column(name = "rating")
+    private Double rating;
+
     @OneToMany(mappedBy = "local")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -205,6 +208,19 @@ public class Local implements Serializable {
 
     public void setProvincia(Provincia provincia) {
         this.provincia = provincia;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public Local rating(Double rating) {
+        this.rating = rating;
+        return this;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 
     public Set<ImagenLocal> getImages() {
@@ -411,6 +427,7 @@ public class Local implements Serializable {
             ", latitud='" + latitud + "'" +
             ", descripcion='" + descripcion + "'" +
             ", provincia='" + provincia + "'" +
+            ", rating='" + rating + "'" +
             '}';
     }
 }

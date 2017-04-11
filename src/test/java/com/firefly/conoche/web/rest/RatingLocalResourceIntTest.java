@@ -24,8 +24,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.util.List;
 
+import static com.firefly.conoche.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -45,6 +50,12 @@ public class RatingLocalResourceIntTest {
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final String DEFAULT_USER_LOGIN = "AAAAAAAAAA";
+    private static final String UPDATED_USER_LOGIN = "BBBBBBBBBB";
+
+    private static final ZonedDateTime DEFAULT_CREATION_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_CREATION_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     @Autowired
     private RatingLocalRepository ratingLocalRepository;
@@ -90,7 +101,9 @@ public class RatingLocalResourceIntTest {
     public static RatingLocal createEntity(EntityManager em) {
         RatingLocal ratingLocal = new RatingLocal()
                 .rating(DEFAULT_RATING)
-                .description(DEFAULT_DESCRIPTION);
+                .description(DEFAULT_DESCRIPTION)
+                .userLogin(DEFAULT_USER_LOGIN)
+                .creationDate(DEFAULT_CREATION_DATE);
         return ratingLocal;
     }
 
@@ -118,6 +131,8 @@ public class RatingLocalResourceIntTest {
         RatingLocal testRatingLocal = ratingLocalList.get(ratingLocalList.size() - 1);
         assertThat(testRatingLocal.getRating()).isEqualTo(DEFAULT_RATING);
         assertThat(testRatingLocal.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testRatingLocal.getUserLogin()).isEqualTo(DEFAULT_USER_LOGIN);
+        assertThat(testRatingLocal.getCreationDate()).isEqualTo(DEFAULT_CREATION_DATE);
     }
 
     @Test
@@ -162,6 +177,44 @@ public class RatingLocalResourceIntTest {
 
     @Test
     @Transactional
+    public void checkUserLoginIsRequired() throws Exception {
+        int databaseSizeBeforeTest = ratingLocalRepository.findAll().size();
+        // set the field null
+        ratingLocal.setUserLogin(null);
+
+        // Create the RatingLocal, which fails.
+        RatingLocalDTO ratingLocalDTO = ratingLocalMapper.ratingLocalToRatingLocalDTO(ratingLocal);
+
+        restRatingLocalMockMvc.perform(post("/api/rating-locals")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(ratingLocalDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<RatingLocal> ratingLocalList = ratingLocalRepository.findAll();
+        assertThat(ratingLocalList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkCreationDateIsRequired() throws Exception {
+        int databaseSizeBeforeTest = ratingLocalRepository.findAll().size();
+        // set the field null
+        ratingLocal.setCreationDate(null);
+
+        // Create the RatingLocal, which fails.
+        RatingLocalDTO ratingLocalDTO = ratingLocalMapper.ratingLocalToRatingLocalDTO(ratingLocal);
+
+        restRatingLocalMockMvc.perform(post("/api/rating-locals")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(ratingLocalDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<RatingLocal> ratingLocalList = ratingLocalRepository.findAll();
+        assertThat(ratingLocalList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllRatingLocals() throws Exception {
         // Initialize the database
         ratingLocalRepository.saveAndFlush(ratingLocal);
@@ -172,7 +225,9 @@ public class RatingLocalResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(ratingLocal.getId().intValue())))
             .andExpect(jsonPath("$.[*].rating").value(hasItem(DEFAULT_RATING)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].userLogin").value(hasItem(DEFAULT_USER_LOGIN.toString())))
+            .andExpect(jsonPath("$.[*].creationDate").value(hasItem(sameInstant(DEFAULT_CREATION_DATE))));
     }
 
     @Test
@@ -187,7 +242,9 @@ public class RatingLocalResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(ratingLocal.getId().intValue()))
             .andExpect(jsonPath("$.rating").value(DEFAULT_RATING))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.userLogin").value(DEFAULT_USER_LOGIN.toString()))
+            .andExpect(jsonPath("$.creationDate").value(sameInstant(DEFAULT_CREATION_DATE)));
     }
 
     @Test
@@ -209,7 +266,9 @@ public class RatingLocalResourceIntTest {
         RatingLocal updatedRatingLocal = ratingLocalRepository.findOne(ratingLocal.getId());
         updatedRatingLocal
                 .rating(UPDATED_RATING)
-                .description(UPDATED_DESCRIPTION);
+                .description(UPDATED_DESCRIPTION)
+                .userLogin(UPDATED_USER_LOGIN)
+                .creationDate(UPDATED_CREATION_DATE);
         RatingLocalDTO ratingLocalDTO = ratingLocalMapper.ratingLocalToRatingLocalDTO(updatedRatingLocal);
 
         restRatingLocalMockMvc.perform(put("/api/rating-locals")
@@ -223,6 +282,8 @@ public class RatingLocalResourceIntTest {
         RatingLocal testRatingLocal = ratingLocalList.get(ratingLocalList.size() - 1);
         assertThat(testRatingLocal.getRating()).isEqualTo(UPDATED_RATING);
         assertThat(testRatingLocal.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testRatingLocal.getUserLogin()).isEqualTo(UPDATED_USER_LOGIN);
+        assertThat(testRatingLocal.getCreationDate()).isEqualTo(UPDATED_CREATION_DATE);
     }
 
     @Test

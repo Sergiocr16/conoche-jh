@@ -126,6 +126,8 @@
                             return {
                                 rating: null,
                                 description: null,
+                                userLogin: null,
+                                creationDate: null,
                                 id: null
                             };
                         }

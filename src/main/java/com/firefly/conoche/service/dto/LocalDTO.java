@@ -33,6 +33,8 @@ public class LocalDTO implements Serializable {
 
     private Provincia provincia;
 
+    private Double rating;
+
     private Set<ServicioDTO> services = new HashSet<>();
 
     private Set<UserDTO> subcribers = new HashSet<>();
@@ -108,6 +110,13 @@ public class LocalDTO implements Serializable {
 
     public void setProvincia(Provincia provincia) {
         this.provincia = provincia;
+    }
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 
     public Set<ServicioDTO> getServices() {
@@ -190,6 +199,7 @@ public class LocalDTO implements Serializable {
             ", latitud='" + latitud + "'" +
             ", descripcion='" + descripcion + "'" +
             ", provincia='" + provincia + "'" +
+            ", rating='" + rating + "'" +
             '}';
     }
 }

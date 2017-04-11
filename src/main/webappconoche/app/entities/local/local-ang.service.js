@@ -10,7 +10,7 @@
         var resourceUrl =  'api/locals/:id';
 
         return $resource(resourceUrl, {}, {
-            'query': { method: 'GET', isArray: true},
+            'query': { method: 'GET',  isArray: true},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
@@ -25,7 +25,16 @@
              method: 'GET',
              isArray: 'TRUE'
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'count': {
+                method: 'GET',
+                url: 'api/local/count'
+            },
+            'getByProvincia': {
+                url: 'api/local/search',
+                method: 'GET',
+                isArray: true
+            }
         });
     }
 })();

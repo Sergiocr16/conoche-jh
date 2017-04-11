@@ -1,3 +1,5 @@
+
+
 .button-clear-style {
     padding: 0;
     border: none;
@@ -10,6 +12,7 @@
 .social-button-margin {
     margin-left: 10px;
 }
+
 
 body {
     background: #fafafa;
@@ -708,6 +711,25 @@ line-height: 24px
          font-weight: 500!important;
 
 }
+
+.gray-star:focus{
+    outline: none;
+}
+.label-almost-good{
+background-color:#45aa23!important;
+color:white!important;
+}
+.gray-star{
+   font-size: 28px!important;
+  color: #ddd;
+  margin: 5px;
+}
+
+.yellow-star{
+color:#fd0;
+margin: 5px;
+font-size: 28px!important;
+}
 .pageTitleAnyPage{
 
  font-family: Raleway,sans-serif;
@@ -725,5 +747,4 @@ line-height: 24px
      color: #777;
      font-size: 19px!important;
      font-family: Lato,sans-serif;
-
 }

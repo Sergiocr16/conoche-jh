@@ -11,7 +11,7 @@
         $stateProvider
         .state('event-ang', {
             parent: 'entity',
-            url: '/event-ang?page&sort&search',
+            url: '/event-ang?page&sort&search&provincia&history',
             data: {
                 authorities: ['ROLE_ADMIN','ROLE_OWNER','ROLE_USER'],
                 pageTitle: 'conocheApp.event.home.title',
@@ -33,16 +33,23 @@
                     value: 'id,asc',
                     squash: true
                 },
-                search: null
+                search: null,
+                provincia: null,
+                history: {
+                    value: 'false',
+                    squash: true
+                },
             },
             resolve: {
-                pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+                optionalParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
                     return {
                         page: PaginationUtil.parsePage($stateParams.page),
                         sort: $stateParams.sort,
                         predicate: PaginationUtil.parsePredicate($stateParams.sort),
                         ascending: PaginationUtil.parseAscending($stateParams.sort),
-                        search: $stateParams.search
+                        search: $stateParams.search,
+                        provincia:  $stateParams.provincia,
+                        history: $stateParams.history.toLowerCase() === 'true',
                     };
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
@@ -50,7 +57,30 @@
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
-            }
+            },
+            onEnter: ['$stateParams', '$state', function($stateParams, $state) {
+                //podria hacer una constante
+                if(!$stateParams.provincia) {
+                    return;
+                }
+
+                var provincias = [
+                    'SAN_JOSE',
+                    'ALAJUELA',
+                    'CARTAGO',
+                    'GUANACASTE',
+                    'LIMON',
+                    'HEREDIA',
+                    'PUNTARENAS'
+                ];
+                var found =_.find(provincias, function(p) {
+                    return p === $stateParams.provincia;
+                });
+                if(!found) {
+                    $state.go('home');
+                }
+            }]
+
         })
              .state('event-ang-by-owner', {
                     parent: 'entity',

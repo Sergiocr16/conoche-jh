@@ -3,24 +3,76 @@
     <div class="col-md-12 no-padding height-83vh" id="home_search" style="background-size: cover !important;">
 
         <div style="background-color: rgba(0,0,0,0.4)" class="col-md-12 height-83vh">
-        <div class="col-md-12 hide-xs hide-sm margin-top-150"></div>
-            <div class="col-md-offset-1 col-md-10"><h1 class=" font-34" style="color:white">Encuentra diversión. <span class="font-20">  Nosotros la buscamos por ti</span></h1>
-            <div class="col-md-5 no-padding">
-            <div class="input-icon input-icon-lg right ">
-                <i class="fa fa-glass"></i>
-                <input type="text" class="form-control input-lg" placeholder="Busca locales o eventos">
-            </div>
-            </div>
-
-            <div class="col-md-5 ">
-                <select class="form-control input-lg col-md-5 light-gray-font">
-                    <option>Selecciona la provincia</option>
-
-                </select>
-            </div>
-                <div class="col-md-10 no-padding margin-top-40"><h1 class=" font-18" style="color:white">Te ofrecemos <span class="bold font-24">27</span> opciones diferentes para tí!</h1>
+            <div class="col-md-12 hide-xs hide-sm margin-top-150"></div>
+            <div class="col-md-offset-1 col-md-10"><h1 class=" font-34" style="color:white">{{'home.title' | translate}} <span data-translate="home.subtitle" class="font-20"> </span></h1>
+                <div class="col-md-5 no-padding">
+                    <div class="input-icon input-icon-lg right ">
+                        <i class="fa fa-glass"></i>
+                        <input ng-model="vm.name"
+                               ng-keypress="vm.search($event)"
+                               type="text"
+                               class="form-control input-lg"
+                               ng-attr-placeholder="{{ 'home.searchPlaceHolder' | translate}}">
+                    </div>
                 </div>
-        </div>
+
+                <div class="col-md-5 ">
+                    <select class="form-control input-lg col-md-5 light-gray-font" name="provincia" ng-model="vm.provincia">
+                        <option value="" data-translate="home.all">All</option>
+                        <option value="SAN_JOSE" data-translate="conocheApp.Provincia.SAN_JOSE">SAN_JOSE</option>
+                        <option value="ALAJUELA" data-translate="conocheApp.Provincia.ALAJUELA">ALAJUELA</option>
+                        <option value="CARTAGO" data-translate="conocheApp.Provincia.CARTAGO">CARTAGO</option>
+                        <option value="GUANACASTE" data-translate="conocheApp.Provincia.GUANACASTE">GUANACASTE</option>
+                        <option value="LIMON" data-translate="conocheApp.Provincia.LIMON">LIMON</option>
+                        <option value="HEREDIA" data-translate="conocheApp.Provincia.HEREDIA">HEREDIA</option>
+                        <option value="PUNTARENAS" data-translate="conocheApp.Provincia.PUNTARENAS">PUNTARENAS</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 no-padding">
+                        <div class="form-group form-md-radios">
+                            <div class="md-radio-list">
+
+                                <div class="pull-left md-radio">
+                                    <input ng-value="vm.event" ng-model="vm.action" type="radio" id="evento" name="option" class="md-radiobtn">
+                                    <label for="evento" style="font-size:12px">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        {{'home.radio.event' | translate}} </label>
+                                </div>
+                                <div style="margin-left: 10px;" class="pull-left md-radio">
+                                    <input ng-value="vm.local" ng-model="vm.action" type="radio" id="local" name="option" class="md-radiobtn">
+                                    <label for="local" style="font-size:12px">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        {{'home.radio.local' | translate}} </label>
+                                </div>
+
+
+                            </div>
+                            <div ng-show="vm.action === vm.event" class="md-checkbox pull-right">
+                                <input type="checkbox" id="checkbox2" ng-model="vm.history" class="md-check">
+                                <label for="checkbox2">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                    {{'home.history' | translate}} </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10 no-padding margin-top-40">
+                    <h1 data-translate="home.eventLocalCount"
+                        translate-values="vm.counters"
+                        class=" font-18"
+                        style="color:white">
+                        Te ofrecemos <span class="bold font-24">27</span> opciones diferentes para tí!
+
+                    </h1>
+                </div>
+            </div>
 
         </div>
     </div>

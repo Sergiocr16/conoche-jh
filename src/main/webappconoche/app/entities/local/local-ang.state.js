@@ -11,7 +11,7 @@
         $stateProvider
         .state('local-ang', {
             parent: 'entity',
-            url: '/local-ang?page&sort&search',
+            url: '/local-ang?page&sort&search&provincia&idCategory',
             data: {
                 authorities: ['ROLE_USER','ROLE_OWNER'],
                 pageTitle: 'conocheApp.local.home.title',
@@ -33,16 +33,20 @@
                     value: 'id,asc',
                     squash: true
                 },
-                search: null
+                search: null,
+                provincia: null,
+                idCategory: null
             },
             resolve: {
-                pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+                optionalParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
                     return {
                         page: PaginationUtil.parsePage($stateParams.page),
                         sort: $stateParams.sort,
                         predicate: PaginationUtil.parsePredicate($stateParams.sort),
                         ascending: PaginationUtil.parseAscending($stateParams.sort),
-                        search: $stateParams.search
+                        search: $stateParams.search,
+                        provincia: $stateParams.provincia,
+                        idCategory: $stateParams.idCategory
                     };
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
@@ -71,6 +75,7 @@
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('local');
                     $translatePartialLoader.addPart('provincia');
+                    $translatePartialLoader.addPart('ratingLocal');
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'Local', function($stateParams, Local) {

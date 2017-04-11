@@ -92,6 +92,10 @@
             "fieldName": "provincia",
             "fieldType": "Provincia",
             "fieldValues": "SAN_JOSE,ALAJUELA,CARTAGO,GUANACASTE,LIMON,HEREDIA,PUNTARENAS"
+        },
+        {
+            "fieldName": "rating",
+            "fieldType": "Double"
         }
     ],
     "changelogDate": "20170307223303",
