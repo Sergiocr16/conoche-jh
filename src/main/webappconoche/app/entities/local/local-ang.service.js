@@ -29,6 +29,11 @@
             'count': {
                 method: 'GET',
                 url: 'api/local/count'
+            },
+            'getByProvincia': {
+                url: 'api/local/search',
+                method: 'GET',
+                isArray: true
             }
         });
     }
