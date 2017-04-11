@@ -8,7 +8,7 @@
     LocalAngController.$inject = ['$state', 'DataUtils', 'Local', 'ParseLinks', 'AlertService', 'paginationConstants', 'optionalParams','Category'];
 
     function LocalAngController($state, DataUtils, Local, ParseLinks, AlertService, paginationConstants, optionalParams, Category) {
-
+        var SORT = 'rating,desc';
         var vm = this;
 
         vm.loadPage = loadPage;
@@ -115,7 +115,7 @@
                 page: optionalParams.page - 1,
 
                 size: vm.itemsPerPage,
-                sort: sort()
+                sort: SORT
             }, onSuccess, onError);
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
@@ -131,7 +131,7 @@
                 vm.locals = data;
 
                 vm.page = optionalParams.page;
-        
+
                 angular.forEach(data,function(local,key){
                  local.stars = populateStars(local.rating);
                 })
@@ -168,6 +168,7 @@
 
         vm.paintStarsRating = function(rating){
 
+        }
         }
     }
 })();

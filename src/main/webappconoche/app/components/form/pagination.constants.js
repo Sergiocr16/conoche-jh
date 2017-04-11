@@ -4,6 +4,6 @@
     angular
         .module('conocheApp')
         .constant('paginationConstants', {
-            'itemsPerPage': 2
+            'itemsPerPage': 20
         });
 })();
