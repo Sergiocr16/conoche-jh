@@ -1,3 +1,7 @@
+.no-display-when-empty:empty {
+    display: none;
+}
+
 
 
 .button-clear-style {

@@ -24,6 +24,7 @@
         vm.transition        = transition;
         vm.computeDimentions = computeDimentions;
         vm.toggleFullScreen  = toggleFullScreen;
+        vm.toSlideshow       = toSlideshow;
         vm.itemsPerPage      = paginationConstants.itemsPerPage;
 
         var unsubscribe = $scope.$on('masonry.created', function(element) {
@@ -111,6 +112,11 @@
                 return img.id === image.id;
             });
             return item !== undefined;
+        }
+
+        function toSlideshow() {
+            var url = $state.href('real-time-event-image-slideshow', {idEvent: idEvent});
+            window.open(url,'_blank');
         }
     }
 /*

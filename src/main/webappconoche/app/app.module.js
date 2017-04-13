@@ -19,19 +19,25 @@
             'angular-loading-bar',
             'cloudinary',
             'wu.masonry',
-            'FBAngular'
+            'FBAngular',
+            'ngAnimate'
         ])
         .run(run);
 
-    run.$inject = ['stateHandler', 'translationHandler','$rootScope','$state','$stateParams'];
+    run.$inject = ['stateHandler', 'translationHandler', '$rootScope', '$state', '$stateParams'];
 
-    function run(stateHandler, translationHandler,$rootScope,$state,$stateParams) {
-    $rootScope.$state=$state;
-    $rootScope.$stateParams=$stateParams;
+    function run(stateHandler, translationHandler, $rootScope, $state, $stateParams) {
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
         stateHandler.initialize();
         translationHandler.initialize();
         Metronic.init();
         Metronic.initComponents();
         Metronic.initAjax();
+        angular.element(document).ready(function () {
+            $('#loaded').show();
+            $('#loading').fadeOut(30);
+        });
+
     }
 })();
