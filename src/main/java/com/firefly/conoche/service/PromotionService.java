@@ -7,6 +7,7 @@ import com.firefly.conoche.service.mapper.PromotionMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 public class PromotionService {
 
     private final Logger log = LoggerFactory.getLogger(PromotionService.class);
-    
+
     private final PromotionRepository promotionRepository;
 
     private final PromotionMapper promotionMapper;
@@ -49,7 +50,7 @@ public class PromotionService {
 
     /**
      *  Get all the promotions.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -82,5 +83,13 @@ public class PromotionService {
     public void delete(Long id) {
         log.debug("Request to delete Promotion : {}", id);
         promotionRepository.delete(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<PromotionDTO> getByEvent(Pageable pageable,Long eventId) {
+        log.debug("Request to get all Residents");
+        List<Promotion> result = promotionRepository.findByEventId(eventId);
+        return new PageImpl<>(result).map(promotion -> promotionMapper.promotionToPromotionDTO(promotion));
+
     }
 }

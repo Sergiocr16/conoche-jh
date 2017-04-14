@@ -22,7 +22,12 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'geyByEvent': {
+                 method: 'GET',
+                 url: 'api/getByEvent',
+                 isArray: true
+             }
         });
     }
 })();

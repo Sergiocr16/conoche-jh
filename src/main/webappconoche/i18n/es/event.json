@@ -50,7 +50,8 @@
                 "services" :"Servicios",
                 "location" :"Ubicación",
                 "images" : "Imágenes",
-                "messages" : "Mensages"
+                "messages" : "Mensages",
+                "promotions" : "Promociones"
             }
         }
     }

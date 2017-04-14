@@ -6,9 +6,9 @@
         .controller('EventAngController', EventAngController);
 
 
-    EventAngController.$inject = ['$rootScope','$state', 'DataUtils', 'Event', 'ParseLinks', 'AlertService', 'paginationConstants', 'optionalParams'];
+    EventAngController.$inject = ['Promotion','$rootScope','$state', 'DataUtils', 'Event', 'ParseLinks', 'AlertService', 'paginationConstants', 'optionalParams'];
 
-    function EventAngController($rootScope, $state, DataUtils, Event, ParseLinks, AlertService, paginationConstants, optionalParams) {
+    function EventAngController(Promotion, $rootScope, $state, DataUtils, Event, ParseLinks, AlertService, paginationConstants, optionalParams) {
 
 
 
@@ -38,16 +38,15 @@
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
                 vm.events = data;
-<<<<<<< HEAD
-                vm.page = pagingParams.page;
+//
+//                vm.page = pagingParams.page;
                 loadPromotions();
 
-=======
                 vm.page = optionalParams.page;
                 setTimeout(function() {
                     $("#tableData").fadeIn(700);
                 }, 200)
->>>>>>> 88755668b58d2bd73095c61daeb3c3b6229f772e
+
             }
 
 

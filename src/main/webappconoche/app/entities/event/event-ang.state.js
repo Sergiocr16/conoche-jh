@@ -290,8 +290,8 @@
                 });
             }]
         })
-        .state('event-ang.delete', {
-            parent: 'event-ang',
+        .state('event-ang-by-owner.delete', {
+            parent: 'event-ang-by-owner',
             url: '/{id}/delete',
             data: {
                   authorities: ['ROLE_OWNER']

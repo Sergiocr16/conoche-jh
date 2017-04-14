@@ -9,7 +9,7 @@
 <div class="no-display" id="tableData">
     <div class="col-md-9 col-sm-9 col-xs-12">
         <div ng-repeat="event in vm.events track by event.id">
-            <div class="col-md-12 E0E0E0-background margin-bottom-20 bottom-border-gray " ui-sref="event-ang-detail({id:event.id})">
+            <div class="col-md-12 E0E0E0-background margin-bottom-20 bottom-border-gray " ui-sref="event-ang-detail.promotions({id:event.id})">
                 <div class="col-md-5 no-padding-left padding-15 position-relative font-18 text-center">
                     <div id="info-date-event" class="col-md-2 padding-10 font-white"><span><span class="font-24">{{event.initialTime| date:'d'}} </span>{{event.initialTime| date:'MMM'}}</span>
                     </div>
@@ -33,18 +33,15 @@
         </div>
     </div>
     <div class="col-md-3 col-sm-3 col-xs-12">
-
-
         <span class="font-18 col-md-12 no-padding margin-bottom-20" style="letter-spacing:1px; font-weight:600px">PROMOCIONES</span>
-
         <div class="col-md-12 col-sm-12 col-xs-12 no-padding  margin-bottom-20 " ui-sref="event-ang.promotionDetail({id:promotion.id})" ng-repeat="promotion in vm.promotions track by promotion.id">
             <div  class="no-padding font-white">
-                <div id="image-promotion-in-events" class="col-md-12 col-xs-12 col-sm-12 "><span class="col-md-12 no-padding Raleway font-18  Raleway text-center margin-top-40" style="opacity:0">Ver promocion</span></div>
-                <div id="info-time-promotion" class="col-md-12 padding-10 "><span class="font-16 Raleway">Tiempo restante <timer end-time="promotion.finalTime">{{hours}}:{{minutes}}:{{seconds}}</timer></span>
+                <div id="image-promotion-in-events" class="col-md-12 col-xs-12 col-sm-12 "><span class="col-md-12 col-lg-12 col-sm-12 col-xs-12 no-padding Raleway font-18  Raleway text-center margin-top-60" style="opacity:0">Ver promocion</span></div>
+                <div id="info-time-promotion" class="col-md-12 col-sm-12 col-xs-12 padding-10 "><span class="font-16 Raleway">Tiempo restante <timer end-time="promotion.finalTime">{{hours}}:{{minutes}}:{{seconds}}</timer></span>
                 </div>
                 <img class="col-md-12 col-sm-12 col-xs-12 no-padding crop-150" style="z-index: 0;"  data-ng-src="{{'data:' + promotion.imageContentType + ';base64,' + promotion.image}}"  alt="promotion image" />
             </div>
-            <span class="col-md-12 no-padding Raleway font-15">{{promotion.description}}</span>
+            <span class="col-md-12 no-padding Raleway font-15" style="text-transform: uppercase;">{{promotion.description}}</span>
         </div>
 
     </div>

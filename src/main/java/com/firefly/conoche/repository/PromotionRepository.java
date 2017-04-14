@@ -11,5 +11,5 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface PromotionRepository extends JpaRepository<Promotion,Long> {
-
+    List<Promotion> findByEventId(Long eventId);
 }

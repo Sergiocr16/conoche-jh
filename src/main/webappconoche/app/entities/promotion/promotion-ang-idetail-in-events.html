@@ -126,19 +126,29 @@
         <h1 class="pageTitleAnyPage col-md-12 text-center" >{{vm.promotion.description}}</h1>
         <div class="form-body ">
             <div class="col-md-6 no-padding">
-                    <img data-ng-src="{{'data:' + vm.promotion.imageContentType + ';base64,' + vm.promotion.image}}"  class="col-md-12 crop-300" ng-if="vm.promotion.image" alt="promotion image"/>
-
+                    <img data-ng-src="{{'data:' + vm.promotion.imageContentType + ';base64,' + vm.promotion.image}}"  class="col-md-12 crop-340" ng-if="vm.promotion.image" alt="promotion image"/>
 
             </div>
             <div class="col-md-6 no-padding gray-font">
-                <span class="Raleway font-20 col-md-12"><i class="fa fa-home font-20" ></i> Bar las teticas</span>
-                <span class="Raleway font-20 col-md-12 margin-top-20"><i class="fa fa-glass font-20" ></i> REGGAE NIGHT CREW </span>
+                <span class="Raleway font-18 col-md-12" style="text-transform: uppercase;"><i class="fa fa-home font-20" style="color: #607D8B"></i> Bar las teticas</span>
+                <span class="Raleway font-18 col-md-12 margin-top-20" style="text-transform: uppercase;"><i class="fa fa-fire font-20" style="color: #607D8B" ></i> REGGAE NIGHT CREW </span>
+                <div class="col-md-12 col-lg-12 col-sm-6 col-xs-12 margin-top-20">
+                <span class="Raleway font-16 col-md-6 ">Códigos restantes: 10</span>
+                <span class="Raleway font-16 col-md-6 ">Te quedan: 10</span>
+                </div>
 
-                <div class="col-md-12 text-center margin-top-20 border-radius-6 padding-20"  style="background-color:#823e9e;">
-                    <span class="Raleway font-24 bold font-white no-padding">Termina en</span>
-                    <h2 class="font-40 bold font-white"><timer end-time="vm.promotion.finalTime">
+                <div class="col-md-12 text-center margin-top-20 border-radius-6 padding-20"  style="background-color:#EEEEEE;">
+                    <span class="Raleway font-24 bold font-white no-padding" style="color: #823e9e">Termina en</span>
+                    <h2 class="font-40 bold font-white" style="color: #823e9e"><timer end-time="vm.promotion.finalTime">
                         <span class=" col-md-3 col-md-offset-1 text-center"><span class="col-md-12 text-center">{{hours}}</span><div class="font-15">Horas</div> </span> <span class=" col-md-3"><span class="col-md-12 text-center">{{minutes}}</span><div class="font-15">Minutos</div></span>  <span class=" col-md-3"><span class="col-md-12 text-center">{{seconds}}</span><div class="font-15">Segundos</div></span></timer></h2>
                 </div>
+
+                    <div class="col-md-offset-1 col-md-10 col-lg-10 margin-top-20 ">
+                    <button type="button" class="btn btn-primary padding-10 border-radius-6 font-18 green-2-background col-md-12">
+                      <span >Redimir código</span>
+                    </button>
+                </div>
+
             </div>
 
         </div>
@@ -147,11 +157,6 @@
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
-        </button>
+
     </div>
 </form>

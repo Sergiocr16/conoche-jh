@@ -46,7 +46,8 @@
                 "services" :"Services",
                 "location" :"Location",
                 "images" : "Images",
-                "messages" : "Messages"
+                "messages" : "Messages",
+                "promotions" : "Promotions"
             }
         }
     }

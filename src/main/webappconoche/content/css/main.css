@@ -440,6 +440,10 @@ line-height: 24px
 .margin-top-40{
     margin-top: 40px;
 }
+
+.margin-top-60{
+    margin-top: 60px;
+}
 .margin-top-150{
     margin-top: 150px;
 }
@@ -475,7 +479,9 @@ line-height: 24px
 .font-15{
     font-size: 15px!important;
 }
-
+.font-13{
+    font-size: 13px!important;
+}
 .light-gray-font{
     color: #A4A4A4!important;
 }
@@ -516,6 +522,9 @@ line-height: 24px
 
 .padding-left-10{
     padding-left:10px!important;
+}
+.padding-left-15{
+    padding-left:15px!important;
 }
 .no-padding-left{
     padding-left:none!important;
@@ -572,7 +581,16 @@ line-height: 24px
 #info-time-promotion{
     position: absolute;
     background-color: rgba(0,0,0,0.8);
-    bottom: 43px;
+    top:98px;
+    left:0px;
+    z-index: 1;
+
+}
+
+#info-time-event-detail{
+    position: absolute;
+    background-color: rgba(0,0,0,0.8);
+    bottom:21px;
     left:0px;
     z-index: 1;
 
@@ -602,6 +620,15 @@ line-height: 24px
     background-color: rgba(0,0,0,0.8);
     top: 25px;
     left: 12px;
+    z-index: 1;
+
+}
+
+#info-date-event-detail{
+    position: absolute;
+    background-color: rgba(0,0,0,0.8);
+    bottom: 0px;
+    left: 0px;
     z-index: 1;
 
 }
@@ -650,7 +677,7 @@ line-height: 24px
     object-fit:cover;
 }
 .crop-300 {
-    height: 300px;
+    height: 30px;
     object-fit:cover;
 }
 .no-display{
