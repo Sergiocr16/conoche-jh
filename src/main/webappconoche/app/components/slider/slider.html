@@ -1,0 +1,37 @@
+<shortcut key-pressed="vm.keyEvent"></shortcut>
+<nav class="navbar navbar-inverse navbar-fixed-top lg-toolbar">
+    <div class="container">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a ng-href="{{image}}" download="image">
+                    <i class="fa fa-download"></i>
+                    Download
+                </a>
+
+            </li>
+            <li>
+                <a ng-click="vm.toggleFullScreen()"><i class="fa fa-arrows-alt"></i>
+                    Fullscreen
+                </a>
+            </li>
+            <li>
+                <a>
+                    <i class="fa fa-times"></i>
+                    Close
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div ng-class="{'animate-back': !vm.isNext}" class="slideshow-content" fullscreen="vm.fullScreen">
+    <div class="lg-actions">
+        <div ng-if="vm.prev" ng-click="vm.prev()" class="lg-prev lg-icon">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        </div>
+        <div  ng-if="vm.next" ng-click="vm.next()" class="lg-next lg-icon">
+            <i class="fa fa-chevron-right"  aria-hidden="true"></i>
+        </div>
+    </div>
+    <img ng-animate-swap="image" image-size watch-src="{{image}}" class="slide center-image-slide-show"/>
+</div>
+
