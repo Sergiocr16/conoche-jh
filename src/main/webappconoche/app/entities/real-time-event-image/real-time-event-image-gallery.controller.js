@@ -1,20 +1,24 @@
 (function() {
     'use strict';
-
+//agregar lista de imagenes e index a directiva slider.
     angular
         .module('conocheApp')
         .controller('RealTimeEventImageGalleryController', RealTimeEventImageGalleryController);
 
     RealTimeEventImageGalleryController.$inject = ['$scope', '$state', 'RealTimeEventImage', 'ParseLinks', 'AlertService',
-        'paginationConstants', 'page', 'idEvent', 'WSRealTimeEventImages', 'isOwner'];
+        'paginationConstants', 'page', 'idEvent', 'WSRealTimeEventImages', 'isOwner', '$uibModal'];
 
     function RealTimeEventImageGalleryController($scope, $state, RealTimeEventImage, ParseLinks,
                                                  AlertService, paginationConstants,
-                                                 page, idEvent, WSRealTimeEventImages, isOwner) {
+                                                 page, idEvent, WSRealTimeEventImages, isOwner, $uibModal) {
         const SORT              = 'creationTime,desc';
         const THUMBNAIL_PADDING = 10;
 
         var vm         = this;
+        var index      =  0;
+        var modal      = null;
+
+        vm.image       = { id:  -1 };
         vm.page        = page;
         vm.width       = 340;
         vm.border      = 5;
@@ -25,6 +29,10 @@
         vm.computeDimentions = computeDimentions;
         vm.toggleFullScreen  = toggleFullScreen;
         vm.toSlideshow       = toSlideshow;
+        vm.next              = next;
+        vm.prev              = prev;
+        vm.close             = close;
+        vm.callModal         = callModal;
         vm.itemsPerPage      = paginationConstants.itemsPerPage;
 
         var unsubscribe = $scope.$on('masonry.created', function(element) {
@@ -32,13 +40,16 @@
         });
         $scope.$on('$destroy', unsubscribe);
 
+
         loadAll();
+
 
         WSRealTimeEventImages.receiveNewImages(idEvent)
             .then(null, null, addNewImage);
 
         WSRealTimeEventImages.receiveDeleteImages(idEvent)
             .then(null, null, onImageDeleted);
+
 
         function loadAll () {
             RealTimeEventImage.eventRealTimeImages({
@@ -54,6 +65,7 @@
                 vm.totalItems          = headers('X-Total-Count');
                 vm.realTimeEventImages = data;
                 vm.page                = page;
+                refreshIndex();
             }
             function onError(error) {
                 AlertService.error(error.data.message);
@@ -74,7 +86,9 @@
                 }
                 vm.links.last = Math.floor(vm.totalItems++ / vm.itemsPerPage);
                 vm.realTimeEventImages.unshift(image);
+                refreshIndex();
             }
+
         }
 
         function onImageDeleted(image) {
@@ -117,6 +131,46 @@
         function toSlideshow() {
             var url = $state.href('real-time-event-image-slideshow', {idEvent: idEvent});
             window.open(url,'_blank');
+        }
+        function callModal($index) {
+            modal = $uibModal.open({
+                templateUrl: 'app/entities/real-time-event-image/fullscreen-real-time-event-image.html',
+                scope: $scope,
+                size: 'lg'
+            });
+            index = $index;
+            vm.image = vm.realTimeEventImages[index];
+        }
+
+        function close() {
+            if(!modal) { return; }
+            modal.close();
+            modal = null;
+        }
+
+
+        function refreshIndex() {
+            var images = vm.realTimeEventImages;
+            if (vm.realTimeEventImages.length === 0) {
+                return close();
+            }
+            var i = _.findIndex(vm.realTimeEventImages, function(img) {
+                return vm.image.id == img.id;
+            });
+            index = i >= 0 ? i : index % vm.realTimeEventImages.length;
+            vm.image = images[index];
+        }
+
+        function next() {
+            var images = vm.realTimeEventImages;
+            index = (index + 1) % images.length
+            vm.image = images[index];
+        }
+
+        function prev() {
+            var images = vm.realTimeEventImages;
+            index = (images.length + (index - 1)) % images.length
+            vm.image = images[index];
         }
     }
 /*

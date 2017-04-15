@@ -9,30 +9,94 @@
         .module('conocheApp')
         .controller('RealTimeEventImageSlideshow', RealTimeEventImageSlideshow);
 
-    RealTimeEventImageSlideshow.$inject = ['$scope', '$state', 'RealTimeEventImage', 'ParseLinks', 'WSRealTimeEventImages', '$timeout' ];
+    RealTimeEventImageSlideshow.$inject = ['$scope', '$state', 'RealTimeEventImage', 'ParseLinks', 'WSRealTimeEventImages', '$timeout', '$stateParams'];
 
-    function RealTimeEventImageSlideshow($scope, $state, RealTimeEventImage, ParseLinks, WSRealTimeEventImages, $timeout) {
+    function RealTimeEventImageSlideshow($scope, $state, RealTimeEventImage, ParseLinks, WSRealTimeEventImages, $timeout, $stateParams) {
         const SORT = 'creationTime,desc';
-        const images = ['http://res.cloudinary.com/dgh2svgxo/image/upload/Willaerts_Adam_The_Embarkation_of_the_Elector_Palantine_Oil_Canvas-huge_perfvo', 'http://res.cloudinary.com/dgh2svgxo/image/upload/v1492091713/banner_dl48y2.jpg']
 
         var vm = this;
-        var index = 0;
-        vm.toggleFullScreen = toggleFullScreen;
-        vm.next = next;
-        vm.prev = prev;
-        vm.image = images[index];
-        function toggleFullScreen() {
-            vm.fullScreen = !vm.fullScreen;
+        var index = -1;
+        var idEvent = $stateParams.idEvent;
+        var pq = [];
+        vm.timeout = 5000;
+
+
+        loadAll();
+        WSRealTimeEventImages.receiveNewImages(idEvent)
+            .then(null, null, addNewImage);
+
+        WSRealTimeEventImages.receiveDeleteImages(idEvent)
+            .then(null, null, onImageDeleted);
+
+
+
+        function slideShow() {
+            $timeout(function () {
+                next();
+                slideShow();
+            }, vm.timeout);
+        }
+
+        function loadAll () {
+            RealTimeEventImage.eventRealTimeImages({
+                idEvent: idEvent,
+                sort: SORT,
+            }, onSuccess, onError);
+
+            function onSuccess(data) {
+                vm.images = data;
+                slideShow();
+                next();
+            }
+            function onError(error) {
+                AlertService.error(error.data.message);
+            }
+        }
+
+        function addNewImage(image) {
+            if(!vm.images) {
+                return;
+            }
+
+            vm.images.unshift(image);
+            pq.push(image);
+            index = (index + 1) % vm.images.length;
+        }
+
+        function onImageDeleted(image) {
+            if(!vm.images) {
+                return;
+            }
+            var removed = _.remove(vm.images,
+                function(img) { return img.id === image.id; });
+
+            if(removed.length === 0) {
+                return;
+            }
+            index = index % vm.images.length;
+
+            //image.id puede ser undefined
+            if(vm.image.id === image.id){
+                next();
+            }
+            else if(vm.image !== vm.images[index]) {
+                index = (vm.images.length + (index - 1))
+                    % vm.images.length;
+            }
+
         }
 
         function next() {
-            index = (index + 1) % images.length
-            vm.image = images[index];
-        }
-
-        function prev() {
-            index = (images.length + (index - 1)) % images.length
-            vm.image = images[index];
+            if(vm.images.length === 0){
+                return;
+            }
+            if(pq.length !== 0) {
+                vm.image = pq.pop();
+            }
+            else {
+                index = (index + 1) % vm.images.length;
+                vm.image = vm.images[index];
+            }
             console.log(index);
         }
     }

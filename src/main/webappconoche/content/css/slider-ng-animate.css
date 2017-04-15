@@ -36,3 +36,29 @@
     opacity: 0;
 }
 
+
+.nav-slide-show.ng-hide-remove {
+    animation: rotateInDownLeft 0.5s;
+
+}
+
+.nav-slide-show.ng-hide-add {
+    animation: rotateOutUpRight 0.5s;
+
+}
+
+.left-btn-slide-show.ng-hide-remove {
+    animation: bounceInLeft 0.5s;
+}
+
+.left-btn-slide-show.ng-hide-add {
+    animation: bounceOutLeft 0.5s;
+}
+
+.right-btn-slide-show.ng-hide-remove {
+    animation: bounceInRight 0.5s;
+}
+
+.right-btn-slide-show.ng-hide-add {
+    animation: bounceOutRight 0.5s;
+}

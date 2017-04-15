@@ -21,8 +21,14 @@
             },
             link: function (scope, element, attrs) {
                 var keyPressed = scope.keyPressed();
-                $(document).on('keydown', function(e){
+                function handler (e) {
                     scope.$apply(keyPressed(e));
+                };
+
+                $(document).on('keydown', handler);
+
+                scope.$on('$destroy', function() {
+                    $(document).off('keydown', handler);
                 });
             }
         };

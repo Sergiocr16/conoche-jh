@@ -17,10 +17,10 @@
 }
 
 .lg-actions .lg-next {
-    right: 5vw;
+    right: 5%;
 }
 .lg-actions .lg-prev {
-    left: 4vw;
+    left: 5%;
 }
 
 .lg-hide-items .lg-next {
@@ -52,6 +52,8 @@
     transition: transform 0.35s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.35s cubic-bezier(0, 0, 0.25, 1) 0s, color 0.2s linear;
 }
 
+
+
 .no-display-when-empty:empty {
     display: none;
 }
@@ -65,12 +67,11 @@
 
 .lg-toolbar {
     background-color: rgba(0, 0, 0, 0.35) !important;
+    border: none !important;
 }
 
 .center-image-slide-show {
     margin: 0 auto;
-    max-height: 85vh;
-    max-width: 95vw;
     position:absolute;
     top: 0;
     left:0;
