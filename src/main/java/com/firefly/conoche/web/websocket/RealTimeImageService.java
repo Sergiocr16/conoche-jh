@@ -59,14 +59,14 @@ public class RealTimeImageService {
     }
 
 
-    //cambiar el zoneid
     @SubscribeMapping("/topic/saveRealTimeEventImage/{idEvent}")
-    @SendTo("/topic/RealTimeEventImage/{idEvent}")
-    public RealTimeEventImageDTO sendRealTimeEventImage(@Payload RealTimeEventImageDTO RTEimageDTO,
+    public void sendRealTimeEventImage(@Payload RealTimeEventImageDTO RTEimageDTO,
                                               @DestinationVariable Long idEvent) {
-        RTEimageDTO.setCreationTime(ZonedDateTime.now());
+        RTEimageDTO.setCreationTime(ZonedDateTime.now().withNano(0));
         RTEimageDTO.setEventId(idEvent);
-        return realTimeEventImageService.save(RTEimageDTO);
+        messagingTemplate.convertAndSend(
+            "/topic/RealTimeEventImage/" + idEvent,
+            realTimeEventImageService.save(RTEimageDTO));
     }
 
     @SubscribeMapping("/topic/deleteRealTimeEventImage/{idRealTimeImage}")

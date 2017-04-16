@@ -15,9 +15,9 @@
         const THUMBNAIL_PADDING = 10;
 
         var vm         = this;
-        var index      =  0;
         var modal      = null;
 
+        vm.index       = 0;
         vm.image       = { id:  -1 };
         vm.page        = page;
         vm.width       = 340;
@@ -156,23 +156,22 @@
             var i = _.findIndex(images, function(img) {
                 return vm.image.id == img.id;
             });
-            setImage(i >= 0 ? i : index % images.length);
+            setImage(i >= 0 ? i : vm.index);
 
         }
 
         function next() {
-            var images = vm.realTimeEventImages;
-            setImage((index + 1) % images.length)
+            setImage(vm.index + 1);
         }
 
         function prev() {
-            var images = vm.realTimeEventImages;
-            setImage((images.length + (index - 1)) % images.length);
+            setImage(vm.realTimeEventImages.length + (vm.index - 1));
         }
 
         function setImage(i) {
-            index = i;
-            vm.image = vm.realTimeEventImages[index];
+            var images = vm.realTimeEventImages;
+            vm.index = i % images.length;
+            vm.image = images[vm.index];
         }
     }
 })();

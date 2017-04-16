@@ -139,13 +139,14 @@
                         size: 'md',
                         resolve: {
                             entity: ['RealTimeEventImage', function(RealTimeEventImage) {
-                                return RealTimeEventImage.get({id : $stateParams.idImage}).$promise;
+                                return RealTimeEventImage.get({id : $stateParams.idImage})
+                                    .$promise;
                             }]
                         }
                     }).result.then(function() {
-                        $state.go('^');
+                        $state.go('event-ang-detail.real-time-event-image-gallery');
                     }, function() {
-                        $state.go('^');
+                        $state.go('event-ang-detail.real-time-event-image-gallery');
                     });
                 }]
             });

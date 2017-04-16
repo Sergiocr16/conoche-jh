@@ -1,5 +1,5 @@
 
 <div style="position: relative; height: 80vh;">
-    <slider close-fn="vm.close" next-fn="vm.next" prev-fn="vm.prev" image="{{vm.image.imageUrl | cloudinaryURL}}"></slider>
+    <slider close-fn="vm.close" next-fn="vm.next" prev-fn="vm.prev" info="{{vm.index + 1}} / {{vm.realTimeEventImages.length}}" image="{{vm.image.imageUrl | cloudinaryURL}}"></slider>
 </div>
 

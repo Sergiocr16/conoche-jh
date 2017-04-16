@@ -13,13 +13,15 @@
                 image: '@',
                 nextFn: '&',
                 prevFn: '&',
-                closeFn: '&'
+                closeFn: '&',
+                info: '@'
             },
             link: function (scope, element, attrs) {
                 var idleTime = attrs.idleTime || 4000;
                 var timeoutid = 0;
                 $(element).mousemove(function() {
                     changeShowNav(true);
+                    $(element).css('cursor', 'auto');
                     clearTimeout(timeoutid);
                     timeoutid = setTimeout(myFunctionToHideMenu, idleTime);
                 });
@@ -32,6 +34,7 @@
                     scope.$apply(function() {
                         scope.vm.showOptions = show;
                     })
+                    $(element).css('cursor', 'none');
                 }
             },
             controllerAs: "vm",

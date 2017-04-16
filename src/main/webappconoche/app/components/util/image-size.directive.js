@@ -16,14 +16,8 @@
             scope: {},
             link: function (scope, element, attrs) {
                 var img = $(element[0]);
-
-                function modify_image(image_src) {
-                    img.on('load', onImageChange)
-                        .attr("src", image_src)
-                        .each(function () {
-                            if (this.complete) $(this).trigger('load');
-                        });
-                }
+                var interval = null;
+                var refreshRate = 200;
                 function onImageChange() {
                     var parent      = img.offsetParent();
                     var aspectRatio = img.width() / img.height();
@@ -41,9 +35,24 @@
                     img.css({top: img.offsetParent().height() / 2 - img.height() / 2});
                 }
 
-                $(window).on('resize', onImageChange);
-                attrs.$observe('watchSrc', modify_image);
+                function onLoad() {
+                    clearInterval(interval);
+                    onImageChange();
+                }
+
+                function onChange() {
+                    interval = setInterval(onImageChange, refreshRate);
+                }
+
+                function onDestroy() {
+                    $(window).off('resize', onImageChange);
+                }
+
+                $(window).resize(onImageChange);
                 $animate.on('enter', img, onImageChange);
+                element.bind('load', onLoad);
+                attrs.$observe('ngSrc', onChange);
+                scope.$on('$destroy', onDestroy);
             }
         };
     }

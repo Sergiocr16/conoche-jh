@@ -1,38 +1,40 @@
 .slide.ng-enter, .slide.ng-leave {
     transition:0.2s linear all;
 }
+
+
 .slide.ng-enter {
-    transform: translate(-100%, 0);
+    transform: translateX(-100%);
     opacity: 0;
 }
 .slide.ng-enter-active {
-    transform: translate(0,0);
+    transform: translateX(0);
     opacity: 1;
 }
 .slide.ng-leave {
-    transform: translate(0,0);
+    transform: translateX(0);
     opacity: 1;
 }
 .slide.ng-leave-active {
-    transform: translate(100%, 0);
+    transform: translateX(100%);
     opacity: 0;
 }
 
 
 .animate-back .slide.ng-enter {
-    transform: translate(100%, 0);
+    transform: translateX(100%);
     opacity: 0;
 }
 .animate-back .slide.ng-enter-active {
-    transform: translate(0,0);
+    transform: translateX(0);
     opacity: 1;
 }
 .animate-back .slide.ng-leave {
-    transform: translate(0,0);
+    transform: translateX(0);
     opacity: 1;
 }
 .animate-back .slide.ng-leave-active {
-    transform: translate(-100%, 0);
+    transform: translateX(-100%);
     opacity: 0;
 }
 
@@ -43,7 +45,7 @@
 }
 
 .nav-slide-show.ng-hide-add {
-    animation: rotateOutUpRight 0.5s;
+    animation: rotateOutUpLeft 0.5s;
 
 }
 
