@@ -185,7 +185,7 @@
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('promotion-ang', null, { reload: 'promotion-ang' });
+                    $state.go('^', null, { reload: '^' });
                 }, function() {
                     $state.go('^');
                 });

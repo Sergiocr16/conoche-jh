@@ -232,6 +232,31 @@
                  });
              }]
          })
+          .state('event-ang-detail.promotions.promotionDetail', {
+              parent: 'event-ang-detail.promotions',
+              url: '/{idPromo}/edit',
+              data: {
+                  authorities: ['ROLE_USER']
+              },
+              onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                  $uibModal.open({
+                      templateUrl: 'app/entities/promotion/promotion-ang-idetail-in-events.html',
+                      controller: 'PromotionAngDialogController',
+                      controllerAs: 'vm',
+                      backdrop: 'static',
+                      size: 'lg',
+                      resolve: {
+                          entity: ['Promotion', function(Promotion) {
+                              return Promotion.get({id : $stateParams.id}).$promise;
+                          }]
+                      }
+                  }).result.then(function() {
+                      $state.go('event-ang-detail.promotions', null, { reload: 'event-ang-detail.promotions' });
+                  }, function() {
+                      $state.go('^');
+                  });
+              }]
+          })
         .state('event-ang-by-owner.new', {
             parent: 'event-ang-by-owner',
             url: '/new',

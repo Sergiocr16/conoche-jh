@@ -1,9 +1,35 @@
 <div class="row">
-   <div ng-repeat="promotion in vm.promotions track by promotion.id" >
-          {{promotion.description}}
 
+
+
+    <!--<div class="col-md-6 col-sm-12 col-xs-12 no-padding  margin-bottom-20 " ui-sref="event-ang.promotionDetail({id:promotion.id})" ng-repeat="promotion in vm.promotions track by promotion.id">-->
+        <!--<span class="col-md-12 no-padding Raleway font-15" style="text-transform: uppercase;">{{promotion.description}}</span>-->
+           <!--<div class="no-padding font-white">-->
+               <!--<div id="image-promotion-in-events" class="col-md-12 col-xs-12 col-sm-12 "><span class="col-md-12 col-lg-12 col-sm-12 col-xs-12 no-padding Raleway font-18  Raleway text-center margin-top-60" style="opacity:0">Ver promocion</span></div>-->
+               <!--<div id="info-time-promotion" class="col-md-12 col-sm-12 col-xs-12 padding-10 "><span class="font-16 Raleway">Tiempo restante <timer end-time="promotion.finalTime">{{hours}}:{{minutes}}:{{seconds}}</timer></span>-->
+               <!--</div>-->
+               <!--<img class="col-md-12 col-sm-12 col-xs-12 no-padding crop-400" style="z-index: 0;"   data-ng-src="{{'data:' + promotion.imageContentType + ';base64,' +  promotion.image}}"  alt="promotion image" />-->
+           <!--</div>-->
+
+       <!--</div>-->
+
+
+    <div class="col-md-6 col-sm-9 col-xs-12  margin-bottom-20" ui-sref="event-ang-detail.promotions.promotionDetail({idPromo:promotion.id, id:vm.event.id})" ng-repeat="promotion in vm.promotions track by promotion.id">
+        <span class="col-md-12 no-padding Raleway font-18" style="text-transform: uppercase;">{{promotion.description}}</span>
+        <div class=" font-white position-relative">
+            <div class="col-md-12 col-xs-12 col-sm-12 image-promotion-in-events height-200 bottom-22"><span class="col-md-12 col-lg-12 col-sm-12 col-xs-12 no-padding Raleway font-24  Raleway text-center margin-top-80" style="opacity:0">Ver promocion</span></div>
+            <div id="info-time-event-detail" class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-12  text-center ">
+                        <h2 class="font-24 bold font-white Raleway">Tiempo restante <timer end-time="promotion.finalTime">{{hours}}:{{minutes}}:{{seconds}}</timer></h2>
+                    </div>
+            </div>
+            <a ng-click="vm.openFile(promotion.imageContentType, promotion.image)">
+                <img class="col-md-12 col-sm-12 col-xs-12 no-padding crop-200" style="z-index: 0;"   data-ng-src="{{'data:' + promotion.imageContentType + ';base64,' +  promotion.image}}"  alt="promotion image" />
+            </a>>
+        </div>
+
+    </div>
 
 
    </div>
 
-</div>
