@@ -9,10 +9,11 @@
         .module('conocheApp')
         .controller('RealTimeEventImageSlideshow', RealTimeEventImageSlideshow);
 
-    RealTimeEventImageSlideshow.$inject = ['$scope', '$state', 'RealTimeEventImage', 'ParseLinks', 'WSRealTimeEventImages', '$timeout', '$stateParams'];
+    RealTimeEventImageSlideshow.$inject = ['$scope', '$state', 'RealTimeEventImage', 'WSRealTimeEventImages', '$timeout', '$stateParams'];
 
-    function RealTimeEventImageSlideshow($scope, $state, RealTimeEventImage, ParseLinks, WSRealTimeEventImages, $timeout, $stateParams) {
-        const SORT = 'creationTime,desc';
+    function RealTimeEventImageSlideshow($scope, $state, RealTimeEventImage, WSRealTimeEventImages, $timeout, $stateParams) {
+        const SORT  = 'creationTime,desc';
+        const HOURS = 1;
 
         var vm = this;
         var index = 0;
@@ -40,8 +41,9 @@
         }
 
         function loadAll () {
-            RealTimeEventImage.eventRealTimeImages({
+            RealTimeEventImage.eventRealTimeImagesInLastHours({
                 idEvent: idEvent,
+                hours: HOURS,
                 sort: SORT,
             }, onSuccess, onError);
 

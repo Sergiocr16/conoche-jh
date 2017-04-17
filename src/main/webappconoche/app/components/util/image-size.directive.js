@@ -15,43 +15,51 @@
             restrict: 'A',
             scope: {},
             link: function (scope, element, attrs) {
-                var img = $(element[0]);
-                var interval = null;
-                var refreshRate = 200;
-                function onImageChange() {
-                    var parent      = img.offsetParent();
-                    var aspectRatio = img.width() / img.height();
-                    if(img.width() > img.height()){
+
+                var img         = $(element[0]);
+                var parent      = img.offsetParent();
+                var refreshRate = 30;
+
+                function positionImage(imgWidth, imgHeight) {
+                    img.css(biggestDimentionPosible(imgWidth, imgHeight));
+                    img.css({marginTop: parent.height() / 2 - img.height() / 2});
+                }
+
+                function biggestDimentionPosible(imgWidth, imgHeight) {
+                    var aspectRatio = imgWidth / imgHeight;
+                    if(imgWidth > imgHeight){
                         var height =  Math.min((1 / aspectRatio) * parent.width(), parent.height());
-                        img.css({height: height, width: (aspectRatio * height)});
+                        return { height: height, width: (aspectRatio * height) };
                     }
-                    else {
-                        var width =  Math.min(aspectRatio * parent.height(), parent.width());
-                        img.css({height: width * (1 / aspectRatio), width: width});
-                    }
-                    rePosition();
-                }
-                function rePosition() {
-                    img.css({top: img.offsetParent().height() / 2 - img.height() / 2});
+                    var width =  Math.min(aspectRatio * parent.height(), parent.width());
+                    return { height: width * (1 / aspectRatio), width: width };
                 }
 
-                function onLoad() {
-                    clearInterval(interval);
-                    onImageChange();
+                function onSrcChange() {
+                    getImageSize(positionImage);
                 }
 
-                function onChange() {
-                    interval = setInterval(onImageChange, refreshRate);
+                function onImageChange() {
+                    positionImage(img.width(), img.height());
                 }
 
                 function onDestroy() {
                     $(window).off('resize', onImageChange);
                 }
 
+                function getImageSize(callback) {
+                    var wait = setInterval(function() {
+                        var w = img[0].naturalWidth,
+                            h = img[0].naturalHeight;
+                        if (w && h) {
+                            clearInterval(wait);
+                            callback(w, h);
+                        }
+                    }, refreshRate);
+                }
                 $(window).resize(onImageChange);
                 $animate.on('enter', img, onImageChange);
-                element.bind('load', onLoad);
-                attrs.$observe('ngSrc', onChange);
+                attrs.$observe('ngSrc', onSrcChange);
                 scope.$on('$destroy', onDestroy);
             }
         };
