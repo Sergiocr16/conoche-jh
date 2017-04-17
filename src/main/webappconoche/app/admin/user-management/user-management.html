@@ -1,80 +1,90 @@
-<div>
-    <h2 data-translate="userManagement.home.title">Users</h2>
-    <jhi-alert></jhi-alert>
-    <div class="row">
-      <div class="col-md-3 col-sm-4 col-xs-12">
-          <button class="btn btn-primary col-md-12 col-xs-12" ui-sref="user-management.new">
-              <span class="glyphicon glyphicon-flash"></span> <span data-translate="userManagement.home.createLabel">Create a new User</span>
-          </button>
-      </div>
-        <div class="col-md-3 col-sm-4 col-xs-12">
-            <button class="btn btn-success col-md-12 col-xs-12" ui-sref="user-management.owner">
-                <span class="glyphicon glyphicon-flash"></span> <span data-translate="userManagement.home.createOwner">Create a new User</span>
-            </button>
+<jhi-alert></jhi-alert>
+
+<div class="portlet light bg-inverse">
+    <div class="portlet-title">
+        <div class="caption font-purple-plum">
+            <i class="icon-speech font-purple-plum"></i>
+            <span class="caption-subject bold uppercase" data-translate="userManagement.home.title"> Users</span>
+        </div>
+        <div class="actions">
+            <a ui-sref="user-management.new" class="btn btn-circle purple btn-sm">
+                <i class="fa fa-plus"></i>
+                <span data-translate="userManagement.home.createLabel">Create a new User</span>
+            </a>
+            <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="">
+            </a>
         </div>
     </div>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                <th jh-sort-by="id"><span data-translate="global.field.id">ID</span><span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="login"><span data-translate="userManagement.login">Login</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="email"><span data-translate="userManagement.email">Email</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th></th>
-                <th  jh-sort-by="langKey"> <span data-translate="userManagement.langKey">Lang Key</span> <span class="glyphicon glyphicon-sort"></span></th>                <th><span data-translate="userManagement.profiles">Profiles</span></th>                <th jh-sort-by="createdDate"><span data-translate="userManagement.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="lastModifiedBy"><span data-translate="userManagement.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="lastModifiedDate"><span data-translate="userManagement.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="user in vm.users track by user.id">
-                <td><a ui-sref="user-management-detail({login:user.login})">{{user.id}}</a></td>
-                <td>{{user.login}}</td>
-                <td>{{user.email}}</td>
-                <td>
-                    <button class="btn btn-danger btn-xs" ng-click="vm.setActive(user, true)" ng-show="!user.activated"
-                            data-translate="userManagement.deactivated">Deactivated</button>
-                    <button class="btn btn-success btn-xs" ng-click="vm.setActive(user, false)" ng-show="user.activated"
-                            ng-disabled="vm.currentAccount.login==user.login" data-translate="userManagement.activated">Activated</button>
-                </td>
-                <td>{{user.langKey}}</td>
-                <td>
-                    <div ng-repeat="authority in user.authorities">
-                        <span class="label label-info">{{ authority }}</span>
-                    </div>
-                </td>
-                <td>{{user.createdDate | date:'dd/MM/yy HH:mm'}}</td>
-                <td>{{user.lastModifiedBy}}</td>
-                <td>{{user.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                ui-sref="user-management-detail({login:user.login})"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>
-                            <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="user-management.edit({login:user.login})"
-                                class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="user-management.delete({login:user.login})"
-                                class="btn btn-danger btn-sm" ng-disabled="vm.currentAccount.login==user.login">
-                            <span class="glyphicon glyphicon-remove-circle"></span>
-                            <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    <div class="portlet-body table-responsive">
+            <table class="table table-striped">
+                <thead class="user-head-style">
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span><span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="login"><span data-translate="userManagement.login">Login</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="email"><span data-translate="userManagement.email">Email</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                    <th  jh-sort-by="langKey"> <span data-translate="userManagement.langKey">Lang Key</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th><span data-translate="userManagement.profiles">Profiles</span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="userManagement.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="userManagement.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="userManagement.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="user in vm.users track by user.id">
+                    <td><a ui-sref="user-management-detail({login:user.login})">{{user.id}}</a></td>
+                    <td>{{user.login}}</td>
+                    <td>{{user.email}}</td>
+                    <td>
+                        <a  ng-click="vm.setActive(user, true)" ng-if="!user.activated">
+                            <i class="fa fa-times-circle icon-deactivation-style" aria-hidden="true"></i>
+                        </a>
+                        <a  ng-click="vm.setActive(user, false)" ng-if="user.activated"
+                            ng-disabled="vm.currentAccount.login==user.login">
+                            <i class="fa fa-check icon-activation-style" aria-hidden="true"></i></a>
+                    </td>
+                    <td>{{user.langKey}}</td>
+                    <td>
+                        <div ng-repeat="authority in user.authorities">
+                            <span class="label label-default">{{ authority }}</span>
+                        </div>
+                    </td>
+                    <td>{{user.createdDate | date:'dd/MM/yy HH:mm'}}</td>
+                    <td>{{user.lastModifiedBy}}</td>
+                    <td>{{user.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <a class="btn btn-circle purple btn-sm" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-user"></i> <span data-translate="userManagement.actions">Actions</span> <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a  ui-sref="user-management.edit({login:user.login})">
+                                        <i class="fa fa-pencil"></i>
+                                        <span data-translate="entity.action.edit"> Edit</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a  ui-sref="user-management.delete({login:user.login})">
+                                        <i class="fa fa-trash-o"></i>
+                                        <span data-translate="entity.action.delete">Delete</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ui-sref="user-management-detail({login:user.login})">
+                                        <i class="fa fa-eye" aria-hidden="true"></i> <span data-translate="entity.action.view">View</span> </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        <div class="text-center">
+            <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+            <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+        </div>
     </div>
 </div>
