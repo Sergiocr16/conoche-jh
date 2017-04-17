@@ -33,11 +33,11 @@
         </div>
     </div>
     <div class="col-md-3 col-sm-3 col-xs-12">
-        <span class="font-18 col-md-12 no-padding margin-bottom-20" style="letter-spacing:1px; font-weight:600px">PROMOCIONES</span>
+        <span class="font-18 col-md-12 no-padding margin-bottom-20" style="letter-spacing:1px; font-weight:600px" data-translate="conocheApp.event.promotions">PROMOCIONES</span>
         <div class="col-md-12 col-sm-12 col-xs-12 no-padding  margin-bottom-20 " ui-sref="event-ang.promotionDetail({id:promotion.id})" ng-repeat="promotion in vm.promotions track by promotion.id">
             <div  class="no-padding font-white">
                 <div class="col-md-12 col-xs-12 col-sm-12 image-promotion-in-events height-130 top-0"><span class="col-md-12 col-lg-12 col-sm-12 col-xs-12 no-padding Raleway font-18  Raleway text-center margin-top-60" style="opacity:0">Ver promocion</span></div>
-                <div id="info-time-promotion" class="col-md-12 col-sm-12 col-xs-12 padding-10 "><span class="font-16 Raleway">Tiempo restante <timer end-time="promotion.finalTime">{{hours}}:{{minutes}}:{{seconds}}</timer></span>
+                <div id="info-time-promotion" class="col-md-12 col-sm-12 col-xs-12 padding-10 "><span class="font-16 Raleway"><span data-translate="conocheApp.event.timeLeft"></span> <timer end-time="promotion.finalTime">{{hours}}:{{minutes}}:{{seconds}}</timer></span>
                 </div>
                 <img class="col-md-12 col-sm-12 col-xs-12 no-padding crop-150" style="z-index: 0;"  data-ng-src="{{'data:' + promotion.imageContentType + ';base64,' + promotion.image}}"  alt="promotion image" />
             </div>

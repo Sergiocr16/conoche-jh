@@ -209,7 +209,7 @@
 
          .state('event-ang.promotionDetail', {
              parent: 'event-ang',
-             url: '/{id}/edit',
+             url: '/{id}',
              data: {
                  authorities: ['ROLE_USER']
              },
@@ -234,7 +234,7 @@
          })
           .state('event-ang-detail.promotions.promotionDetail', {
               parent: 'event-ang-detail.promotions',
-              url: '/{idPromo}/edit',
+              url: '/{idPromo}',
               data: {
                   authorities: ['ROLE_USER']
               },
@@ -247,7 +247,7 @@
                       size: 'lg',
                       resolve: {
                           entity: ['Promotion', function(Promotion) {
-                              return Promotion.get({id : $stateParams.id}).$promise;
+                              return Promotion.get({id : $stateParams.idPromo}).$promise;
                           }]
                       }
                   }).result.then(function() {
