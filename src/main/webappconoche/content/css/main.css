@@ -1,20 +1,3 @@
-.user-head-style span {
-    color: #8ea3b6
-}
-.icon-activation-style {
-    color: #9749b7;
-    font-size: 20px !important;
-    margin-left: 15px;
-    margin-right: 15px;
-}
-
-.icon-deactivation-style {
-    color: #6a6c6f;
-    font-size: 20px !important;
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
 .button-clear-style {
     padding: 0;
     border: none;
@@ -718,4 +701,21 @@ font-size: 28px!important;
      color: #777;
      font-size: 19px!important;
      font-family: Lato,sans-serif;
+}
+
+.user-head-style span {
+    color: #8ea3b6
+}
+.icon-activation-style {
+    color: #9749b7;
+    font-size: 20px !important;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.icon-deactivation-style {
+    color: #6a6c6f;
+    font-size: 20px !important;
+    margin-left: 20px;
+    margin-right: 20px;
 }
