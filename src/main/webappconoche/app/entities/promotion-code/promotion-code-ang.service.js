@@ -20,7 +20,30 @@
                     return data;
                 }
             },
+            'getByUserIdAndPromotionId': {
+                method: 'GET',
+                isArray: true,
+                url: 'api/promotion-codes/byUserAndPromotion/:userId/:promotionId',
+                params:{
+                  userId:'@userId',
+                  promotionId: '@promotionId'
+                }
+            },
+            'getAvailableByPromotion': {
+                method: 'GET',
+                isArray: true,
+                url:'api/promotion-codes/availableByPromotion/:promotionId'
+            },
+            'redeemCode': {
+              method:'GET',
+              url: 'api/promotion-codes/redeem/:promotionId/:userId',
+              params:{
+                userId:'@userId',
+                promotionId: '@promotionId'
+              }
+             },
             'update': { method:'PUT' }
         });
     }
 })();
+

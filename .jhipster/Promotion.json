@@ -53,12 +53,16 @@
                 "required"
             ],
             "fieldValidateRulesMin": 1
+        },
+        {
+            "fieldName": "codeQuantity",
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20170307223303",
-    "entityTableName": "promotion",
     "dto": "mapstruct",
-    "pagination": "pager",
     "service": "serviceClass",
+    "entityTableName": "promotion",
+    "pagination": "pager",
     "angularJSSuffix": "ang"
 }

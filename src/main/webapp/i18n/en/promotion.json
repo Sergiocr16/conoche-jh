@@ -21,6 +21,7 @@
             "initialTime": "Initial Time",
             "finalTime": "Final Time",
             "maximumCodePerUser": "Maximum Code Per User",
+            "codeQuantity": "Code Quantity",
             "codes": "Codes",
             "event": "Event"
         }

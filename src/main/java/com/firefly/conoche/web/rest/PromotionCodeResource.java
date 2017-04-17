@@ -34,7 +34,7 @@ public class PromotionCodeResource {
     private final Logger log = LoggerFactory.getLogger(PromotionCodeResource.class);
 
     private static final String ENTITY_NAME = "promotionCode";
-        
+
     private final PromotionCodeService promotionCodeService;
 
     public PromotionCodeResource(PromotionCodeService promotionCodeService) {
@@ -98,6 +98,36 @@ public class PromotionCodeResource {
         Page<PromotionCodeDTO> page = promotionCodeService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/promotion-codes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/promotion-codes/byUserAndPromotion/{userId}/{promotionId}")
+    @Timed
+    public ResponseEntity<List<PromotionCodeDTO>> getByUserIdAndPromotionId( @PathVariable (value = "userId")  Long userId, @PathVariable(value = "promotionId")  Long promotionId)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of PromotionCodes");
+        Page<PromotionCodeDTO> page = promotionCodeService.findByUserAndPromotion(userId,promotionId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/promotion-codes");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/promotion-codes/availableByPromotion/{promotionId}")
+    @Timed
+    public ResponseEntity<List<PromotionCodeDTO>> getAvailableByPromotionId(@PathVariable(value = "promotionId")  Long promotionId)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of PromotionCodes");
+        Page<PromotionCodeDTO> page = promotionCodeService.findAvailableCodesByPromotionId(promotionId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/promotion-codes");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/promotion-codes/redeem/{promotionId}/{userId}")
+    @Timed
+    public ResponseEntity<List<PromotionCodeDTO>> redemCode(@PathVariable(value = "promotionId")  Long promotionId,@PathVariable(value = "userId")  Long userId)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of PromotionCodes");
+        PromotionCodeDTO page = promotionCodeService.redeemCodeInPromotion(promotionId,userId);
+//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders("/api/promotion-codes");
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**

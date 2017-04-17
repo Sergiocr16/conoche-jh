@@ -11,8 +11,10 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface PromotionCodeRepository extends JpaRepository<PromotionCode,Long> {
-
     @Query("select promotionCode from PromotionCode promotionCode where promotionCode.user.login = ?#{principal.username}")
     List<PromotionCode> findByUserIsCurrentUser();
-
+    List<PromotionCode> findByPromotionIdAndUserIdIsNull(Long promotionId);
+    List<PromotionCode> findByPromotionIdAndUserId(Long promotionId,Long userId);
+    List<PromotionCode> findByUserId(Long userId);
+    PromotionCode findTop1ByPromotionIdAndUserIdIsNull(Long promotionId);
 }

@@ -133,8 +133,8 @@
                 <span class="Raleway font-18 col-md-12" style="text-transform: uppercase;"><i class="fa fa-home font-20" style="color: #607D8B"></i> Bar las teticas</span>
                 <span class="Raleway font-18 col-md-12 margin-top-20" style="text-transform: uppercase;"><i class="fa fa-fire font-20" style="color: #607D8B" ></i> REGGAE NIGHT CREW </span>
                 <div class="col-md-12 col-lg-12 col-sm-6 col-xs-12 margin-top-20">
-                <span class="Raleway font-16 col-md-6 ">Códigos restantes: 10</span>
-                <span class="Raleway font-16 col-md-6 ">Te quedan: 10</span>
+                <span class="Raleway font-16 col-md-6 ">Códigos disponibles: {{vm.availableCodes}}</span>
+                <span class="Raleway font-16 col-md-6 ">Puedes redimir: {{vm.availableCodesPerUser}}</span>
                 </div>
 
                 <div class="col-md-12 text-center margin-top-20 border-radius-6 padding-20"  style="background-color:#EEEEEE;">
@@ -142,9 +142,8 @@
                     <h2 class="font-40 bold font-white" style="color: #823e9e"><timer end-time="vm.promotion.finalTime">
                         <span class=" col-md-3 col-md-offset-1 text-center"><span class="col-md-12 text-center">{{hours}}</span><div class="font-15">Horas</div> </span> <span class=" col-md-3"><span class="col-md-12 text-center">{{minutes}}</span><div class="font-15">Minutos</div></span>  <span class=" col-md-3"><span class="col-md-12 text-center">{{seconds}}</span><div class="font-15">Segundos</div></span></timer></h2>
                 </div>
-
                     <div class="col-md-offset-1 col-md-10 col-lg-10 margin-top-20 ">
-                    <button type="button" class="btn btn-primary padding-10 border-radius-6 font-18 green-2-background col-md-12">
+                    <button ng-click="vm.redeemCode()" ng-show="vm.availableCodesPerUser>0" type="button" class="btn btn-primary padding-10 border-radius-6 font-18 green-2-background col-md-12">
                       <span >Redimir código</span>
                     </button>
                 </div>

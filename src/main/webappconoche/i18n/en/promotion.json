@@ -22,7 +22,8 @@
             "finalTime": "Final Time",
             "maximumCodePerUser": "Maximum Code Per User",
             "codes": "Codes",
-            "event": "Event"
+            "event": "Event",
+            "codeQuantity": "Code quantity"
         }
     }
 }

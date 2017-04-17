@@ -1,6 +1,7 @@
 package com.firefly.conoche.service;
 
 import com.firefly.conoche.domain.Promotion;
+import com.firefly.conoche.repository.PromotionCodeRepository;
 import com.firefly.conoche.repository.PromotionRepository;
 import com.firefly.conoche.service.dto.PromotionDTO;
 import com.firefly.conoche.service.mapper.PromotionMapper;
@@ -27,11 +28,14 @@ public class PromotionService {
 
     private final PromotionRepository promotionRepository;
 
+    private final PromotionCodeRepository promotionCodeRepository;
+
     private final PromotionMapper promotionMapper;
 
-    public PromotionService(PromotionRepository promotionRepository, PromotionMapper promotionMapper) {
+    public PromotionService(PromotionRepository promotionRepository, PromotionMapper promotionMapper,PromotionCodeRepository promotionCodeRepository) {
         this.promotionRepository = promotionRepository;
         this.promotionMapper = promotionMapper;
+        this.promotionCodeRepository = promotionCodeRepository;
     }
 
     /**
@@ -43,7 +47,10 @@ public class PromotionService {
     public PromotionDTO save(PromotionDTO promotionDTO) {
         log.debug("Request to save Promotion : {}", promotionDTO);
         Promotion promotion = promotionMapper.promotionDTOToPromotion(promotionDTO);
+        promotion.setCodeQuantity(promotionDTO.getCodeQuantity());
         promotion = promotionRepository.save(promotion);
+        promotion.generatePromotionsCodes();
+        promotion.getCodes().forEach(promotionCode -> {this.promotionCodeRepository.save(promotionCode);});
         PromotionDTO result = promotionMapper.promotionToPromotionDTO(promotion);
         return result;
     }

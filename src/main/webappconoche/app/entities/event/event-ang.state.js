@@ -209,7 +209,7 @@
 
          .state('event-ang.promotionDetail', {
              parent: 'event-ang',
-             url: '/{id}',
+             url: '/promotion/{id}',
              data: {
                  authorities: ['ROLE_USER']
              },
