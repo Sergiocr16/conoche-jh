@@ -26,7 +26,12 @@
                 method: 'GET',
                 isArray: true,
                 url: 'api/real-time-event-images/event/:idEvent'
-            }
+            },
+            'eventRealTimeImagesInLastHours' : {
+                method: 'GET',
+                isArray: true,
+                url: 'api/real-time-event-images/event/:idEvent/:hours'
+            },
         });
     }
 })();

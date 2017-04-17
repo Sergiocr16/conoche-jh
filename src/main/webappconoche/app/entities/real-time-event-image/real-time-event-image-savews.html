@@ -11,6 +11,7 @@
         </div>
     </div>
     <div class="modal-body">
+
         <jhi-alert-error></jhi-alert-error>
         <div class="alert alert-warning"  ng-show="editForm.image.$invalid" >
             <p data-translate="conocheApp.realTimeEventImage.required"
@@ -22,7 +23,7 @@
         <div class="form-group form-md-line-input" ngf-drop ngf-change="vm.setImage($file)" ngf-pattern="'image/*'">
                 <div ng-if="vm.displayImage" class="image-overlay-position" >
                     <div class="image-overlay-container image-overlay-view-first">
-                        <img data-ng-src="{{'data:' + vm.displayImageType + ';base64,' + vm.displayImage}}" style="max-height: 200px;"  alt="realTimeEventImage image"/>
+                        <img data-ng-src="{{'data:' + vm.displayImageType + ';base64,' + vm.displayImage}}" style="width: 100%;" alt="realTimeEventImage image"/>
                         <div class="image-overlay-mask">
                             <a href="" ng-click="vm.displayImage=null;vm.displayImageType=null;" class="btn btn-icon-only green pull-left">
                                 <i class="fa fa-times"></i>
@@ -57,11 +58,24 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        <button ng-if="!vm.isSaving" type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span data-translate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-danger">
+            <div ng-if="vm.isSaving">
+                <span class="pull-left"> {{vm.progress}}% </span>
+                <div  class="sk-folding-cube pull-right">
+
+                    <div class="sk-cube1 sk-cube"></div>
+                    <div class="sk-cube2 sk-cube"></div>
+                    <div class="sk-cube4 sk-cube"></div>
+                    <div class="sk-cube3 sk-cube"></div>
+                </div>
+            </div>
+            <div ng-if="!vm.isSaving">
+                <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+            </div>
         </button>
     </div>
 </form>
+

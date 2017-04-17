@@ -1,0 +1,66 @@
+.slide.ng-enter, .slide.ng-leave {
+    transition:0.2s linear all;
+}
+
+
+.slide.ng-enter {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+.slide.ng-enter-active {
+    transform: translateX(0);
+    opacity: 1;
+}
+.slide.ng-leave {
+    transform: translateX(0);
+    opacity: 1;
+}
+.slide.ng-leave-active {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+
+.animate-back .slide.ng-enter {
+    transform: translateX(100%);
+    opacity: 0;
+}
+.animate-back .slide.ng-enter-active {
+    transform: translateX(0);
+    opacity: 1;
+}
+.animate-back .slide.ng-leave {
+    transform: translateX(0);
+    opacity: 1;
+}
+.animate-back .slide.ng-leave-active {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+
+.nav-slide-show.ng-hide-remove {
+    animation: rotateInDownLeft 0.5s;
+
+}
+
+.nav-slide-show.ng-hide-add {
+    animation: rotateOutUpLeft 0.5s;
+
+}
+
+.left-btn-slide-show.ng-hide-remove {
+    animation: bounceInLeft 0.5s;
+}
+
+.left-btn-slide-show.ng-hide-add {
+    animation: bounceOutLeft 0.5s;
+}
+
+.right-btn-slide-show.ng-hide-remove {
+    animation: bounceInRight 0.5s;
+}
+
+.right-btn-slide-show.ng-hide-add {
+    animation: bounceOutRight 0.5s;
+}

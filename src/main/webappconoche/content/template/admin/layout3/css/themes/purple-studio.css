@@ -452,7 +452,7 @@ Page Footer
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 9995;
+    z-index: 1000;
   }
 }
 @media (max-width: 991px) {

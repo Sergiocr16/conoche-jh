@@ -14,7 +14,6 @@
            getAccount();
            $('#loaded').show();
            $('#loading').fadeOut(30);
-             var unsubLogo  = $rootScope.$on('$stateChangeStart', logoChange);
           });
 
 
