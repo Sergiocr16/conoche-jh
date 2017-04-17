@@ -15,11 +15,15 @@
                 authorities: []
             },
             views: {
-                'landingPage@': {
+                'otherContent@': {
                     templateUrl: 'app/layouts/landing-page/landing-page.html',
                     controller: 'LandingPageController',
                     controllerAs: 'vm'
-                }
+                },
+                'footer@': { },
+                'navbar@': { },
+                'head@': { },
+
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {

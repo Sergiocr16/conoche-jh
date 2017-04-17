@@ -15,6 +15,7 @@
         cloudinaryProvider
             .set("cloud_name", "dgh2svgxo")
             .set("upload_preset", "ieo8vml9")
-            .set("base_url", "https://api.cloudinary.com/v1_1/");
+            .set("base_url", "https://api.cloudinary.com/v1_1/")
+            .set("image_url", "http://res.cloudinary.com/");
     }
 })()

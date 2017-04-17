@@ -19,6 +19,7 @@
     <link href="https://fonts.googleapis.com/css?family=Bubblegum+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="content/css/animate.css">
     <link href="content/template/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="content/template/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
     <link href="content/template/global/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
@@ -33,6 +34,8 @@
     <link href="https://fonts.googleapis.com/css?family=Ranga" rel="stylesheet">
     <link rel="stylesheet" href="content/css/tabs.css">
     <link rel="stylesheet" href="content/css/image-overlay.css">
+    <link rel="stylesheet" href="content/css/slider-ng-animate.css">
+    <link rel="stylesheet" href="content/css/loading-spinners.css">
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css">
     <!--end template css-->
@@ -60,21 +63,21 @@
         <div class="bounce3"></div>
     </div>
 </div>
-<div ui-view="landingPage" ng-show="$state.includes('landing-page')"></div>
+<div class="no-display-when-empty" ui-view="otherContent"></div>
 <div id="loaded" style="display:none">
     <!--<div ui-view="navbar" ng-cloak class="page-header" style="background:url('content/images/bg1.jpg')"></div>-->
-    <div ui-view="navbar" ng-show="!$state.includes('landing-page')" ng-cloak class="page-header" style="color:black!important"></div>
+    <div ui-view="navbar" ng-cloak class="page-header no-display-when-empty" style="color:black!important"></div>
     <div class="clearfix">
     </div>
-    <div ng-show="$state.includes('home')" ui-view="home" style="padding-none;">
+    <div class="no-display-when-empty" ui-view="home" class="padding-none">
     </div>
-    <div class="page-content" style="background-color:white ">
-        <div ui-view="head" style="background-color:#F2F2F2;"></div>
+    <div class="no-display-when-empty" ui-view="head" style="background-color:#F2F2F2;"></div>
+    <div class="no-display-when-empty page-content" style="background-color:rgba(255,255,255,1); padding:none!important;">
         <div class="container" >
-            <div  ng-show="!$state.includes('home')" class="well" ui-view="content" style="background-color:rgba(255,255,255,1); padding:none!important;"></div>
+            <div class="well no-display-when-empty" ui-view="content" style="background-color:rgba(255,255,255,1); padding:none!important;"></div>
         </div>
-        <div ui-view="footer" ng-show="!$state.includes('landing-page')"></div>
     </div>
+    <div ui-view="footer"></div>
 </div>
 <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
 <script>
@@ -89,57 +92,32 @@
 <!-- build:js app/vendor.js -->
 <!-- bower:js -->
 <script src="bower_components/jquery/dist/jquery.js"></script>
-
 <script src="bower_components/messageformat/messageformat.js"></script>
-
 <script src="bower_components/json3/lib/json3.js"></script>
-
 <script src="bower_components/lodash/lodash.js"></script>
-
 <script src="bower_components/sockjs-client/dist/sockjs.js"></script>
-
 <script src="bower_components/stomp-websocket/lib/stomp.min.js"></script>
-
 <script src="bower_components/cloudinary-core/cloudinary-core.js"></script>
-
 <script src="bower_components/angular/angular.js"></script>
-
 <script src="bower_components/angular-aria/angular-aria.js"></script>
-
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-
 <script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
-
 <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-
 <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
-
 <script src="bower_components/ngstorage/ngStorage.js"></script>
-
 <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
-
 <script src="bower_components/angular-resource/angular-resource.js"></script>
-
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-
 <script src="bower_components/angular-translate/angular-translate.js"></script>
-
 <script src="bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js"></script>
-
 <script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
-
 <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
-
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-
 <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
-
 <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
-
 <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
-
 <script src="bower_components/cloudinary_ng/js/angular.cloudinary.js"></script>
-
+<script src="bower_components/angular-animate/angular-animate.js"></script>
 <!-- endinject -->
 <!-- endbuild -->
 <script src="bower_components/jquery-bridget/jquery-bridget.js"></script>
@@ -164,6 +142,7 @@
 <script src="app/services/user/user.service.js"></script>
 <script src="app/services/profiles/profile.service.js"></script>
 <script src="app/services/profiles/page-ribbon.directive.js"></script>
+<script src="app/services/cloudinary/cloudinaryURL.filter.js"></script>
 <script src="app/services/cloudinary/cloudinary.service.js"></script>
 <script src="app/services/cloudinary/cloudinary.config.js"></script>
 <script src="app/services/auth/register.service.js"></script>
@@ -200,15 +179,12 @@
 <script src="app/entities/schedule/schedule-ang.controller.js"></script>
 <script src="app/entities/real-time-event-image/ws-real-time-event-images.service.js"></script>
 <script src="app/entities/real-time-event-image/real-time-image-cloudinary.service.js"></script>
+<script src="app/entities/real-time-event-image/real-time-event-image-slideshow.controller.js"></script>
 <script src="app/entities/real-time-event-image/real-time-event-image-savews.controller.js"></script>
 <script src="app/entities/real-time-event-image/real-time-event-image-gallery-delete-dialog.controller.js"></script>
 <script src="app/entities/real-time-event-image/real-time-event-image-gallery.controller.js"></script>
-<script src="app/entities/real-time-event-image/real-time-event-image-ang-dialog.controller.js"></script>
-<script src="app/entities/real-time-event-image/real-time-event-image-ang-detail.controller.js"></script>
-<script src="app/entities/real-time-event-image/real-time-event-image-ang-delete-dialog.controller.js"></script>
 <script src="app/entities/real-time-event-image/real-time-event-image-ang.state.js"></script>
 <script src="app/entities/real-time-event-image/real-time-event-image-ang.service.js"></script>
-<script src="app/entities/real-time-event-image/real-time-event-image-ang.controller.js"></script>
 <script src="app/entities/rating-local/rating-local-ang-dialog.controller.js"></script>
 <script src="app/entities/rating-local/rating-local-ang-detail.controller.js"></script>
 <script src="app/entities/rating-local/rating-local-ang-delete-dialog.controller.js"></script>
@@ -280,21 +256,25 @@
 <script src="app/entities/action/action-ang.state.js"></script>
 <script src="app/entities/action/action-ang.service.js"></script>
 <script src="app/entities/action/action-ang.controller.js"></script>
+<script src="app/components/util/trusted.filter.js"></script>
 <script src="app/components/util/truncate-words.filter.js"></script>
 <script src="app/components/util/truncate-characters.filter.js"></script>
 <script src="app/components/util/timeToMin.js"></script>
 <script src="app/components/util/sort-by.directive.js"></script>
 <script src="app/components/util/sort.directive.js"></script>
 <script src="app/components/util/shuffle.filter.js"></script>
+<script src="app/components/util/shortcut.directive.js"></script>
 <script src="app/components/util/parse-links.service.js"></script>
 <script src="app/components/util/pagination-util.service.js"></script>
 <script src="app/components/util/minToTime.filter.js"></script>
 <script src="app/components/util/jhi-item-count.directive.js"></script>
+<script src="app/components/util/image-size.directive.js"></script>
 <script src="app/components/util/image.service.js"></script>
 <script src="app/components/util/date-util.service.js"></script>
 <script src="app/components/util/data-util.service.js"></script>
 <script src="app/components/util/capitalize.filter.js"></script>
 <script src="app/components/util/base64.service.js"></script>
+<script src="app/components/slider/slider.directive.js"></script>
 <script src="app/components/particle/particleImage.directive.js"></script>
 <script src="app/components/particle/particle-text.directive.js"></script>
 <script src="app/components/particle/particle-animator.service.js"></script>
