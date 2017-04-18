@@ -19,6 +19,7 @@
         vm.local = 'local';
         vm.action = vm.event;
         vm.search = search;
+        vm.onKeypressed = onKeypressed;
         $scope.$on('authenticationSuccess', function() {
             getAccount();
         });
@@ -58,13 +59,16 @@
             });
         }
 
-        function search(event) {
+        function onKeypressed(event) {
             if (event.which !== 13) {
                 return;
             }
-            map[vm.action]();
+            search();
         }
 
+        function search() {
+            map[vm.action]();
+        }
 
         function setCount() {
             var events =  Event.countFuture().$promise;

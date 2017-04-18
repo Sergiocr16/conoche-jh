@@ -1,3 +1,19 @@
+.home-search-button {
+    height: 46px;
+    color: #a4a4a4 !important;
+}
+
+.home-search-button:hover {
+    color: #a4a4a4;
+}
+
+.dropdown-menu {
+    animation: fadeInUp 0.2s;
+}
+.page-header .page-header-menu .hor-menu .navbar-nav > .open > a:hover{
+    color:#ffffff!important;
+    background-color: #55616f!important;
+}
 
 .lg-actions .lg-next, .lg-actions .lg-prev {
     background-color: rgba(0, 0, 0, 0.45);

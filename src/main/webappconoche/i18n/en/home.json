@@ -16,6 +16,7 @@
         "like": "If you like JHipster, don't forget to give us a star on",
         "github": "GitHub",
         "searchPlaceHolder": "Search for events or locals",
+        "search" : "Search",
         "radio": {
             "event" : "Events",
             "local" : "Locals"
