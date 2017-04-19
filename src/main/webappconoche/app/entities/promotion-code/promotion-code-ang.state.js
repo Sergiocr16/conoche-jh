@@ -83,6 +83,62 @@
                 }]
             }
         })
+        .state('swapCoupon', {
+            url: '/swapCoupon',
+            parent: 'entity',
+            data: {
+                authorities: ['ROLE_OWNER'],
+                pageTitle: 'conocheApp.promotionCode.detail.title'
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/entities/promotion-code/swap-coupon.html',
+                    controller: 'SwapCouponController',
+                    controllerAs: 'vm',
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('promotionCode');
+                    return $translate.refresh();
+                }],
+                previousState: ["$state", function ($state) {
+                    var currentStateData = {
+                        name: $state.current.name || 'promotion-code-ang',
+                        params: $state.params,
+                        url: $state.href($state.current.name, $state.params)
+                    };
+                    return currentStateData;
+                }]
+            }
+        })
+        .state('home.myPromotions', {
+            parent: 'home',
+            url: '/myPromotions',
+            data: {
+                authorities: ['ROLE_USER']
+            },
+            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                $uibModal.open({
+                    templateUrl: 'app/entities/promotion-code/my-promotions-codes.html',
+                    controller: 'MyPromotionCodesController',
+                    controllerAs: 'vm',
+                    backdrop: 'static',
+                    size: 'md',
+                    resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                                        $translatePartialLoader.addPart('event');
+                                        $translatePartialLoader.addPart('global');
+                                        return $translate.refresh();
+                                    }]
+                    }
+                }).result.then(function() {
+                    $state.go('^', {}, { reload: false });
+                }, function() {
+                    $state.go('^');
+                });
+            }]
+        })
         .state('promotion-code-ang-detail.edit', {
             parent: 'promotion-code-ang-detail',
             url: '/detail/edit',

@@ -29,6 +29,22 @@
                   promotionId: '@promotionId'
                 }
             },
+            'findCoupon': {
+                method: 'GET',
+                isArray: true,
+                url: 'api/promotion-codes/findCode/:code',
+                params:{
+                  code:'@code'
+                }
+            },
+            'getByUserId': {
+                method: 'GET',
+                isArray: true,
+                url: 'api/promotion-codes/byUser/:userId',
+                params:{
+                  userId:'@userId'
+                }
+            },
             'getAvailableByPromotion': {
                 method: 'GET',
                 isArray: true,

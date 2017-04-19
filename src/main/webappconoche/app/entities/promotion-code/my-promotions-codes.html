@@ -1,0 +1,32 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h3 class="text-center" style="color:#FF8000!important;font-weight:bolder"><i class="icon-map"></i> <span data-translate="global.menu.account.promo"> Mis cupones </span></h3>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div ng-show="vm.promotionCodes.length==0"><h3 class="text-center">No tienes ningún código aún</h3></div>
+        <div class="col-md-12 col-sm-12 col-xs-12" style="max-height:480px; overflow:scroll;">
+         <div class="col-md-12 col-sm-12 col-xs-12 no-padding  margin-bottom-20 " ng-repeat="promoCode in vm.promotionCodes">
+             <div  class="no-padding font-white">
+                 <div class="col-md-12 col-xs-12 col-sm-12 code-promotion height-130 top-0">
+                     <span class="col-md-12 col-lg-12 col-sm-12 col-xs-12 no-padding Raleway Raleway" style="margin-top:15px">
+                         <h3 class="text-center "><span class="promo-code">{{promoCode.code}}</span></h3></span>
+                 </div>
+                 <div id="info-time-promotion" class="col-md-12 col-sm-12 col-xs-12">
+                     <span class="col-md-12 col-sm-12 col-xs-12 no-padding Raleway font-15" style="text-transform: uppercase;"><h3 class="text-center font-15 no-padding no-margin" style="color:white;">{{promoCode.promotion.description}}</h3></span>
+                     <span class="col-md-12 col-sm-12 col-xs-12 font-16 Raleway"><h3 class="text-center font-15 no-padding no-margin" style="color:white;"><span data-translate="conocheApp.event.timeLeft"></span> <timer class="text-center" end-time="promoCode.promotion.finalTime">{{hours}}:{{minutes}}:{{seconds}}</timer></h3></span>
+                 </div>
+                 <img class="col-md-12 col-sm-12 col-xs-12 no-padding crop-150" style="z-index: 0;"  data-ng-src="{{'data:' + promoCode.promotion.imageContentType + ';base64,' + promoCode.promotion.image}}"  alt="promotion image" />
+             </div>
+
+         </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <p  ng-show="vm.promotionCodes.length>0">Mencione al bartender el codigo que desea canjear para obtener la promoción</p>
+    </div>
+</form>

@@ -607,7 +607,23 @@ line-height: 24px
 .image-promotion-in-events{
  position: absolute;
     background-color: rgba(0,0,0,0.0);
+    left:0px;
+    z-index: 3;
+   transition-duration: 0.5s;
+}
 
+.promo-code{
+font-size:30px;opacity:1;
+color:white;
+text-transform:uppercase;
+padding:5px;
+border-radius:5px!important;
+background-color:rgba(94, 63, 125,0.7);
+}
+
+.code-promotion{
+ position: absolute;
+   opacity:1!important;
     left:0px;
     z-index: 3;
    transition-duration: 0.5s;
@@ -690,6 +706,10 @@ line-height: 24px
      height: 140px;
      object-fit:cover;
  }
+ .crop-90{
+      height: 90px;
+      object-fit:cover;
+  }
  .crop-200 {
     height: 200px;
     object-fit:cover;

@@ -1,7 +1,10 @@
 package com.firefly.conoche.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.firefly.conoche.domain.Promotion;
 import com.firefly.conoche.service.PromotionCodeService;
+import com.firefly.conoche.service.PromotionService;
+import com.firefly.conoche.service.dto.PromotionDTO;
 import com.firefly.conoche.web.rest.util.HeaderUtil;
 import com.firefly.conoche.web.rest.util.PaginationUtil;
 import com.firefly.conoche.service.dto.PromotionCodeDTO;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -37,8 +41,11 @@ public class PromotionCodeResource {
 
     private final PromotionCodeService promotionCodeService;
 
-    public PromotionCodeResource(PromotionCodeService promotionCodeService) {
+    private final PromotionService promotionService;
+
+    public PromotionCodeResource(PromotionCodeService promotionCodeService,PromotionService promotionService) {
         this.promotionCodeService = promotionCodeService;
+        this.promotionService = promotionService;
     }
 
     /**
@@ -108,6 +115,26 @@ public class PromotionCodeResource {
         Page<PromotionCodeDTO> page = promotionCodeService.findByUserAndPromotion(userId,promotionId);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/promotion-codes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/promotion-codes/byUser/{userId}")
+    @Timed
+    public ResponseEntity<List<PromotionCodeDTO>> getByUser( @PathVariable (value = "userId")  Long userId)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of PromotionCodes");
+        Page<PromotionCodeDTO> page = promotionCodeService.findByUserId(userId);
+        page.forEach(promotionCodeDTO -> {
+            PromotionDTO promo = this.promotionService.findOne(promotionCodeDTO.getPromotionId());
+            if(promo.getFinalTime().isBefore(ZonedDateTime.now())){
+                this.promotionCodeService.delete(promotionCodeDTO.getId());
+            }
+        });
+        Page<PromotionCodeDTO> result = promotionCodeService.findByUserId(userId);
+        result.forEach(promotionCodeDTO -> {
+            promotionCodeDTO.setPromotion(this.promotionService.findOne(promotionCodeDTO.getPromotionId()));
+        });
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/promotion-codes");
+        return new ResponseEntity<>(result.getContent(), headers, HttpStatus.OK);
     }
 
     @GetMapping("/promotion-codes/availableByPromotion/{promotionId}")

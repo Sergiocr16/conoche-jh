@@ -5,6 +5,7 @@ import com.firefly.conoche.ConocheApp;
 import com.firefly.conoche.domain.PromotionCode;
 import com.firefly.conoche.repository.PromotionCodeRepository;
 import com.firefly.conoche.service.PromotionCodeService;
+import com.firefly.conoche.service.PromotionService;
 import com.firefly.conoche.service.dto.PromotionCodeDTO;
 import com.firefly.conoche.service.mapper.PromotionCodeMapper;
 import com.firefly.conoche.web.rest.errors.ExceptionTranslator;
@@ -52,8 +53,6 @@ public class PromotionCodeResourceIntTest {
     @Autowired
     private PromotionCodeMapper promotionCodeMapper;
 
-    @Autowired
-    private PromotionCodeService promotionCodeService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -65,7 +64,13 @@ public class PromotionCodeResourceIntTest {
     private ExceptionTranslator exceptionTranslator;
 
     @Autowired
+    private PromotionService promotionService;
+
+    @Autowired
     private EntityManager em;
+
+    @Autowired
+    private PromotionCodeService promotionCodeService;
 
     private MockMvc restPromotionCodeMockMvc;
 
@@ -74,7 +79,7 @@ public class PromotionCodeResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        PromotionCodeResource promotionCodeResource = new PromotionCodeResource(promotionCodeService);
+        PromotionCodeResource promotionCodeResource = new PromotionCodeResource(promotionCodeService,promotionService);
         this.restPromotionCodeMockMvc = MockMvcBuilders.standaloneSetup(promotionCodeResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
