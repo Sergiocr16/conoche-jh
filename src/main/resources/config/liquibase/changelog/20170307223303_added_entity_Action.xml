@@ -34,16 +34,5 @@
         </createTable>
         <dropDefaultValue tableName="action" columnName="creation" columnDataType="datetime"/>
         
-        <createTable tableName="action_users">
-            <column name="users_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="actions_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="actions_id, users_id" tableName="action_users"/>
-        
     </changeSet>
 </databaseChangeLog>

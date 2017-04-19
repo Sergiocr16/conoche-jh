@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Mapper for the entity Action and its DTO ActionDTO.
  */
-@Mapper(componentModel = "spring", uses = {UserMapper.class, })
+@Mapper(componentModel = "spring", uses = {})
 public interface ActionMapper {
 
     ActionDTO actionToActionDTO(Action action);

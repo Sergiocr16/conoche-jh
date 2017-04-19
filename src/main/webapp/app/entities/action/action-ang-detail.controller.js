@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('ActionAngDetailController', ActionAngDetailController);
 
-    ActionAngDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Action', 'ActionObject', 'User'];
+    ActionAngDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Action', 'ActionObject'];
 
-    function ActionAngDetailController($scope, $rootScope, $stateParams, previousState, entity, Action, ActionObject, User) {
+    function ActionAngDetailController($scope, $rootScope, $stateParams, previousState, entity, Action, ActionObject) {
         var vm = this;
 
         vm.action = entity;

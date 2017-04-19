@@ -12,12 +12,6 @@
         <dd>
             <span>{{vm.action.creation | date:'medium'}}</span>
         </dd>
-        <dt><span data-translate="conocheApp.action.users">Users</span></dt>
-        <dd>
-            <span ng-repeat="users in vm.action.users">
-                {{users.id}}{{$last ? '' : ', '}}
-            </span>
-        </dd>
     </dl>
 
     <button type="submit"

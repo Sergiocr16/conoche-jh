@@ -69,7 +69,7 @@ public class ActionService {
     @Transactional(readOnly = true)
     public ActionDTO findOne(Long id) {
         log.debug("Request to get Action : {}", id);
-        Action action = actionRepository.findOneWithEagerRelationships(id);
+        Action action = actionRepository.findOne(id);
         ActionDTO actionDTO = actionMapper.actionToActionDTO(action);
         return actionDTO;
     }

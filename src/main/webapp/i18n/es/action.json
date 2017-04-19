@@ -17,8 +17,7 @@
             },
             "descripcion": "Descripcion",
             "creation": "Creation",
-            "objects": "Objects",
-            "users": "Users"
+            "objects": "Objects"
         }
     }
 }

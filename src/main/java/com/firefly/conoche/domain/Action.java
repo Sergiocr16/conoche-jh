@@ -39,13 +39,6 @@ public class Action implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ActionObject> objects = new HashSet<>();
 
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "action_users",
-               joinColumns = @JoinColumn(name="actions_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="users_id", referencedColumnName="id"))
-    private Set<User> users = new HashSet<>();
-
     public Long getId() {
         return id;
     }
@@ -103,29 +96,6 @@ public class Action implements Serializable {
 
     public void setObjects(Set<ActionObject> actionObjects) {
         this.objects = actionObjects;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public Action users(Set<User> users) {
-        this.users = users;
-        return this;
-    }
-
-    public Action addUsers(User user) {
-        this.users.add(user);
-        return this;
-    }
-
-    public Action removeUsers(User user) {
-        this.users.remove(user);
-        return this;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 
     @Override

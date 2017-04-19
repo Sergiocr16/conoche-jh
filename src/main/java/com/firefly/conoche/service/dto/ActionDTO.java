@@ -21,8 +21,6 @@ public class ActionDTO implements Serializable {
     @NotNull
     private ZonedDateTime creation;
 
-    private Set<UserDTO> users = new HashSet<>();
-
     public Long getId() {
         return id;
     }
@@ -43,14 +41,6 @@ public class ActionDTO implements Serializable {
 
     public void setCreation(ZonedDateTime creation) {
         this.creation = creation;
-    }
-
-    public Set<UserDTO> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<UserDTO> users) {
-        this.users = users;
     }
 
     @Override
