@@ -21,6 +21,7 @@
                 "scheduleAng": "Schedule",
                 "servicioAng": "Servicio",
                 "category": "Category",
+                "notification": "Notification",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

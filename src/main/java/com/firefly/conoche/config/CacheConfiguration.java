@@ -70,6 +70,7 @@ public class CacheConfiguration {
             cm.createCache(com.firefly.conoche.domain.Schedule.class.getName(), jcacheConfiguration);
             cm.createCache(com.firefly.conoche.domain.Servicio.class.getName(), jcacheConfiguration);
             cm.createCache(com.firefly.conoche.domain.Category.class.getName(), jcacheConfiguration);
+            cm.createCache(com.firefly.conoche.domain.Notification.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

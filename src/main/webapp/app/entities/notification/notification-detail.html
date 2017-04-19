@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span data-translate="conocheApp.notification.detail.title">Notification</span> {{vm.notification.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row jh-entity-details">
+        <dt><span data-translate="conocheApp.notification.isRead">Is Read</span></dt>
+        <dd>
+            <span>{{vm.notification.isRead}}</span>
+        </dd>
+        <dt><span data-translate="conocheApp.notification.user">User</span></dt>
+        <dd>
+            {{vm.notification.userLogin}}
+        </dd>
+        <dt><span data-translate="conocheApp.notification.action">Action</span></dt>
+        <dd>
+            <a ui-sref="action-ang-detail({id:vm.notification.actionId})">{{vm.notification.actionId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="notification-detail.edit({id:vm.notification.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
