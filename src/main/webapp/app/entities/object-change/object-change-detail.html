@@ -8,6 +8,10 @@
         <dd>
             <span>{{vm.objectChange.fieldName}}</span>
         </dd>
+        <dt><span data-translate="conocheApp.objectChange.actionObject">Action Object</span></dt>
+        <dd>
+            <a ui-sref="action-object-ang-detail({id:vm.objectChange.actionObjectId})">{{vm.objectChange.actionObjectId}}</a>
+        </dd>
     </dl>
 
     <button type="submit"

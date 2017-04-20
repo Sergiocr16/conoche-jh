@@ -15,7 +15,8 @@
             "detail": {
                 "title": "Object Change"
             },
-            "fieldName": "Field Name"
+            "fieldName": "Field Name",
+            "actionObject": "Action Object"
         }
     }
 }

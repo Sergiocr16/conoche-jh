@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('ObjectChange Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockObjectChange;
+        var MockEntity, MockPreviousState, MockObjectChange, MockActionObject;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -13,6 +13,7 @@ describe('Controller Tests', function() {
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
             MockObjectChange = jasmine.createSpy('MockObjectChange');
+            MockActionObject = jasmine.createSpy('MockActionObject');
             
 
             var locals = {
@@ -20,7 +21,8 @@ describe('Controller Tests', function() {
                 '$rootScope': $rootScope,
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
-                'ObjectChange': MockObjectChange
+                'ObjectChange': MockObjectChange,
+                'ActionObject': MockActionObject
             };
             createController = function() {
                 $injector.get('$controller')("ObjectChangeDetailController", locals);

@@ -1,6 +1,7 @@
 package com.firefly.conoche.service.interfaces;
+import com.firefly.conoche.service.dto.UserDTO;
 
-import com.firefly.conoche.service.dto.EventDTO;
+import java.util.List;
 
 /**
  * Created by melvin on 4/19/2017.
@@ -8,4 +9,5 @@ import com.firefly.conoche.service.dto.EventDTO;
 public interface NotificationableService<T extends Notificationable> {
     T save(T element);
     T findOne(Long id);
+    List<UserDTO> getNotificationRecipients(T element);
 }

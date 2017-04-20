@@ -3,6 +3,8 @@ package com.firefly.conoche.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -14,6 +16,8 @@ public class ObjectChangeDTO implements Serializable {
 
     @NotNull
     private String fieldName;
+
+    private Long actionObjectId;
 
     public Long getId() {
         return id;
@@ -28,6 +32,14 @@ public class ObjectChangeDTO implements Serializable {
 
     public void setFieldName(String fieldName) {
         this.fieldName = fieldName;
+    }
+
+    public Long getActionObjectId() {
+        return actionObjectId;
+    }
+
+    public void setActionObjectId(Long actionObjectId) {
+        this.actionObjectId = actionObjectId;
     }
 
     @Override

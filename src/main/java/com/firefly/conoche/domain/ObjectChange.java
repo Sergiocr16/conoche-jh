@@ -26,6 +26,9 @@ public class ObjectChange implements Serializable {
     @Column(name = "field_name", nullable = false)
     private String fieldName;
 
+    @ManyToOne
+    private ActionObject actionObject;
+
     public Long getId() {
         return id;
     }
@@ -45,6 +48,19 @@ public class ObjectChange implements Serializable {
 
     public void setFieldName(String fieldName) {
         this.fieldName = fieldName;
+    }
+
+    public ActionObject getActionObject() {
+        return actionObject;
+    }
+
+    public ObjectChange actionObject(ActionObject actionObject) {
+        this.actionObject = actionObject;
+        return this;
+    }
+
+    public void setActionObject(ActionObject actionObject) {
+        this.actionObject = actionObject;
     }
 
     @Override

@@ -20,6 +20,7 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="fieldName"><span data-translate="conocheApp.objectChange.fieldName">Field Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="actionObjectId"><span data-translate="conocheApp.objectChange.actionObject">Action Object</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -27,6 +28,9 @@
                 <tr ng-repeat="objectChange in vm.objectChanges track by objectChange.id">
                     <td><a ui-sref="object-change-detail({id:objectChange.id})">{{objectChange.id}}</a></td>
                     <td>{{objectChange.fieldName}}</td>
+                    <td>
+                        <a ui-sref="action-object-ang-detail({id:objectChange.actionObjectId})">{{objectChange.actionObjectId}}</a>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
