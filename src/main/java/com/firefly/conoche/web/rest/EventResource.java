@@ -34,7 +34,7 @@ public class EventResource {
     private final Logger log = LoggerFactory.getLogger(EventResource.class);
 
     private static final String ENTITY_NAME = "event";
-        
+
     private final EventService eventService;
 
     public EventResource(EventService eventService) {

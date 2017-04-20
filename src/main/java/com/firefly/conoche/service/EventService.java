@@ -3,27 +3,28 @@ package com.firefly.conoche.service;
 import com.firefly.conoche.domain.Event;
 import com.firefly.conoche.repository.EventRepository;
 import com.firefly.conoche.service.dto.EventDTO;
+import com.firefly.conoche.service.interfaces.NotificationableService;
 import com.firefly.conoche.service.mapper.EventMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Event.
  */
 @Service
+@Scope( proxyMode = ScopedProxyMode.TARGET_CLASS )
 @Transactional
-public class EventService {
+public class EventService implements NotificationableService<EventDTO>{
 
     private final Logger log = LoggerFactory.getLogger(EventService.class);
-    
+
     private final EventRepository eventRepository;
 
     private final EventMapper eventMapper;
@@ -49,7 +50,7 @@ public class EventService {
 
     /**
      *  Get all the events.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */

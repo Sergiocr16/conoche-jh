@@ -7,17 +7,8 @@
         Added the constraints for entity Action.
     -->
     <changeSet id="20170307223303-2" author="jhipster">
-        
-        <addForeignKeyConstraint baseColumnNames="actions_id"
-                                 baseTableName="action_users"
-                                 constraintName="fk_action_users_actions_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="action"/>
-        <addForeignKeyConstraint baseColumnNames="users_id"
-                                 baseTableName="action_users"
-                                 constraintName="fk_action_users_users_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="jhi_user"/>
-        
+
+
+
     </changeSet>
 </databaseChangeLog>
