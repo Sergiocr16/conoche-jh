@@ -8,6 +8,8 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.firefly.conoche.domain.enumeration.ActionType;
+
 import com.firefly.conoche.domain.enumeration.ActionObjectType;
 
 /**
@@ -28,8 +30,9 @@ public class ActionObject implements Serializable {
     @Column(name = "object_id", nullable = false)
     private Long objectId;
 
-    @Column(name = "description")
-    private String description;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "action_type")
+    private ActionType actionType;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "object_type")
@@ -56,17 +59,17 @@ public class ActionObject implements Serializable {
         this.objectId = objectId;
     }
 
-    public String getDescription() {
-        return description;
+    public ActionType getActionType() {
+        return actionType;
     }
 
-    public ActionObject description(String description) {
-        this.description = description;
+    public ActionObject actionType(ActionType actionType) {
+        this.actionType = actionType;
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setActionType(ActionType actionType) {
+        this.actionType = actionType;
     }
 
     public ActionObjectType getObjectType() {
@@ -107,7 +110,7 @@ public class ActionObject implements Serializable {
         return "ActionObject{" +
             "id=" + id +
             ", objectId='" + objectId + "'" +
-            ", description='" + description + "'" +
+            ", actionType='" + actionType + "'" +
             ", objectType='" + objectType + "'" +
             '}';
     }

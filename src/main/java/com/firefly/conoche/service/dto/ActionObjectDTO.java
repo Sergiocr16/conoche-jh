@@ -4,6 +4,7 @@ package com.firefly.conoche.service.dto;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+import com.firefly.conoche.domain.enumeration.ActionType;
 import com.firefly.conoche.domain.enumeration.ActionObjectType;
 
 /**
@@ -16,7 +17,7 @@ public class ActionObjectDTO implements Serializable {
     @NotNull
     private Long objectId;
 
-    private String description;
+    private ActionType actionType;
 
     private ActionObjectType objectType;
 
@@ -34,12 +35,12 @@ public class ActionObjectDTO implements Serializable {
     public void setObjectId(Long objectId) {
         this.objectId = objectId;
     }
-    public String getDescription() {
-        return description;
+    public ActionType getActionType() {
+        return actionType;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setActionType(ActionType actionType) {
+        this.actionType = actionType;
     }
     public ActionObjectType getObjectType() {
         return objectType;
@@ -75,7 +76,7 @@ public class ActionObjectDTO implements Serializable {
         return "ActionObjectDTO{" +
             "id=" + id +
             ", objectId='" + objectId + "'" +
-            ", description='" + description + "'" +
+            ", actionType='" + actionType + "'" +
             ", objectType='" + objectType + "'" +
             '}';
     }

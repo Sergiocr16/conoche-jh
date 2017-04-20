@@ -16,7 +16,7 @@
                 "title": "Action Object"
             },
             "objectId": "Object Id",
-            "description": "Description",
+            "actionType": "Action Type",
             "objectType": "Object Type"
         }
     }

@@ -10,8 +10,9 @@
             ]
         },
         {
-            "fieldName": "description",
-            "fieldType": "String"
+            "fieldName": "actionType",
+            "fieldType": "ActionType",
+            "fieldValues": "CREATE,UPDATE"
         },
         {
             "fieldName": "objectType",

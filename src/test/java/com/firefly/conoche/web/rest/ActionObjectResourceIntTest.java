@@ -31,6 +31,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.firefly.conoche.domain.enumeration.ActionType;
 import com.firefly.conoche.domain.enumeration.ActionObjectType;
 /**
  * Test class for the ActionObjectResource REST controller.
@@ -44,8 +45,8 @@ public class ActionObjectResourceIntTest {
     private static final Long DEFAULT_OBJECT_ID = 1L;
     private static final Long UPDATED_OBJECT_ID = 2L;
 
-    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+    private static final ActionType DEFAULT_ACTION_TYPE = ActionType.CREATE;
+    private static final ActionType UPDATED_ACTION_TYPE = ActionType.UPDATE;
 
     private static final ActionObjectType DEFAULT_OBJECT_TYPE = ActionObjectType.USER;
     private static final ActionObjectType UPDATED_OBJECT_TYPE = ActionObjectType.LOCAL;
@@ -94,7 +95,7 @@ public class ActionObjectResourceIntTest {
     public static ActionObject createEntity(EntityManager em) {
         ActionObject actionObject = new ActionObject()
                 .objectId(DEFAULT_OBJECT_ID)
-                .description(DEFAULT_DESCRIPTION)
+                .actionType(DEFAULT_ACTION_TYPE)
                 .objectType(DEFAULT_OBJECT_TYPE);
         return actionObject;
     }
@@ -122,7 +123,7 @@ public class ActionObjectResourceIntTest {
         assertThat(actionObjectList).hasSize(databaseSizeBeforeCreate + 1);
         ActionObject testActionObject = actionObjectList.get(actionObjectList.size() - 1);
         assertThat(testActionObject.getObjectId()).isEqualTo(DEFAULT_OBJECT_ID);
-        assertThat(testActionObject.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testActionObject.getActionType()).isEqualTo(DEFAULT_ACTION_TYPE);
         assertThat(testActionObject.getObjectType()).isEqualTo(DEFAULT_OBJECT_TYPE);
     }
 
@@ -178,7 +179,7 @@ public class ActionObjectResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(actionObject.getId().intValue())))
             .andExpect(jsonPath("$.[*].objectId").value(hasItem(DEFAULT_OBJECT_ID.intValue())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].actionType").value(hasItem(DEFAULT_ACTION_TYPE.toString())))
             .andExpect(jsonPath("$.[*].objectType").value(hasItem(DEFAULT_OBJECT_TYPE.toString())));
     }
 
@@ -194,7 +195,7 @@ public class ActionObjectResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(actionObject.getId().intValue()))
             .andExpect(jsonPath("$.objectId").value(DEFAULT_OBJECT_ID.intValue()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.actionType").value(DEFAULT_ACTION_TYPE.toString()))
             .andExpect(jsonPath("$.objectType").value(DEFAULT_OBJECT_TYPE.toString()));
     }
 
@@ -217,7 +218,7 @@ public class ActionObjectResourceIntTest {
         ActionObject updatedActionObject = actionObjectRepository.findOne(actionObject.getId());
         updatedActionObject
                 .objectId(UPDATED_OBJECT_ID)
-                .description(UPDATED_DESCRIPTION)
+                .actionType(UPDATED_ACTION_TYPE)
                 .objectType(UPDATED_OBJECT_TYPE);
         ActionObjectDTO actionObjectDTO = actionObjectMapper.actionObjectToActionObjectDTO(updatedActionObject);
 
@@ -231,7 +232,7 @@ public class ActionObjectResourceIntTest {
         assertThat(actionObjectList).hasSize(databaseSizeBeforeUpdate);
         ActionObject testActionObject = actionObjectList.get(actionObjectList.size() - 1);
         assertThat(testActionObject.getObjectId()).isEqualTo(UPDATED_OBJECT_ID);
-        assertThat(testActionObject.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testActionObject.getActionType()).isEqualTo(UPDATED_ACTION_TYPE);
         assertThat(testActionObject.getObjectType()).isEqualTo(UPDATED_OBJECT_TYPE);
     }
 
