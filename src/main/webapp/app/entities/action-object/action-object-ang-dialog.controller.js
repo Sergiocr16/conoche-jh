@@ -5,14 +5,15 @@
         .module('conocheApp')
         .controller('ActionObjectAngDialogController', ActionObjectAngDialogController);
 
-    ActionObjectAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ActionObject'];
+    ActionObjectAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ActionObject', 'ObjectChange'];
 
-    function ActionObjectAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ActionObject) {
+    function ActionObjectAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ActionObject, ObjectChange) {
         var vm = this;
 
         vm.actionObject = entity;
         vm.clear = clear;
         vm.save = save;
+        vm.objectchanges = ObjectChange.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

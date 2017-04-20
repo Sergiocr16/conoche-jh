@@ -1,11 +1,14 @@
 package com.firefly.conoche.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 import com.firefly.conoche.domain.enumeration.ActionType;
@@ -37,6 +40,11 @@ public class ActionObject implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "object_type")
     private ActionObjectType objectType;
+
+    @OneToMany(mappedBy = "actionObject")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<ObjectChange> changes = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -83,6 +91,31 @@ public class ActionObject implements Serializable {
 
     public void setObjectType(ActionObjectType objectType) {
         this.objectType = objectType;
+    }
+
+    public Set<ObjectChange> getChanges() {
+        return changes;
+    }
+
+    public ActionObject changes(Set<ObjectChange> objectChanges) {
+        this.changes = objectChanges;
+        return this;
+    }
+
+    public ActionObject addChanges(ObjectChange objectChange) {
+        this.changes.add(objectChange);
+        objectChange.setActionObject(this);
+        return this;
+    }
+
+    public ActionObject removeChanges(ObjectChange objectChange) {
+        this.changes.remove(objectChange);
+        objectChange.setActionObject(null);
+        return this;
+    }
+
+    public void setChanges(Set<ObjectChange> objectChanges) {
+        this.changes = objectChanges;
     }
 
     @Override

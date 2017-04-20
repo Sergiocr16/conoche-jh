@@ -17,7 +17,8 @@
             },
             "objectId": "Object Id",
             "actionType": "Action Type",
-            "objectType": "Object Type"
+            "objectType": "Object Type",
+            "changes": "Changes"
         }
     }
 }

@@ -1,6 +1,13 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "changes",
+            "otherEntityName": "objectChange",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "actionObject"
+        }
+    ],
     "fields": [
         {
             "fieldName": "objectId",
@@ -21,9 +28,9 @@
         }
     ],
     "changelogDate": "20170307223303",
-    "entityTableName": "action_object",
     "dto": "mapstruct",
-    "pagination": "pager",
     "service": "serviceClass",
+    "entityTableName": "action_object",
+    "pagination": "pager",
     "angularJSSuffix": "ang"
 }

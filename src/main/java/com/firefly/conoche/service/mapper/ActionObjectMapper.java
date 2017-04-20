@@ -16,6 +16,7 @@ public interface ActionObjectMapper {
 
     List<ActionObjectDTO> actionObjectsToActionObjectDTOs(List<ActionObject> actionObjects);
 
+    @Mapping(target = "changes", ignore = true)
     ActionObject actionObjectDTOToActionObject(ActionObjectDTO actionObjectDTO);
 
     List<ActionObject> actionObjectDTOsToActionObjects(List<ActionObjectDTO> actionObjectDTOs);
