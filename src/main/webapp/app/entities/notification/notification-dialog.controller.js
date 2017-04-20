@@ -5,15 +5,16 @@
         .module('conocheApp')
         .controller('NotificationDialogController', NotificationDialogController);
 
-    NotificationDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Notification', 'User'];
+    NotificationDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Notification', 'User', 'ActionObject'];
 
-    function NotificationDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Notification, User) {
+    function NotificationDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Notification, User, ActionObject) {
         var vm = this;
 
         vm.notification = entity;
         vm.clear = clear;
         vm.save = save;
         vm.users = User.query();
+        vm.actionobjects = ActionObject.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

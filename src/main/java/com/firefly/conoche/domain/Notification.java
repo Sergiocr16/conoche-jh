@@ -30,6 +30,10 @@ public class Notification implements Serializable {
     @NotNull
     private User user;
 
+    @ManyToOne(optional = false)
+    @NotNull
+    private ActionObject actionObject;
+
     public Long getId() {
         return id;
     }
@@ -62,6 +66,19 @@ public class Notification implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public ActionObject getActionObject() {
+        return actionObject;
+    }
+
+    public Notification actionObject(ActionObject actionObject) {
+        this.actionObject = actionObject;
+        return this;
+    }
+
+    public void setActionObject(ActionObject actionObject) {
+        this.actionObject = actionObject;
     }
 
     @Override

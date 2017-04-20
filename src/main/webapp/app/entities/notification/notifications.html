@@ -21,6 +21,7 @@
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="isRead"><span data-translate="conocheApp.notification.isRead">Is Read</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="userLogin"><span data-translate="conocheApp.notification.user">User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="actionObjectId"><span data-translate="conocheApp.notification.actionObject">Action Object</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -30,6 +31,9 @@
                     <td>{{notification.isRead}}</td>
                     <td>
                         {{notification.userLogin}}
+                    </td>
+                    <td>
+                        <a ui-sref="action-object-ang-detail({id:notification.actionObjectId})">{{notification.actionObjectId}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

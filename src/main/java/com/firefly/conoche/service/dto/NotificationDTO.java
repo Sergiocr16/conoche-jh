@@ -21,6 +21,8 @@ public class NotificationDTO implements Serializable {
 
     private String userLogin;
 
+    private Long actionObjectId;
+
     public Long getId() {
         return id;
     }
@@ -50,6 +52,14 @@ public class NotificationDTO implements Serializable {
 
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
+    }
+
+    public Long getActionObjectId() {
+        return actionObjectId;
+    }
+
+    public void setActionObjectId(Long actionObjectId) {
+        this.actionObjectId = actionObjectId;
     }
 
     @Override

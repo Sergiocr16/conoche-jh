@@ -12,6 +12,10 @@
         <dd>
             {{vm.notification.userLogin}}
         </dd>
+        <dt><span data-translate="conocheApp.notification.actionObject">Action Object</span></dt>
+        <dd>
+            <a ui-sref="action-object-ang-detail({id:vm.notification.actionObjectId})">{{vm.notification.actionObjectId}}</a>
+        </dd>
     </dl>
 
     <button type="submit"

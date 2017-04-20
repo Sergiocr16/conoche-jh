@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('NotificationDetailController', NotificationDetailController);
 
-    NotificationDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Notification', 'User'];
+    NotificationDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Notification', 'User', 'ActionObject'];
 
-    function NotificationDetailController($scope, $rootScope, $stateParams, previousState, entity, Notification, User) {
+    function NotificationDetailController($scope, $rootScope, $stateParams, previousState, entity, Notification, User, ActionObject) {
         var vm = this;
 
         vm.notification = entity;

@@ -11,6 +11,15 @@
             "otherEntityField": "login",
             "ownerSide": true,
             "otherEntityRelationshipName": "notification"
+        },
+        {
+            "relationshipName": "actionObject",
+            "otherEntityName": "actionObject",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
         }
     ],
     "fields": [
