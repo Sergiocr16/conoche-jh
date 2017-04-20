@@ -5,9 +5,11 @@
         .module('conocheApp')
         .controller('EventAngController', EventAngController);
 
-    EventAngController.$inject = ['$rootScope','$state', 'DataUtils', 'Event', 'ParseLinks', 'AlertService', 'paginationConstants', 'optionalParams'];
 
-    function EventAngController($rootScope, $state, DataUtils, Event, ParseLinks, AlertService, paginationConstants, optionalParams) {
+    EventAngController.$inject = ['Promotion','$rootScope','$state', 'DataUtils', 'Event', 'ParseLinks', 'AlertService', 'paginationConstants', 'optionalParams'];
+
+    function EventAngController(Promotion, $rootScope, $state, DataUtils, Event, ParseLinks, AlertService, paginationConstants, optionalParams) {
+
 
 
         var vm = this;
@@ -30,6 +32,28 @@
                 size: vm.itemsPerPage,
                 sort: sort()
             }, onSuccess, onError);
+
+            function onSuccess(data, headers) {
+                vm.links = ParseLinks.parse(headers('link'));
+                vm.totalItems = headers('X-Total-Count');
+                vm.queryCount = vm.totalItems;
+                vm.events = data;
+//
+//                vm.page = pagingParams.page;
+                loadPromotions();
+
+                vm.page = optionalParams.page;
+                setTimeout(function() {
+                    $("#tableData").fadeIn(700);
+                }, 200)
+
+            }
+
+
+
+            function onError(error) {
+                AlertService.error(error.data.message);
+            }
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
                 if (vm.predicate !== 'id') {
@@ -37,19 +61,19 @@
                 }
                 return result;
             }
-            function onSuccess(data, headers) {
-                vm.links = ParseLinks.parse(headers('link'));
-                vm.totalItems = headers('X-Total-Count');
-                vm.queryCount = vm.totalItems;
-                vm.events = data;
-                vm.page = optionalParams.page;
-                setTimeout(function() {
-                    $("#tableData").fadeIn(700);
-                }, 200)
+
+            function loadPromotions(){
+                   Promotion.query({}, onSuccessPromotions, onError);
             }
-            function onError(error) {
-                AlertService.error(error.data.message);
-            }
+
+            function onSuccessPromotions(data, headers) {
+                   vm.promotions = data;
+                   setTimeout(function() {
+                        $("#tableData").fadeIn(700);
+                    }, 200)
+             }
+
+
         }
 
         function loadPage(page) {

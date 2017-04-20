@@ -10,14 +10,46 @@
 
     <jhi-alert-error></jhi-alert-error>
     <div class="row no-display" id="container">
-        <div class="col-md-12 col-xs-12 margin-top-20">
-            <div ng-if="vm.event.banner" class="col-md-9 col-xs-12 no-padding-left margin-bottom-40">
-                <a ng-click="vm.openFile(vm.event.bannerContentType, vm.event.banner)">
-                    <img data-ng-src="{{'data:' + vm.event.bannerContentType + ';base64,' + vm.event.banner}}" class="col-md-12 col-xs-12 crop-400" alt="event image" />
-                </a>
-            </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 margin-top-20">
 
-            <div class="col-md-3 no-padding-left">
+            <div class="col-md-9 col-sm-9 col-xs-12 no-padding  margin-bottom-20">
+                <div class=" font-white position-relative">
+                    <div id="info-time-event-detail" class="col-md-12 col-sm-12 col-xs-12">
+                        <h2 class="text-center bold font-white" >
+                            <div class="font-24 col-md-offset-1 col-md-3 no-padding text-center hidden-xs">
+                                <span class="" style="line-height: 80px;">Comienza en: </span>
+                            </div>
+
+                            <div class=" col-md-6 font-40 font-white">
+                                <timer end-time="vm.event.initialTime">
+                                      <span class=" col-md-3 col-sm-3 col-xs-3 text-center">
+                                        <span class="col-md-12 text-center">{{days}}</span>
+                                       <div class="font-13">Días</div>
+                                    </span>
+                                    <span class=" col-md-3 col-sm-3 col-xs-3 text-center">
+                                        <span class="col-md-12 text-center">{{hours}}</span>
+                                       <div class="font-13">Horas</div>
+                                    </span>
+                                    <span class=" col-md-3 col-sm-3 col-xs-3 text-center">
+                                        <span class="col-md-12 ">{{minutes}}</span>
+                                        <div class="font-13 text-center">Minutos</div>
+                                    </span>
+                                    <span class=" col-md-3 col-sm-3 col-xs-3 text-center">
+                                        <span class="col-md-12 text-center">{{seconds}}</span>
+                                       <div class="font-13 text-center">Segundos</div>
+                                    </span>
+                                </timer>
+                            </div>
+
+                        </h2>
+                    </div>
+                    <a ng-click="vm.openFile(vm.event.bannerContentType, vm.event.banner)">
+                    <img class="col-md-12 col-sm-12 col-xs-12 no-padding crop-400" style="z-index: 0;"   data-ng-src="{{'data:' + vm.event.bannerContentType + ';base64,' + vm.event.banner}}"  alt="promotion image" />
+                    </a>>
+                </div>
+
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12 ">
                 <div class=" no-padding E0E0E0-background" id="event-info">
                     <h4 class="padding-10 text-center bold gray-font">Información de evento</h4>
                 </div>
@@ -42,22 +74,26 @@
                     </ul>
                 </div>
                 <div class="btn btn-success btn-block btn-lg 5cb85c-background border-radius-6 green-2-background cursor-default"><span>Entrada: ₡ {{vm.event.price}}</span></div>
-                <button type="button" ng-click="vm.createComment(vm.event)" class="btn btn-danger btn-block btn-lg  border-radius-6 no-margin-left">
+                <button has-authority="ROLE_USER"  type="button" ng-click="vm.createComment(vm.event)" class="btn btn-danger btn-block btn-lg  border-radius-6 no-margin-left">
                     <span class="glyphicon glyphicon-eye"></span>
                     <span class="hidden-sm-down" data-translate="conocheApp.event.detail.commentButton"> Create comment</span>
                 </button>
+                <button has-authority="ROLE_OWNER" type="button" ui-sref="event-ang-detail.new({id:vm.event.id})" class="btn btn-danger btn-block btn-lg  border-radius-6 no-margin-left">
+                    <span class="glyphicon glyphicon-eye"></span>
+                    <span class="hidden-sm-down" data-translate="conocheApp.event.detail.addPromotionButton"> Add promotion</span>
+                </button>
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 no-padding">
             <div class="col-md-9 font-15 max-height-300px">
-                <h2 class="bold font-24 margin-bottom-40 " data-translate="conocheApp.event.details">Detalles</h2>
+                <h2 class="bold font-24 margin-bottom-40" style="letter-spacing:1px; " data-translate="conocheApp.event.details">Detalles</h2>
                 <p class="margin-bottom-40 ">{{vm.event.details}}</p>
             </div>
         </div>
 
     </div>
 
-        <ul class="nav nav-tabs nav-justified" role="tablist">
+        <ul class="nav nav-tabs nav-justified " role="tablist">
             <li ui-sref-active="active" ><a ui-sref="event-ang-detail.real-time-event-image-gallery"
                                             translate="conocheApp.event.tabs.images">Images</a></li>
             <li ui-sref-active="active"><a ui-sref="event-ang-detail.live-messages"
@@ -66,6 +102,8 @@
                                            translate="conocheApp.event.tabs.location">Location</a></li>
             <li ui-sref-active="active"><a ui-sref="event-ang-detail.services"
                                            translate="conocheApp.event.tabs.services">Services</a></li>
+            <li ui-sref-active="active"><a ui-sref="event-ang-detail.promotions"
+                                           translate="conocheApp.event.tabs.promotions">Promotions</a></li>
         </ul>
         <div class="tab-content no-padding">
             <div class="tab-pane active">

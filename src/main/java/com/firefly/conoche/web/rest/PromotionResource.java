@@ -34,7 +34,7 @@ public class PromotionResource {
     private final Logger log = LoggerFactory.getLogger(PromotionResource.class);
 
     private static final String ENTITY_NAME = "promotion";
-        
+
     private final PromotionService promotionService;
 
     public PromotionResource(PromotionService promotionService) {
@@ -127,5 +127,16 @@ public class PromotionResource {
         promotionService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping("/getByEvent")
+    @Timed
+    public ResponseEntity<List<PromotionDTO>> getByEvent(@ApiParam Pageable pageable, Long eventId)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Residents");
+        Page<PromotionDTO> page = promotionService.getByEvent(pageable,eventId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/getByEvent");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
 
 }

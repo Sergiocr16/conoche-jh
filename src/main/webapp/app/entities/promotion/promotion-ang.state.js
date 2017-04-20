@@ -131,6 +131,7 @@
                                 initialTime: null,
                                 finalTime: null,
                                 maximumCodePerUser: null,
+                                codeQuantity: null,
                                 id: null
                             };
                         }

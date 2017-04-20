@@ -108,11 +108,11 @@
                 });
             }]
         })
-        .state('promotion-ang.new', {
-            parent: 'promotion-ang',
-            url: '/new',
+        .state('event-ang-detail.new', {
+            parent: 'event-ang-detail',
+            url: 'promotions/new',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER','ROLE_OWNER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -133,12 +133,16 @@
                                 maximumCodePerUser: null,
                                 id: null
                             };
-                        }
+                        },   translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                                              $translatePartialLoader.addPart('promotion');
+                                              $translatePartialLoader.addPart('global');
+                                              return $translate.refresh();
+                                          }]
                     }
                 }).result.then(function() {
-                    $state.go('promotion-ang', null, { reload: 'promotion-ang' });
+                    $state.go('event-ang-detail', null, { reload: 'event-ang-detail' });
                 }, function() {
-                    $state.go('promotion-ang');
+                    $state.go('event-ang-detail');
                 });
             }]
         })
@@ -185,11 +189,36 @@
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('promotion-ang', null, { reload: 'promotion-ang' });
+                    $state.go('^', null, { reload: '^' });
                 }, function() {
                     $state.go('^');
                 });
             }]
+        })
+        .state('event-ang-detail.promotions', {
+            parent: 'event-ang-detail',
+            url: '/promotions',
+            data: {
+                  authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN'],
+                pageTitle: 'conocheApp.promotion.home.title'
+            },
+            views: {
+                'eventContent@event-ang-detail': {
+                    templateUrl: 'app/entities/promotion/event-promotions.html',
+                    controller: 'EventPromotionsController',
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('promotion');
+                    return $translate.refresh();
+                }],
+
+                event: ['idEvent', 'Event', function(idEvent, Event) {
+                    return Event.get({id : idEvent}).$promise;
+                }],
+            }
         });
     }
 

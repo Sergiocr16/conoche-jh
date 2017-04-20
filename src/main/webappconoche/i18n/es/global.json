@@ -24,6 +24,7 @@
                 "scheduleAng": "Schedule",
                 "servicioAng": "Servicio",
                 "category": "Category",
+                "canjearPromo": "Canjear promoción",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -33,7 +34,8 @@
                 "sessions": "Sesiones",
                 "login": "Iniciar sesión",
                 "logout": "Cerrar la sesión",
-                "register": "Crear una cuenta"
+                "register": "Crear una cuenta",
+                "promo": "Mis cupones"
             },
             "admin": {
                 "main": "Administración",

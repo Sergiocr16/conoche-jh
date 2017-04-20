@@ -20,6 +20,7 @@
             'cloudinary',
             'wu.masonry',
             'FBAngular',
+            'timer',
             'ngAnimate'
         ])
         .run(run);

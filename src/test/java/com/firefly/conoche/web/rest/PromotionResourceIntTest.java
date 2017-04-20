@@ -66,6 +66,9 @@ public class PromotionResourceIntTest {
     private static final Integer DEFAULT_MAXIMUM_CODE_PER_USER = 1;
     private static final Integer UPDATED_MAXIMUM_CODE_PER_USER = 2;
 
+    private static final Integer DEFAULT_CODE_QUANTITY = 1;
+    private static final Integer UPDATED_CODE_QUANTITY = 2;
+
     @Autowired
     private PromotionRepository promotionRepository;
 
@@ -115,7 +118,8 @@ public class PromotionResourceIntTest {
                 .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE)
                 .initialTime(DEFAULT_INITIAL_TIME)
                 .finalTime(DEFAULT_FINAL_TIME)
-                .maximumCodePerUser(DEFAULT_MAXIMUM_CODE_PER_USER);
+                .maximumCodePerUser(DEFAULT_MAXIMUM_CODE_PER_USER)
+                .codeQuantity(DEFAULT_CODE_QUANTITY);
         return promotion;
     }
 
@@ -148,6 +152,7 @@ public class PromotionResourceIntTest {
         assertThat(testPromotion.getInitialTime()).isEqualTo(DEFAULT_INITIAL_TIME);
         assertThat(testPromotion.getFinalTime()).isEqualTo(DEFAULT_FINAL_TIME);
         assertThat(testPromotion.getMaximumCodePerUser()).isEqualTo(DEFAULT_MAXIMUM_CODE_PER_USER);
+        assertThat(testPromotion.getCodeQuantity()).isEqualTo(DEFAULT_CODE_QUANTITY);
     }
 
     @Test
@@ -264,7 +269,8 @@ public class PromotionResourceIntTest {
             .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))))
             .andExpect(jsonPath("$.[*].initialTime").value(hasItem(sameInstant(DEFAULT_INITIAL_TIME))))
             .andExpect(jsonPath("$.[*].finalTime").value(hasItem(sameInstant(DEFAULT_FINAL_TIME))))
-            .andExpect(jsonPath("$.[*].maximumCodePerUser").value(hasItem(DEFAULT_MAXIMUM_CODE_PER_USER)));
+            .andExpect(jsonPath("$.[*].maximumCodePerUser").value(hasItem(DEFAULT_MAXIMUM_CODE_PER_USER)))
+            .andExpect(jsonPath("$.[*].codeQuantity").value(hasItem(DEFAULT_CODE_QUANTITY)));
     }
 
     @Test
@@ -284,7 +290,8 @@ public class PromotionResourceIntTest {
             .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)))
             .andExpect(jsonPath("$.initialTime").value(sameInstant(DEFAULT_INITIAL_TIME)))
             .andExpect(jsonPath("$.finalTime").value(sameInstant(DEFAULT_FINAL_TIME)))
-            .andExpect(jsonPath("$.maximumCodePerUser").value(DEFAULT_MAXIMUM_CODE_PER_USER));
+            .andExpect(jsonPath("$.maximumCodePerUser").value(DEFAULT_MAXIMUM_CODE_PER_USER))
+            .andExpect(jsonPath("$.codeQuantity").value(DEFAULT_CODE_QUANTITY));
     }
 
     @Test
@@ -311,7 +318,8 @@ public class PromotionResourceIntTest {
                 .imageContentType(UPDATED_IMAGE_CONTENT_TYPE)
                 .initialTime(UPDATED_INITIAL_TIME)
                 .finalTime(UPDATED_FINAL_TIME)
-                .maximumCodePerUser(UPDATED_MAXIMUM_CODE_PER_USER);
+                .maximumCodePerUser(UPDATED_MAXIMUM_CODE_PER_USER)
+                .codeQuantity(UPDATED_CODE_QUANTITY);
         PromotionDTO promotionDTO = promotionMapper.promotionToPromotionDTO(updatedPromotion);
 
         restPromotionMockMvc.perform(put("/api/promotions")
@@ -330,6 +338,7 @@ public class PromotionResourceIntTest {
         assertThat(testPromotion.getInitialTime()).isEqualTo(UPDATED_INITIAL_TIME);
         assertThat(testPromotion.getFinalTime()).isEqualTo(UPDATED_FINAL_TIME);
         assertThat(testPromotion.getMaximumCodePerUser()).isEqualTo(UPDATED_MAXIMUM_CODE_PER_USER);
+        assertThat(testPromotion.getCodeQuantity()).isEqualTo(UPDATED_CODE_QUANTITY);
     }
 
     @Test

@@ -17,7 +17,8 @@
             "detail": {
                 "title": "Event",
                 "vieMessages": "View live comments",
-                "commentButton": "Comment the event"
+                "commentButton": "Comment the event",
+                "addPromotionButton": "Add new promotion"
             },
             "name": "Name",
             "details": "Details",
@@ -26,7 +27,8 @@
             "bannerUrl": "Banner Url",
             "initialTime": "Initial Time",
             "finalTime": "Final Time",
-            "promotions": "Promotions",
+            "promotions": "PROMOTIONS",
+            "timeLeft": "Time left",
             "images": "Images",
             "realTimeImages": "Real Time Images",
             "attendingUsers": "Attending Users",
@@ -45,7 +47,8 @@
                 "services" :"Services",
                 "location" :"Location",
                 "images" : "Images",
-                "messages" : "Messages"
+                "messages" : "Messages",
+                "promotions" : "Promotions"
             }
         }
     }

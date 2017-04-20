@@ -1,6 +1,8 @@
 package com.firefly.conoche.service.dto;
 
 
+import com.firefly.conoche.domain.Promotion;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -24,6 +26,8 @@ public class PromotionCodeDTO implements Serializable {
 
     private Long userId;
 
+    private PromotionDTO promotion;
+
     public Long getId() {
         return id;
     }
@@ -33,6 +37,13 @@ public class PromotionCodeDTO implements Serializable {
     }
     public String getCode() {
         return code;
+    }
+
+    public void setPromotion(PromotionDTO promotion) {
+        this.promotion = promotion;
+    }
+    public PromotionDTO getPromotion() {
+        return promotion;
     }
 
     public void setCode(String code) {
