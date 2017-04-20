@@ -157,6 +157,18 @@ public class PromotionCodeResource {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/promotion-codes/findCode/{code}")
+    @Timed
+    public ResponseEntity<PromotionCodeDTO> findByCode(@PathVariable(value = "code")  String code)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of PromotionCodes");
+        PromotionCodeDTO result = promotionCodeService.findByCode(code);
+        if(result!=null) {
+            result.setPromotion(this.promotionService.findOne(result.getPromotionId()));
+        }
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+    }
+
     /**
      * GET  /promotion-codes/:id : get the "id" promotionCode.
      *

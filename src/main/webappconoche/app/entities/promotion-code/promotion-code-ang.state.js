@@ -88,7 +88,7 @@
             parent: 'entity',
             data: {
                 authorities: ['ROLE_OWNER'],
-                pageTitle: 'conocheApp.promotionCode.detail.title'
+                pageTitle: 'global.menu.entities.canjearPromo'
             },
             views: {
                 'content@': {
@@ -100,6 +100,8 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('promotionCode');
+                    $translatePartialLoader.addPart('event');
+                    $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }],
                 previousState: ["$state", function ($state) {
@@ -118,7 +120,10 @@
             data: {
                 authorities: ['ROLE_USER']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+            onEnter: ['$stateParams', '$state', '$uibModal','WSPromotionCodeService','Principal', function($stateParams, $state, $uibModal,WSPromotionCodeService,Principal) {
+             Principal.identity().then(function(user){
+              WSPromotionCodeService.subscribe(user.id);
+             })
                 $uibModal.open({
                     templateUrl: 'app/entities/promotion-code/my-promotions-codes.html',
                     controller: 'MyPromotionCodesController',
@@ -137,6 +142,11 @@
                 }, function() {
                     $state.go('^');
                 });
+            }],
+            onExit: ['$stateParams', 'WSPromotionCodeService','Principal', function($stateParams, WSPromotionCodeService,Principal) {
+                Principal.identity().then(function(user){
+                WSPromotionCodeService.unsubscribe(user.id)
+                })
             }]
         })
         .state('promotion-code-ang-detail.edit', {

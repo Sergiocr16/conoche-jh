@@ -5,26 +5,44 @@
         .module('conocheApp')
         .controller('SwapCouponController', SwapCouponController);
 
-    SwapCouponController.$inject = ['$timeout', '$scope', '$stateParams', 'PromotionCode', 'Promotion', 'User'];
+    SwapCouponController.$inject = ['$timeout', '$scope', '$stateParams', 'PromotionCode', 'Promotion', 'User','WSPromotionCodeService','Principal'];
 
-    function SwapCouponController ($timeout, $scope, $stateParams, PromotionCode, Promotion, User) {
+    function SwapCouponController ($timeout, $scope, $stateParams, PromotionCode, Promotion, User,WSPromotionCodeService,Principal) {
         var vm = this;
 
         vm.promotionCode = {};
         vm.clear = clear;
         vm.save = save;
-        vm.promotions = Promotion.query();
-        vm.users = User.query();
+
+
+      vm.swapCoupon = function(){
+      vm.promoCode.promotion = undefined;
+      WSPromotionCodeService.discardPromotionCode(vm.promoCode.userId,vm.promoCode)
+      vm.promoCode = undefined;
+      vm.found = false;
+      vm.borderColor = "normal-border";
+      vm.bgColor = "normal-swap";
+      vm.query = undefined;
+      }
 
         vm.findCoupon = function(){
+        vm.found = false;
+        vm.borderColor = "normal-border";
+        vm.bgColor = "normal-swap";
         if(vm.query.length==5){
-          PromotionCode.findCoupon({ code: vm.query},onSuccess,OnError)
+          PromotionCode.findCoupon({ code: vm.query},onSuccess,onError)
         }
+
         function onSuccess(code){
         vm.promoCode = code;
+        vm.borderColor = "border-success";
+        vm.bgColor = "swap-coupon-found"
+        vm.found = true;
         }
         function onError(){
-        console.log('error')
+        vm.borderColor = "border-error";
+        vm.bgColor = "swap-coupon-no-found"
+        vm.found = false;
         }
         }
         $timeout(function (){

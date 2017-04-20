@@ -31,8 +31,13 @@
             },
             'findCoupon': {
                 method: 'GET',
-                isArray: true,
                 url: 'api/promotion-codes/findCode/:code',
+                transformResponse: function (data) {
+                    if (data) {
+                        data = angular.fromJson(data);
+                    }
+                    return data;
+                },
                 params:{
                   code:'@code'
                 }

@@ -17,4 +17,5 @@ public interface PromotionCodeRepository extends JpaRepository<PromotionCode,Lon
     List<PromotionCode> findByPromotionIdAndUserId(Long promotionId,Long userId);
     List<PromotionCode> findByUserId(Long userId);
     PromotionCode findTop1ByPromotionIdAndUserIdIsNull(Long promotionId);
+    PromotionCode findByCode(String code);
 }

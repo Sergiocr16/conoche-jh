@@ -621,6 +621,31 @@ border-radius:5px!important;
 background-color:rgba(94, 63, 125,0.7);
 }
 
+.swap-coupon-no-found{
+background-color:#B71C1C!important;
+border-color:#B71C1C!important;
+}
+.normal-swap{
+background-color:#e5e5e5!important;
+border-color:#e5e5e5!important;
+}
+.swap-coupon-found{
+background-color:#4CAF50!important;
+border-color:#4CAF50!important;
+}
+.font-18{
+font-size:19px;
+}
+.border-success{
+border:1px solid #4CAF50!important;
+}
+.normal-border{
+border:1px solid #e5e5e5!important;
+}
+.border-error{
+border:1px solid #B71C1C!important;
+}
+
 .code-promotion{
  position: absolute;
    opacity:1!important;

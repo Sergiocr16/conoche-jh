@@ -1,4 +1,32 @@
-<h1>Hola</h1>
+<div class="col-lg-8 col-lg-offset-2" >
+    <div class="input-group" style="margin:30px;">
+        <input  type="text" ng-model="vm.query" ng-change="vm.findCoupon()" style="text-transform:uppercase" maxlength="5" class="form-control input-lg text-center {{vm.borderColor}}" type="text" placeholder="CODIGO">
+        <span class="input-group-addon {{vm.bgColor}}">
+            <i ng-show="vm.query == undefined || vm.query.length == 0" class="fa fa-search font-18"></i>
+            <i ng-show="vm.query.length>=1 && !vm.found && vm.query.length!=5" class="fa fa-spinner fa-spin font-18"></i>
+		    <i ng-show="vm.found" class="fa fa-check-circle font-18"  style="color:lightgreen"></i>
+            <i ng-show="!vm.found && vm.query.length == 5" class="fa fa-times-circle font-18" style="color:lightsalmon"></i>
+		</span>
 
-<input type="text" ng-model="vm.query" ng-change="vm.findCoupon()" maxlength="5" style="text-transform:uppercase">
+    </div>
+
+    <div style="height:55px" ng-show="!vm.found">
+        <h3 ng-show="!vm.found && vm.query.length == 5" class="text-center" style="margin-bottom:30px;">Ninguna promoción encontrada</h3>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12 no-padding  margin-bottom-20 " ng-show="vm.found">
+        <div  class="no-padding font-white">
+            <div class="col-md-12 col-xs-12 col-sm-12 code-promotion height-130 top-0">
+                     <span class="col-md-12 col-lg-12 col-sm-12 col-xs-12 no-padding Raleway Raleway" style="margin-top:15px">
+                         <h3 class="text-center "><span class="promo-code">{{vm.promoCode.code}}</span></h3></span>
+            </div>
+            <div id="info-time-promotion" class="col-md-12 col-sm-12 col-xs-12">
+                <span class="col-md-12 col-sm-12 col-xs-12 no-padding Raleway font-15" style="text-transform: uppercase;"><h3 class="text-center font-15 no-padding no-margin" style="color:white;">{{vm.promoCode.promotion.description}}</h3></span>
+                <span class="col-md-12 col-sm-12 col-xs-12 font-16 Raleway"><h3 class="text-center font-15 no-padding no-margin" style="color:white;"><span data-translate="conocheApp.event.timeLeft"></span> <timer class="text-center" end-time="promoCode.promotion.finalTime">{{hours}}:{{minutes}}:{{seconds}}</timer></h3></span>
+            </div>
+            <img class="col-md-12 col-sm-12 col-xs-12 no-padding crop-150" style="z-index: 0;"  data-ng-src="{{'data:' + vm.promoCode.promotion.imageContentType + ';base64,' + vm.promoCode.promotion.image}}"  alt="promotion image" />
+        </div>
+        <h3 class="text-center"><button ng-click="vm.swapCoupon()" style="margin-top:10px;background-color:#4CAF50!important" class="btn btn-success col-md-8 col-md-offset-2">Canjear</button></h3>
+    </div>
+
+</div>
 

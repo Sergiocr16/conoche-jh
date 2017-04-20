@@ -216,7 +216,7 @@ public class Promotion implements Serializable {
         StringBuilder sb = new StringBuilder( len );
         for( int i = 0; i < len; i++ )
             sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
-        return sb.toString();
+        return sb.toString().toUpperCase();
     }
     public void setCodes(Set<PromotionCode> promotionCodes) {
         this.codes = promotionCodes;

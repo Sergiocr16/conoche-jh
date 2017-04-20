@@ -24,6 +24,7 @@
                 "scheduleAng": "Schedule",
                 "servicioAng": "Servicio",
                 "category": "Category",
+                "canjearPromo": "Canjear promoción",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -113,6 +113,14 @@ public class PromotionCodeService {
         return promotionCodeDTO;
     }
 
+    @Transactional(readOnly = true)
+    public PromotionCodeDTO findByCode(String code) {
+        log.debug("Request to get PromotionCode : {}", code);
+        PromotionCode promotionCode = promotionCodeRepository.findByCode(code);
+        PromotionCodeDTO promotionCodeDTO = promotionCodeMapper.promotionCodeToPromotionCodeDTO(promotionCode);
+        return promotionCodeDTO;
+    }
+
     /**
      *  Delete the  promotionCode by id.
      *

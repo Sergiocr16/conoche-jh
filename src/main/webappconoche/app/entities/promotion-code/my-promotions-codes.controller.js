@@ -5,10 +5,21 @@
         .module('conocheApp')
         .controller('MyPromotionCodesController', MyPromotionCodesController);
 
-    MyPromotionCodesController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'PromotionCode', 'Promotion', 'User','Principal'];
+    MyPromotionCodesController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'PromotionCode', 'Promotion', 'User','Principal','WSPromotionCodeService','$filter'];
 
-    function MyPromotionCodesController ($timeout, $scope, $stateParams, $uibModalInstance, PromotionCode, Promotion, User,Principal) {
+    function MyPromotionCodesController ($timeout, $scope, $stateParams, $uibModalInstance, PromotionCode, Promotion, User,Principal,WSPromotionCodeService,$filter) {
         var vm = this;
+
+       Principal.identity().then(function(user){
+             vm.user = user;
+             WSPromotionCodeService.receive(vm.user.id).then(null, null, deletePromotion);
+        })
+
+
+      function deletePromotion(promo){
+      vm.promotionCodes = $filter('filter')(vm.promotionCodes, {id: promo.id})
+      }
+
 
         vm.promotionCodes = [];
         vm.clear = clear;

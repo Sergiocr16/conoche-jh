@@ -52,7 +52,6 @@ public class RealTimeMessageService {
         }
     }
 
-    //cambiar el zoneid
     @SubscribeMapping("/topic/saveRealTimeEventMessage/{idEvent}")
     @SendTo("/topic/RealTimeEventMessage/{idEvent}")
     public MessageDTO sendRealTimeEventMessage(@Payload MessageDTO messageDTO, @DestinationVariable Long idEvent){
