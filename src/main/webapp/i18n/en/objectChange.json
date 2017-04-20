@@ -1,0 +1,21 @@
+{
+    "conocheApp": {
+        "objectChange" : {
+            "home": {
+                "title": "Object Changes",
+                "createLabel": "Create a new Object Change",
+                "createOrEditLabel": "Create or edit a Object Change"
+            },
+            "created": "A new Object Change is created with identifier {{ param }}",
+            "updated": "A Object Change is updated with identifier {{ param }}",
+            "deleted": "A Object Change is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Object Change {{ id }}?"
+            },
+            "detail": {
+                "title": "Object Change"
+            },
+            "fieldName": "Field Name"
+        }
+    }
+}

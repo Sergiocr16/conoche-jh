@@ -1,0 +1,18 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "fieldName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170420163424",
+    "dto": "mapstruct",
+    "service": "serviceClass",
+    "entityTableName": "object_change",
+    "pagination": "pager"
+}
