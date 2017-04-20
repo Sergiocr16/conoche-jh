@@ -35,7 +35,11 @@
             vm.isSaving = true
             RealTimeEventImageCloudinary
                 .save(fileImage, vm.realTimeEventImage)
-                .then(onSaveSuccess, onSaveError);
+                .then(onSaveSuccess, onSaveError, onNotify);
+        }
+
+        function onNotify(info) {
+            vm.progress = Math.round((info.loaded / info.total) * 100);
         }
 
         function onSaveSuccess (result) {

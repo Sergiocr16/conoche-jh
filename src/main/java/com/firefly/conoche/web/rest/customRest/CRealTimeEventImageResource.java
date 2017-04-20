@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 
@@ -34,13 +35,29 @@ public class CRealTimeEventImageResource {
 
     @GetMapping("/real-time-event-images/event/{idEvent}")
     @Timed
-    public ResponseEntity<List<RealTimeEventImageDTO>> getMesageByEvent(@PathVariable Long idEvent,
+    public ResponseEntity<List<RealTimeEventImageDTO>> getImagesByEvent(@PathVariable Long idEvent,
                                                                         @PageableDefault(page= 0, value = Integer.MAX_VALUE)
                                                                         @ApiParam Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get mesages from Event : {}", idEvent);
         Page<RealTimeEventImageDTO> page = realTimeEventImageService.findEventRealTimeImages(idEvent, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/real-time-event-images/event/" + idEvent);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/real-time-event-images/event/{idEvent}/{hours}")
+    @Timed
+    public ResponseEntity<List<RealTimeEventImageDTO>> getLastNHourImages(@PathVariable Long idEvent,
+                                                                          @PathVariable Long hours,
+                                                                        @PageableDefault(page= 0, value = Integer.MAX_VALUE)
+                                                                        @ApiParam Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get mesages from Event : {}", idEvent);
+        Page<RealTimeEventImageDTO> page = realTimeEventImageService.findEventRealtimeImagesAftherDate(
+                idEvent, ZonedDateTime.now().minusHours(hours), pageable);
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page,
+            "/api/real-time-event-images/event/" + idEvent + "/" + hours);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

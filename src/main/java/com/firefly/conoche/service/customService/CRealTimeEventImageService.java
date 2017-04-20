@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 /**
@@ -43,6 +44,12 @@ public class CRealTimeEventImageService {
     @Transactional(readOnly = true)
     public Page<RealTimeEventImageDTO> findEventRealTimeImages(Long id, Pageable page) {
         return realTimeEventImageRepository.findByEventId(id, page)
+            .map(realTimeEventImageMapper::realTimeEventImageToRealTimeEventImageDTO);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<RealTimeEventImageDTO> findEventRealtimeImagesAftherDate(Long id, ZonedDateTime date, Pageable page) {
+        return realTimeEventImageRepository.findByEventIdAndCreationTimeGreaterThan(id, date, page)
             .map(realTimeEventImageMapper::realTimeEventImageToRealTimeEventImageDTO);
     }
 

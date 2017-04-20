@@ -1,4 +1,100 @@
+.home-search-button {
+    height: 46px;
+    color: #a4a4a4 !important;
+}
 
+.home-search-button:hover {
+    color: #a4a4a4;
+}
+
+.dropdown-menu {
+    animation: fadeInUp 0.2s;
+}
+.page-header .page-header-menu .hor-menu .navbar-nav > .open > a:hover{
+    color:#ffffff!important;
+    background-color: #55616f!important;
+}
+
+.lg-actions .lg-next, .lg-actions .lg-prev {
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: 10% !important;
+    color: #999;
+    cursor: pointer;
+    display: block;
+    font-size: 22px;
+    margin-top: -10px;
+    padding: 17px 12px 9px 10px;
+    position: absolute;
+    top: 50%;
+    z-index: 1080;
+}
+
+.lg-actions .lg-next:hover, .lg-actions .lg-prev:hover {
+    color: #FFF;
+}
+
+.lg-actions .lg-next {
+    right: 5%;
+}
+.lg-actions .lg-prev {
+    left: 5%;
+}
+
+.lg-hide-items .lg-next {
+    opacity: 0;
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+}
+
+.lg-icon {
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.lg-icon i {
+    font-size: 32px !important;
+}
+
+.lg-toolbar, .lg-prev, .lg-next {
+    opacity: 1;
+    -webkit-transition: -webkit-transform 0.35s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.35s cubic-bezier(0, 0, 0.25, 1) 0s, color 0.2s linear;
+    -moz-transition: -moz-transform 0.35s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.35s cubic-bezier(0, 0, 0.25, 1) 0s, color 0.2s linear;
+    -o-transition: -o-transform 0.35s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.35s cubic-bezier(0, 0, 0.25, 1) 0s, color 0.2s linear;
+    transition: transform 0.35s cubic-bezier(0, 0, 0.25, 1) 0s, opacity 0.35s cubic-bezier(0, 0, 0.25, 1) 0s, color 0.2s linear;
+}
+
+
+
+.no-display-when-empty:empty {
+    display: none;
+}
+.slideshow-content {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+}
+
+.lg-toolbar {
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    border: none !important;
+}
+
+.center-image-slide-show {
+    margin: 0 auto;
+    position:absolute;
+    top: 0;
+    left:0;
+    right:0;
+    bottom:0;
+}
 
 .button-clear-style {
     padding: 0;
@@ -845,4 +941,21 @@ font-size: 28px!important;
      color: #777;
      font-size: 19px!important;
      font-family: Lato,sans-serif;
+}
+
+.user-head-style span {
+    color: #8ea3b6
+}
+.icon-activation-style {
+    color: #9749b7;
+    font-size: 20px !important;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.icon-deactivation-style {
+    color: #6a6c6f;
+    font-size: 20px !important;
+    margin-left: 20px;
+    margin-right: 20px;
 }

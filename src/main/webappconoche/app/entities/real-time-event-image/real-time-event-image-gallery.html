@@ -1,17 +1,18 @@
 
-
-
 <div>
     <div class="container">
-        <h2 class="pull-left"data-translate="conocheApp.realTimeEventImage.home.title">Real Time Event Images</h2>
-        <figure class="pull-left snip1566">
+        <figure class="snip1566">
             <figcaption><i class="fa fa-plus"></i></figcaption>
             <a  ui-sref="event-ang-detail.real-time-event-image-gallery.savews"></a>
+        </figure>
+
+        <figure class="snip1566">
+            <figcaption><i class="fa fa-play"></i></figcaption>
+            <a  ng-click="vm.toSlideshow()"></a>
         </figure>
     </div>
 
     <jhi-alert></jhi-alert>
-
     <div ng-show="vm.showGallery" class="container">
         <div masonry="{ transitionDuration: '0.3s' }" preserve-order="true">
             <div class=" masonry-brick" ng-repeat="realTimeEventImage in vm.realTimeEventImages track by realTimeEventImage.id">
@@ -23,18 +24,13 @@
                                                 quality="70"
                                                 crop="scale" radius="5"/>
                         </cl-image>
-
-                        <cl-image ng-if="realTimeEventImage.fullScreen"
-                                  fullscreen="realTimeEventImage.fullScreen"
-                                  full-screen public-id="{{realTimeEventImage.imageUrl}}">
-                        </cl-image>
                     </div>
                     <div class="masondry-overlay-mask" ng-style="dimentions">
                         <a  ng-if="vm.isOwner" ui-sref="event-ang-detail.real-time-event-image-gallery.delete({idImage:realTimeEventImage.id})"
                             class="btn btn-icon-only purple pull-left">
                             <i class="fa fa-times"></i>
                         </a>
-                        <a ng-click="vm.toggleFullScreen(realTimeEventImage)" class="btn btn-icon-only purple pull-left">
+                        <a ng-click="vm.callModal($index)" class="btn btn-icon-only purple pull-left">
                             <i class="fa fa-arrows-alt"></i>
                         </a>
                         <span href="" class="pull-right">{{realTimeEventImage.creationTime |  date:'yyyy-MM-dd HH:mm:ss Z' }}</span>
