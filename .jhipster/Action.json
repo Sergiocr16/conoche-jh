@@ -1,13 +1,6 @@
 {
     "fluentMethods": true,
-    "relationships": [
-        {
-            "relationshipType": "one-to-many",
-            "relationshipName": "objects",
-            "otherEntityName": "actionObject",
-            "otherEntityRelationshipName": "action"
-        }
-    ],
+    "relationships": [],
     "fields": [
         {
             "fieldName": "descripcion",

@@ -16,8 +16,7 @@
                 "title": "Notification"
             },
             "isRead": "Is Read",
-            "user": "User",
-            "action": "Action"
+            "user": "User"
         }
     }
 }

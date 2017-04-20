@@ -7,12 +7,6 @@
         Added the constraints for entity ActionObject.
     -->
     <changeSet id="20170307223303-2" author="jhipster">
-        
-        <addForeignKeyConstraint baseColumnNames="action_id"
-                                 baseTableName="action_object"
-                                 constraintName="fk_action_object_action_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="action"/>
 
     </changeSet>
 </databaseChangeLog>

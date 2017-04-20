@@ -4,7 +4,6 @@ import com.firefly.conoche.ConocheApp;
 
 import com.firefly.conoche.domain.Notification;
 import com.firefly.conoche.domain.User;
-import com.firefly.conoche.domain.Action;
 import com.firefly.conoche.repository.NotificationRepository;
 import com.firefly.conoche.service.NotificationService;
 import com.firefly.conoche.service.dto.NotificationDTO;
@@ -94,11 +93,6 @@ public class NotificationResourceIntTest {
         em.persist(user);
         em.flush();
         notification.setUser(user);
-        // Add required entity
-        Action action = ActionResourceIntTest.createEntity(em);
-        em.persist(action);
-        em.flush();
-        notification.setAction(action);
         return notification;
     }
 

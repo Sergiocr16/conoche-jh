@@ -35,9 +35,6 @@ public class ActionObject implements Serializable {
     @Column(name = "object_type")
     private ActionObjectType objectType;
 
-    @ManyToOne
-    private Action action;
-
     public Long getId() {
         return id;
     }
@@ -83,19 +80,6 @@ public class ActionObject implements Serializable {
 
     public void setObjectType(ActionObjectType objectType) {
         this.objectType = objectType;
-    }
-
-    public Action getAction() {
-        return action;
-    }
-
-    public ActionObject action(Action action) {
-        this.action = action;
-        return this;
-    }
-
-    public void setAction(Action action) {
-        this.action = action;
     }
 
     @Override

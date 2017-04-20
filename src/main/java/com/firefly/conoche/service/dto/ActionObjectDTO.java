@@ -3,8 +3,6 @@ package com.firefly.conoche.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 import com.firefly.conoche.domain.enumeration.ActionObjectType;
 
@@ -21,8 +19,6 @@ public class ActionObjectDTO implements Serializable {
     private String description;
 
     private ActionObjectType objectType;
-
-    private Long actionId;
 
     public Long getId() {
         return id;
@@ -51,14 +47,6 @@ public class ActionObjectDTO implements Serializable {
 
     public void setObjectType(ActionObjectType objectType) {
         this.objectType = objectType;
-    }
-
-    public Long getActionId() {
-        return actionId;
-    }
-
-    public void setActionId(Long actionId) {
-        this.actionId = actionId;
     }
 
     @Override

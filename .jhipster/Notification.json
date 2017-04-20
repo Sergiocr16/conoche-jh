@@ -11,15 +11,6 @@
             "otherEntityField": "login",
             "ownerSide": true,
             "otherEntityRelationshipName": "notification"
-        },
-        {
-            "relationshipName": "action",
-            "otherEntityName": "action",
-            "relationshipType": "many-to-one",
-            "relationshipValidateRules": [
-                "required"
-            ],
-            "otherEntityField": "id"
         }
     ],
     "fields": [

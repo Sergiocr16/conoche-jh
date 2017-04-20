@@ -22,7 +22,6 @@
                     <th jh-sort-by="objectId"><span data-translate="conocheApp.actionObject.objectId">Object Id</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="description"><span data-translate="conocheApp.actionObject.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="objectType"><span data-translate="conocheApp.actionObject.objectType">Object Type</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="actionId"><span data-translate="conocheApp.actionObject.action">Action</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,9 +31,6 @@
                     <td>{{actionObject.objectId}}</td>
                     <td>{{actionObject.description}}</td>
                     <td data-translate="{{'conocheApp.ActionObjectType.' + actionObject.objectType}}">{{actionObject.objectType}}</td>
-                    <td>
-                        <a ui-sref="action-ang-detail({id:actionObject.actionId})">{{actionObject.actionId}}</a>
-                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
