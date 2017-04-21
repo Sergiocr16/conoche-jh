@@ -2,15 +2,10 @@ package com.firefly.conoche.service;
 
 import com.firefly.conoche.domain.Event;
 import com.firefly.conoche.repository.EventRepository;
-import com.firefly.conoche.repository.LocalRepository;
 import com.firefly.conoche.service.dto.EventDTO;
-import com.firefly.conoche.service.dto.UserDTO;
-import com.firefly.conoche.service.interfaces.NotificationableService;
 import com.firefly.conoche.service.mapper.EventMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,9 +18,8 @@ import java.util.List;
  * Service Implementation for managing Event.
  */
 @Service
-@Scope( proxyMode = ScopedProxyMode.TARGET_CLASS )
 @Transactional
-public class EventService implements NotificationableService<EventDTO>{
+public class EventService {
 
     private final Logger log = LoggerFactory.getLogger(EventService.class);
 
@@ -90,10 +84,5 @@ public class EventService implements NotificationableService<EventDTO>{
     public void delete(Long id) {
         log.debug("Request to delete Event : {}", id);
         eventRepository.delete(id);
-    }
-
-    //ver como mover a otro archivo luego
-    public List<UserDTO> getNotificationRecipients(EventDTO eventDTO) {
-        return localService.findOne(eventDTO.getLocalId());
     }
 }

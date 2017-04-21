@@ -1,8 +1,6 @@
 package com.firefly.conoche.service.dto;
 
 
-import com.firefly.conoche.service.interfaces.Notificationable;
-
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -12,7 +10,7 @@ import javax.persistence.Lob;
 /**
  * A DTO for the Event entity.
  */
-public class EventDTO implements Serializable, Notificationable {
+public class EventDTO implements Serializable {
 
     private Long id;
 
@@ -176,16 +174,5 @@ public class EventDTO implements Serializable, Notificationable {
             ", initialTime='" + initialTime + "'" +
             ", finalTime='" + finalTime + "'" +
             '}';
-    }
-
-    public Map<String, Object> getNotificationInfo() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("name", name);
-        map.put("details", details);
-        map.put("price", price);
-        map.put("initialTime", initialTime.toEpochSecond());
-        map.put("finalTime", finalTime.toEpochSecond());
-
-        return map;
     }
 }
