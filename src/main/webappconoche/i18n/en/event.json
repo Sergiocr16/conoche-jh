@@ -18,7 +18,8 @@
                 "title": "Event",
                 "vieMessages": "View live comments",
                 "commentButton": "Comment the event",
-                "addPromotionButton": "Add new promotion"
+                "addPromotionButton": "Add new promotion",
+                "attendButton": "Attend to the event"
             },
             "name": "Name",
             "details": "Details",

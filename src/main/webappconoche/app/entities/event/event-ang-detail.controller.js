@@ -30,6 +30,12 @@
         vm.viewLiveMessages = function(event){
         $state.go('live-messages',{ idEvent: event.id })
         }
+
+
+        vm.attend = function(){
+                Event.attendToEvent(vm.event.id.toString());
+        }
+
         vm.createComment = function(event){
 
          $state.go('event-ang-detail.live-messages.newComment',{ idEvent: event.id})

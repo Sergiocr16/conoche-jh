@@ -2,6 +2,7 @@ package com.firefly.conoche.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.firefly.conoche.service.EventService;
+import com.firefly.conoche.service.dto.UserDTO;
 import com.firefly.conoche.web.rest.util.HeaderUtil;
 import com.firefly.conoche.web.rest.util.PaginationUtil;
 import com.firefly.conoche.service.dto.EventDTO;
@@ -34,7 +35,7 @@ public class EventResource {
     private final Logger log = LoggerFactory.getLogger(EventResource.class);
 
     private static final String ENTITY_NAME = "event";
-        
+
     private final EventService eventService;
 
     public EventResource(EventService eventService) {
@@ -128,4 +129,12 @@ public class EventResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
+
+
+    @PostMapping("/events/attend")
+    @Timed
+    public void attendToEvent(@RequestBody Long idEvent) throws URISyntaxException {
+        eventService.attendEvent(idEvent);
+
+    }
 }

@@ -1,8 +1,12 @@
 package com.firefly.conoche.service;
 
 import com.firefly.conoche.domain.Event;
+import com.firefly.conoche.domain.User;
 import com.firefly.conoche.repository.EventRepository;
+import com.firefly.conoche.repository.UserRepository;
+import com.firefly.conoche.security.SecurityUtils;
 import com.firefly.conoche.service.dto.EventDTO;
+import com.firefly.conoche.service.dto.UserDTO;
 import com.firefly.conoche.service.mapper.EventMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -23,14 +28,17 @@ import java.util.stream.Collectors;
 public class EventService {
 
     private final Logger log = LoggerFactory.getLogger(EventService.class);
-    
+
     private final EventRepository eventRepository;
 
     private final EventMapper eventMapper;
+    private final UserRepository userRepository;
 
-    public EventService(EventRepository eventRepository, EventMapper eventMapper) {
+
+    public EventService(EventRepository eventRepository, EventMapper eventMapper, UserRepository userRepository) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -49,7 +57,7 @@ public class EventService {
 
     /**
      *  Get all the events.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -83,4 +91,16 @@ public class EventService {
         log.debug("Request to delete Event : {}", id);
         eventRepository.delete(id);
     }
+    public void attendEvent(Long idEvent) {
+         Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+
+         user.ifPresent(u -> {
+             Event event = eventRepository.findOneWithEagerRelationships(idEvent);
+             event.addAttendingUsers(u);
+             eventRepository.save(event);
+             EventDTO eventDTO = eventMapper.eventToEventDTO(event);
+         });
+
+    }
+
 }
