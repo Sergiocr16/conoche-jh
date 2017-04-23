@@ -9,14 +9,14 @@ import java.util.List;
 /**
  * Mapper for the entity ActionObject and its DTO ActionObjectDTO.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {ObjectChangeMapper.class,})
 public interface ActionObjectMapper {
 
     ActionObjectDTO actionObjectToActionObjectDTO(ActionObject actionObject);
 
     List<ActionObjectDTO> actionObjectsToActionObjectDTOs(List<ActionObject> actionObjects);
 
-    @Mapping(target = "changes", ignore = true)
+
     ActionObject actionObjectDTOToActionObject(ActionObjectDTO actionObjectDTO);
 
     List<ActionObject> actionObjectDTOsToActionObjects(List<ActionObjectDTO> actionObjectDTOs);

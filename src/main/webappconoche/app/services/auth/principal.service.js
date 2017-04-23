@@ -5,9 +5,9 @@
         .module('conocheApp')
         .factory('Principal', Principal);
 
-    Principal.$inject = ['$q', 'Account', 'JhiTrackerService'];
+    Principal.$inject = ['$q', 'Account', 'JhiTrackerService', 'WSNotification'];
 
-    function Principal ($q, Account, JhiTrackerService) {
+    function Principal ($q, Account, JhiTrackerService, WSNotification) {
         var _identity,
             _authenticated = false;
 
@@ -77,9 +77,11 @@
 
             function getAccountThen (account) {
                 _identity = account.data;
+                JhiTrackerService.connect();
+                WSNotification.subscribeNotification(_identity.login);
                 _authenticated = true;
                 deferred.resolve(_identity);
-                JhiTrackerService.connect();
+
             }
 
             function getAccountCatch () {

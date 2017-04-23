@@ -8,12 +8,12 @@
     Auth.$inject = ['$rootScope', '$state', '$sessionStorage', '$q', '$translate',
         'Principal', 'AuthServerProvider', 'Account', 'LoginService',
         'Register', 'Activate', 'Password', 'PasswordResetInit',
-        'PasswordResetFinish', 'JhiTrackerService', 'StompManager'];
+        'PasswordResetFinish', 'JhiTrackerService', 'StompManager', 'WSNotification'];
 
     function Auth ($rootScope, $state, $sessionStorage, $q, $translate,
                    Principal, AuthServerProvider, Account, LoginService,
                    Register, Activate, Password, PasswordResetInit,
-                   PasswordResetFinish, JhiTrackerService, StompManager) {
+                   PasswordResetFinish, JhiTrackerService, StompManager, WSNotification) {
 
         var service = {
             activateAccount: activateAccount,
@@ -148,9 +148,12 @@
         }
 
         function logout () {
-            AuthServerProvider.logout();
-            Principal.authenticate(null);
-            StompManager.disconnect();
+            Principal.identity().then(function(account) {
+                WSNotification.unsubcribeNotification(account.login);
+                AuthServerProvider.logout();
+                Principal.authenticate(null);
+                StompManager.disconnect();
+            });
         }
 
         function resetPasswordFinish (keyAndPassword, callback) {

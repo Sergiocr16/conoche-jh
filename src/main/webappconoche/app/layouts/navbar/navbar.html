@@ -27,7 +27,7 @@
         <div class="top-menu"   ng-switch="vm.isAuthenticated()">
             <ul class="nav navbar-nav pull-right" ng-controller="JhiLanguageController as languageVm" >
                 <!-- BEGIN NOTIFICATION DROPDOWN -->
-                <li class="dropdown dropdown-dark dropdown-extended  dropdown-notification" id="header_notification_bar"  ng-switch-when="true">
+                <li  ng-if="vm.isAuthenticated()"  ng-controller="NotificationController as noticationVm" class="dropdown dropdown-dark dropdown-extended  dropdown-notification" id="header_notification_bar"  ng-switch-when="true">
                     <a href="javascript:;" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
                         <i class="icon-bell"></i>
                         <span class="badge badge-default">7</span>

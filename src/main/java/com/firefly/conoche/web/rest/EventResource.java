@@ -73,6 +73,7 @@ public class EventResource {
     @PutMapping("/events")
     @Timed
     public ResponseEntity<EventDTO> updateEvent(@Valid @RequestBody EventDTO eventDTO) throws URISyntaxException {
+        log.error(Thread.currentThread().getName());
         log.debug("REST request to update Event : {}", eventDTO);
         if (eventDTO.getId() == null) {
             return createEvent(eventDTO);

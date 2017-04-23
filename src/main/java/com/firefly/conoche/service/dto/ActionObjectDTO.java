@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+
+import com.firefly.conoche.domain.ObjectChange;
 import com.firefly.conoche.domain.enumeration.ActionType;
 import com.firefly.conoche.domain.enumeration.ActionObjectType;
 
@@ -22,6 +24,8 @@ public class ActionObjectDTO implements Serializable {
     private ActionType actionType;
 
     private ActionObjectType objectType;
+
+    private Set<ObjectChangeDTO> changes;
 
     public Long getId() {
         return id;
@@ -81,5 +85,13 @@ public class ActionObjectDTO implements Serializable {
             ", actionType='" + actionType + "'" +
             ", objectType='" + objectType + "'" +
             '}';
+    }
+
+    public Set<ObjectChangeDTO> getChanges() {
+        return changes;
+    }
+
+    public void setChanges(Set<ObjectChangeDTO> changes) {
+        this.changes = changes;
     }
 }

@@ -1,29 +1,18 @@
 package com.firefly.conoche.service.aspects;
 
-import com.firefly.conoche.domain.User;
 import com.firefly.conoche.domain.enumeration.ActionType;
 import com.firefly.conoche.domain.interfaces.IEntity;
 import com.firefly.conoche.repository.notifications.NotifyRepository;
-
 import com.firefly.conoche.service.customService.CNotificationService;
-import com.firefly.conoche.service.dto.UserDTO;
-import com.firefly.conoche.service.mapper.UserMapper;
-import org.aspectj.apache.bcel.Repository;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.inject.Inject;
 import java.lang.reflect.Array;
-import java.lang.reflect.Field;
 import java.util.*;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
@@ -62,7 +51,7 @@ public class NotificationAspect {
     }
 
 
-    public <T extends IEntity> void createNotifications(NotifyRepository<T> repo,
+    private <T extends IEntity> void createNotifications(NotifyRepository<T> repo,
                                                         T entity,
                                                         Stream<String> changes,
                                                         ActionType action) {
@@ -74,7 +63,7 @@ public class NotificationAspect {
             action);
     }
 
-    public Stream<String> getChanges(Map<String, Object> beforeMap,
+    private Stream<String> getChanges(Map<String, Object> beforeMap,
                                   Map<String, Object> aftherMap) {
        return aftherMap.entrySet()
             .stream()
@@ -85,7 +74,7 @@ public class NotificationAspect {
     }
 
 
-    public boolean isDiferent(Object o1, Object o2)  {
+    private boolean isDiferent(Object o1, Object o2)  {
         boolean isArray = o1.getClass().isArray();
         return (isArray && isDiferentArray(o1, o2))
             || (!isArray && !Objects.equals(o1, o2));

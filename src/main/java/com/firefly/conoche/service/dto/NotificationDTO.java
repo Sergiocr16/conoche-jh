@@ -1,6 +1,8 @@
 package com.firefly.conoche.service.dto;
 
 
+import com.firefly.conoche.domain.ActionObject;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -21,7 +23,8 @@ public class NotificationDTO implements Serializable {
 
     private String userLogin;
 
-    private Long actionObjectId;
+
+    private ActionObjectDTO actionObject;
 
     public Long getId() {
         return id;
@@ -54,12 +57,12 @@ public class NotificationDTO implements Serializable {
         this.userLogin = userLogin;
     }
 
-    public Long getActionObjectId() {
-        return actionObjectId;
+    public ActionObjectDTO getActionObject() {
+        return actionObject;
     }
 
-    public void setActionObjectId(Long actionObjectId) {
-        this.actionObjectId = actionObjectId;
+    public void setActionObject(ActionObjectDTO actionObject) {
+        this.actionObject = actionObject;
     }
 
     @Override

@@ -24,9 +24,9 @@
         ])
         .run(run);
 
-    run.$inject = ['stateHandler', 'translationHandler', '$rootScope', '$state', '$stateParams'];
+    run.$inject = ['stateHandler', 'translationHandler', '$rootScope', '$state', '$stateParams', 'StompManager'];
 
-    function run(stateHandler, translationHandler, $rootScope, $state, $stateParams) {
+    function run(stateHandler, translationHandler, $rootScope, $state, $stateParams, StompManager) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         stateHandler.initialize();
@@ -38,6 +38,5 @@
             $('#loaded').show();
             $('#loading').fadeOut(30);
         });
-
     }
 })();

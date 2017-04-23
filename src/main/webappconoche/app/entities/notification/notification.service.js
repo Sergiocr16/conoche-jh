@@ -2,12 +2,12 @@
     'use strict';
     angular
         .module('conocheApp')
-        .factory('ActionObject', ActionObject);
+        .factory('Notification', Notification);
 
-    ActionObject.$inject = ['$resource'];
+    Notification.$inject = ['$resource'];
 
-    function ActionObject ($resource) {
-        var resourceUrl =  'api/action-objects/:id';
+    function Notification ($resource) {
+        var resourceUrl =  'api/notifications/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
