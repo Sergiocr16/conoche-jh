@@ -7,6 +7,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -40,6 +41,10 @@ public class ActionObject implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "object_type")
     private ActionObjectType objectType;
+
+    @NotNull
+    @Column(name = "creation_time", nullable = false)
+    private ZonedDateTime creationTime;
 
     @OneToMany(mappedBy = "actionObject")
     @JsonIgnore
@@ -91,6 +96,19 @@ public class ActionObject implements Serializable {
 
     public void setObjectType(ActionObjectType objectType) {
         this.objectType = objectType;
+    }
+
+    public ZonedDateTime getCreationTime() {
+        return creationTime;
+    }
+
+    public ActionObject creationTime(ZonedDateTime creationTime) {
+        this.creationTime = creationTime;
+        return this;
+    }
+
+    public void setCreationTime(ZonedDateTime creationTime) {
+        this.creationTime = creationTime;
     }
 
     public Set<ObjectChange> getChanges() {
@@ -145,6 +163,7 @@ public class ActionObject implements Serializable {
             ", objectId='" + objectId + "'" +
             ", actionType='" + actionType + "'" +
             ", objectType='" + objectType + "'" +
+            ", creationTime='" + creationTime + "'" +
             '}';
     }
 }

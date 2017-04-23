@@ -28,6 +28,7 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -50,21 +51,18 @@ public class CNotificationService {
     private final ActionObjectRepository actionObjectRepository;
     private final ObjectChangeRepository objectChangeRepository;
     private final NotificationMapper notificationMapper;
-    private final UserMapper userMapper;
 
     public CNotificationService(NotificationRepository notificationRepository,
                                 CNotificationRepository cNotificationRepository,
                                 ActionObjectRepository actionObjectRepository,
                                 ObjectChangeRepository objectChangeRepository,
-                                NotificationMapper notificationMapper,
-                                UserMapper userMapper) {
+                                NotificationMapper notificationMapper) {
 
         this.notificationRepository  = notificationRepository;
         this.cNotificationRepository = cNotificationRepository;
         this.actionObjectRepository  = actionObjectRepository;
         this.objectChangeRepository  = objectChangeRepository;
         this.notificationMapper      = notificationMapper;
-        this.userMapper              = userMapper;
     }
 
 
@@ -113,6 +111,7 @@ public class CNotificationService {
 
         ActionObject ao = new ActionObject();
         ao.setObjectType(objectType);
+        ao.setCreationTime(ZonedDateTime.now());
         ao.setActionType(actionType);
         ao.setObjectId(id);
         oChanges.forEach(ao::addChanges);

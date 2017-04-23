@@ -24,8 +24,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.util.List;
 
+import static com.firefly.conoche.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -50,6 +55,9 @@ public class ActionObjectResourceIntTest {
 
     private static final ActionObjectType DEFAULT_OBJECT_TYPE = ActionObjectType.USER;
     private static final ActionObjectType UPDATED_OBJECT_TYPE = ActionObjectType.LOCAL;
+
+    private static final ZonedDateTime DEFAULT_CREATION_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_CREATION_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     @Autowired
     private ActionObjectRepository actionObjectRepository;
@@ -96,7 +104,8 @@ public class ActionObjectResourceIntTest {
         ActionObject actionObject = new ActionObject()
                 .objectId(DEFAULT_OBJECT_ID)
                 .actionType(DEFAULT_ACTION_TYPE)
-                .objectType(DEFAULT_OBJECT_TYPE);
+                .objectType(DEFAULT_OBJECT_TYPE)
+                .creationTime(DEFAULT_CREATION_TIME);
         return actionObject;
     }
 
@@ -125,6 +134,7 @@ public class ActionObjectResourceIntTest {
         assertThat(testActionObject.getObjectId()).isEqualTo(DEFAULT_OBJECT_ID);
         assertThat(testActionObject.getActionType()).isEqualTo(DEFAULT_ACTION_TYPE);
         assertThat(testActionObject.getObjectType()).isEqualTo(DEFAULT_OBJECT_TYPE);
+        assertThat(testActionObject.getCreationTime()).isEqualTo(DEFAULT_CREATION_TIME);
     }
 
     @Test
@@ -169,6 +179,25 @@ public class ActionObjectResourceIntTest {
 
     @Test
     @Transactional
+    public void checkCreationTimeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = actionObjectRepository.findAll().size();
+        // set the field null
+        actionObject.setCreationTime(null);
+
+        // Create the ActionObject, which fails.
+        ActionObjectDTO actionObjectDTO = actionObjectMapper.actionObjectToActionObjectDTO(actionObject);
+
+        restActionObjectMockMvc.perform(post("/api/action-objects")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(actionObjectDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<ActionObject> actionObjectList = actionObjectRepository.findAll();
+        assertThat(actionObjectList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllActionObjects() throws Exception {
         // Initialize the database
         actionObjectRepository.saveAndFlush(actionObject);
@@ -180,7 +209,8 @@ public class ActionObjectResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(actionObject.getId().intValue())))
             .andExpect(jsonPath("$.[*].objectId").value(hasItem(DEFAULT_OBJECT_ID.intValue())))
             .andExpect(jsonPath("$.[*].actionType").value(hasItem(DEFAULT_ACTION_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].objectType").value(hasItem(DEFAULT_OBJECT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].objectType").value(hasItem(DEFAULT_OBJECT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].creationTime").value(hasItem(sameInstant(DEFAULT_CREATION_TIME))));
     }
 
     @Test
@@ -196,7 +226,8 @@ public class ActionObjectResourceIntTest {
             .andExpect(jsonPath("$.id").value(actionObject.getId().intValue()))
             .andExpect(jsonPath("$.objectId").value(DEFAULT_OBJECT_ID.intValue()))
             .andExpect(jsonPath("$.actionType").value(DEFAULT_ACTION_TYPE.toString()))
-            .andExpect(jsonPath("$.objectType").value(DEFAULT_OBJECT_TYPE.toString()));
+            .andExpect(jsonPath("$.objectType").value(DEFAULT_OBJECT_TYPE.toString()))
+            .andExpect(jsonPath("$.creationTime").value(sameInstant(DEFAULT_CREATION_TIME)));
     }
 
     @Test
@@ -219,7 +250,8 @@ public class ActionObjectResourceIntTest {
         updatedActionObject
                 .objectId(UPDATED_OBJECT_ID)
                 .actionType(UPDATED_ACTION_TYPE)
-                .objectType(UPDATED_OBJECT_TYPE);
+                .objectType(UPDATED_OBJECT_TYPE)
+                .creationTime(UPDATED_CREATION_TIME);
         ActionObjectDTO actionObjectDTO = actionObjectMapper.actionObjectToActionObjectDTO(updatedActionObject);
 
         restActionObjectMockMvc.perform(put("/api/action-objects")
@@ -234,6 +266,7 @@ public class ActionObjectResourceIntTest {
         assertThat(testActionObject.getObjectId()).isEqualTo(UPDATED_OBJECT_ID);
         assertThat(testActionObject.getActionType()).isEqualTo(UPDATED_ACTION_TYPE);
         assertThat(testActionObject.getObjectType()).isEqualTo(UPDATED_OBJECT_TYPE);
+        assertThat(testActionObject.getCreationTime()).isEqualTo(UPDATED_CREATION_TIME);
     }
 
     @Test

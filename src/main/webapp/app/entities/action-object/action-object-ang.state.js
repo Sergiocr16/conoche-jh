@@ -131,6 +131,7 @@
                                 objectId: null,
                                 actionType: null,
                                 objectType: null,
+                                creationTime: null,
                                 id: null
                             };
                         }

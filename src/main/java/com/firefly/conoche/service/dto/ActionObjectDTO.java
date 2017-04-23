@@ -1,6 +1,7 @@
 package com.firefly.conoche.service.dto;
 
 
+import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -26,6 +27,8 @@ public class ActionObjectDTO implements Serializable {
     private ActionObjectType objectType;
 
     private Set<ObjectChangeDTO> changes;
+    @NotNull
+    private ZonedDateTime creationTime;
 
     public Long getId() {
         return id;
@@ -54,6 +57,13 @@ public class ActionObjectDTO implements Serializable {
 
     public void setObjectType(ActionObjectType objectType) {
         this.objectType = objectType;
+    }
+    public ZonedDateTime getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(ZonedDateTime creationTime) {
+        this.creationTime = creationTime;
     }
 
     @Override
@@ -84,6 +94,7 @@ public class ActionObjectDTO implements Serializable {
             ", objectId='" + objectId + "'" +
             ", actionType='" + actionType + "'" +
             ", objectType='" + objectType + "'" +
+            ", creationTime='" + creationTime + "'" +
             '}';
     }
 

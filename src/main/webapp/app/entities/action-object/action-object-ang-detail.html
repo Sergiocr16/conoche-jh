@@ -16,6 +16,10 @@
         <dd>
             <span data-translate="{{'conocheApp.ActionObjectType.' + vm.actionObject.objectType}}">{{vm.actionObject.objectType}}</span>
         </dd>
+        <dt><span data-translate="conocheApp.actionObject.creationTime">Creation Time</span></dt>
+        <dd>
+            <span>{{vm.actionObject.creationTime | date:'medium'}}</span>
+        </dd>
     </dl>
 
     <button type="submit"

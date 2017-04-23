@@ -149,7 +149,9 @@
 
         function logout () {
             Principal.identity().then(function(account) {
-                WSNotification.unsubcribeNotification(account.login);
+                if(account) {
+                    WSNotification.unsubcribeNotification(account.login);
+                }
                 AuthServerProvider.logout();
                 Principal.authenticate(null);
                 StompManager.disconnect();

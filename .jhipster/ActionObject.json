@@ -25,6 +25,13 @@
             "fieldName": "objectType",
             "fieldType": "ActionObjectType",
             "fieldValues": "USER,LOCAL,EVENT,PROMOTION,MESSAGE,RATING,EVENT_IMAGE,REALTIME_EVENT_IMAGE,LOCAL_IMAGE"
+        },
+        {
+            "fieldName": "creationTime",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20170307223303",

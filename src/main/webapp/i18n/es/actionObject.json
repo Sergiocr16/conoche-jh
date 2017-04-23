@@ -18,6 +18,7 @@
             "objectId": "Object Id",
             "actionType": "Action Type",
             "objectType": "Object Type",
+            "creationTime": "Creation Time",
             "changes": "Changes"
         }
     }
