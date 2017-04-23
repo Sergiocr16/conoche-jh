@@ -27,7 +27,7 @@
         <div class="top-menu"   ng-switch="vm.isAuthenticated()">
             <ul class="nav navbar-nav pull-right" ng-controller="JhiLanguageController as languageVm" >
                 <!-- BEGIN NOTIFICATION DROPDOWN -->
-                <li  ng-if="vm.isAuthenticated()"  ng-controller="NotificationController as noticationVm" class="dropdown dropdown-dark dropdown-extended  dropdown-notification" id="header_notification_bar"  ng-switch-when="true">
+                <li  ng-if="vm.isAuthenticated()"  ng-controller="NotificationController as noticationVm" class="dropdown dropdown-extended  dropdown-notification" id="header_notification_bar"  ng-switch-when="true">
                     <a href="javascript:;" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
                         <i class="icon-bell"></i>
                         <span class="badge badge-default">7</span>
@@ -38,6 +38,8 @@
                             <h3>You have <strong>12</strong> notifications</h3>
                         </li>
                         <li>
+
+                            <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;">
                             <ul class="dropdown-menu-list scroller" data-handle-color="#637283">
                                 <li>
                                     <a href="javascript:;">
@@ -130,6 +132,7 @@
                                     </a>
                                 </li>
                             </ul>
+                            </div>
                         </li>
                     </ul>
                 </li>

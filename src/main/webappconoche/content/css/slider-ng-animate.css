@@ -64,3 +64,11 @@
 .right-btn-slide-show.ng-hide-add {
     animation: bounceOutRight 0.5s;
 }
+
+.toast.ng-enter {
+    animation: bounceInRight 0.5s;
+}
+
+.toast.ng-leave {
+    animation: bounceOutRight 0.5s;
+}

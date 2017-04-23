@@ -136,7 +136,8 @@
         "Size": "Field {{ fieldName }} does not meet min/max size requirements!",
         "userexists": "Login name already used!",
         "emailexists": "E-mail is already in use!",
-        "idexists": "A new {{ entityName }} cannot already have an ID"
+        "idexists": "A new {{ entityName }} cannot already have an ID",
+        "serverDown": "You have lost connection to the server"
     },
     "footer": {
         "about": "About",
@@ -149,5 +150,12 @@
                 "email":"Email"
         },
         "copyright":"2017 © Firefly. All Rights Reserved."
+    },
+
+    "notifications" : {
+        "notificationCount" : "You have {{count}} notifications",
+        "CREATE" : "A new {{entity | translate}} has been created",
+        "UPDATE" : "A {{entity | translate}} has bean updated",
+        "changes" : "Changes"
     }
 }

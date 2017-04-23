@@ -817,3 +817,16 @@ font-size: 28px!important;
     margin-left: 20px;
     margin-right: 20px;
 }
+
+
+
+/* Alert style*/
+
+.toast {
+    background-color: transparent !important;
+}
+
+.alerts .alert {
+    opacity: 0.95;
+    border: none !important;
+}

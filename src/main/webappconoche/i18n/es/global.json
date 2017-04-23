@@ -136,7 +136,8 @@
         "Size": "¡El campo {{fieldName}} no cumple con los requisitos de tamaño mínimo/máximo!",
         "userexists": "Login name already used!",
         "emailexists": "E-mail is already in use!",
-        "idexists": "A new {{entityName}} cannot already have an ID"
+        "idexists": "A new {{entityName}} cannot already have an ID",
+        "serverDown": "Se perdio la conexion con el servidor"
     },
     "footer": {
         "about": "Acerca de Nosotros",
@@ -149,5 +150,12 @@
             "email":"Correo eléctronico"
         },
         "copyright":"2017 © Firefly. Todos los Derechos Reservados."
+    },
+
+    "notifications" : {
+        "notificationCount" : "You have {{count}} notifications",
+        "CREATE" : "A new {{entity | translate}} has been created",
+        "UPDATE" : "A {{entity | translate}} has been updated",
+        "changes" : "changes"
     }
 }

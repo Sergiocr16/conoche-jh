@@ -20,7 +20,13 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+
+            'getNotifications' : {
+                method: 'GET',
+                isArray: true,
+                url: 'api//notification/user'
+            },
         });
     }
 })();
