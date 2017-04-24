@@ -48,7 +48,23 @@
                 "database": "Base de datos",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
-            "language": "Idioma"
+            "language": "Idioma",
+
+            "notifications" : {
+                "notificationCount" : "Usted tiene <strong>{{count}}</strong> notificacion{{ count != 1 ? 'es' : ''}}.",
+                "CREATE" : "Un nuevo {{ ('conocheApp.ActionObjectType.' + entity) | translate}} ha sido creado.",
+                "UPDATE" : "Un {{('conocheApp.ActionObjectType.' + entity) | translate}} ha sido modificado.",
+                "changes" : "Cambios",
+                "viewAll" : "ver todos"
+            },
+            "timeSince" : {
+                "years" : "{{value}} año{{ value != 1 ? 's' : ''}}",
+                "months": "{{value}} mes{{ value != 1 ? 'es' : ''}}",
+                "days":   "{{value}} dia{{ value != 1 ? 's' : ''}}",
+                "hours":  "{{value}} hora{{ value != 1 ? 's' : ''}}",
+                "minutes": "{{value}} minuto{{ value != 1 ? 's' : ''}}",
+                "justNow" : "ahora"
+            }
         },
         "form": {
             "username": "Usuario",
@@ -137,7 +153,8 @@
         "userexists": "Login name already used!",
         "emailexists": "E-mail is already in use!",
         "idexists": "A new {{entityName}} cannot already have an ID",
-        "serverDown": "Se perdio la conexion con el servidor"
+        "serverDown": "Se perdio la conexion con el servidor",
+        "eventNotFound": "El evento no existe"
     },
     "footer": {
         "about": "Acerca de Nosotros",
@@ -150,12 +167,5 @@
             "email":"Correo eléctronico"
         },
         "copyright":"2017 © Firefly. Todos los Derechos Reservados."
-    },
-
-    "notifications" : {
-        "notificationCount" : "You have {{count}} notifications",
-        "CREATE" : "A new {{entity | translate}} has been created",
-        "UPDATE" : "A {{entity | translate}} has been updated",
-        "changes" : "changes"
     }
 }

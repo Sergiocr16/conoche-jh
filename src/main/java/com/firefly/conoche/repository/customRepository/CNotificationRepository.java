@@ -18,7 +18,8 @@ import java.util.List;
 public interface CNotificationRepository extends JpaRepository<Notification,Long> {
     @Query("select notification from Notification notification " +
         "where notification.user.login = ?#{principal.username} " +
-        "and (:isRead is null or notification.isRead = :isRead)")
+        "and (:isRead is null or notification.isRead = :isRead) " +
+        "order by notification.actionObject.creationTime desc")
     Page<Notification> findByUserIsCurrentUser(Pageable page, @Param("isRead") Boolean isRead);
 
 

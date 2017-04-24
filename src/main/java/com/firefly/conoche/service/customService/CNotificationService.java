@@ -137,4 +137,5 @@ public class CNotificationService {
         return cNotificationRepository.findByUserIsCurrentUser(page, isRead)
             .map(notificationMapper::notificationToNotificationDTO);
     }
+
 }

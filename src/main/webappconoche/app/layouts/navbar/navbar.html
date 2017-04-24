@@ -27,108 +27,48 @@
         <div class="top-menu"   ng-switch="vm.isAuthenticated()">
             <ul class="nav navbar-nav pull-right" ng-controller="JhiLanguageController as languageVm" >
                 <!-- BEGIN NOTIFICATION DROPDOWN -->
-                <li  ng-if="vm.isAuthenticated()"  ng-controller="NotificationController as noticationVm" class="dropdown dropdown-extended  dropdown-notification" id="header_notification_bar"  ng-switch-when="true">
+                <li  ng-show="noticationVm.notifications.length > 0" ng-if="vm.isAuthenticated()"  ng-controller="NotificationController as noticationVm" class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar"  ng-switch-when="true">
                     <a href="javascript:;" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
                         <i class="icon-bell"></i>
-                        <span class="badge badge-default">7</span>
+                        <span class="badge badge-default">{{noticationVm.totalItems}}</span>
                     </a>
-                    </a>
+
                     <ul class="dropdown-menu">
-                        <li class="external">
-                            <h3>You have <strong>12</strong> notifications</h3>
+                        <li class="external" style="background: rgb(255, 240, 234) !important;">
+                            <h3 data-translate="global.menu.notifications.notificationCount"
+                                translate-values="{count: noticationVm.totalItems }"></h3>
+                            <a data-translate="global.menu.notifications.viewAll"> View all</a>
                         </li>
                         <li>
 
                             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;">
-                            <ul class="dropdown-menu-list scroller" data-handle-color="#637283">
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">just now</span>
-                                        <span class="details">
-									<span class="label label-sm label-icon label-success">
-									<i class="fa fa-plus"></i>
-									</span>
-									New user registered. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">3 mins</span>
-                                        <span class="details">
-									<span class="label label-sm label-icon label-danger">
-									<i class="fa fa-bolt"></i>
-									</span>
-									Server #12 overloaded. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">10 mins</span>
-                                        <span class="details">
-									<span class="label label-sm label-icon label-warning">
-									<i class="fa fa-bell-o"></i>
-									</span>
-									Server #2 not responding. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">14 hrs</span>
-                                        <span class="details">
-									<span class="label label-sm label-icon label-info">
-									<i class="fa fa-bullhorn"></i>
-									</span>
-									Application error. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">2 days</span>
-                                        <span class="details">
-									<span class="label label-sm label-icon label-danger">
-									<i class="fa fa-bolt"></i>
-									</span>
-									Database overloaded 68%. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">3 days</span>
-                                        <span class="details">
-									<span class="label label-sm label-icon label-danger">
-									<i class="fa fa-bolt"></i>
-									</span>
-									A user IP blocked. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">4 days</span>
-                                        <span class="details">
-									<span class="label label-sm label-icon label-warning">
-									<i class="fa fa-bell-o"></i>
-									</span>
-									Storage Server #4 not responding dfdfdfd. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">5 days</span>
-                                        <span class="details">
-									<span class="label label-sm label-icon label-info">
-									<i class="fa fa-bullhorn"></i>
-									</span>
-									System Error. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">9 days</span>
-                                        <span class="details">
-									<span class="label label-sm label-icon label-danger">
-									<i class="fa fa-bolt"></i>
-									</span>
-									Storage server failed. </span>
+                            <ul class="dropdown-menu-list" slimscroll="{noWatch  : true, color: '#FF8000'}" data-handle-color="#637283">
+
+                                <li ng-repeat="notification in noticationVm.notifications track by notification.id"
+                                    ng-init="object = notification.actionObject">
+                                    <a href-notification object="object" ng-init="since = (object.creationTime | timeSince)">
+                                        <span class="time" style="margin-left: 4px;"
+                                              translate-values="{value: since[0]}"
+                                              data-translate="global.menu.timeSince.{{since[1]}}">
+                                        </span>
+
+                                        <span class="details" style="line-height: 200%;">
+                                            <span  ng-if="object.actionType == 'CREATE'" class="label label-sm label-icon label-success">
+									            <i class="fa fa-plus"></i>
+									        </span>
+                                            <span  ng-if="object.actionType == 'UPDATE'" class="label label-sm label-icon label-warning">
+									           <i class="fa fa-pencil-square-o"></i>
+									        </span>
+                                            <span translate-values="{entity: notification.actionObject.objectType}"
+                                                  data-translate="global.menu.notifications.{{notification.actionObject.actionType}}">
+                                            </span>
+                                            <!--
+                                            <span style="color: #FF8000;" ng-if="object.changes.length > 0">Changes:</span>
+                                                <span class="label label-default" ng-repeat="change in object.changes | limitTo : 4 track by change.id" style="margin-left: 3px; white-space: normal;" >
+									                {{change.fieldName}}
+									            </span>
+									            -->
+                                        </span>
                                     </a>
                                 </li>
                             </ul>
@@ -139,7 +79,7 @@
                 <!-- END NOTIFICATION DROPDOWN -->
 
                 <!-- BEGIN USER LOGIN DROPDOWN -->
-                <li class="dropdown dropdown-user dropdown-dark" ng-switch="vm.isAuthenticated()">
+                <li class="dropdown dropdown-user" ng-switch="vm.isAuthenticated()">
                     <a href="javascript:;" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
                         <img alt="" class="img-circle" ng-src="{{vm.account.imageUrl || 'content/template/admin/layout3/img/no-one.jpg'}}">
                         <span ng-switch-when="true" class="username username-hide-mobile">{{vm.account.login}}</span>
@@ -178,7 +118,7 @@
                     <span class="separator"></span>
                 </li>
                 <!-- BEGIN LANGUAGES DROPDOWN -->
-                <li class="dropdown dropdown-language dropdown-dark"  ng-if="languageVm.languages.length > 1">
+                <li class="dropdown dropdown-language"  ng-if="languageVm.languages.length > 1">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         <img  ng-show="languageVm.currentLanguage() == 'en'" src="content/template/global/img/flags/us.png">
                         <img ng-show="languageVm.currentLanguage() == 'es'" src="content/template/global/img/flags/es.png" alt="">

@@ -4,7 +4,9 @@ import com.firefly.conoche.domain.enumeration.ActionType;
 import com.firefly.conoche.domain.interfaces.IEntity;
 import com.firefly.conoche.repository.notifications.NotifyRepository;
 import com.firefly.conoche.service.customService.CNotificationService;
+import com.firefly.conoche.service.dto.NotificationDTO;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
@@ -13,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Inject;
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.stream.Stream;
 
 
@@ -49,6 +53,13 @@ public class NotificationAspect {
             changes, ActionType.UPDATE);
         return afther;
     }
+
+    @Around(value="execution(public * com.firefly.conoche.repository.notifications.NotifyRepository+.delete(..)) && args(notificable,..)")
+    public <T extends IEntity> void audit(ProceedingJoinPoint pjp, T notificable) throws Throwable {
+        T afther = (T) pjp.proceed();
+
+    }
+
 
 
     private <T extends IEntity> void createNotifications(NotifyRepository<T> repo,

@@ -12,27 +12,22 @@
 
     function NotificationController (WSNotification, $scope, Principal, Notification, AlertService) {
         var vm = this;
-        const NUMBER_OF_NOTIFICATIONS = 6;
+        const NUMBER_OF_NOTIFICATIONS = 10;
 
         Principal.identity()
             .then(subscribe);
 
-
-
+        loadAll();
         function loadAll () {
             Notification.getNotifications({
                 read: false,
-                page: 1,
-                size: vm.itemsPerPage,
-                sort: SORT
+                page: 0,
+                size: NUMBER_OF_NOTIFICATIONS,
             }, onSuccess, onError);
 
             function onSuccess(data, headers) {
-                var link = ParseLinks.parse(headers('link'));
-                vm.links               = link;
-                vm.totalItems          = headers('X-Total-Count');
+                vm.totalItems    = headers('X-Total-Count');
                 vm.notifications = data;
-                vm.page                = page;
             }
             function onError(error) {
                 AlertService.error(error.data.message);
@@ -46,6 +41,7 @@
             function onNewNotification(n) {
                 vm.notifications.unshift(n);
                 vm.notifications.pop();
+                ++vm.totalItems;
             }
         }
 
