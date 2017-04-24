@@ -33,7 +33,7 @@ public class NotificationAspect {
     private CNotificationService cNotificationService;
 
     @Around(value="execution(public * com.firefly.conoche.repository.notifications.NotifyRepository+.save(..)) && args(notificable,..) && target(repo)")
-    public <T extends IEntity> Object audit(ProceedingJoinPoint pjp, T notificable, NotifyRepository<T> repo) throws Throwable {
+    public <T extends IEntity> Object auditCreate(ProceedingJoinPoint pjp, T notificable, NotifyRepository<T> repo) throws Throwable {
 
         if(notificable.getId() == null) {
             T afther = (T) pjp.proceed();
@@ -54,10 +54,13 @@ public class NotificationAspect {
         return afther;
     }
 
-    @Around(value="execution(public * com.firefly.conoche.repository.notifications.NotifyRepository+.delete(..)) && args(notificable,..)")
-    public <T extends IEntity> void audit(ProceedingJoinPoint pjp, T notificable) throws Throwable {
-        T afther = (T) pjp.proceed();
+    @Around(value="execution(public * com.firefly.conoche.repository.notifications.NotifyRepository+.delete(..)) && args(id,..) && target(repo)")
+    public <T extends IEntity> void auditDelete(ProceedingJoinPoint pjp, Long id, NotifyRepository<T> repo) throws Throwable {
 
+        T entity = repo.findOne(id);
+        pjp.proceed();
+        cNotificationService.deactivateActionObjects(
+            entity.getObjectType(), entity.getId());
     }
 
 
@@ -86,9 +89,10 @@ public class NotificationAspect {
 
 
     private boolean isDiferent(Object o1, Object o2)  {
-        boolean isArray = o1.getClass().isArray();
-        return (isArray && isDiferentArray(o1, o2))
-            || (!isArray && !Objects.equals(o1, o2));
+        return o1 != o2 &&
+            ((o1 == null || o2 == null )
+            || (o1.getClass().isArray() && isDiferentArray(o1, o2))
+            || (!o1.getClass().isArray() && !Objects.equals(o1, o2)));
     }
     private boolean isDiferentArray(Object o1, Object o2) {
         int length = Array.getLength(o1);

@@ -15,6 +15,7 @@ import com.firefly.conoche.service.ActionObjectService;
 import com.firefly.conoche.service.NotificationService;
 import com.firefly.conoche.service.ObjectChangeService;
 import com.firefly.conoche.service.dto.NotificationDTO;
+import com.firefly.conoche.service.dto.NotificationEntityDTO;
 import com.firefly.conoche.service.dto.UserDTO;
 import com.firefly.conoche.service.mapper.NotificationMapper;
 import com.firefly.conoche.service.mapper.UserMapper;
@@ -52,11 +53,13 @@ public class CNotificationService {
     private final ObjectChangeRepository objectChangeRepository;
     private final NotificationMapper notificationMapper;
 
+
     public CNotificationService(NotificationRepository notificationRepository,
                                 CNotificationRepository cNotificationRepository,
                                 ActionObjectRepository actionObjectRepository,
                                 ObjectChangeRepository objectChangeRepository,
-                                NotificationMapper notificationMapper) {
+                                NotificationMapper notificationMapper,
+                                UserMapper userMapper) {
 
         this.notificationRepository  = notificationRepository;
         this.cNotificationRepository = cNotificationRepository;
@@ -114,6 +117,7 @@ public class CNotificationService {
         ao.setCreationTime(ZonedDateTime.now());
         ao.setActionType(actionType);
         ao.setObjectId(id);
+        ao.setActive(true);
         oChanges.forEach(ao::addChanges);
         return actionObjectRepository.save(ao);
     }
@@ -132,10 +136,26 @@ public class CNotificationService {
         return objectChangeRepository.save(oc);
     }
 
-
+    @Transactional(readOnly = true)
     public Page<NotificationDTO> getAllNotificationsFromCurrent(Pageable page, Boolean isRead) {
         return cNotificationRepository.findByUserIsCurrentUser(page, isRead)
             .map(notificationMapper::notificationToNotificationDTO);
     }
 
+
+    @Async
+    public Future<Stream<String>> deactivateActionObjects(ActionObjectType type, Long objectId) {
+        List<ActionObject> actions = actionObjectRepository
+            .findByObjectTypeAndObjectIdAndActiveTrue(type, objectId);
+
+        Stream<String> users = cNotificationRepository
+            .findUsersWithPendingEnitityNotifications(objectId, type)
+            .stream().map(User::getLogin);
+
+        actions.stream().peek(a -> log.error(actions.toString()))
+            .peek(a ->  a.setActive(false))
+            .forEach(actionObjectRepository::save);
+
+        return new AsyncResult<>(users);
+    }
 }

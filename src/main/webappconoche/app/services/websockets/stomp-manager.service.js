@@ -72,8 +72,8 @@
         }
 
         function disconnect () {
+            connected = $q.defer();
             if (stompClient !== null) {
-                connected = $q.defer();
                 stompClient.disconnect();
                 stompClient = null;
             }
@@ -112,8 +112,10 @@
         }
         function subscribeKeyValue(url, value) {
             connected.promise.then(() => {
-                value.subscriber = stompClient.subscribe(url,
-                    data => value.listener.notify(angular.fromJson(data.body)));
+                if (isConnected()) {
+                    value.subscriber = stompClient.subscribe(url,
+                        data => value.listener.notify(angular.fromJson(data.body)));
+                }
             });
         }
 

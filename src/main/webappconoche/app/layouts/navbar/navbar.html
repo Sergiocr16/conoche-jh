@@ -47,7 +47,7 @@
                                 <li ng-repeat="notification in noticationVm.notifications track by notification.id"
                                     ng-init="object = notification.actionObject">
                                     <a href-notification object="object" ng-init="since = (object.creationTime | timeSince)">
-                                        <span class="time" style="margin-left: 4px;"
+                                        <span class="time" style="margin-left: 6px;"
                                               translate-values="{value: since[0]}"
                                               data-translate="global.menu.timeSince.{{since[1]}}">
                                         </span>

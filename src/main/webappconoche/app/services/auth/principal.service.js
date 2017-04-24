@@ -79,6 +79,7 @@
                 _identity = account.data;
                 JhiTrackerService.connect();
                 WSNotification.subscribeNotification(_identity.login);
+                WSNotification.subscribeToDeadEntities(_identity.login);
                 _authenticated = true;
                 deferred.resolve(_identity);
 

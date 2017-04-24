@@ -12,17 +12,23 @@
     WSNotification.$inject = ['StompManager'];
 
     function WSNotification(StompManager) {
-
         var service = {
             subscribeNotification: subscribeNotification,
             receiveNotifications: receiveNotifications,
             unsubcribeNotification: unsubcribeNotification,
+            subscribeToDeadEntities: subscribeToDeadEntities,
+            unsubscribeToDeadEntities: unsubscribeToDeadEntities,
+            receiveDeadEntities: receiveDeadEntities
         };
 
         return service;
 
         function buildUrl(login) {
             return '/user/' + login + '/queue/notifications';
+        }
+
+        function buildDeadUrl(login) {
+            return '/user/' + login + '/queue/notifications/dead'
         }
 
         function receiveNotifications (login) {
@@ -36,6 +42,18 @@
 
         function subscribeNotification(login) {
             StompManager.subscribe(buildUrl(login));
+        }
+
+        function subscribeToDeadEntities(login) {
+            StompManager.subscribe(buildDeadUrl(login));
+        }
+
+        function unsubscribeToDeadEntities(login) {
+            StompManager.unsubscribe(buildDeadUrl(login));
+        }
+
+        function receiveDeadEntities(login) {
+            return StompManager.getListener(buildDeadUrl(login));
         }
     }
 })();

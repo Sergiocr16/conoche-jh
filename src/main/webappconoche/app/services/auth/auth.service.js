@@ -151,6 +151,7 @@
             Principal.identity().then(function(account) {
                 if(account) {
                     WSNotification.unsubcribeNotification(account.login);
+                    WSNotification.unsubscribeToDeadEntities(account.login);
                 }
                 AuthServerProvider.logout();
                 Principal.authenticate(null);

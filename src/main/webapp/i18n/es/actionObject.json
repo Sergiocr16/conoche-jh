@@ -19,6 +19,7 @@
             "actionType": "Action Type",
             "objectType": "Object Type",
             "creationTime": "Creation Time",
+            "active": "Active",
             "changes": "Changes"
         }
     }

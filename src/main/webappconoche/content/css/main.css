@@ -709,13 +709,6 @@ line-height: 24px
     display: none;
 }
 
-.info-pagination {
-    font-family: 'Amatic SC', cursive;
-    color: #000000;
-    font-size: 25px;
-    margin: 10% 0 0 0;
-}
-
 #home_search{
     background: url('/content/images/home-background.jpg')!important;
     color: white;
@@ -829,4 +822,26 @@ font-size: 28px!important;
 .alerts .alert {
     opacity: 0.95;
     border: none !important;
+}
+
+/**Pager override*/
+
+.pager .disabled > a, .pager .disabled > a:hover, .pager .disabled > a:focus, .pager .disabled > span {
+    color: #ffffff !important;
+    background-color: #8f74d0 !important;
+    border-radius: 15px !important;
+}
+
+.pager li > a, .pager li > span {
+    background-color: #a68be6 !important;
+    border: none !important;
+    border-radius: 15px !important;
+    color: #ffffff !important;
+}
+
+.info-pagination {
+    font-family: 'Amatic SC', cursive;
+    color: #000000;
+    font-size: 20px;
+    margin: 10% 0 0 0;
 }

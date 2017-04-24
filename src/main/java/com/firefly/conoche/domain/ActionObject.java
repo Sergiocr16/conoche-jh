@@ -46,6 +46,10 @@ public class ActionObject implements Serializable {
     @Column(name = "creation_time", nullable = false)
     private ZonedDateTime creationTime;
 
+    @NotNull
+    @Column(name = "active", nullable = false)
+    private Boolean active;
+
     @OneToMany(mappedBy = "actionObject")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -111,6 +115,19 @@ public class ActionObject implements Serializable {
         this.creationTime = creationTime;
     }
 
+    public Boolean isActive() {
+        return active;
+    }
+
+    public ActionObject active(Boolean active) {
+        this.active = active;
+        return this;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
     public Set<ObjectChange> getChanges() {
         return changes;
     }
@@ -164,6 +181,7 @@ public class ActionObject implements Serializable {
             ", actionType='" + actionType + "'" +
             ", objectType='" + objectType + "'" +
             ", creationTime='" + creationTime + "'" +
+            ", active='" + active + "'" +
             '}';
     }
 }

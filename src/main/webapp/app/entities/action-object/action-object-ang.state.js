@@ -132,6 +132,7 @@
                                 actionType: null,
                                 objectType: null,
                                 creationTime: null,
+                                active: false,
                                 id: null
                             };
                         }

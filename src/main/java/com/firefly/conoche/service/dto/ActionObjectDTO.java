@@ -30,6 +30,9 @@ public class ActionObjectDTO implements Serializable {
     @NotNull
     private ZonedDateTime creationTime;
 
+    @NotNull
+    private Boolean active;
+
     public Long getId() {
         return id;
     }
@@ -65,6 +68,13 @@ public class ActionObjectDTO implements Serializable {
     public void setCreationTime(ZonedDateTime creationTime) {
         this.creationTime = creationTime;
     }
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -95,6 +105,7 @@ public class ActionObjectDTO implements Serializable {
             ", actionType='" + actionType + "'" +
             ", objectType='" + objectType + "'" +
             ", creationTime='" + creationTime + "'" +
+            ", active='" + active + "'" +
             '}';
     }
 

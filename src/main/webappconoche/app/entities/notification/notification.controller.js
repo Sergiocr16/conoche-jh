@@ -37,13 +37,24 @@
         function subscribe(user) {
             WSNotification.receiveNotifications(user.login)
                 .then(null, null, onNewNotification);
+            WSNotification.receiveDeadEntities(user.login)
+                .then(null, null, onDeadLink)
 
             function onNewNotification(n) {
+                if(NUMBER_OF_NOTIFICATIONS == vm.notifications.length) {
+                    vm.notifications.pop();
+                }
                 vm.notifications.unshift(n);
-                vm.notifications.pop();
                 ++vm.totalItems;
             }
+
+            function onDeadLink(p) {
+                console.log(p);
+               loadAll();
+            }
         }
+
+
 
 
 

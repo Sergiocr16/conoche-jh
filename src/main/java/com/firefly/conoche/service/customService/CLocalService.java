@@ -35,11 +35,13 @@ public class CLocalService {
         this.userService = userService;
     }
 
+    @Transactional(readOnly = true)
     public Page<LocalDTO> findByProvinciaAndName(Pageable page, Provincia provincia, String name, Long category) {
         return clocalRepository.findByProvinciaAndName(page, provincia, name, category)
             .map(localmapper::localToLocalDTO);
     }
 
+    @Transactional(readOnly = true)
    public Page<LocalDTO> findLocalsByOwner(Long id, Pageable page) {
        return clocalRepository.findByOwnerId(id, page)
             .map(localmapper::localToLocalDTO);
@@ -53,7 +55,7 @@ public class CLocalService {
                 return clocalRepository.save(l);
             }).map(localmapper::localToLocalDTO));
    }
-
+    @Transactional(readOnly = true)
    public Long count() {
         return clocalRepository.count();
    }
