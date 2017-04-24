@@ -103,4 +103,16 @@ public class EventService {
 
     }
 
+    public void dismissEvent(Long idEvent) {
+        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+
+        user.ifPresent(u -> {
+            Event event = eventRepository.findOneWithEagerRelationships(idEvent);
+            event.removeAttendingUsers(u);
+            eventRepository.save(event);
+            EventDTO eventDTO = eventMapper.eventToEventDTO(event);
+        });
+
+    }
+
 }

@@ -19,7 +19,8 @@
                 "vieMessages": "View live comments",
                 "commentButton": "Comment the event",
                 "addPromotionButton": "Add new promotion",
-                "attendButton": "Attend to the event"
+                "attendButton": "Attend to the event",
+                "dismissButton": "Dismiss event"
             },
             "name": "Name",
             "details": "Details",

@@ -22,7 +22,8 @@
                 "vieMessages": "Ver comentarios en vivo",
                 "commentButton": "Comenta el evento",
                 "addPromotionButton": "Agregar promoción",
-                "attendButton": "Asistir"
+                "attendButton": "Asistir",
+                "dismissButton": "Cancelar asistencia"
             },
             "name": "Nombre",
             "details": "Detalles",

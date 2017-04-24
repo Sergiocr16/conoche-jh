@@ -36,6 +36,10 @@
                 Event.attendToEvent(vm.event.id.toString());
         }
 
+        vm.dismiss = function(){
+                        Event.dismissEvent(vm.event.id.toString());
+                }
+
         vm.createComment = function(event){
 
          $state.go('event-ang-detail.live-messages.newComment',{ idEvent: event.id})

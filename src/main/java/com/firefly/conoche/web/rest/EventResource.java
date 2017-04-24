@@ -137,4 +137,11 @@ public class EventResource {
         eventService.attendEvent(idEvent);
 
     }
+
+    @PostMapping("/events/dismiss")
+    @Timed
+    public void dismissEvent(@RequestBody Long idEvent) throws URISyntaxException {
+        eventService.dismissEvent(idEvent);
+    }
+
 }
