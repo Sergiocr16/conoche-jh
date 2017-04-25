@@ -2,6 +2,7 @@ package com.firefly.conoche.web.websocket;
 
 import com.firefly.conoche.domain.ActionObject;
 import com.firefly.conoche.domain.enumeration.ActionObjectType;
+import com.firefly.conoche.service.dto.DetailNotificationDTO;
 import com.firefly.conoche.service.dto.NotificationDTO;
 import com.firefly.conoche.service.dto.NotificationEntityDTO;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -34,9 +35,8 @@ public class NotificationWSAspect {
     @AfterReturning(
         pointcut="execution(public * com.firefly.conoche.service.customService.CNotificationService+.createNotifications(..))",
         returning="retVal")
-    public void notificationCreateAdvice(Future<List<NotificationDTO>> retVal) throws InterruptedException, ExecutionException {
-        List<NotificationDTO> notifications = retVal.get();
-        notifications.forEach(this::sendToUser);
+    public void notificationCreateAdvice(Future<List<DetailNotificationDTO>> retVal) throws InterruptedException, ExecutionException {
+        retVal.get().forEach(this::sendToUser);
     }
 
     @AfterReturning(
@@ -54,7 +54,7 @@ public class NotificationWSAspect {
                 login, DELETE_SUBSCRIPTION_URL, notificationEntityDTO));
     }
 
-    private void sendToUser(NotificationDTO notificationDTO) {
+    private void sendToUser(DetailNotificationDTO notificationDTO) {
         messagingTemplate.convertAndSendToUser(notificationDTO.getUserLogin(),
             USER_SUBSCRIPTION_URL, notificationDTO);
     }

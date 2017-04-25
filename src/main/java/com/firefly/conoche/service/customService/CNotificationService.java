@@ -14,9 +14,11 @@ import com.firefly.conoche.repository.customRepository.CNotificationRepository;
 import com.firefly.conoche.service.ActionObjectService;
 import com.firefly.conoche.service.NotificationService;
 import com.firefly.conoche.service.ObjectChangeService;
+import com.firefly.conoche.service.dto.DetailNotificationDTO;
 import com.firefly.conoche.service.dto.NotificationDTO;
 import com.firefly.conoche.service.dto.NotificationEntityDTO;
 import com.firefly.conoche.service.dto.UserDTO;
+import com.firefly.conoche.service.mapper.DetailNotificationMapper;
 import com.firefly.conoche.service.mapper.NotificationMapper;
 import com.firefly.conoche.service.mapper.UserMapper;
 import org.slf4j.Logger;
@@ -51,26 +53,26 @@ public class CNotificationService {
     private final CNotificationRepository cNotificationRepository;
     private final ActionObjectRepository actionObjectRepository;
     private final ObjectChangeRepository objectChangeRepository;
-    private final NotificationMapper notificationMapper;
+    private final DetailNotificationMapper detailNotificationMapper;
 
 
     public CNotificationService(NotificationRepository notificationRepository,
                                 CNotificationRepository cNotificationRepository,
                                 ActionObjectRepository actionObjectRepository,
                                 ObjectChangeRepository objectChangeRepository,
-                                NotificationMapper notificationMapper,
+                                DetailNotificationMapper detailNotificationMapper,
                                 UserMapper userMapper) {
 
-        this.notificationRepository  = notificationRepository;
-        this.cNotificationRepository = cNotificationRepository;
-        this.actionObjectRepository  = actionObjectRepository;
-        this.objectChangeRepository  = objectChangeRepository;
-        this.notificationMapper      = notificationMapper;
+        this.notificationRepository   = notificationRepository;
+        this.cNotificationRepository  = cNotificationRepository;
+        this.actionObjectRepository   = actionObjectRepository;
+        this.objectChangeRepository   = objectChangeRepository;
+        this.detailNotificationMapper = detailNotificationMapper;
     }
 
 
     @Async
-    public Future<List<NotificationDTO>> createNotifications(Stream<String> changesStream,
+    public Future<List<DetailNotificationDTO>> createNotifications(Stream<String> changesStream,
                                                             Supplier<Set<User>> recipientsSupplier,
                                                             Long id,
                                                             ActionObjectType type,
@@ -93,17 +95,17 @@ public class CNotificationService {
         ActionObject ao =  createActionObject(id, type,
             oChanges, actionType);
 
-        List<NotificationDTO> notifications = recipients
+        List<DetailNotificationDTO> notifications = recipients
             .stream()
             .map( u ->createNotification(u, ao))
             .peek( n-> n.getActionObject().getChanges())
-            .map(notificationMapper::notificationToNotificationDTO)
+            .map(detailNotificationMapper::notificationToNotificationDTO)
             .collect(Collectors.toList());
 
         return new AsyncResult<>(notifications);
     }
 
-    private Future<List<NotificationDTO>> emptyResult() {
+    private Future<List<DetailNotificationDTO>> emptyResult() {
         return new AsyncResult<>(new ArrayList<>());
     }
 
@@ -137,9 +139,9 @@ public class CNotificationService {
     }
 
     @Transactional(readOnly = true)
-    public Page<NotificationDTO> getAllNotificationsFromCurrent(Pageable page, Boolean isRead) {
+    public Page<DetailNotificationDTO> getAllNotificationsFromCurrent(Pageable page, Boolean isRead) {
         return cNotificationRepository.findByUserIsCurrentUser(page, isRead)
-            .map(notificationMapper::notificationToNotificationDTO);
+            .map(detailNotificationMapper::notificationToNotificationDTO);
     }
 
 
@@ -158,4 +160,6 @@ public class CNotificationService {
 
         return new AsyncResult<>(users);
     }
+
+
 }
