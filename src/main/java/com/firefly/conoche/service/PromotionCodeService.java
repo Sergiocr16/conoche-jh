@@ -1,12 +1,15 @@
 package com.firefly.conoche.service;
 
+import com.firefly.conoche.domain.Promotion;
 import com.firefly.conoche.domain.PromotionCode;
 import com.firefly.conoche.repository.PromotionCodeRepository;
+import com.firefly.conoche.repository.UserRepository;
 import com.firefly.conoche.service.dto.PromotionCodeDTO;
 import com.firefly.conoche.service.mapper.PromotionCodeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
@@ -23,14 +26,17 @@ import java.util.stream.Collectors;
 public class PromotionCodeService {
 
     private final Logger log = LoggerFactory.getLogger(PromotionCodeService.class);
-    
+
     private final PromotionCodeRepository promotionCodeRepository;
+
+    private final UserRepository userRepository;
 
     private final PromotionCodeMapper promotionCodeMapper;
 
-    public PromotionCodeService(PromotionCodeRepository promotionCodeRepository, PromotionCodeMapper promotionCodeMapper) {
+    public PromotionCodeService(PromotionCodeRepository promotionCodeRepository, PromotionCodeMapper promotionCodeMapper, UserRepository userRepository) {
         this.promotionCodeRepository = promotionCodeRepository;
         this.promotionCodeMapper = promotionCodeMapper;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -49,7 +55,7 @@ public class PromotionCodeService {
 
     /**
      *  Get all the promotionCodes.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -60,6 +66,39 @@ public class PromotionCodeService {
         return result.map(promotionCode -> promotionCodeMapper.promotionCodeToPromotionCodeDTO(promotionCode));
     }
 
+    @Transactional(readOnly = true)
+    public Page<PromotionCodeDTO> findByUserAndPromotion(Long userId,Long promotionId) {
+        log.debug("Request to get all PromotionCodes");
+        List<PromotionCode> result = promotionCodeRepository.findByPromotionIdAndUserId(promotionId,userId);
+        return new PageImpl<PromotionCode>(result).map(promotionCode -> promotionCodeMapper.promotionCodeToPromotionCodeDTO(promotionCode));
+    }
+
+    @Transactional(readOnly = true)
+    public Page<PromotionCodeDTO> findByUserId(Long userId) {
+        log.debug("Request to get all PromotionCodes");
+        List<PromotionCode> result = promotionCodeRepository.findByUserIdAndActive(userId,true);
+        return new PageImpl<PromotionCode>(result).map(promotionCode -> promotionCodeMapper.promotionCodeToPromotionCodeDTO(promotionCode));
+    }
+
+
+    public PromotionCodeDTO redeemCodeInPromotion(Long promotionId,Long userId) {
+        log.debug("Request to get all PromotionCodes");
+        PromotionCode result = promotionCodeRepository.findTop1ByPromotionIdAndUserIdIsNull(promotionId);
+        PromotionCodeDTO promotionCodeDTO = promotionCodeMapper.promotionCodeToPromotionCodeDTO(result);
+        promotionCodeDTO.setUserId(userId);
+        PromotionCode promotionCode = promotionCodeMapper.promotionCodeDTOToPromotionCode(promotionCodeDTO);
+        promotionCodeRepository.save(promotionCode);
+        promotionCodeDTO.setUserId(userId);
+        PromotionCode p = this.promotionCodeRepository.save(promotionCode);
+        String a = "";
+        return promotionCodeMapper.promotionCodeToPromotionCodeDTO(result);
+    }
+    @Transactional(readOnly = true)
+    public Page<PromotionCodeDTO> findAvailableCodesByPromotionId(Long promotionId) {
+        log.debug("Request to get all Promotions available");
+        List<PromotionCode> result = promotionCodeRepository.findByPromotionIdAndUserIdIsNullAndActive(promotionId,true);
+        return new PageImpl<PromotionCode>(result).map(promotionCode -> promotionCodeMapper.promotionCodeToPromotionCodeDTO(promotionCode));
+    }
     /**
      *  Get one promotionCode by id.
      *
@@ -70,6 +109,14 @@ public class PromotionCodeService {
     public PromotionCodeDTO findOne(Long id) {
         log.debug("Request to get PromotionCode : {}", id);
         PromotionCode promotionCode = promotionCodeRepository.findOne(id);
+        PromotionCodeDTO promotionCodeDTO = promotionCodeMapper.promotionCodeToPromotionCodeDTO(promotionCode);
+        return promotionCodeDTO;
+    }
+
+    @Transactional(readOnly = true)
+    public PromotionCodeDTO findByCode(String code) {
+        log.debug("Request to get PromotionCode : {}", code);
+        PromotionCode promotionCode = promotionCodeRepository.findByCodeAndActive(code,true);
         PromotionCodeDTO promotionCodeDTO = promotionCodeMapper.promotionCodeToPromotionCodeDTO(promotionCode);
         return promotionCodeDTO;
     }

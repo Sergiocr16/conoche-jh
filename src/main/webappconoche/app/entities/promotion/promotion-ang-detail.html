@@ -1,5 +1,6 @@
 
 <div>
+    <jhi-alert></jhi-alert>
     <h2><span data-translate="conocheApp.promotion.detail.title">Promotion</span> {{vm.promotion.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
@@ -39,7 +40,7 @@
         </dd>
     </dl>
 
-    <button type="submit"
+    <button ng-disabled="vm.redeemig==true" type="submit"
             ui-sref="{{ vm.previousState }}"
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>

@@ -49,6 +49,10 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="code_quantity" type="integer">
+                <constraints nullable="true" />
+            </column>
+
             <column name="event_id" type="bigint">
                 <constraints nullable="true" />
             </column>

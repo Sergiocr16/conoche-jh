@@ -20,8 +20,9 @@
             'cloudinary',
             'wu.masonry',
             'FBAngular',
-            'ngAnimate',
-            'ui.slimscroll'
+            'ui.slimscroll',
+            'timer',
+            'ngAnimate'
         ])
         .run(run);
 

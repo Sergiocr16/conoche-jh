@@ -83,6 +83,72 @@
                 }]
             }
         })
+        .state('swapCoupon', {
+            url: '/swapCoupon',
+            parent: 'entity',
+            data: {
+                authorities: ['ROLE_OWNER'],
+                pageTitle: 'global.menu.entities.canjearPromo',
+               phrase: 'conocheApp.promotionCode.home.swapPhrase'
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/entities/promotion-code/swap-coupon.html',
+                    controller: 'SwapCouponController',
+                    controllerAs: 'vm',
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('promotionCode');
+                    $translatePartialLoader.addPart('event');
+                    $translatePartialLoader.addPart('global');
+                    return $translate.refresh();
+                }],
+                previousState: ["$state", function ($state) {
+                    var currentStateData = {
+                        name: $state.current.name || 'promotion-code-ang',
+                        params: $state.params,
+                        url: $state.href($state.current.name, $state.params)
+                    };
+                    return currentStateData;
+                }]
+            }
+        })
+        .state('myPromotions', {
+            parent: 'entity',
+            url: '/myPromotions',
+            data: {
+                authorities: ['ROLE_USER'],
+                pageTitle: 'conocheApp.promotionCode.home.title',
+                phrase: 'conocheApp.promotionCode.home.phrase'
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/entities/promotion-code/my-promotions-codes.html',
+                    controller: 'MyPromotionCodesController',
+                    controllerAs: 'vm'
+                }
+            },
+            onEnter: ['$stateParams', '$state', '$uibModal','WSPromotionCodeService','Principal', function($stateParams, $state, $uibModal,WSPromotionCodeService,Principal) {
+             Principal.identity().then(function(user){
+              WSPromotionCodeService.subscribe(user.id);
+             })
+            }],
+            onExit: ['$stateParams', 'WSPromotionCodeService','Principal', function($stateParams, WSPromotionCodeService,Principal) {
+                Principal.identity().then(function(user){
+                WSPromotionCodeService.unsubscribe(user.id)
+                })
+            }],
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('promotionCode');
+                    $translatePartialLoader.addPart('event');
+                    $translatePartialLoader.addPart('global');
+                    return $translate.refresh();
+                }],
+            }
+        })
         .state('promotion-code-ang-detail.edit', {
             parent: 'promotion-code-ang-detail',
             url: '/detail/edit',

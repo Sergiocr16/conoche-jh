@@ -25,6 +25,7 @@
                     <th jh-sort-by="initialTime"><span data-translate="conocheApp.promotion.initialTime">Initial Time</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="finalTime"><span data-translate="conocheApp.promotion.finalTime">Final Time</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="maximumCodePerUser"><span data-translate="conocheApp.promotion.maximumCodePerUser">Maximum Code Per User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="codeQuantity"><span data-translate="conocheApp.promotion.codeQuantity">Code Quantity</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="eventId"><span data-translate="conocheApp.promotion.event">Event</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -43,6 +44,7 @@
                     <td>{{promotion.initialTime | date:'medium'}}</td>
                     <td>{{promotion.finalTime | date:'medium'}}</td>
                     <td>{{promotion.maximumCodePerUser}}</td>
+                    <td>{{promotion.codeQuantity}}</td>
                     <td>
                         <a ui-sref="event-ang-detail({id:promotion.eventId})">{{promotion.eventId}}</a>
                     </td>

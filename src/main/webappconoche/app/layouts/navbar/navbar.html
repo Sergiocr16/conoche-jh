@@ -90,6 +90,11 @@
                                 <i class="icon-lock"></i>
                                 <span data-translate="global.menu.account.password">Password </span></a>
                         </li>
+                        <li ui-sref="myPromotions" has-authority="ROLE_USER" ng-switch-when="true" >
+                            <a>
+                                <i class="icon-map"></i>
+                                <span data-translate="global.menu.account.promo">Mis cupones </span></a>
+                        </li>
                         <li ng-click="vm.logout()" ng-switch-when="true" >
                             <a>
                                 <i class="icon-logout"></i>
@@ -167,9 +172,9 @@
                         <a data-translate="global.menu.entities.myLocalAng" > Local Ang  </a>
 
                 </li>
-                <li has-authority="ROLE_OWNER" ui-sref="promotion-ang" >
+                <li has-authority="ROLE_OWNER" ui-sref="swapCoupon" >
 
-                        <a data-translate="global.menu.entities.promotionAng">
+                        <a data-translate="global.menu.entities.canjearPromo">
                          Promotion Ang
                         </a>
 
@@ -187,9 +192,8 @@
                 <li has-authority="ROLE_USER" ui-sref="promotion-ang">
 
                         <a data-translate="global.menu.entities.promotionAng">
-                         Promotion Ang
+                         Canjear Promociones
                         </a>
-
                 </li>
 
                 <!--BEGIN ENTITIES MENU-->

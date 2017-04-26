@@ -7,8 +7,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.security.SecureRandom;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Objects;
 
@@ -52,6 +54,9 @@ public class Promotion implements Serializable {
     @Min(value = 1)
     @Column(name = "maximum_code_per_user", nullable = false)
     private Integer maximumCodePerUser;
+
+    @Column(name = "code_quantity")
+    private Integer codeQuantity;
 
     @OneToMany(mappedBy = "promotion")
     @JsonIgnore
@@ -160,6 +165,19 @@ public class Promotion implements Serializable {
         this.maximumCodePerUser = maximumCodePerUser;
     }
 
+    public Integer getCodeQuantity() {
+        return codeQuantity;
+    }
+
+    public Promotion codeQuantity(Integer codeQuantity) {
+        this.codeQuantity = codeQuantity;
+        return this;
+    }
+
+    public void setCodeQuantity(Integer codeQuantity) {
+        this.codeQuantity = codeQuantity;
+    }
+
     public Set<PromotionCode> getCodes() {
         return codes;
     }
@@ -181,6 +199,25 @@ public class Promotion implements Serializable {
         return this;
     }
 
+    public void generatePromotionsCodes(){
+    for (int i = 0;i<this.codeQuantity;i++){
+        PromotionCode promotionCode = new PromotionCode();
+        promotionCode.setCode(randomString(5));
+        promotionCode.setActive(true);
+        promotionCode.setPromotion(this);
+        this.addCodes(promotionCode);
+    }
+    }
+
+
+    private String randomString( int len ){
+        final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        SecureRandom rnd = new SecureRandom();
+        StringBuilder sb = new StringBuilder( len );
+        for( int i = 0; i < len; i++ )
+            sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
+        return sb.toString().toUpperCase();
+    }
     public void setCodes(Set<PromotionCode> promotionCodes) {
         this.codes = promotionCodes;
     }
@@ -229,6 +266,7 @@ public class Promotion implements Serializable {
             ", initialTime='" + initialTime + "'" +
             ", finalTime='" + finalTime + "'" +
             ", maximumCodePerUser='" + maximumCodePerUser + "'" +
+            ", codeQuantity='" + codeQuantity + "'" +
             '}';
     }
 }

@@ -5,12 +5,13 @@
         .module('conocheApp')
         .controller('PromotionAngDialogController', PromotionAngDialogController);
 
-    PromotionAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Promotion', 'PromotionCode', 'Event'];
+    PromotionAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Promotion', 'PromotionCode', 'Event','Principal','AlertService'];
 
-    function PromotionAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Promotion, PromotionCode, Event) {
+    function PromotionAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Promotion, PromotionCode, Event,Principal,AlertService) {
         var vm = this;
 
         vm.promotion = entity;
+         vm.redeemig = false;
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
@@ -20,12 +21,40 @@
         vm.promotioncodes = PromotionCode.query();
         vm.events = Event.query();
 
+       function onError(error) {
+//            AlertService.error(error.data.message);
+        }
+        findAvailableCodes();
+        function findAvailableCodes (){
+        PromotionCode.getAvailableByPromotion({promotionId: vm.promotion.id}).$promise.then(onSuccessAvailable, onError);
+       }
+
+
+       function onSuccessAvailablePerUser(data){
+        var availableCodesPerUser = (vm.promotion.maximumCodePerUser - data.length);
+           if(vm.availableCodes <= availableCodesPerUser){
+            availableCodesPerUser = vm.availableCodes;
+           }
+          vm.availableCodesPerUser = availableCodesPerUser;
+        }
+        function onSuccessAvailable(data){
+        vm.availableCodes = data.length;
+          Principal.identity().then(function(data){
+          vm.currentUserId = data.id;
+            PromotionCode.getByUserIdAndPromotionId({promotionId: vm.promotion.id,userId: data.id}).$promise.then(onSuccessAvailablePerUser, onError);
+           })
+        }
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
 
         function clear () {
             $uibModalInstance.dismiss('cancel');
+        }
+
+        vm.redeemCode = function (){
+        vm.redeemig = true;
+        PromotionCode.redeemCode({promotionId: vm.promotion.id,userId: vm.currentUserId}).$promise.then(onSaveSuccess, onSaveError);
         }
 
         function save () {
@@ -38,8 +67,9 @@
         }
 
         function onSaveSuccess (result) {
-            $scope.$emit('conocheApp:promotionUpdate', result);
-            $uibModalInstance.close(result);
+             findAvailableCodes();
+             vm.redeemig = false;
+             AlertService.success('Has redimido un código');
             vm.isSaving = false;
         }
 

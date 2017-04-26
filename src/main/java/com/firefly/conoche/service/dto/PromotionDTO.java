@@ -35,6 +35,8 @@ public class PromotionDTO implements Serializable {
     @Min(value = 1)
     private Integer maximumCodePerUser;
 
+    private Integer codeQuantity;
+
     private Long eventId;
 
     public Long getId() {
@@ -94,6 +96,13 @@ public class PromotionDTO implements Serializable {
     public void setMaximumCodePerUser(Integer maximumCodePerUser) {
         this.maximumCodePerUser = maximumCodePerUser;
     }
+    public Integer getCodeQuantity() {
+        return codeQuantity;
+    }
+
+    public void setCodeQuantity(Integer codeQuantity) {
+        this.codeQuantity = codeQuantity;
+    }
 
     public Long getEventId() {
         return eventId;
@@ -134,6 +143,7 @@ public class PromotionDTO implements Serializable {
             ", initialTime='" + initialTime + "'" +
             ", finalTime='" + finalTime + "'" +
             ", maximumCodePerUser='" + maximumCodePerUser + "'" +
+            ", codeQuantity='" + codeQuantity + "'" +
             '}';
     }
 }

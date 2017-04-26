@@ -22,7 +22,9 @@
             "finalTime": "Final Time",
             "maximumCodePerUser": "Maximum Code Per User",
             "codes": "Codes",
-            "event": "Event"
+            "event": "Event",
+            "codeQuantity": "Cantidad de códigos",
+            "redeemCode":"Has redimido un código"
         }
     }
 }

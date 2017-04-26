@@ -206,8 +206,59 @@
                     }]
                 }
             })
-        .state('event-ang.new', {
-            parent: 'event-ang',
+
+         .state('event-ang.promotionDetail', {
+             parent: 'event-ang',
+             url: '/promotion/{id}',
+             data: {
+                 authorities: ['ROLE_USER']
+             },
+             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                 $uibModal.open({
+                     templateUrl: 'app/entities/promotion/promotion-ang-idetail-in-events.html',
+                     controller: 'PromotionAngDialogController',
+                     controllerAs: 'vm',
+                     backdrop: 'static',
+                     size: 'lg',
+                     resolve: {
+                         entity: ['Promotion', function(Promotion) {
+                             return Promotion.get({id : $stateParams.id}).$promise;
+                         }]
+                     }
+                 }).result.then(function() {
+                     $state.go('event-ang', null, { reload: 'event-ang' });
+                 }, function() {
+                     $state.go('^');
+                 });
+             }]
+         })
+          .state('event-ang-detail.promotions.promotionDetail', {
+              parent: 'event-ang-detail.promotions',
+              url: '/{idPromo}',
+              data: {
+                  authorities: ['ROLE_USER']
+              },
+              onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                  $uibModal.open({
+                      templateUrl: 'app/entities/promotion/promotion-ang-idetail-in-events.html',
+                      controller: 'PromotionAngDialogController',
+                      controllerAs: 'vm',
+                      backdrop: 'static',
+                      size: 'lg',
+                      resolve: {
+                          entity: ['Promotion', function(Promotion) {
+                              return Promotion.get({id : $stateParams.idPromo}).$promise;
+                          }]
+                      }
+                  }).result.then(function() {
+                      $state.go('event-ang-detail.promotions', null, { reload: 'event-ang-detail.promotions' });
+                  }, function() {
+                      $state.go('^');
+                  });
+              }]
+          })
+        .state('event-ang-by-owner.new', {
+            parent: 'event-ang-by-owner',
             url: '/new',
             data: {
                 authorities: ['ROLE_OWNER']
@@ -264,11 +315,11 @@
                 });
             }]
         })
-        .state('event-ang.delete', {
-            parent: 'event-ang',
+        .state('event-ang-by-owner.delete', {
+            parent: 'event-ang-by-owner',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_OWNER']
+                  authorities: ['ROLE_OWNER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
