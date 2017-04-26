@@ -10,8 +10,12 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.core.env.Environment;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -23,6 +27,7 @@ import java.util.stream.Stream;
  * Created by melvin on 4/22/2017.
  */
 
+@Order(1)
 @Aspect
 @Controller
 public class NotificationWSAspect {
@@ -36,7 +41,11 @@ public class NotificationWSAspect {
         pointcut="execution(public * com.firefly.conoche.service.customService.CNotificationService+.createNotifications(..))",
         returning="retVal")
     public void notificationCreateAdvice(Future<List<DetailNotificationDTO>> retVal) throws InterruptedException, ExecutionException {
-        retVal.get().forEach(this::sendToUser);
+        try {
+            retVal.get().forEach(this::sendToUser);
+        } catch(Throwable s) {
+            log.error(s.getMessage());
+        }
     }
 
     @AfterReturning(
@@ -45,13 +54,18 @@ public class NotificationWSAspect {
     public void notificationDeleteAdvice(Future<Stream<String>> retVal, ActionObjectType type, Long id)
             throws InterruptedException, ExecutionException {
 
-        NotificationEntityDTO notificationEntityDTO = new NotificationEntityDTO();
-        notificationEntityDTO.setId(id);
-        notificationEntityDTO.setType(type);
-        retVal.get()
-            .peek(log::error)
-            .forEach(login -> messagingTemplate.convertAndSendToUser(
-                login, DELETE_SUBSCRIPTION_URL, notificationEntityDTO));
+        try {
+            NotificationEntityDTO notificationEntityDTO = new NotificationEntityDTO();
+            notificationEntityDTO.setId(id);
+            notificationEntityDTO.setType(type);
+            retVal.get()
+                .peek(log::error)
+                .forEach(login -> messagingTemplate.convertAndSendToUser(
+                    login, DELETE_SUBSCRIPTION_URL, notificationEntityDTO));
+
+        } catch(Throwable s) {
+            log.error(s.getMessage());
+        }
     }
 
     private void sendToUser(DetailNotificationDTO notificationDTO) {

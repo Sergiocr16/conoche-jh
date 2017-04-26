@@ -1,7 +1,10 @@
 package com.firefly.conoche.web.rest.customRest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.firefly.conoche.domain.Notification;
 import com.firefly.conoche.domain.enumeration.Provincia;
+import com.firefly.conoche.security.SecurityUtils;
+import com.firefly.conoche.service.NotificationService;
 import com.firefly.conoche.service.customService.CNotificationService;
 import com.firefly.conoche.service.dto.DetailNotificationDTO;
 import com.firefly.conoche.service.dto.EventDTO;
@@ -35,9 +38,11 @@ public class CNotificationResource {
     private final Logger log = LoggerFactory.getLogger(com.firefly.conoche.web.rest.NotificationResource.class);
 
     private final CNotificationService cNotificationService;
+    private final NotificationService notificationService;
 
-    public CNotificationResource(CNotificationService cNotificationService) {
+    public CNotificationResource(CNotificationService cNotificationService, NotificationService notificationService) {
         this.cNotificationService = cNotificationService;
+        this.notificationService = notificationService;
     }
 
 
@@ -52,14 +57,27 @@ public class CNotificationResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-/*
 
-    @PutMapping("/notification/read")
+
+    @PostMapping("/notification/{id}/read")
     @Timed
-    public ResponseEntity<List<NotificationDTO>> getMesageByEvent(Long id) throws URISyntaxException {
+    public ResponseEntity getMesageByEvent(@PathVariable Long id) throws URISyntaxException {
 
+        Optional<NotificationDTO> notificationDTO = Optional
+            .ofNullable(notificationService.findOne(id));
 
+        if(!notificationDTO.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        return notificationDTO.filter( n -> n.getUserLogin()
+            .equals(SecurityUtils.getCurrentUserLogin()))
+            .map(n -> {
+                n.setIsRead(true);
+                notificationService.save(n);
+                return ResponseEntity.ok().build();
+            })
+            .orElse(new ResponseEntity(HttpStatus.UNAUTHORIZED));
     }
-*/
+
 
 }

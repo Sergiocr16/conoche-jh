@@ -8,14 +8,17 @@
         .module('conocheApp')
         .controller('NotificationController', NotificationController);
 
-    NotificationController.$inject = ['WSNotification', '$scope', 'Principal', 'Notification'];
+    NotificationController.$inject = ['WSNotification', '$scope', 'Principal', 'Notification', 'AlertService', 'HrefNotification'];
 
-    function NotificationController (WSNotification, $scope, Principal, Notification, AlertService) {
+    function NotificationController (WSNotification, $scope, Principal, Notification, AlertService, HrefNotification) {
         var vm = this;
         const NUMBER_OF_NOTIFICATIONS = 10;
 
+        vm.read = read;
+
         Principal.identity()
             .then(subscribe);
+
 
         loadAll();
         function loadAll () {
@@ -48,15 +51,18 @@
                 ++vm.totalItems;
             }
 
-            function onDeadLink(p) {
-                console.log(p);
-               loadAll();
+            function onDeadLink() {
+                loadAll();
             }
         }
 
-
-
-
-
+        function read(notification) {
+            Notification.readNotification({id: notification.id},
+                null, onSuccess);
+            function onSuccess() {
+                HrefNotification.goToState(notification);
+                loadAll();
+            }
+        }
     }
 })();

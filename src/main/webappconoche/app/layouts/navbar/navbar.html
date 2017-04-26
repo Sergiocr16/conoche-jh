@@ -27,17 +27,17 @@
         <div class="top-menu"   ng-switch="vm.isAuthenticated()">
             <ul class="nav navbar-nav pull-right" ng-controller="JhiLanguageController as languageVm" >
                 <!-- BEGIN NOTIFICATION DROPDOWN -->
-                <li  ng-show="noticationVm.notifications.length > 0" ng-if="vm.isAuthenticated()"  ng-controller="NotificationController as noticationVm" class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar"  ng-switch-when="true">
+                <li  ng-show="noticationVm.notifications.length > 0" ng-if="vm.isAuthenticated() && $state.current.name !== 'all-notification'"  ng-controller="NotificationController as noticationVm" class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar"  ng-switch-when="true">
                     <a href="javascript:;" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
                         <i class="icon-bell"></i>
-                        <span class="badge badge-default">{{noticationVm.totalItems}}</span>
+                        <span style="position: absolute !important;" ng-animate-swap="noticationVm.totalItems" class="notification-circle badge badge-default">{{noticationVm.totalItems}}</span>
                     </a>
 
                     <ul class="dropdown-menu">
                         <li class="external" style="background: rgb(255, 240, 234) !important;">
                             <h3 data-translate="global.menu.notifications.notificationCount"
                                 translate-values="{count: noticationVm.totalItems }"></h3>
-                            <a data-translate="global.menu.notifications.viewAll"> View all</a>
+                            <a style="margin-left: 5px;" ui-sref="all-notification" data-translate="global.menu.notifications.viewAll"> View all</a>
                         </li>
                         <li>
 
@@ -46,28 +46,22 @@
 
                                 <li ng-repeat="notification in noticationVm.notifications track by notification.id"
                                     ng-init="object = notification.actionObject">
-                                    <a href-notification object="object" ng-init="since = (object.creationTime | timeSince)">
+                                    <a ng-click="noticationVm.read(notification)" ng-init="since = (object.creationTime | timeSince)">
                                         <span class="time" style="margin-left: 6px;"
                                               translate-values="{value: since[0]}"
                                               data-translate="global.menu.timeSince.{{since[1]}}">
                                         </span>
 
                                         <span class="details" style="line-height: 200%;">
-                                            <span  ng-if="object.actionType == 'CREATE'" class="label label-sm label-icon label-success">
-									            <i class="fa fa-plus"></i>
-									        </span>
-                                            <span  ng-if="object.actionType == 'UPDATE'" class="label label-sm label-icon label-warning">
-									           <i class="fa fa-pencil-square-o"></i>
+                                            <span  color-this="background-color" data-color="object.objectType"
+                                                   class="label label-sm label-icon label-success">
+									            <i ng-if="object.actionType == 'CREATE'" class="fa fa-plus"></i>
+                                                 <i ng-if="object.actionType == 'UPDATE'" class="fa fa-pencil-square-o"></i>
 									        </span>
                                             <span translate-values="{entity: notification.actionObject.objectType}"
                                                   data-translate="global.menu.notifications.{{notification.actionObject.actionType}}">
                                             </span>
-                                            <!--
-                                            <span style="color: #FF8000;" ng-if="object.changes.length > 0">Changes:</span>
-                                                <span class="label label-default" ng-repeat="change in object.changes | limitTo : 4 track by change.id" style="margin-left: 3px; white-space: normal;" >
-									                {{change.fieldName}}
-									            </span>
-									            -->
+                                             <span>.</span>
                                         </span>
                                     </a>
                                 </li>

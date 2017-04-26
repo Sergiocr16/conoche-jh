@@ -7,10 +7,12 @@ import com.firefly.conoche.domain.ObjectChange;
 import com.firefly.conoche.domain.User;
 import com.firefly.conoche.domain.enumeration.ActionObjectType;
 import com.firefly.conoche.domain.enumeration.ActionType;
+import com.firefly.conoche.domain.interfaces.IEntity;
 import com.firefly.conoche.repository.ActionObjectRepository;
 import com.firefly.conoche.repository.NotificationRepository;
 import com.firefly.conoche.repository.ObjectChangeRepository;
 import com.firefly.conoche.repository.customRepository.CNotificationRepository;
+import com.firefly.conoche.repository.notifications.NotifyRepository;
 import com.firefly.conoche.service.ActionObjectService;
 import com.firefly.conoche.service.NotificationService;
 import com.firefly.conoche.service.ObjectChangeService;
@@ -31,6 +33,7 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +57,7 @@ public class CNotificationService {
     private final ActionObjectRepository actionObjectRepository;
     private final ObjectChangeRepository objectChangeRepository;
     private final DetailNotificationMapper detailNotificationMapper;
+    private final NotificationMailService notificationMailService;
 
 
     public CNotificationService(NotificationRepository notificationRepository,
@@ -61,13 +65,14 @@ public class CNotificationService {
                                 ActionObjectRepository actionObjectRepository,
                                 ObjectChangeRepository objectChangeRepository,
                                 DetailNotificationMapper detailNotificationMapper,
-                                UserMapper userMapper) {
+                                NotificationMailService notificationMailService) {
 
         this.notificationRepository   = notificationRepository;
         this.cNotificationRepository  = cNotificationRepository;
         this.actionObjectRepository   = actionObjectRepository;
         this.objectChangeRepository   = objectChangeRepository;
         this.detailNotificationMapper = detailNotificationMapper;
+        this.notificationMailService =   notificationMailService;
     }
 
 
@@ -101,6 +106,8 @@ public class CNotificationService {
             .peek( n-> n.getActionObject().getChanges())
             .map(detailNotificationMapper::notificationToNotificationDTO)
             .collect(Collectors.toList());
+
+        notificationMailService.sendMails(recipients, ao);
 
         return new AsyncResult<>(notifications);
     }
@@ -161,5 +168,12 @@ public class CNotificationService {
         return new AsyncResult<>(users);
     }
 
+    @Async
+    @Transactional(readOnly = true)
+    <T extends IEntity> Future<Set<User>> getAsyncRecipients(NotifyRepository<T> repo, T entity) {
+        if(true)
+            throw new RuntimeException();
+        return new AsyncResult<>(repo.notificationRecipients(entity));
+    }
 
 }

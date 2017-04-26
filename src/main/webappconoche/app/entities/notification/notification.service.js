@@ -25,8 +25,13 @@
             'getNotifications' : {
                 method: 'GET',
                 isArray: true,
-                url: 'api//notification/user'
+                url: 'api/notification/user'
             },
+            'readNotification' : {
+                method: 'POST',
+                url: 'api/notification/:id/read'
+            },
+
         });
     }
 })();

@@ -131,6 +131,17 @@ jhipster:
 
 application:
     cloudinary:
-        cloud-name: ""
-        api-key: ""
-        api-secret: "secret"
+        cloud-name:
+        api-key:
+        api-secret: secret
+
+    notifications-url:
+        user: ""
+        local: "/#/local-ang/local-ang/%d"
+        event: "/#/event-ang/%d"
+        promotion: ""
+        message: ""
+        rating: ""
+        event-image: ""
+        realtime-event-image: ""
+        local-image: ""

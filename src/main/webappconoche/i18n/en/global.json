@@ -50,11 +50,12 @@
             },
             "language": "Language",
             "notifications" : {
-                "notificationCount" : "You have <strong>{{count}}</strong> notification{{ count != 1 ? 's' : ''}}.",
-                "CREATE" : "A new {{ ('conocheApp.ActionObjectType.' + entity) | translate}} has been created.",
-                "UPDATE" : "A {{ ('conocheApp.ActionObjectType.' + entity) | translate}} has bean updated.",
-                "changes" : "Changes",
-                "viewAll" : "view all"
+                "notificationCount" : "You have <strong>{{count}}</strong> notification{{ count != 1 ? 's' : ''}}",
+                "CREATE" : "A new {{ ('conocheApp.ActionObjectType.' + entity) | translate}} has been created",
+                "UPDATE" : "A {{ ('conocheApp.ActionObjectType.' + entity) | translate}} has been updated",
+                "changes" : " with changed ",
+                "viewAll" : "all",
+                "title" : "Notifications"
             },
             "timeSince" : {
                 "years" : "{{value}} year{{ value != 1 ? 's' : ''}}",

@@ -52,10 +52,11 @@
 
             "notifications" : {
                 "notificationCount" : "Usted tiene <strong>{{count}}</strong> notificacion{{ count != 1 ? 'es' : ''}}.",
-                "CREATE" : "Un nuevo {{ ('conocheApp.ActionObjectType.' + entity) | translate}} ha sido creado.",
-                "UPDATE" : "Un {{('conocheApp.ActionObjectType.' + entity) | translate}} ha sido modificado.",
-                "changes" : "Cambios",
-                "viewAll" : "ver todos"
+                "CREATE" : "Un nuevo {{ ('conocheApp.ActionObjectType.' + entity) | translate}} ha sido creado",
+                "UPDATE" : "Un {{('conocheApp.ActionObjectType.' + entity) | translate}} ha sido modificado",
+                "changes" : " con cambios  ",
+                "viewAll" : "todas",
+                "title" : "Notificaciones"
             },
             "timeSince" : {
                 "years" : "{{value}} año{{ value != 1 ? 's' : ''}}",
