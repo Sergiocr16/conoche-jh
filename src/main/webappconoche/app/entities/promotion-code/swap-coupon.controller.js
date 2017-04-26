@@ -5,14 +5,15 @@
         .module('conocheApp')
         .controller('SwapCouponController', SwapCouponController);
 
-    SwapCouponController.$inject = ['$timeout', '$scope', '$stateParams', 'PromotionCode', 'Promotion', 'User','WSPromotionCodeService','Principal'];
+    SwapCouponController.$inject = ['$timeout', '$scope', '$stateParams', 'PromotionCode', 'Promotion', 'User','WSPromotionCodeService','Principal','AlertService'];
 
-    function SwapCouponController ($timeout, $scope, $stateParams, PromotionCode, Promotion, User,WSPromotionCodeService,Principal) {
+    function SwapCouponController ($timeout, $scope, $stateParams, PromotionCode, Promotion, User,WSPromotionCodeService,Principal,AlertService) {
         var vm = this;
 
         vm.promotionCode = {};
         vm.clear = clear;
         vm.save = save;
+        vm.found=false;
 
 
       vm.swapCoupon = function(){
@@ -23,6 +24,7 @@
       vm.borderColor = "normal-border";
       vm.bgColor = "normal-swap";
       vm.query = undefined;
+      AlertService.success('conocheApp.promotionCode.swapedPromo');
       }
 
         vm.findCoupon = function(){
@@ -50,7 +52,10 @@
         });
 
         function clear () {
-            $uibModalInstance.dismiss('cancel');
+            vm.query = undefined;
+            vm.found = false;
+            vm.borderColor = "normal-border";
+            vm.bgColor = "normal-swap";
         }
 
         function save () {

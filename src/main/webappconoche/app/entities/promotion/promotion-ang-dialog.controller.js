@@ -5,12 +5,13 @@
         .module('conocheApp')
         .controller('PromotionAngDialogController', PromotionAngDialogController);
 
-    PromotionAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Promotion', 'PromotionCode', 'Event','Principal'];
+    PromotionAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Promotion', 'PromotionCode', 'Event','Principal','AlertService'];
 
-    function PromotionAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Promotion, PromotionCode, Event,Principal) {
+    function PromotionAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Promotion, PromotionCode, Event,Principal,AlertService) {
         var vm = this;
 
         vm.promotion = entity;
+         vm.redeemig = false;
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
@@ -52,6 +53,7 @@
         }
 
         vm.redeemCode = function (){
+        vm.redeemig = true;
         PromotionCode.redeemCode({promotionId: vm.promotion.id,userId: vm.currentUserId}).$promise.then(onSaveSuccess, onSaveError);
         }
 
@@ -65,8 +67,9 @@
         }
 
         function onSaveSuccess (result) {
-            $scope.$emit('conocheApp:promotionUpdate', result);
              findAvailableCodes();
+             vm.redeemig = false;
+             AlertService.success('Has redimido un código');
             vm.isSaving = false;
         }
 

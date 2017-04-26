@@ -88,7 +88,8 @@
             parent: 'entity',
             data: {
                 authorities: ['ROLE_OWNER'],
-                pageTitle: 'global.menu.entities.canjearPromo'
+                pageTitle: 'global.menu.entities.canjearPromo',
+               phrase: 'conocheApp.promotionCode.home.swapPhrase'
             },
             views: {
                 'content@': {
@@ -114,40 +115,39 @@
                 }]
             }
         })
-        .state('home.myPromotions', {
-            parent: 'home',
+        .state('myPromotions', {
+            parent: 'entity',
             url: '/myPromotions',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER'],
+                pageTitle: 'conocheApp.promotionCode.home.title',
+                phrase: 'conocheApp.promotionCode.home.phrase'
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/entities/promotion-code/my-promotions-codes.html',
+                    controller: 'MyPromotionCodesController',
+                    controllerAs: 'vm'
+                }
             },
             onEnter: ['$stateParams', '$state', '$uibModal','WSPromotionCodeService','Principal', function($stateParams, $state, $uibModal,WSPromotionCodeService,Principal) {
              Principal.identity().then(function(user){
               WSPromotionCodeService.subscribe(user.id);
              })
-                $uibModal.open({
-                    templateUrl: 'app/entities/promotion-code/my-promotions-codes.html',
-                    controller: 'MyPromotionCodesController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'md',
-                    resolve: {
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                                        $translatePartialLoader.addPart('event');
-                                        $translatePartialLoader.addPart('global');
-                                        return $translate.refresh();
-                                    }]
-                    }
-                }).result.then(function() {
-                    $state.go('^', {}, { reload: false });
-                }, function() {
-                    $state.go('^');
-                });
             }],
             onExit: ['$stateParams', 'WSPromotionCodeService','Principal', function($stateParams, WSPromotionCodeService,Principal) {
                 Principal.identity().then(function(user){
                 WSPromotionCodeService.unsubscribe(user.id)
                 })
-            }]
+            }],
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('promotionCode');
+                    $translatePartialLoader.addPart('event');
+                    $translatePartialLoader.addPart('global');
+                    return $translate.refresh();
+                }],
+            }
         })
         .state('promotion-code-ang-detail.edit', {
             parent: 'promotion-code-ang-detail',

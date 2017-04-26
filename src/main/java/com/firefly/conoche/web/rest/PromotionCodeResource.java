@@ -165,8 +165,10 @@ public class PromotionCodeResource {
         PromotionCodeDTO result = promotionCodeService.findByCode(code);
         if(result!=null) {
             result.setPromotion(this.promotionService.findOne(result.getPromotionId()));
+            return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
     }
 
     /**

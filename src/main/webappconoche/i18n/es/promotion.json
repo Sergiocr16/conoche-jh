@@ -23,7 +23,8 @@
             "maximumCodePerUser": "Maximum Code Per User",
             "codes": "Codes",
             "event": "Event",
-            "codeQuantity": "Cantidad de códigos"
+            "codeQuantity": "Cantidad de códigos",
+            "redeemCode":"Has redimido un código"
         }
     }
 }
