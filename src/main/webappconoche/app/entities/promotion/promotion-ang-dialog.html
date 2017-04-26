@@ -1,48 +1,106 @@
 
 <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
-    <div class="modal-header">
+    <div class="modal-header caption font-red-sunglo" >
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="myPromotionLabel" data-translate="conocheApp.promotion.home.createOrEditLabel">Create or edit a Promotion</h4>
+
+        <span id="myUserLabel"  class="caption-subject bold uppercase"  data-translate="conocheApp.promotion.home.createOrEditLabel"> Comment live</span>
     </div>
+    <jhi-alert-error></jhi-alert-error>
     <div class="modal-body">
-        <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.promotion.id">
-            <label for="id" data-translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.promotion.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="conocheApp.promotion.description" for="field_description">Description</label>
-            <input type="text" class="form-control" name="description" id="field_description"
-                    ng-model="vm.promotion.description"
-                    required/>
-            <div ng-show="editForm.description.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.description.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
+        <div class="form-body">
+            <div class="col-md-6">
+                <!--<div class="form-group form-md-line-input has-info ">-->
+                    <!--<select class="form-control gray-font" id="field_event" name="event"   ng-model="vm.promotion.eventId" ng-options="event.id as event.name for event in vm.events" required>-->
+                        <!--<option value="">Seleccione un local</option>-->
+                    <!--</select>-->
+                    <!--<label class="control-label font-15" data-translate="conocheApp.promotion.event">Event</label>-->
+                    <!--<span ng-show="editForm.event.$invalid" class="help-block" ng-show="editForm.event.$error.required" data-translate="entity.validation.required"></span>-->
+                <!--</div>-->
+                <div class="form-group form-md-line-input">
+                    <input type="text" class="form-control gray-font" name="eventName" id="field_name" ng-model="vm.event.name" readOnly>
+                    <label class="control-label font-15" data-translate="conocheApp.promotion.description" for="field_name">Name</label>
+
+                </div>
+                <div class="form-group form-md-line-input">
+                    <input id="field_initialTime"  name="initialTime" type="text" ng-click="vm.openCalendar('initialTime')" class="form-control" name="initialTime" datepicker-options="vm.picker1.datepickerOptions"  ng-change="vm.updatePicker()" datetime-picker="{{dateformat}}" ng-model="vm.promotion.initialTime" is-open="vm.datePickerOpenStatus.initialTime"
+                           required/>
+                    <label class="font-15" data-translate="conocheApp.promotion.initialTime">Initial Time</label>
+                    <span ng-show="editForm.initialTime.$invalid" class="help-block" ng-show="editForm.initialTime.$error.required" data-translate="entity.validation.required"></span>
+                </div>
+
+                <div class="form-group form-md-line-input">
+                    <input type="number" class="form-control gray-font" name="codeQuantity" id="field_codeQuantity"    ng-model="vm.promotion.codeQuantity" required min="1">
+                    <label class="control-label font-15" data-translate="conocheApp.promotion.codeQuantity"  for="field_maximumCodePerUser">Name</label>
+                    <span class="help-block"
+                          ng-show="editForm.codeQuantity.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </span>
+                    <span class="help-block"
+                          ng-show="editForm.codeQuantity.$error.min" data-translate="entity.validation.min" translate-value-min="1">
+                        This field should be at least 1.
+                    </span>
+                    <span class="help-block"
+                          ng-show="editForm.codeQuantity.$error.number" data-translate="entity.validation.number">
+                        This field should be a number.
+                    </span>
+                </div>
+                <!--<div class="form-group">-->
+                    <!--<label class="control-label" data-translate="conocheApp.promotion.codeQuantity" for="field_codeQuantity">Code Quantity</label>-->
+                    <!--<input type="number" class="form-control" name="codeQuantity" id="field_codeQuantity"-->
+                           <!--ng-model="vm.promotion.codeQuantity"-->
+                    <!--/>-->
+                <!--</div>-->
+
+
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group form-md-line-input">
+                        <input type="text" class="form-control gray-font" name="description" id="field_name" ng-model="vm.promotion.description" required>
+                        <label class="control-label font-15" data-translate="conocheApp.promotion.description" for="field_name">Name</label>
+                        <span ng-show="editForm.description.$invalid" class="help-block" ng-show="editForm.description.$error.required" data-translate="entity.validation.required"></span>
+
+                </div>
+                <div class="form-group form-md-line-input">
+                    <input id="field_finalTime" type="text"  name="finalTime" ng-click="vm.openCalendar('finalTime')" class="form-control" ng-change="vm.updatePicker()" datepicker-options="vm.picker2.datepickerOptions"  name="finalTime" datetime-picker="{{dateformat}}" ng-model="vm.promotion.finalTime" is-open="vm.datePickerOpenStatus.finalTime"
+                           required/>
+                    <label class="font-15" data-translate="conocheApp.promotion.finalTime"  for="field_finalTime">Final Time</label>
+                    <span ng-show="editForm.finalTime.$invalid" class="help-block" ng-show="editForm.finalTime.$error.required" data-translate="entity.validation.required"></span>
+                    <span class="help-block"
+                       ng-show="editForm.initialTime.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">
+                        This field should be a date and time.
+                    </span>
+
+                </div>
+
+                <div class="form-group form-md-line-input">
+                    <input type="number" class="form-control gray-font" name="maximumCodePerUser" id="field_maximumCodePerUser"    ng-model="vm.promotion.maximumCodePerUser" required min="1">
+                    <label class="control-label font-15" data-translate="conocheApp.promotion.codeQuantity"  for="field_maximumCodePerUser">Name</label>
+                    <span class="help-block"
+                          ng-show="editForm.maximumCodePerUser.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </span>
+                    <span class="help-block"
+                          ng-show="editForm.maximumCodePerUser.$error.min" data-translate="entity.validation.min" translate-value-min="1">
+                        This field should be at least 1.
+                    </span>
+                    <span class="help-block"
+                          ng-show="editForm.maximumCodePerUser.$error.number" data-translate="entity.validation.number">
+                        This field should be a number.
+                    </span>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="conocheApp.promotion.imageUrl" for="field_imageUrl">Image Url</label>
-            <input type="text" class="form-control" name="imageUrl" id="field_imageUrl"
-                    ng-model="vm.promotion.imageUrl"
-                    />
-        </div>
-        <div class="form-group" ngf-drop ngf-change="vm.setImage($file, vm.promotion)" ngf-pattern="'image/*'">
-            <label class="control-label" data-translate="conocheApp.promotion.image" for="field_image">Image</label>
+        <div class="form-group  padding-20" ngf-drop ngf-change="vm.setImage($file, vm.promotion)" ngf-pattern="'image/*'">
+            <label class="control-label  gray-font font-15" data-translate="conocheApp.promotion.image" for="field_image">Image</label>
             <div>
-                <img data-ng-src="{{'data:' + vm.promotion.imageContentType + ';base64,' + vm.promotion.image}}" style="max-height: 100px;" ng-if="vm.promotion.image" alt="promotion image"/>
+                <img data-ng-src="{{'data:' + vm.promotion.imageContentType + ';base64,' + vm.promotion.image}}" class="col-md-12 crop-300 col-lg-12 col-sm-12 col-xs-12" style="" ng-if="vm.promotion.image" alt="promotion image"/>
                 <div ng-if="vm.promotion.image" class="help-block clearfix">
-                    <span class="pull-left">{{vm.promotion.imageContentType}}, {{vm.byteSize(vm.promotion.image)}}</span>
-                    <button type="button" ng-click="vm.promotion.image=null;vm.promotion.imageContentType=null;"
-                            class="btn btn-default btn-xs pull-right">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
+
                 </div>
-                <button type="button" ngf-select class="btn btn-default btn-block"
+                <button type="button" ngf-select class="btn btn-default btn-block  gray-font"
                         ngf-change="vm.setImage($file, vm.promotion)" accept="image/*" data-translate="entity.action.addimage">
                     Add image
                 </button>
@@ -53,78 +111,9 @@
             <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
                     ng-model="vm.promotion.imageContentType" />
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="conocheApp.promotion.initialTime" for="field_initialTime">Initial Time</label>
-                <div class="input-group">
-                    <input id="field_initialTime" type="text" class="form-control" name="initialTime" datetime-picker="{{dateformat}}" ng-model="vm.promotion.initialTime" is-open="vm.datePickerOpenStatus.initialTime"
-                    required/>
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('initialTime')"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                </div>
-            <div ng-show="editForm.initialTime.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.initialTime.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.initialTime.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">
-                    This field should be a date and time.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="conocheApp.promotion.finalTime" for="field_finalTime">Final Time</label>
-                <div class="input-group">
-                    <input id="field_finalTime" type="text" class="form-control" name="finalTime" datetime-picker="{{dateformat}}" ng-model="vm.promotion.finalTime" is-open="vm.datePickerOpenStatus.finalTime"
-                    required/>
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('finalTime')"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                </div>
-            <div ng-show="editForm.finalTime.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.finalTime.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.finalTime.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">
-                    This field should be a date and time.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="conocheApp.promotion.maximumCodePerUser" for="field_maximumCodePerUser">Maximum Code Per User</label>
-            <input type="number" class="form-control" name="maximumCodePerUser" id="field_maximumCodePerUser"
-                    ng-model="vm.promotion.maximumCodePerUser"
-                    required min="1"/>
-            <div ng-show="editForm.maximumCodePerUser.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.maximumCodePerUser.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.maximumCodePerUser.$error.min" data-translate="entity.validation.min" translate-value-min="1">
-                    This field should be at least 1.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.maximumCodePerUser.$error.number" data-translate="entity.validation.number">
-                    This field should be a number.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="conocheApp.promotion.codeQuantity" for="field_codeQuantity">Code Quantity</label>
-            <input type="number" class="form-control" name="codeQuantity" id="field_codeQuantity"
-                   ng-model="vm.promotion.codeQuantity"
-            />
-        </div>
-        <div class="form-group">
-            <label data-translate="conocheApp.promotion.event" for="field_event">Event</label>
-            <select class="form-control" id="field_event" name="event" ng-model="vm.promotion.eventId" ng-options="event.id as event.id for event in vm.events"            >
-                <option value=""></option>
-            </select>
-        </div>
+
+
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

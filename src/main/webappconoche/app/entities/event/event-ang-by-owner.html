@@ -1,6 +1,6 @@
 <div>
-    <div class="col-md-12 margin-bottom-20">
-        <div class="col-md-offset-9 col-md-3">
+    <div class="col-md-12 margin-bottom-20 ">
+        <div class="col-md-offset-9 col-md-3 no-padding">
             <div has-authority="ROLE_OWNER" ui-sref="event-ang-by-owner.new" class="btn btn-primary btn-block btn-lg border-radius-6 col-md-3">    <span class="glyphicon glyphicon-plus"></span>
                 <span  data-translate="conocheApp.event.home.createLabel"></span></div>
         </div>
@@ -12,8 +12,9 @@
             <div class="col-md-12 F9F9F9-background margin-bottom-20 bottom-border-gray " style="padding:20px;" >
                 <div class="col-md-5 no-padding-left padding-15 position-relative font-18 text-center" >
                     <div id="info-date-event" class="col-md-2 padding-10 font-white"><span><span class="font-24">{{event.initialTime| date:'d'}} </span>{{event.initialTime| date:'MMM'}}</span></div>
-                    <img class="col-md-12 crop no-padding"  style="z-index: 0;" data-ng-src="{{'data:' + event.bannerContentType + ';base64,' +
+                    <img class="col-md-12 col-sm-12 col-xs-12 crop no-padding" ng-show="event.banner" style="z-index: 0;" data-ng-src="{{'data:' + event.bannerContentType + ';base64,' +
                          event.banner}}" alt="event image"/>
+                    <img class="col-md-12 col-sm-12 col-xs-12 crop no-padding" ng-hide="event.banner" src="content/images/defaultEventImg.png" style="z-index: 0;"  alt="event image"/>
                 </div>
                 <div class="col-md-7 gray-font">
                     <h1 class="font-24  Raleway" style="color: #5cb9ff; text-transform: uppercase;">{{event.name}}</h1>
@@ -28,12 +29,6 @@
                         <span class="glyphicon glyphicon-eye-open"></span>
                         <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                     </button>
-                    <!--<button has-authority="ROLE_OWNER"  type="submit"-->
-                            <!--ui-sref="event-ang.edit({id:event.id})"-->
-                            <!--class="btn btn-primary btn-sm border-radius-6 padding-10">-->
-                        <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                        <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
-                    <!--</button>-->
                     <button has-authority="ROLE_OWNER" type="submit"
                             ui-sref="event-ang-by-owner.delete({id:event.id})"
                             class="btn btn-danger btn-sm border-radius-6 padding-10">
