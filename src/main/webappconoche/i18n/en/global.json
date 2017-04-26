@@ -35,7 +35,7 @@
                 "login": "Sign in",
                 "logout": "Sign out",
                 "register": "Register",
-                "promo": "My cupons"
+                "promo": "My promotion codes"
             },
             "admin": {
                 "main": "Administration",
@@ -50,7 +50,23 @@
                 "database": "Database",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
-            "language": "Language"
+            "language": "Language",
+            "notifications" : {
+                "notificationCount" : "You have <strong>{{count}}</strong> notification{{ count != 1 ? 's' : ''}}",
+                "CREATE" : "A new {{ ('conocheApp.ActionObjectType.' + entity) | translate}} has been created",
+                "UPDATE" : "A {{ ('conocheApp.ActionObjectType.' + entity) | translate}} has been updated",
+                "changes" : " with changed ",
+                "viewAll" : "all",
+                "title" : "Notifications"
+            },
+            "timeSince" : {
+                "years" : "{{value}} year{{ value != 1 ? 's' : ''}}",
+                "months": "{{value}} month{{ value != 1 ? 'es' : ''}}",
+                "days":   "{{value}} day{{ value != 1 ? 's' : ''}}",
+                "hours":  "{{value}} hour{{ value != 1 ? 's' : ''}}",
+                "minutes": "{{value}} minute{{ value != 1 ? 's' : ''}}",
+                "justNow" : "just now"
+            }
         },
         "form": {
             "username": "Username",
@@ -138,7 +154,9 @@
         "Size": "Field {{ fieldName }} does not meet min/max size requirements!",
         "userexists": "Login name already used!",
         "emailexists": "E-mail is already in use!",
-        "idexists": "A new {{ entityName }} cannot already have an ID"
+        "idexists": "A new {{ entityName }} cannot already have an ID",
+        "serverDown": "You have lost connection to the server",
+        "eventNotFound": "The event doesn't exists"
     },
     "footer": {
         "about": "About",
@@ -152,4 +170,6 @@
         },
         "copyright":"2017 © Firefly. All Rights Reserved."
     }
+
+
 }

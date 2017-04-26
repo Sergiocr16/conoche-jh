@@ -76,7 +76,7 @@ public class PromotionCodeService {
     @Transactional(readOnly = true)
     public Page<PromotionCodeDTO> findByUserId(Long userId) {
         log.debug("Request to get all PromotionCodes");
-        List<PromotionCode> result = promotionCodeRepository.findByUserId(userId);
+        List<PromotionCode> result = promotionCodeRepository.findByUserIdAndActive(userId,true);
         return new PageImpl<PromotionCode>(result).map(promotionCode -> promotionCodeMapper.promotionCodeToPromotionCodeDTO(promotionCode));
     }
 
@@ -96,7 +96,7 @@ public class PromotionCodeService {
     @Transactional(readOnly = true)
     public Page<PromotionCodeDTO> findAvailableCodesByPromotionId(Long promotionId) {
         log.debug("Request to get all Promotions available");
-        List<PromotionCode> result = promotionCodeRepository.findByPromotionIdAndUserIdIsNull(promotionId);
+        List<PromotionCode> result = promotionCodeRepository.findByPromotionIdAndUserIdIsNullAndActive(promotionId,true);
         return new PageImpl<PromotionCode>(result).map(promotionCode -> promotionCodeMapper.promotionCodeToPromotionCodeDTO(promotionCode));
     }
     /**
@@ -116,7 +116,7 @@ public class PromotionCodeService {
     @Transactional(readOnly = true)
     public PromotionCodeDTO findByCode(String code) {
         log.debug("Request to get PromotionCode : {}", code);
-        PromotionCode promotionCode = promotionCodeRepository.findByCode(code);
+        PromotionCode promotionCode = promotionCodeRepository.findByCodeAndActive(code,true);
         PromotionCodeDTO promotionCodeDTO = promotionCodeMapper.promotionCodeToPromotionCodeDTO(promotionCode);
         return promotionCodeDTO;
     }

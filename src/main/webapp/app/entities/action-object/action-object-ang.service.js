@@ -4,9 +4,9 @@
         .module('conocheApp')
         .factory('ActionObject', ActionObject);
 
-    ActionObject.$inject = ['$resource'];
+    ActionObject.$inject = ['$resource', 'DateUtils'];
 
-    function ActionObject ($resource) {
+    function ActionObject ($resource, DateUtils) {
         var resourceUrl =  'api/action-objects/:id';
 
         return $resource(resourceUrl, {}, {
@@ -16,6 +16,7 @@
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
+                        data.creationTime = DateUtils.convertDateTimeFromServer(data.creationTime);
                     }
                     return data;
                 }

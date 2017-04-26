@@ -15,7 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,12 +32,13 @@ public class EventService {
 
     private final EventMapper eventMapper;
     private final UserRepository userRepository;
+    private final LocalService localService;
 
-
-    public EventService(EventRepository eventRepository, EventMapper eventMapper, UserRepository userRepository) {
+    public EventService(EventRepository eventRepository, EventMapper eventMapper, LocalService localService) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
-        this.userRepository = userRepository;
+        this.localService = localService;
+
     }
 
     /**

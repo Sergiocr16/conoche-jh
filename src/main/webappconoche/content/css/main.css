@@ -350,6 +350,7 @@ Custom alerts for notification
 .alerts .toast {
     position: fixed;
     width: 100%;
+    z-index: 100000;
 }
 
 .alerts .toast.left {
@@ -851,13 +852,6 @@ border:1px solid #B71C1C!important;
     display: none;
 }
 
-.info-pagination {
-    font-family: 'Amatic SC', cursive;
-    color: #000000;
-    font-size: 25px;
-    margin: 10% 0 0 0;
-}
-
 #home_search{
     background: url('/content/images/home-background.jpg')!important;
     color: white;
@@ -958,4 +952,49 @@ font-size: 28px!important;
     font-size: 20px !important;
     margin-left: 20px;
     margin-right: 20px;
+}
+
+
+
+/* Alert style*/
+
+.toast {
+    background-color: transparent !important;
+}
+
+.alerts .alert {
+    opacity: 0.95;
+    border: none !important;
+}
+
+/**Pager override*/
+
+.pager .disabled > a, .pager .disabled > a:hover, .pager .disabled > a:focus, .pager .disabled > span {
+    color: #FF8000 !important;
+}
+
+.pager li > a, .pager li > span {
+    color: #FF8000 !important;
+}
+
+.info-pagination {
+    font-family: 'Amatic SC', cursive;
+    color: #000000;
+    font-size: 20px;
+    margin: 10% 0 0 0;
+}
+.pagination > li > a, .pagination > li > span {
+    color: #FF8000 !important;
+}
+/**notificaciones
+
+ */
+
+.feeds li .col2 {
+    float: left;
+    width: 120px;
+    margin-left: -120px;
+}
+.desc {
+    color: #82949a !important;
 }

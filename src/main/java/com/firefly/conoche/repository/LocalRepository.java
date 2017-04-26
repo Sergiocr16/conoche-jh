@@ -2,6 +2,8 @@ package com.firefly.conoche.repository;
 
 import com.firefly.conoche.domain.Local;
 
+import com.firefly.conoche.repository.notifications.NotifyRepository;
+import com.firefly.conoche.repository.notifications.especificImpl.LocalRepositoryCustom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -14,7 +16,7 @@ import java.util.List;
  * Mover findBylocalCategoryId a otro servicio para evitar perderlos
  */
 @SuppressWarnings("unused")
-public interface LocalRepository extends JpaRepository<Local,Long> {
+public interface LocalRepository extends NotifyRepository<Local>, LocalRepositoryCustom {
 
     @Query("select local from Local local where local.owner.login = ?#{principal.username}")
     List<Local> findByOwnerIsCurrentUser();

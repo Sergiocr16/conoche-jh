@@ -22,11 +22,13 @@ public class CEventService {
         this.eventMapper = eventMapper;
     }
 
+    @Transactional(readOnly = true)
     public Page<EventDTO> findByProvincia(Pageable page, Provincia provincia, String name, ZonedDateTime zonedDateTime) {
         return ceventRepository.findByProvincia(page, provincia, name, zonedDateTime)
             .map(eventMapper::eventToEventDTO);
     }
 
+    @Transactional(readOnly = true)
     public Long countEventAfter(ZonedDateTime zonedDateTime) {
         return ceventRepository.countByFinalTimeGreaterThan(zonedDateTime);
     }

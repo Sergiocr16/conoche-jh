@@ -33,19 +33,11 @@ public class PromotionCodeWSService {
         this.promotionCodeService = promotionCodeService;
     }
 
-    //cambiar el zoneid
-    @SubscribeMapping("/topic/deletePromotionCode/{idUser}")
-    @SendTo("/topic/deletedPromotionCode/{idUser}")
-    public Long ajasdf(@Payload Long id)throws IOException {
-        this.promotionCodeService.delete(id);
-        return id;
+    @SubscribeMapping("/topic/deletedPromotionCode/{idUser}")
+    @SendTo("/topic/deletePromotionCode/{idUser}")
+    public PromotionCodeDTO deletePromotionCode(@Payload PromotionCodeDTO promo)throws IOException {
+        promo.setActive(false);
+        this.promotionCodeService.save(promo);
+        return promo;
     }
-//    //cambiar el zoneid
-//    @SubscribeMapping("/topic/deletePromotionCode/{idUser}")
-//    @SendTo("/topic/deletedPromotionCode/{idUser}")
-//    public Long lala(Long id)throws IOException {
-//        this.promotionCodeService.delete(id);
-//        return id;
-//    }
-
 }

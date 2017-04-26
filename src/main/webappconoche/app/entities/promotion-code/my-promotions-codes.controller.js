@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('MyPromotionCodesController', MyPromotionCodesController);
 
-    MyPromotionCodesController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'PromotionCode', 'Promotion', 'User','Principal','WSPromotionCodeService','$filter'];
+    MyPromotionCodesController.$inject = ['$timeout', '$scope', '$stateParams', 'PromotionCode', 'Promotion', 'User','Principal','WSPromotionCodeService','$filter','AlertService'];
 
-    function MyPromotionCodesController ($timeout, $scope, $stateParams, $uibModalInstance, PromotionCode, Promotion, User,Principal,WSPromotionCodeService,$filter) {
+    function MyPromotionCodesController ($timeout, $scope, $stateParams, PromotionCode, Promotion, User,Principal,WSPromotionCodeService,$filter,AlertService) {
         var vm = this;
 
        Principal.identity().then(function(user){
@@ -17,13 +17,14 @@
 
 
       function deletePromotion(promo){
-      vm.promotionCodes = $filter('filter')(vm.promotionCodes, {id: promo.id})
+      AlertService.success('conocheApp.promotionCode.swapedPromo');
+      vm.promotionCodes = $filter('filter')(vm.promotionCodes, function (item) {
+            return item.id !== promo.id;
+          });
       }
 
 
         vm.promotionCodes = [];
-        vm.clear = clear;
-        vm.save = save;
          function loadAll () {
          Principal.identity().then(function(user){
               PromotionCode.getByUserId({
@@ -40,7 +41,6 @@
                   vm.totalItems = headers('X-Total-Count');
                   vm.queryCount = vm.totalItems;
                   vm.promotionCodes = data;
-                  console.log(data);
               }
               function onError(error) {
                   AlertService.error(error.data.message);
@@ -49,29 +49,6 @@
          }
 
          loadAll();
-
-        function clear () {
-            $uibModalInstance.dismiss('cancel');
-        }
-
-        function save () {
-            vm.isSaving = true;
-            if (vm.promotionCode.id !== null) {
-                PromotionCode.update(vm.promotionCode, onSaveSuccess, onSaveError);
-            } else {
-                PromotionCode.save(vm.promotionCode, onSaveSuccess, onSaveError);
-            }
-        }
-
-        function onSaveSuccess (result) {
-            $scope.$emit('conocheApp:promotionCodeUpdate', result);
-            $uibModalInstance.close(result);
-            vm.isSaving = false;
-        }
-
-        function onSaveError () {
-            vm.isSaving = false;
-        }
 
 
     }

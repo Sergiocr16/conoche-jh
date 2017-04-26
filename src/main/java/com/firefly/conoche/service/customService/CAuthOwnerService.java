@@ -26,6 +26,7 @@ public class CAuthOwnerService {
         this.eventRepository = eventRepository;
     }
 
+    @Transactional(readOnly = true)
     public Optional<Boolean> currentUserIsOwner(Long idEvent) {
         return Optional
             .ofNullable(userService.getUserWithAuthorities())

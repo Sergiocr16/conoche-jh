@@ -48,6 +48,25 @@
     <!-- build:css content/css/main.css -->
     <link rel="stylesheet" href="content/css/main.css">
     <!-- endbuild -->
+    <!--
+        <div class="alert" ng-class="['alert-' + (type || 'warning'), closeable ? 'alert-dismissible' : null]" role="alert">
+          <button ng-show="closeable" type="button" class="close" ng-click="close({$event: $event})">
+               <span aria-hidden="true">&times;</span>
+            <span class=\"sr-only\">Close</span>
+           </button>
+           <div ng-transclude></div>
+        </div>
+
+     -->
+
+    <script id="alert2.html" type="text/ng-template">
+        <div class="ns-box ns-growl ns-effect-slide ns-type-notice ns-show">
+            <div class="ns-box-inner">
+                <p ng-transclude></p>
+            </div>
+            <span ng-show="closeable" ng-click="close({$event: $event})" class="ns-close"></span>
+        </div>
+    </script>
 </head>
 
 <body ng-app="conocheApp" class="page-header-menu-fixed" ng-strict-di>
@@ -98,8 +117,13 @@
 <script src="bower_components/sockjs-client/dist/sockjs.js"></script>
 <script src="bower_components/stomp-websocket/lib/stomp.min.js"></script>
 <script src="bower_components/cloudinary-core/cloudinary-core.js"></script>
+
+<script src="bower_components/slimScroll/jquery.slimscroll.js"></script>
+<script src="bower_components/slimScroll/jquery.slimscroll.min.js"></script>
+
 <script src="bower_components/moment/moment.js"></script>
 <script src="bower_components/humanize-duration/humanize-duration.js"></script>
+
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-aria/angular-aria.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
@@ -121,6 +145,7 @@
 <script src="bower_components/cloudinary_ng/js/angular.cloudinary.js"></script>
 <script src="bower_components/angular-timer/dist/angular-timer.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-slimscroll/angular-slimscroll.js"></script>
 <!-- endinject -->
 <!-- endbuild -->
 <script src="bower_components/jquery-bridget/jquery-bridget.js"></script>
@@ -211,7 +236,16 @@
 <script src="app/entities/promotion/promotion-ang.state.js"></script>
 <script src="app/entities/promotion/promotion-ang.service.js"></script>
 <script src="app/entities/promotion/promotion-ang.controller.js"></script>
+
+<script src="app/entities/notification/ws-notification.service.js"></script>
+<script src="app/entities/notification/notifications.state.js"></script>
+<script src="app/entities/notification/notification.service.js"></script>
+<script src="app/entities/notification/notification.controller.js"></script>
+<script src="app/entities/notification/href-notification.service.js"></script>
+<script src="app/entities/notification/all-notifications.controller.js"></script>
+
 <script src="app/entities/promotion/event-promotions.controller.js"></script>
+
 <script src="app/entities/message/ws-real-time-messages.service.js"></script>
 <script src="app/entities/message/message-ang-dialog.controller.js"></script>
 <script src="app/entities/message/message-ang-detail.controller.js"></script>
@@ -253,22 +287,11 @@
 <script src="app/entities/category/category.state.js"></script>
 <script src="app/entities/category/category.service.js"></script>
 <script src="app/entities/category/category.controller.js"></script>
-<script src="app/entities/action-object/action-object-ang-dialog.controller.js"></script>
-<script src="app/entities/action-object/action-object-ang-detail.controller.js"></script>
-<script src="app/entities/action-object/action-object-ang-delete-dialog.controller.js"></script>
-<script src="app/entities/action-object/action-object-ang.state.js"></script>
-<script src="app/entities/action-object/action-object-ang.service.js"></script>
-<script src="app/entities/action-object/action-object-ang.controller.js"></script>
-<script src="app/entities/action/action-ang-dialog.controller.js"></script>
-<script src="app/entities/action/action-ang-detail.controller.js"></script>
-<script src="app/entities/action/action-ang-delete-dialog.controller.js"></script>
-<script src="app/entities/action/action-ang.state.js"></script>
-<script src="app/entities/action/action-ang.service.js"></script>
-<script src="app/entities/action/action-ang.controller.js"></script>
 <script src="app/components/util/trusted.filter.js"></script>
 <script src="app/components/util/truncate-words.filter.js"></script>
 <script src="app/components/util/truncate-characters.filter.js"></script>
 <script src="app/components/util/timeToMin.js"></script>
+<script src="app/components/util/time-since.filter.js"></script>
 <script src="app/components/util/sort-by.directive.js"></script>
 <script src="app/components/util/sort.directive.js"></script>
 <script src="app/components/util/shuffle.filter.js"></script>
@@ -281,6 +304,7 @@
 <script src="app/components/util/image.service.js"></script>
 <script src="app/components/util/date-util.service.js"></script>
 <script src="app/components/util/data-util.service.js"></script>
+<script src="app/components/util/color-this.js"></script>
 <script src="app/components/util/capitalize.filter.js"></script>
 <script src="app/components/util/base64.service.js"></script>
 <script src="app/components/slider/slider.directive.js"></script>
@@ -288,7 +312,6 @@
 <script src="app/components/particle/particle-text.directive.js"></script>
 <script src="app/components/particle/particle-animator.service.js"></script>
 <script src="app/components/particle/particle.service.js"></script>
-<script src="app/components/particle/mouse-position.service.js"></script>
 <script src="app/components/login/login.service.js"></script>
 <script src="app/components/login/login.controller.js"></script>
 <script src="app/components/language/language.service.js"></script>

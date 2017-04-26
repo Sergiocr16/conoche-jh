@@ -6,9 +6,9 @@
 angular.module('conocheApp')
        .directive("particleImage", ParticleImage);
 
-ParticleImage.$inject = ['$window', '$document', 'Particle', 'ImageUtil', 'ParticleAnimator', '$timeout', 'MousePosition'];
+ParticleImage.$inject = ['$window', '$document', 'Particle', 'ImageUtil', 'ParticleAnimator', '$timeout'];
 
-function ParticleImage($window, $document, Particle, ImageUtil, ParticleAnimator, $timeout, MousePosition) {
+function ParticleImage($window, $document, Particle, ImageUtil, ParticleAnimator, $timeout) {
     return {
         restrict: 'E',
         template: '<canvas/>',
@@ -20,11 +20,12 @@ function ParticleImage($window, $document, Particle, ImageUtil, ParticleAnimator
             let context   = canvas.getContext('2d');
             let r         = parseInt(attrs.radius, 10) || 20;
             let radius    =  r * r;
-            let mouse     =  MousePosition.createMouseEvents(canvas);
+            let mouse     = {x: canvas.width, y: canvas.height};;
             let timeout   = parseInt(attrs.timeout, 10) || 5000;
             canvas.width  = parseInt(attrs.width, 10) || canvas.width;
             canvas.height = parseInt(attrs.height, 10) || canvas.height;
 
+            addEvents();
             context.globalAlpha = 0.7;
 
             if (!angular.isArray(scope.src)
@@ -62,8 +63,49 @@ function ParticleImage($window, $document, Particle, ImageUtil, ParticleAnimator
                 pia.start(mouse, radius);
             }
 
+            function addEvents() {
+                $document.bind("mousemove", onMouseMove);
+                $document.bind("touchstart", onTouchStart, false);
+                $document.bind("touchmove", onTouchMove, false);
+                $document.bind("touchend", onTouchend, false);
+            }
+
+            function onDestroy() {
+                $document.unbind("mousemove", onMouseMove);
+                $document.unbind("touchstart", onTouchStart);
+                $document.unbind("touchmove", onTouchMove);
+                $document.unbind("touchend", onTouchend);
+            }
+
+            function setMouse(x, y) {
+                var rect = canvas.getBoundingClientRect();
+                mouse.x = x - rect.left;
+                mouse.y = y - rect.top;
+            }
+
+            function onMouseMove(event) {
+                setMouse(event.clientX, event.clientY);
+            }
+
+            function onTouchStart(event) {
+                setMouse(event.changedTouches[0].clientX,
+                    event.changedTouches[0].clientY);
+            }
+
+            function onTouchMove(event) {
+                event.preventDefault();
+                setMouse(event.targetTouches[0].clientX,
+                    event.targetTouches[0].clientY);
+            }
+            function onTouchend(event){
+                event.preventDefault();
+                setMouse(0, 0);
+            }
+
             ImageUtil.preloadImages(scope.src)
                 .then(slideShow);
+
+            scope.$on('$destroy', onDestroy);
         }
     };
 }
