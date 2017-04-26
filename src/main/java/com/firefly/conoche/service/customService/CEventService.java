@@ -30,4 +30,38 @@ public class CEventService {
     public Long countEventAfter(ZonedDateTime zonedDateTime) {
         return ceventRepository.countByFinalTimeGreaterThan(zonedDateTime);
     }
+
+
+    /*
+
+     public void attendEvent(Long idEvent) {
+         Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+
+         user.ifPresent(u -> {
+             Event event = eventRepository.findOneWithEagerRelationships(idEvent);
+             event.addAttendingUsers(u);
+             eventRepository.save(event);
+             EventDTO eventDTO = eventMapper.eventToEventDTO(event);
+         });
+
+    }
+
+    public void dismissEvent(Long idEvent) {
+        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+
+        user.ifPresent(u -> {
+            Event event = eventRepository.findOneWithEagerRelationships(idEvent);
+            event.removeAttendingUsers(u);
+            eventRepository.save(event);
+            EventDTO eventDTO = eventMapper.eventToEventDTO(event);
+        });
+
+    }
+
+
+    */
+
+
+
+
 }
