@@ -1,5 +1,5 @@
 
-<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+<form name="editForm" role="form" novalidate ng-submit="vm.save()"  show-validation>
 
     <div class="modal-header caption font-red-sunglo" >
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -12,23 +12,29 @@
         <div class="form-body ">
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info ">
-                    <select class="form-control gray-font" id="field_house" name="house"  ng-model="vm.event.localId" ng-options="local.id as local.name for local in vm.locals"  required>
+                    <select class="form-control gray-font" id="field_local" name="local"  ng-model="vm.event.localId" ng-options="local.id as local.name for local in vm.locals"  required>
                         <option value="">Seleccione un local</option>
                     </select>
                     <label class="control-label font-15" data-translate="conocheApp.event.local">Local</label>
+                    <span ng-show="editForm.local.$invalid" class="help-block" ng-show="editForm.local.$error.required" data-translate="entity.validation.required"></span>
+
                 </div>
 
                 <div class="form-group form-md-line-input">
                         <input id="field_initialTime" type="text" ng-click="vm.openCalendar('initialTime')" class="form-control" name="initialTime" datepicker-options="vm.picker1.datepickerOptions"  ng-change="vm.updatePicker()" datetime-picker="{{dateformat}}" ng-model="vm.event.initialTime" is-open="vm.datePickerOpenStatus.initialTime"
                                required/>
                     <label class="font-15" data-translate="conocheApp.event.initialTime">Initial Time</label>
+                    <span ng-show="editForm.initialTime.$invalid" class="help-block" ng-show="editForm.initialTime.$error.required" data-translate="entity.validation.required"></span>
+
                 </div>
                 <div class="form-group form-md-line-input">
                 <textarea class="form-control gray-font" rows="2" name="details" id="field_details" style="min-height:180px;"
-                          ng-model="vm.event.details"></textarea>
+                          ng-model="vm.event.details" required></textarea>
                     <label class="control-label font-15" data-translate="conocheApp.event.details" for="field_details">Details</label>
-                </div>
+                    <span ng-show="editForm.details.$invalid" class="help-block" ng-show="editForm.details.$error.required" data-translate="entity.validation.required"></span>
 
+                </div>
+                <label class="control-label gray-font font-15" data-translate="conocheApp.event.banner" for="field_banner">Banner</label>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
@@ -39,9 +45,10 @@
                     </div>
                 </div>
                 <div class="form-group form-md-line-input">
-                        <input id="field_finalTime" type="text" ng-click="vm.openCalendar('finalTime')" class="form-control" ng-change="vm.updatePicker()" datepicker-options="vm.picker2.datepickerOptions"  name="finalTime" datetime-picker="{{dateformat}}" ng-model="vm.event.finalTime" is-open="vm.datePickerOpenStatus.finalTime"
+                        <input id="field_finalTime" type="text" name="finalTime"  ng-click="vm.openCalendar('finalTime')" class="form-control" ng-change="vm.updatePicker()" datepicker-options="vm.picker2.datepickerOptions"  name="finalTime" datetime-picker="{{dateformat}}" ng-model="vm.event.finalTime" is-open="vm.datePickerOpenStatus.finalTime"
                                required/>
                     <label class="font-15" data-translate="conocheApp.event.finalTime" for="field_finalTime">Final Time</label>
+                    <span ng-show="editForm.finalTime.$invalid" class="help-block" ng-show="editForm.finalTime.$error.required" data-translate="entity.validation.required"></span>
 
 
                 </div>
@@ -49,6 +56,7 @@
                     <div class="form-group form-md-line-input">
                         <input type="text" class="form-control gray-font" name="price" id="field_price" ng-model="vm.event.price" required>
                         <label class="control-label font-15" data-translate="conocheApp.event.price" for="field_price">Price</label>
+                        <span ng-show="editForm.price.$invalid" class="help-block" ng-show="editForm.price.$error.required" data-translate="entity.validation.required"></span>
 
                     </div>
                 </div>
@@ -64,7 +72,7 @@
 
 
             <div>
-                <label class="control-label gray-font font-15" data-translate="conocheApp.event.banner" for="field_banner">Banner</label>
+
                 <img data-ng-src="{{'data:' + vm.event.bannerContentType + ';base64,' + vm.event.banner}}" class="col-md-12 crop-400 col-lg-12 col-sm-12 col-xs-12" ng-if="vm.event.banner" alt="event image"/>
                 <div ng-if="vm.event.banner" class="help-block clearfix">
 
@@ -87,7 +95,7 @@
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
         </button>
     </div>
