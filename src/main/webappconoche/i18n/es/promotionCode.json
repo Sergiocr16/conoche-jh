@@ -2,9 +2,11 @@
     "conocheApp": {
         "promotionCode" : {
             "home": {
-                "title": "Promotion Codes",
+                "title": "Mis códigos de promoción",
                 "createLabel": "Crear nuevo Promotion Code",
-                "createOrEditLabel": "Crear o editar Promotion Code"
+                "createOrEditLabel": "Crear o editar Promotion Code",
+                "phrase":"Obten las mejores promociones con tus códigos",
+                "swapPhrase":"Ingresa los códigos para canjearlos"
             },
             "created": "Un nuevo Promotion Code ha sido creado con el identificador {{ param }}",
             "updated": "Un Promotion Code ha sido actualizado con el identificador {{ param }}",
@@ -15,10 +17,14 @@
             "detail": {
                 "title": "Promotion Code"
             },
-            "code": "Code",
+            "code": "CODIGO",
             "active": "Active",
             "promotion": "Promotion",
-            "user": "User"
+            "user": "User",
+            "noPromo":"No se ha encontrado ningún código de promoción",
+            "swapedPromo": "El código se ha canjeado correctamente",
+            "noCodes":"No tienes ningún código aún",
+            "redeemCode":"Has redimido un código"
         }
     }
 }

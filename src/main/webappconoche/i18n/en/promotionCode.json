@@ -2,9 +2,11 @@
     "conocheApp": {
         "promotionCode" : {
             "home": {
-                "title": "Promotion Codes",
+                "title": "My Promotion Codes",
                 "createLabel": "Create a new Promotion Code",
-                "createOrEditLabel": "Create or edit a Promotion Code"
+                "createOrEditLabel": "Create or edit a Promotion Code",
+                "phrase":"Get the best promotions with your codes",
+                "swapPhrase":"Type the codes to swap them"
             },
             "created": "A new Promotion Code is created with identifier {{ param }}",
             "updated": "A Promotion Code is updated with identifier {{ param }}",
@@ -15,10 +17,14 @@
             "detail": {
                 "title": "Promotion Code"
             },
-            "code": "Code",
+            "code": "CODE",
             "active": "Active",
             "promotion": "Promotion",
-            "user": "User"
+            "user": "User",
+            "noPromo":"No promotion code have being found",
+            "swapedPromo": "The promotion code has being swapped successfuly",
+            "noCodes":"You have no promotions codes yet",
+            "redeemCode":"You have redeemed a code!"
         }
     }
 }

@@ -68,6 +68,7 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('promotion');
+                     $translatePartialLoader.addPart('promotionCode');
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'Promotion', function($stateParams, Promotion) {
