@@ -43,7 +43,7 @@
             WSNotification.receiveNotifications(user.login)
                 .then(null, null, loadAll);
             WSNotification.receiveDeadEntities(user.login)
-                .then(null, null, loadAll)
+                .then(null, null, loadAll);
         }
 
         function loadPage(page) {

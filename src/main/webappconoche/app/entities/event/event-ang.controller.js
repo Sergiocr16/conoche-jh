@@ -45,7 +45,7 @@
                 vm.page = optionalParams.page;
                 setTimeout(function() {
                     $("#tableData").fadeIn(700);
-                }, 200)
+                }, 200);
 
             }
 
@@ -63,15 +63,15 @@
             }
 
             function loadPromotions(){
-                   Promotion.query({}, onSuccessPromotions, onError);
+                Promotion.query({}, onSuccessPromotions, onError);
             }
 
             function onSuccessPromotions(data, headers) {
-                   vm.promotions = data;
-                   setTimeout(function() {
-                        $("#tableData").fadeIn(700);
-                    }, 200)
-             }
+                vm.promotions = data;
+                setTimeout(function() {
+                    $("#tableData").fadeIn(700);
+                }, 200);
+            }
 
 
         }

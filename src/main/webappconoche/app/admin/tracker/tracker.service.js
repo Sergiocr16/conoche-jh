@@ -25,7 +25,7 @@
         return service;
 
         function connect () {
-            let stateChangeStart;
+            var stateChangeStart;
             StompManager.connect().then(function() {
                 sendActivity();
                 if (!alreadyConnectedOnce) {

@@ -5,14 +5,10 @@
         .module('conocheApp')
         .controller('LandingPageController', LandingPageController);
 
-    LandingPageController.$inject = ['$scope', 'Principal', 'LoginService', '$state'];
-
-    function LandingPageController ($scope, Principal, LoginService, $state) {
-        var vm = this;
-
-         angular.element(document).ready(function () {
-                $('#all').fadeIn(1000);
-            });
+    function LandingPageController () {
+        angular.element(document).ready(function () {
+            angular.element('#all').fadeIn(1000);
+        });
 
     }
 })();

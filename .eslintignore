@@ -4,3 +4,12 @@
 
 # ignore bower_components
 src/main/webappconoche/bower_components
+
+#ignore fullscreen
+src/main/webappconoche/app/components/fullscreen/angular-fullscreen.js
+
+src/main/webappconoche/app/components/util/image.service.js
+
+src/main/webappconoche/app/components/particle/particle-animator.service.js
+
+src/main/webappconoche/app/components/particle/particle.service.js

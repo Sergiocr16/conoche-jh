@@ -36,7 +36,7 @@
         }
 
         function discardViewedMessage(message) {
-             StompManager.send(DISCARD_ACTIVITY_URL, message);
+            StompManager.send(DISCARD_ACTIVITY_URL, message);
         }
 
         function subscribe (idEvent) {

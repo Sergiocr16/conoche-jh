@@ -25,8 +25,8 @@
                 isArray: true,
                 url: 'api/promotion-codes/byUserAndPromotion/:userId/:promotionId',
                 params:{
-                  userId:'@userId',
-                  promotionId: '@promotionId'
+                    userId:'@userId',
+                    promotionId: '@promotionId'
                 }
             },
             'findCoupon': {
@@ -39,7 +39,7 @@
                     return data;
                 },
                 params:{
-                  code:'@code'
+                    code:'@code'
                 }
             },
             'getByUserId': {
@@ -47,7 +47,7 @@
                 isArray: true,
                 url: 'api/promotion-codes/byUser/:userId',
                 params:{
-                  userId:'@userId'
+                    userId:'@userId'
                 }
             },
             'getAvailableByPromotion': {
@@ -56,13 +56,13 @@
                 url:'api/promotion-codes/availableByPromotion/:promotionId'
             },
             'redeemCode': {
-              method:'GET',
-              url: 'api/promotion-codes/redeem/:promotionId/:userId',
-              params:{
-                userId:'@userId',
-                promotionId: '@promotionId'
-              }
-             },
+                method:'GET',
+                url: 'api/promotion-codes/redeem/:promotionId/:userId',
+                params:{
+                    userId:'@userId',
+                    promotionId: '@promotionId'
+                }
+            },
             'update': { method:'PUT' }
         });
     }

@@ -28,7 +28,7 @@
         }
 
         function buildDeadUrl(login) {
-            return '/user/' + login + '/queue/notifications/dead'
+            return '/user/' + login + '/queue/notifications/dead';
         }
 
         function receiveNotifications (login) {

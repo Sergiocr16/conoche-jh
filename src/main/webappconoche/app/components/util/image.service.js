@@ -494,19 +494,19 @@
 
                 if (!isNaN(iterable.length)) {
                     var i = -1, next = function next() {
-                        while (++i < iterable.length) {
-                            if (hasOwn.call(iterable, i)) {
-                                next.value = iterable[i];
-                                next.done = false;
-                                return next;
+                            while (++i < iterable.length) {
+                                if (hasOwn.call(iterable, i)) {
+                                    next.value = iterable[i];
+                                    next.done = false;
+                                    return next;
+                                }
                             }
-                        }
 
-                        next.value = undefined;
-                        next.done = true;
+                            next.value = undefined;
+                            next.done = true;
 
-                        return next;
-                    };
+                            return next;
+                        };
 
                     return next.next = next;
                 }
@@ -755,47 +755,47 @@
             return regeneratorRuntime.wrap(function forEachPixel$(_context) {
                 while (1) {
                     switch (_context.prev = _context.next) {
-                        case 0:
-                            width = context.canvas.width;
-                            height = context.canvas.height;
-                            pixels = context.getImageData(0, 0, width, height).data;
-                            y = 0;
+                    case 0:
+                        width = context.canvas.width;
+                        height = context.canvas.height;
+                        pixels = context.getImageData(0, 0, width, height).data;
+                        y = 0;
 
-                        case 4:
-                            if (!(y < height)) {
-                                _context.next = 17;
-                                break;
-                            }
-
-                            x = 0;
-
-                        case 6:
-                            if (!(x < width)) {
-                                _context.next = 14;
-                                break;
-                            }
-
-                            i = (y * width + x) * 4;
-                            RGBA = {
-                                R: pixels[i], G: pixels[i + 1],
-                                B: pixels[i + 2], A: pixels[i + 3]
-                            };
-                            _context.next = 11;
-                            return [x, y, RGBA];
-
-                        case 11:
-                            x += spacing;
-                            _context.next = 6;
+                    case 4:
+                        if (!(y < height)) {
+                            _context.next = 17;
                             break;
+                        }
 
-                        case 14:
-                            y += spacing;
-                            _context.next = 4;
+                        x = 0;
+
+                    case 6:
+                        if (!(x < width)) {
+                            _context.next = 14;
                             break;
+                        }
 
-                        case 17:
-                        case 'end':
-                            return _context.stop();
+                        i = (y * width + x) * 4;
+                        RGBA = {
+                            R: pixels[i], G: pixels[i + 1],
+                            B: pixels[i + 2], A: pixels[i + 3]
+                        };
+                        _context.next = 11;
+                        return [x, y, RGBA];
+
+                    case 11:
+                        x += spacing;
+                        _context.next = 6;
+                        break;
+
+                    case 14:
+                        y += spacing;
+                        _context.next = 4;
+                        break;
+
+                    case 17:
+                    case 'end':
+                        return _context.stop();
                     }
                 }
             }, _marked[0], this);
@@ -807,71 +807,71 @@
             return regeneratorRuntime.wrap(function forEachAlphaPixel$(_context2) {
                 while (1) {
                     switch (_context2.prev = _context2.next) {
-                        case 0:
-                            _iteratorNormalCompletion = true;
-                            _didIteratorError = false;
-                            _iteratorError = undefined;
-                            _context2.prev = 3;
-                            _iterator = forEachPixel(context, spacing)[Symbol.iterator]();
+                    case 0:
+                        _iteratorNormalCompletion = true;
+                        _didIteratorError = false;
+                        _iteratorError = undefined;
+                        _context2.prev = 3;
+                        _iterator = forEachPixel(context, spacing)[Symbol.iterator]();
 
-                        case 5:
-                            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                                _context2.next = 13;
-                                break;
-                            }
+                    case 5:
+                        if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                            _context2.next = 13;
+                            break;
+                        }
 
-                            a = _step.value;
+                        a = _step.value;
 
-                            if (!(a[2].A > 0)) {
-                                _context2.next = 10;
-                                break;
-                            }
-
+                        if (!(a[2].A > 0)) {
                             _context2.next = 10;
-                            return a;
-
-                        case 10:
-                            _iteratorNormalCompletion = true;
-                            _context2.next = 5;
                             break;
+                        }
 
-                        case 13:
-                            _context2.next = 19;
+                        _context2.next = 10;
+                        return a;
+
+                    case 10:
+                        _iteratorNormalCompletion = true;
+                        _context2.next = 5;
+                        break;
+
+                    case 13:
+                        _context2.next = 19;
+                        break;
+
+                    case 15:
+                        _context2.prev = 15;
+                        _context2.t0 = _context2['catch'](3);
+                        _didIteratorError = true;
+                        _iteratorError = _context2.t0;
+
+                    case 19:
+                        _context2.prev = 19;
+                        _context2.prev = 20;
+
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+
+                    case 22:
+                        _context2.prev = 22;
+
+                        if (!_didIteratorError) {
+                            _context2.next = 25;
                             break;
+                        }
 
-                        case 15:
-                            _context2.prev = 15;
-                            _context2.t0 = _context2['catch'](3);
-                            _didIteratorError = true;
-                            _iteratorError = _context2.t0;
+                        throw _iteratorError;
 
-                        case 19:
-                            _context2.prev = 19;
-                            _context2.prev = 20;
+                    case 25:
+                        return _context2.finish(22);
 
-                            if (!_iteratorNormalCompletion && _iterator.return) {
-                                _iterator.return();
-                            }
+                    case 26:
+                        return _context2.finish(19);
 
-                        case 22:
-                            _context2.prev = 22;
-
-                            if (!_didIteratorError) {
-                                _context2.next = 25;
-                                break;
-                            }
-
-                            throw _iteratorError;
-
-                        case 25:
-                            return _context2.finish(22);
-
-                        case 26:
-                            return _context2.finish(19);
-
-                        case 27:
-                        case 'end':
-                            return _context2.stop();
+                    case 27:
+                    case 'end':
+                        return _context2.stop();
                     }
                 }
             }, _marked[1], this, [[3, 15, 19, 27], [20,, 22, 26]]);

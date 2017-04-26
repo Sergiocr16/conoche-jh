@@ -24,7 +24,7 @@
                 var r = parseInt(attrs.radius, 10) || 20;
                 var radius = r * r;
                 var mouse = {x: canvas.width, y: canvas.height};
-                ;
+                
                 var timeout = parseInt(attrs.timeout, 10) || 5000;
                 canvas.width = parseInt(attrs.width, 10) || canvas.width;
                 canvas.height = parseInt(attrs.height, 10) || canvas.height;

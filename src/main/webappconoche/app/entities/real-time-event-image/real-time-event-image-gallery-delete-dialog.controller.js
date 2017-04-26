@@ -23,7 +23,7 @@
         }
 
         function confirmDelete (image) {
-            WSRealTimeEventImages.deleteImage(image)
+            WSRealTimeEventImages.deleteImage(image);
             $uibModalInstance.close(true);
         }
     }

@@ -6,13 +6,13 @@
         .controller('RealTimeEventImageGalleryController', RealTimeEventImageGalleryController);
 
     RealTimeEventImageGalleryController.$inject = ['$scope', '$state', 'RealTimeEventImage', 'ParseLinks', 'AlertService',
-        'paginationConstants', 'page', 'idEvent', 'WSRealTimeEventImages', 'isOwner', '$uibModal'];
+        'paginationConstants', 'page', 'idEvent', 'WSRealTimeEventImages', 'isOwner', '$uibModal', '$window'];
 
     function RealTimeEventImageGalleryController($scope, $state, RealTimeEventImage, ParseLinks,
                                                  AlertService, paginationConstants,
-                                                 page, idEvent, WSRealTimeEventImages, isOwner, $uibModal) {
-        const SORT              = 'creationTime,desc';
-        const THUMBNAIL_PADDING = 10;
+                                                 page, idEvent, WSRealTimeEventImages, isOwner, $uibModal, $window) {
+        var SORT              = 'creationTime,desc';
+        var THUMBNAIL_PADDING = 10;
 
         var vm         = this;
         var modal      = null;
@@ -77,8 +77,8 @@
                 return;
             }
 
-            if(vm.page != 1) {
-                loadAll()
+            if(vm.page !== 1) {
+                loadAll();
             }
             else if(!contains(image)){
                 if (vm.realTimeEventImages.length % vm.itemsPerPage === 0) {
@@ -108,7 +108,7 @@
             return {
                 'width' : vm.width + borderOffset,
                 'height' :  (vm.width * aspectRatio) + borderOffset
-            }
+            };
         }
 
         function transition() {
@@ -125,12 +125,12 @@
             var item = _.find( vm.realTimeEventImages, function(img) {
                 return img.id === image.id;
             });
-            return item !== undefined;
+            return angular.isUndefined(item);
         }
 
         function toSlideshow() {
             var url = $state.href('real-time-event-image-slideshow', {idEvent: idEvent});
-            window.open(url,'_blank');
+            $window.open(url,'_blank');
         }
         function callModal($index) {
             modal = $uibModal.open({
@@ -154,7 +154,7 @@
                 return close();
             }
             var i = _.findIndex(images, function(img) {
-                return vm.image.id == img.id;
+                return vm.image.id === img.id;
             });
             setImage(i >= 0 ? i : vm.index);
 

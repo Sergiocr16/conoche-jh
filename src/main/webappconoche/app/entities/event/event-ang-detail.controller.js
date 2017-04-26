@@ -28,21 +28,21 @@
         console.log("load controller");
 
         vm.viewLiveMessages = function(event){
-        $state.go('live-messages',{ idEvent: event.id })
-        }
+            $state.go('live-messages',{ idEvent: event.id });
+        };
         vm.createComment = function(event){
 
-         $state.go('event-ang-detail.live-messages.newComment',{ idEvent: event.id})
-        }
+            $state.go('event-ang-detail.live-messages.newComment',{ idEvent: event.id});
+        };
         $scope.$on('$destroy', unsubscribe);
 
         Local.get({id: vm.event.localId},onSuccess);
         function onSuccess(data, headers) {
-          vm.local = data;
+            vm.local = data;
 
-           setTimeout(function() {
-              $("#container").fadeIn(500);
-          }, 200)
+            setTimeout(function() {
+                $("#container").fadeIn(500);
+            }, 200);
 
         }
 

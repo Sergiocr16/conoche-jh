@@ -18,4 +18,4 @@
             .set("base_url", "https://api.cloudinary.com/v1_1/")
             .set("image_url", "http://res.cloudinary.com/");
     }
-})()
+})();

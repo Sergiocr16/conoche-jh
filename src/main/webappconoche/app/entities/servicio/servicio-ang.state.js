@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/servicio-ang?page&sort&search',
             data: {
-      authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN'],
+                authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN'],
                 pageTitle: 'conocheApp.servicio.home.title'
             },
             views: {
@@ -55,7 +55,7 @@
             parent: 'servicio-ang',
             url: '/servicio-ang/{id}',
             data: {
-                               authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN'],
+                authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN'],
                 pageTitle: 'conocheApp.servicio.detail.title'
             },
             views: {
@@ -112,7 +112,7 @@
             parent: 'servicio-ang',
             url: '/new',
             data: {
-                     authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN'],
+                authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN'],
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -141,7 +141,7 @@
             parent: 'servicio-ang',
             url: '/{id}/edit',
             data: {
-                              authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN']
+                authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -166,7 +166,7 @@
             parent: 'servicio-ang',
             url: '/{id}/delete',
             data: {
-                              authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN']
+                authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -190,7 +190,7 @@
                 parent: 'event-ang-detail',
                 url: '/services',
                 data: {
-                      authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN'],
+                    authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN'],
                     pageTitle: 'conocheApp.servicio.home.title'
                 },
                 views: {

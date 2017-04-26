@@ -7,7 +7,7 @@
 (function () {
     'use strict';
 
-    var _createClass = function () {
+    var _createClass = (function () {
         function defineProperties(target, props) {
             for (var i = 0; i < props.length; i++) {
                 var descriptor = props[i];
@@ -23,7 +23,7 @@
             if (staticProps)
                 defineProperties(Constructor, staticProps);
             return Constructor; };
-    }();
+    })();
 
     function _classCallCheck(instance, Constructor) {
         if (!(instance instanceof Constructor)) {
@@ -35,7 +35,7 @@
     angular.module('conocheApp').factory('Particle', ParticleFactory);
 
     function ParticleFactory() {
-        var Particle = function () {
+        var Particle = (function () {
             function Particle(x, y, originX, originY, color, atributes) {
                 _classCallCheck(this, Particle);
 
@@ -95,9 +95,9 @@
             }]);
 
             return Particle;
-        }();
+        })();
 
-        var ParticleBuilder = function () {
+        var ParticleBuilder = (function () {
             function ParticleBuilder() {
                 _classCallCheck(this, ParticleBuilder);
 
@@ -180,9 +180,9 @@
             }]);
 
             return ParticleBuilder;
-        }();
+        })();
 
-        var ParticleObserver = function () {
+        var ParticleObserver = (function () {
             function ParticleObserver(builder) {
                 _classCallCheck(this, ParticleObserver);
 
@@ -266,7 +266,7 @@
             }]);
 
             return ParticleObserver;
-        }();
+        })();
 
         return {
             builder: function builder() {

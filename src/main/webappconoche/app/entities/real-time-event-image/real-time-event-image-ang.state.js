@@ -68,7 +68,7 @@
                     },
                     'otherContent@': {
                         templateUrl: 'app/entities/real-time-event-image/real-time-event-image-slideshow.html',
-                        controller: 'RealTimeEventImageSlideshow',
+                        controller: 'RealTimeEventImageSlideshowController',
                         controllerAs: 'vm'
                     },
                     'head@': {
@@ -104,7 +104,7 @@
                 onEnter: [ '$state', '$uibModal', 'idEvent', function($state, $uibModal, idEvent) {
                     $uibModal.open({
                         templateUrl: 'app/entities/real-time-event-image/real-time-event-image-savews.html',
-                        controller: 'RealTimeEventImageSaveWS',
+                        controller: 'RealTimeEventImageSaveWSController',
                         controllerAs: 'vm',
                         backdrop: 'static',
                         size: 'lg',

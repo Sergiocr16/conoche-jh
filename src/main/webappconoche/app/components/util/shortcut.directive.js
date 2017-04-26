@@ -23,7 +23,7 @@
                 var keyPressed = scope.keyPressed();
                 function handler (e) {
                     scope.$apply(keyPressed(e));
-                };
+                }
 
                 $(document).on('keydown', handler);
 

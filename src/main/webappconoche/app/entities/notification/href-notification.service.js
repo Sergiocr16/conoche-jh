@@ -16,7 +16,7 @@
 
         return {
             goToState : goToState
-        }
+        };
         function goToState(notification) {
             if(!notification) {
                 return;
@@ -30,26 +30,22 @@
 
             var id = object.objectId;
             switch (object.objectType) {
-                case "EVENT":
-                    $state.go('event-ang-detail', { id: id });
-                    break;
-                case "LOCAL":
-                    $state.go('local-ang-detail', { id: id });
-                    break;
-                case "PROMOTION":
-                    throw 'NotImplementedError';
-                    break;
-                case "USER":
-                    throw 'NotImplementedError';
-                    break;
-                case "REALTIME_EVENT_IMAGE":
-                    throw 'NotImplementedError';
-                    break;
-                case "RATING":
-                    throw 'NotImplementedError';
-                    break;
-                default:
-                    throw 'NotSupportedError';
+            case "EVENT":
+                $state.go('event-ang-detail', { id: id });
+                break;
+            case "LOCAL":
+                $state.go('local-ang-detail', { id: id });
+                break;
+            case "PROMOTION":
+                throw 'NotImplementedError';
+            case "USER":
+                throw 'NotImplementedError';
+            case "REALTIME_EVENT_IMAGE":
+                throw 'NotImplementedError';
+            case "RATING":
+                throw 'NotImplementedError';
+            default:
+                throw 'NotSupportedError';
             }
         }
     }
