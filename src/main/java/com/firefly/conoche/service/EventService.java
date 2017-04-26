@@ -11,9 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 /**
  * Service Implementation for managing Event.
@@ -23,14 +22,17 @@ import java.util.stream.Collectors;
 public class EventService {
 
     private final Logger log = LoggerFactory.getLogger(EventService.class);
-    
+
     private final EventRepository eventRepository;
 
     private final EventMapper eventMapper;
 
-    public EventService(EventRepository eventRepository, EventMapper eventMapper) {
+    private final LocalService localService;
+
+    public EventService(EventRepository eventRepository, EventMapper eventMapper, LocalService localService) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
+        this.localService = localService;
     }
 
     /**
@@ -49,7 +51,7 @@ public class EventService {
 
     /**
      *  Get all the events.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */

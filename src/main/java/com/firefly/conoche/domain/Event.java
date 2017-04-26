@@ -1,6 +1,8 @@
 package com.firefly.conoche.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.firefly.conoche.domain.enumeration.ActionObjectType;
+import com.firefly.conoche.domain.interfaces.IEntity;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -8,9 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * A Event.
@@ -18,7 +18,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "event")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Event implements Serializable {
+public class Event implements Serializable, IEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -398,5 +398,31 @@ public class Event implements Serializable {
             ", initialTime='" + initialTime + "'" +
             ", finalTime='" + finalTime + "'" +
             '}';
+    }
+
+    @Override
+    public Map<String, Object> notificationInfo() {
+
+        long[] servicesArray = services.stream()
+            .mapToLong(Servicio::getId)
+            .sorted()
+            .toArray();
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", name);
+        map.put("details", details);
+        map.put("price", price);
+        map.put("initialTime", initialTime.toEpochSecond());
+        map.put("finalTime", finalTime.toEpochSecond());
+        map.put("banner", banner);
+        map.put("services",  servicesArray);
+
+
+        return map;
+    }
+
+    @Override
+    public ActionObjectType getObjectType() {
+        return ActionObjectType.EVENT;
     }
 }

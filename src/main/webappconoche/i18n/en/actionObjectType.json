@@ -2,15 +2,15 @@
     "conocheApp": {
         "ActionObjectType" : {
             "null": "",
-            "USER": "USER",
-            "LOCAL": "LOCAL",
-            "EVENT": "EVENT",
-            "PROMOTION": "PROMOTION",
-            "MESSAGE": "MESSAGE",
-            "RATING": "RATING",
-            "EVENT_IMAGE": "EVENT_IMAGE",
-            "REALTIME_EVENT_IMAGE": "REALTIME_EVENT_IMAGE",
-            "LOCAL_IMAGE": "LOCAL_IMAGE"
+            "USER": "user",
+            "LOCAL": "local",
+            "EVENT": "event",
+            "PROMOTION": "promotion",
+            "MESSAGE": "message",
+            "RATING": "rating",
+            "EVENT_IMAGE": "event image",
+            "REALTIME_EVENT_IMAGE": "real time image",
+            "LOCAL_IMAGE": "local image"
         }
     }
 }

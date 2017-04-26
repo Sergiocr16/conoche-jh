@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="#{email.notification.title}">New notification</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body style="margin:0;padding:15px;background-color:#48525e;font-family:Raleway,'Helvetica Neue',Helvetica,Arial,sans-serif;color:white;line-height:1.428571429;font-size:13px;">
+<h1 style="text-align:center;">CONO<span style="color:#9749b7">CHE</span></h1>
+<div style="margin:10px 5px 5px 10px;background-color:white;padding:10px;border-radius:10px;color:#6a6c6f!important;">
+    <h2  th:text="#{email.social.registration.greeting(${user.login})}"> Dear user</h2>
+    <p th:text="${message}">
+
+    </p>
+    <p style="text-align:center">
+        <a th:href="@{${url}}" th:text="#{email.notification.link}">See it here.</a>
+    </p>
+</div>
+<span th:text="#{email.activation.text2}">Regards, </span>
+<br/>
+<em>Firefly</em>
+
+</body>
+
+</html>

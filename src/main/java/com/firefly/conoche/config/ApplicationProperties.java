@@ -15,9 +15,14 @@ import org.springframework.stereotype.Component;
 public class ApplicationProperties {
 
     private final Cloudinary cloudinary = new Cloudinary();
+    private final NotificationsUrl notificationsUrl = new NotificationsUrl();
 
     public Cloudinary getCloudinary() {
         return cloudinary;
+    }
+
+    public NotificationsUrl getNotificationsUrl() {
+        return notificationsUrl;
     }
 
     public static class Cloudinary {
@@ -49,4 +54,91 @@ public class ApplicationProperties {
             this.apiSecret = apiSecret;
         }
     }
+    public static class NotificationsUrl{
+
+        private String user;
+        private String local;
+        private String event;
+        private String promotion;
+        private String message;
+        private String rating;
+        private String eventImage;
+        private String realtimeEventImage;
+        private String localImage;
+
+
+        public String getUser() {
+            return user;
+        }
+
+        public void setUser(String user) {
+            this.user = user;
+        }
+
+        public String getLocal() {
+            return local;
+        }
+
+        public void setLocal(String local) {
+            this.local = local;
+        }
+
+        public String getEvent() {
+            return event;
+        }
+
+        public void setEvent(String event) {
+            this.event = event;
+        }
+
+        public String getPromotion() {
+            return promotion;
+        }
+
+        public void setPromotion(String promotion) {
+            this.promotion = promotion;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public String getRating() {
+            return rating;
+        }
+
+        public void setRating(String rating) {
+            this.rating = rating;
+        }
+
+        public String getEventImage() {
+            return eventImage;
+        }
+
+        public void setEventImage(String eventImage) {
+            this.eventImage = eventImage;
+        }
+
+        public String getRealtimeEventImage() {
+            return realtimeEventImage;
+        }
+
+        public void setRealtimeEventImage(String realtimeEventImage) {
+            this.realtimeEventImage = realtimeEventImage;
+        }
+
+        public String getLocalImage() {
+            return localImage;
+        }
+
+        public void setLocalImage(String localImage) {
+            this.localImage = localImage;
+        }
+    }
+
+
 }

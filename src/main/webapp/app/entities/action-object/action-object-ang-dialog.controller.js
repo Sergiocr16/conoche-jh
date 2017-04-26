@@ -5,15 +5,17 @@
         .module('conocheApp')
         .controller('ActionObjectAngDialogController', ActionObjectAngDialogController);
 
-    ActionObjectAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ActionObject', 'Action'];
+    ActionObjectAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ActionObject', 'ObjectChange'];
 
-    function ActionObjectAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ActionObject, Action) {
+    function ActionObjectAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ActionObject, ObjectChange) {
         var vm = this;
 
         vm.actionObject = entity;
         vm.clear = clear;
+        vm.datePickerOpenStatus = {};
+        vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.actions = Action.query();
+        vm.objectchanges = ObjectChange.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -42,6 +44,10 @@
             vm.isSaving = false;
         }
 
+        vm.datePickerOpenStatus.creationTime = false;
 
+        function openCalendar (date) {
+            vm.datePickerOpenStatus[date] = true;
+        }
     }
 })();

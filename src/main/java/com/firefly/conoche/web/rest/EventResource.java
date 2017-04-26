@@ -34,7 +34,7 @@ public class EventResource {
     private final Logger log = LoggerFactory.getLogger(EventResource.class);
 
     private static final String ENTITY_NAME = "event";
-        
+
     private final EventService eventService;
 
     public EventResource(EventService eventService) {
@@ -73,6 +73,7 @@ public class EventResource {
     @PutMapping("/events")
     @Timed
     public ResponseEntity<EventDTO> updateEvent(@Valid @RequestBody EventDTO eventDTO) throws URISyntaxException {
+        log.error(Thread.currentThread().getName());
         log.debug("REST request to update Event : {}", eventDTO);
         if (eventDTO.getId() == null) {
             return createEvent(eventDTO);
