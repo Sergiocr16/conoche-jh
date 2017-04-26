@@ -6,11 +6,11 @@
         .module('conocheApp')
         .factory('JhiTrackerService', JhiTrackerService);
 
-    JhiTrackerService.$inject = ['$rootScope', '$window', '$cookies', '$http', '$q', 'AuthServerProvider', 'StompManager'];
+    JhiTrackerService.$inject = ['$rootScope', 'StompManager'];
 
-    function JhiTrackerService ($rootScope, $window, $cookies, $http, $q, AuthServerProvider, StompManager) {
-        const SUBSCRIBE_TRACKER_URL = '/topic/tracker';
-        const SEND_ACTIVITY_URL ='/topic/activity';
+    function JhiTrackerService ($rootScope, StompManager) {
+        var SUBSCRIBE_TRACKER_URL = '/topic/tracker';
+        var SEND_ACTIVITY_URL ='/topic/activity';
 
         var alreadyConnectedOnce = false;
 
@@ -26,7 +26,7 @@
 
         function connect () {
             let stateChangeStart;
-            StompManager.connect().then(() => {
+            StompManager.connect().then(function() {
                 sendActivity();
                 if (!alreadyConnectedOnce) {
                     stateChangeStart = $rootScope.$on('$stateChangeStart', function () {

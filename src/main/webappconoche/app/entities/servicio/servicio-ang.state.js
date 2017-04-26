@@ -87,7 +87,7 @@
             parent: 'servicio-ang-detail',
             url: '/detail/edit',
             data: {
-                           authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN'], authorities: ['ROLE_USER,ROLE_OWNER,ROLE_ADMIN']
+                authorities: ['ROLE_USER,ROLE_OWNER,ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

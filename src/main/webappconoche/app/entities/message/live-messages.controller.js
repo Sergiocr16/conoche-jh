@@ -116,8 +116,8 @@
          vm.isShowing = 0;
          vm.message = null;
         }
-        var removeItemFromArr = ( arr, item ) => {
-            return arr.filter( e => e !== item );
+        var removeItemFromArr = function( arr, item ) {
+            return arr.filter( function(e) { return e !== item; });
         };
         function loadMessage(message){
           vm.liveMessages.push(message);
