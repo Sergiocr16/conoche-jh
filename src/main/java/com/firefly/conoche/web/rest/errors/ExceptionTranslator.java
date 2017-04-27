@@ -2,12 +2,14 @@ package com.firefly.conoche.web.rest.errors;
 
 import java.util.List;
 
+import org.hibernate.exception.JDBCConnectionException;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.transaction.CannotCreateTransactionException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -67,6 +69,14 @@ public class ExceptionTranslator {
     public ErrorVM processMethodNotSupportedException(HttpRequestMethodNotSupportedException exception) {
         return new ErrorVM(ErrorConstants.ERR_METHOD_NOT_SUPPORTED, exception.getMessage());
     }
+
+    @ExceptionHandler(CannotCreateTransactionException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    public ErrorVM processMethodJDBCConnectionException(CannotCreateTransactionException exception) {
+        return new ErrorVM(ErrorConstants.ERR_CONNECTION_EXCEPTION, exception.getMessage());
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorVM> processRuntimeException(Exception ex) {

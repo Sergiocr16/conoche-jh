@@ -2,10 +2,10 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "action",
-            "otherEntityName": "action",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
+            "relationshipName": "changes",
+            "otherEntityName": "objectChange",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "actionObject"
         }
     ],
     "fields": [
@@ -17,19 +17,34 @@
             ]
         },
         {
-            "fieldName": "description",
-            "fieldType": "String"
+            "fieldName": "actionType",
+            "fieldType": "ActionType",
+            "fieldValues": "CREATE,UPDATE"
         },
         {
             "fieldName": "objectType",
             "fieldType": "ActionObjectType",
             "fieldValues": "USER,LOCAL,EVENT,PROMOTION,MESSAGE,RATING,EVENT_IMAGE,REALTIME_EVENT_IMAGE,LOCAL_IMAGE"
+        },
+        {
+            "fieldName": "creationTime",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "active",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20170307223303",
-    "entityTableName": "action_object",
     "dto": "mapstruct",
-    "pagination": "pager",
     "service": "serviceClass",
+    "entityTableName": "action_object",
+    "pagination": "pager",
     "angularJSSuffix": "ang"
 }

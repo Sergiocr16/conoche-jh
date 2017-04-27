@@ -1,0 +1,50 @@
+<div class="portlet light bg-inverse">
+    <div class="portlet-title">
+        <div class="actions">
+            <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="">
+            </a>
+        </div>
+    </div>
+    <div class="portlet-body table-responsive">
+        <ul class="feeds container-fluid">
+            <li ng-repeat="notification in vm.notifications track by notification.id"
+                ng-init="object = notification.actionObject">
+                <a ng-click="vm.read(notification)">
+                    <div class="col1">
+                        <div class="cont">
+                            <div class="cont-col1">
+                                <div class="label label-sm label-info" color-this="background-color" data-color="object.objectType">
+                                    <i  ng-if="object.actionType == 'CREATE'" class="fa fa-plus"></i>
+                                    <i  ng-if="object.actionType == 'UPDATE'" class="fa fa-pencil-square-o"></i>
+                                </div>
+                            </div>
+                            <div class="cont-col2">
+                                <div class="desc">
+                                    <span  translate-values="{entity: notification.actionObject.objectType}"
+                                           data-translate="global.menu.notifications.{{notification.actionObject.actionType}}" >
+                                    </span>
+                                    <span data-translate="global.menu.notifications.changes"> </span>
+                                    <span style="opacity: 0.7;" class="label label-default" ng-repeat="change in object.changes track by change.id"
+                                           color-this="background-color" data-color="change.fieldName" >
+                                            {{change.fieldName}}
+                                    </span>
+                                    <span>.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col2" ng-init="since = (object.creationTime | timeSince)">
+                        <div   translate-values="{value: since[0]}"
+                               data-translate="global.menu.timeSince.{{since[1]}}" class="date">
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+
+        <div class="text-center">
+            <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+            <uib-pagination items-per-page="vm.itemsPerPage" class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+        </div>
+    </div>
+</div>

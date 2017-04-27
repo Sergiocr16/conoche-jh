@@ -23,7 +23,7 @@ spring:
         type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:mysql://localhost:3306/conoche?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
-        password:
+        password: admin
         hikari:
             data-source-properties:
                 cachePrepStmts: true
@@ -131,6 +131,17 @@ jhipster:
 
 application:
     cloudinary:
-        cloud-name: ""
-        api-key: ""
-        api-secret: "secret"
+        cloud-name:
+        api-key:
+        api-secret: secret
+
+    notifications-url:
+        user: ""
+        local: "/#/local-ang/local-ang/%d"
+        event: "/#/event-ang/%d"
+        promotion: ""
+        message: ""
+        rating: ""
+        event-image: ""
+        realtime-event-image: ""
+        local-image: ""

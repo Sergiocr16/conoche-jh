@@ -35,9 +35,9 @@
                     enableTime: false,
                     showWeeks: false,
                 }
-            }
-        }
-vm.updatePicker()
+            };
+        };
+        vm.updatePicker();
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });

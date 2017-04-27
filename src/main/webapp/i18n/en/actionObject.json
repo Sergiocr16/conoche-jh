@@ -16,9 +16,11 @@
                 "title": "Action Object"
             },
             "objectId": "Object Id",
-            "description": "Description",
+            "actionType": "Action Type",
             "objectType": "Object Type",
-            "action": "Action"
+            "creationTime": "Creation Time",
+            "active": "Active",
+            "changes": "Changes"
         }
     }
 }

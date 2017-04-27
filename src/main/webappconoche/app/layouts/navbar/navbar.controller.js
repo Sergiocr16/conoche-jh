@@ -9,12 +9,12 @@
 
     function NavbarController ($state, Auth, Principal, ProfileService, LoginService, $rootScope, $scope) {
         var vm = this;
-         angular.element(document).ready(function () {
-           Layout.initHeader();
-           getAccount();
-           $('#loaded').show();
-           $('#loading').fadeOut(30);
-          });
+        angular.element(document).ready(function () {
+            Layout.initHeader();
+            getAccount();
+            angular.element('#loaded').show();
+            angular.element('#loading').fadeOut(30);
+        });
 
 
         var unsubLogin = $scope.$on('authenticationSuccess', getAccount);
@@ -27,6 +27,7 @@
         vm.logo = logo[current];
         vm.isNavbarCollapsed = true;
         vm.isAuthenticated = Principal.isAuthenticated;
+
 
         ProfileService.getProfileInfo().then(function(response) {
             vm.inProduction = response.inProduction;

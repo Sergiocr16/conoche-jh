@@ -26,7 +26,7 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="description" type="varchar(255)">
+            <column name="action_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -34,12 +34,17 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="action_id" type="bigint">
-                <constraints nullable="true" />
+            <column name="creation_time" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="active" type="bit">
+                <constraints nullable="false" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        <dropDefaultValue tableName="action_object" columnName="creation_time" columnDataType="datetime"/>
         
     </changeSet>
 </databaseChangeLog>

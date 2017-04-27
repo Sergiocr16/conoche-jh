@@ -1,15 +1,15 @@
 package com.firefly.conoche.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.firefly.conoche.domain.enumeration.ActionObjectType;
+import com.firefly.conoche.domain.interfaces.IEntity;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
+import java.util.*;
 
 import com.firefly.conoche.domain.enumeration.Provincia;
 
@@ -19,7 +19,7 @@ import com.firefly.conoche.domain.enumeration.Provincia;
 @Entity
 @Table(name = "local")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Local implements Serializable {
+public class Local implements Serializable, IEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -430,4 +430,36 @@ public class Local implements Serializable {
             ", rating='" + rating + "'" +
             '}';
     }
+
+
+    public ActionObjectType getObjectType() {
+        return ActionObjectType.LOCAL;
+    }
+   public Map<String, Object> notificationInfo() {
+        long[] servicesArray = services.stream()
+            .mapToLong(Servicio::getId)
+            .sorted()
+            .toArray();
+
+        long[] shedulesarray = getSchedules()
+            .stream()
+            .mapToLong(Schedule::getId)
+            .sorted()
+            .toArray();
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", name);
+        map.put("longitud", longitud);
+        map.put("latitud", latitud);
+        map.put("descripcion", descripcion);
+        map.put("provincia", provincia);
+        map.put("banner", banner);
+        map.put("services",  servicesArray);
+        map.put("schedules", shedulesarray);
+
+
+        return map;
+    }
+
+
 }

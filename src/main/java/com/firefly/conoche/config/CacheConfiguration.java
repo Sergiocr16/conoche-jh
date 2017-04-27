@@ -42,9 +42,6 @@ public class CacheConfiguration {
             cm.createCache(com.firefly.conoche.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(com.firefly.conoche.domain.SocialUserConnection.class.getName(), jcacheConfiguration);
             cm.createCache(com.firefly.conoche.domain.Message.class.getName(), jcacheConfiguration);
-            cm.createCache(com.firefly.conoche.domain.Action.class.getName(), jcacheConfiguration);
-            cm.createCache(com.firefly.conoche.domain.Action.class.getName() + ".objects", jcacheConfiguration);
-            cm.createCache(com.firefly.conoche.domain.Action.class.getName() + ".users", jcacheConfiguration);
             cm.createCache(com.firefly.conoche.domain.Event.class.getName(), jcacheConfiguration);
             cm.createCache(com.firefly.conoche.domain.Event.class.getName() + ".promotions", jcacheConfiguration);
             cm.createCache(com.firefly.conoche.domain.Event.class.getName() + ".images", jcacheConfiguration);
@@ -70,6 +67,9 @@ public class CacheConfiguration {
             cm.createCache(com.firefly.conoche.domain.Schedule.class.getName(), jcacheConfiguration);
             cm.createCache(com.firefly.conoche.domain.Servicio.class.getName(), jcacheConfiguration);
             cm.createCache(com.firefly.conoche.domain.Category.class.getName(), jcacheConfiguration);
+            cm.createCache(com.firefly.conoche.domain.Notification.class.getName(), jcacheConfiguration);
+            cm.createCache(com.firefly.conoche.domain.ObjectChange.class.getName(), jcacheConfiguration);
+            cm.createCache(com.firefly.conoche.domain.ActionObject.class.getName() + ".changes", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -24,13 +24,19 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.util.List;
 
+import static com.firefly.conoche.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.firefly.conoche.domain.enumeration.ActionType;
 import com.firefly.conoche.domain.enumeration.ActionObjectType;
 /**
  * Test class for the ActionObjectResource REST controller.
@@ -44,11 +50,17 @@ public class ActionObjectResourceIntTest {
     private static final Long DEFAULT_OBJECT_ID = 1L;
     private static final Long UPDATED_OBJECT_ID = 2L;
 
-    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+    private static final ActionType DEFAULT_ACTION_TYPE = ActionType.CREATE;
+    private static final ActionType UPDATED_ACTION_TYPE = ActionType.UPDATE;
 
     private static final ActionObjectType DEFAULT_OBJECT_TYPE = ActionObjectType.USER;
     private static final ActionObjectType UPDATED_OBJECT_TYPE = ActionObjectType.LOCAL;
+
+    private static final ZonedDateTime DEFAULT_CREATION_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_CREATION_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+
+    private static final Boolean DEFAULT_ACTIVE = false;
+    private static final Boolean UPDATED_ACTIVE = true;
 
     @Autowired
     private ActionObjectRepository actionObjectRepository;
@@ -94,8 +106,10 @@ public class ActionObjectResourceIntTest {
     public static ActionObject createEntity(EntityManager em) {
         ActionObject actionObject = new ActionObject()
                 .objectId(DEFAULT_OBJECT_ID)
-                .description(DEFAULT_DESCRIPTION)
-                .objectType(DEFAULT_OBJECT_TYPE);
+                .actionType(DEFAULT_ACTION_TYPE)
+                .objectType(DEFAULT_OBJECT_TYPE)
+                .creationTime(DEFAULT_CREATION_TIME)
+                .active(DEFAULT_ACTIVE);
         return actionObject;
     }
 
@@ -122,8 +136,10 @@ public class ActionObjectResourceIntTest {
         assertThat(actionObjectList).hasSize(databaseSizeBeforeCreate + 1);
         ActionObject testActionObject = actionObjectList.get(actionObjectList.size() - 1);
         assertThat(testActionObject.getObjectId()).isEqualTo(DEFAULT_OBJECT_ID);
-        assertThat(testActionObject.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testActionObject.getActionType()).isEqualTo(DEFAULT_ACTION_TYPE);
         assertThat(testActionObject.getObjectType()).isEqualTo(DEFAULT_OBJECT_TYPE);
+        assertThat(testActionObject.getCreationTime()).isEqualTo(DEFAULT_CREATION_TIME);
+        assertThat(testActionObject.isActive()).isEqualTo(DEFAULT_ACTIVE);
     }
 
     @Test
@@ -168,6 +184,44 @@ public class ActionObjectResourceIntTest {
 
     @Test
     @Transactional
+    public void checkCreationTimeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = actionObjectRepository.findAll().size();
+        // set the field null
+        actionObject.setCreationTime(null);
+
+        // Create the ActionObject, which fails.
+        ActionObjectDTO actionObjectDTO = actionObjectMapper.actionObjectToActionObjectDTO(actionObject);
+
+        restActionObjectMockMvc.perform(post("/api/action-objects")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(actionObjectDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<ActionObject> actionObjectList = actionObjectRepository.findAll();
+        assertThat(actionObjectList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkActiveIsRequired() throws Exception {
+        int databaseSizeBeforeTest = actionObjectRepository.findAll().size();
+        // set the field null
+        actionObject.setActive(null);
+
+        // Create the ActionObject, which fails.
+        ActionObjectDTO actionObjectDTO = actionObjectMapper.actionObjectToActionObjectDTO(actionObject);
+
+        restActionObjectMockMvc.perform(post("/api/action-objects")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(actionObjectDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<ActionObject> actionObjectList = actionObjectRepository.findAll();
+        assertThat(actionObjectList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllActionObjects() throws Exception {
         // Initialize the database
         actionObjectRepository.saveAndFlush(actionObject);
@@ -178,8 +232,10 @@ public class ActionObjectResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(actionObject.getId().intValue())))
             .andExpect(jsonPath("$.[*].objectId").value(hasItem(DEFAULT_OBJECT_ID.intValue())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
-            .andExpect(jsonPath("$.[*].objectType").value(hasItem(DEFAULT_OBJECT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].actionType").value(hasItem(DEFAULT_ACTION_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].objectType").value(hasItem(DEFAULT_OBJECT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].creationTime").value(hasItem(sameInstant(DEFAULT_CREATION_TIME))))
+            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())));
     }
 
     @Test
@@ -194,8 +250,10 @@ public class ActionObjectResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(actionObject.getId().intValue()))
             .andExpect(jsonPath("$.objectId").value(DEFAULT_OBJECT_ID.intValue()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
-            .andExpect(jsonPath("$.objectType").value(DEFAULT_OBJECT_TYPE.toString()));
+            .andExpect(jsonPath("$.actionType").value(DEFAULT_ACTION_TYPE.toString()))
+            .andExpect(jsonPath("$.objectType").value(DEFAULT_OBJECT_TYPE.toString()))
+            .andExpect(jsonPath("$.creationTime").value(sameInstant(DEFAULT_CREATION_TIME)))
+            .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()));
     }
 
     @Test
@@ -217,8 +275,10 @@ public class ActionObjectResourceIntTest {
         ActionObject updatedActionObject = actionObjectRepository.findOne(actionObject.getId());
         updatedActionObject
                 .objectId(UPDATED_OBJECT_ID)
-                .description(UPDATED_DESCRIPTION)
-                .objectType(UPDATED_OBJECT_TYPE);
+                .actionType(UPDATED_ACTION_TYPE)
+                .objectType(UPDATED_OBJECT_TYPE)
+                .creationTime(UPDATED_CREATION_TIME)
+                .active(UPDATED_ACTIVE);
         ActionObjectDTO actionObjectDTO = actionObjectMapper.actionObjectToActionObjectDTO(updatedActionObject);
 
         restActionObjectMockMvc.perform(put("/api/action-objects")
@@ -231,8 +291,10 @@ public class ActionObjectResourceIntTest {
         assertThat(actionObjectList).hasSize(databaseSizeBeforeUpdate);
         ActionObject testActionObject = actionObjectList.get(actionObjectList.size() - 1);
         assertThat(testActionObject.getObjectId()).isEqualTo(UPDATED_OBJECT_ID);
-        assertThat(testActionObject.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testActionObject.getActionType()).isEqualTo(UPDATED_ACTION_TYPE);
         assertThat(testActionObject.getObjectType()).isEqualTo(UPDATED_OBJECT_TYPE);
+        assertThat(testActionObject.getCreationTime()).isEqualTo(UPDATED_CREATION_TIME);
+        assertThat(testActionObject.isActive()).isEqualTo(UPDATED_ACTIVE);
     }
 
     @Test

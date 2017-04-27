@@ -64,3 +64,35 @@
 .right-btn-slide-show.ng-hide-add {
     animation: bounceOutRight 0.5s;
 }
+
+.toast.ng-enter {
+    animation: bounceInRight 0.5s;
+}
+
+.toast.ng-leave {
+    animation: bounceOutRight 0.5s;
+}
+
+
+.notification-circle.ng-enter, .notification-circle.ng-leave {
+    transition:0.2s linear all;
+}
+
+
+.notification-circle.ng-enter {
+    transform: scale(0);
+    opacity: 0;
+}
+.notification-circle.ng-enter-active {
+    transform: scale(1);
+    opacity: 1;
+}
+.notification-circle.ng-leave {
+    transform: scale(1);
+    opacity: 1;
+}
+.notification-circle.ng-leave-active {
+    transform: scale(0);
+    opacity: 0;
+}
+

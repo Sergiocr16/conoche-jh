@@ -1,0 +1,9 @@
+{
+    "conocheApp": {
+        "ActionType" : {
+            "null": "",
+            "CREATE": "CREATE",
+            "UPDATE": "UPDATE"
+        }
+    }
+}

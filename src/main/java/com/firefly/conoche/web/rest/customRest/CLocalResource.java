@@ -3,10 +3,8 @@ package com.firefly.conoche.web.rest.customRest;
 import com.codahale.metrics.annotation.Timed;
 import com.firefly.conoche.domain.enumeration.Provincia;
 import com.firefly.conoche.service.customService.CLocalService;
-import com.firefly.conoche.service.dto.EventDTO;
-import com.firefly.conoche.service.dto.LocalDTO;
-import com.firefly.conoche.service.dto.RealTimeEventImageDTO;
-import com.firefly.conoche.service.dto.WrapperDTO;
+import com.firefly.conoche.service.dto.*;
+import com.firefly.conoche.web.rest.util.HeaderUtil;
 import com.firefly.conoche.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
 import org.springframework.data.domain.Page;
@@ -68,5 +66,14 @@ public class CLocalResource {
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/local/search");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @PutMapping("/local/subscribe")
+    @Timed
+    public ResponseEntity subscribe(@RequestBody Long idLocal) throws URISyntaxException {
+        return cLocalService.suscribeCurrentToLocal(idLocal)
+            .map(l -> ResponseEntity.ok())
+            .orElseGet(ResponseEntity::badRequest)
+            .body(null);
     }
 }

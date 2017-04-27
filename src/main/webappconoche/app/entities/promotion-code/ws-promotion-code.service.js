@@ -13,8 +13,8 @@
     WSPromotionCodeService.$inject = ['StompManager'];
 
     function WSPromotionCodeService(StompManager) {
-        const SUBSCRIBE_TRACKER_URL = '/topic/deletePromotionCode/';
-        const DISCARD_ACTIVITY_URL = '/topic/deletedPromotionCode/';
+        var SUBSCRIBE_TRACKER_URL = '/topic/deletePromotionCode/';
+        var DISCARD_ACTIVITY_URL = '/topic/deletedPromotionCode/';
 
         var service = {
             receive: receive,
@@ -30,7 +30,7 @@
         }
 
         function discardPromotionCode(userId,promotionCode) {
-             StompManager.send(DISCARD_ACTIVITY_URL+userId, promotionCode);
+            StompManager.send(DISCARD_ACTIVITY_URL+userId, promotionCode);
         }
 
         function subscribe (userId) {

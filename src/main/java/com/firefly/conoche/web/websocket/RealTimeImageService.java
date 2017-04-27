@@ -64,6 +64,7 @@ public class RealTimeImageService {
                                               @DestinationVariable Long idEvent) {
         RTEimageDTO.setCreationTime(ZonedDateTime.now().withNano(0));
         RTEimageDTO.setEventId(idEvent);
+
         messagingTemplate.convertAndSend(
             "/topic/RealTimeEventImage/" + idEvent,
             realTimeEventImageService.save(RTEimageDTO));

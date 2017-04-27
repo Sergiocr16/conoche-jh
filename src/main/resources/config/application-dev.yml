@@ -148,3 +148,14 @@ application:
         cloud-name: "dgh2svgxo"
         api-key: "526662361431646"
         api-secret: "fuzokP7eDuLhZtaN1JbiK8ojSHQ"
+
+    notifications-url:
+        user: ""
+        local: "/#/local-ang/local-ang/%d"
+        event: "/#/event-ang/%d"
+        promotion: ""
+        message: ""
+        rating: ""
+        event-image: ""
+        realtime-event-image: ""
+        local-image: ""

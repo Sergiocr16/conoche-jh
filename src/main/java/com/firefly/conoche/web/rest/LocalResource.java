@@ -135,6 +135,7 @@ public class LocalResource {
         localService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
     @GetMapping("/getByOwner")
     @Timed
     public ResponseEntity<List<LocalDTO>> getByOwner(@ApiParam Pageable pageable, Long ownerId)
@@ -144,4 +145,17 @@ public class LocalResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/getByOwner");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+    @PostMapping("/locals/subscribeLocal")
+    @Timed
+    public void subscribeToLocal(@RequestBody Long idLocal) throws URISyntaxException {
+        localService.subscribeLocal(idLocal);
+    }
+
+    @PostMapping("/locals/unsubscribeLocal")
+    @Timed
+    public void unsubscribeToLocal(@RequestBody Long idLocal) throws URISyntaxException {
+        localService.unsubscribeLocal(idLocal);
+    }
+
 }

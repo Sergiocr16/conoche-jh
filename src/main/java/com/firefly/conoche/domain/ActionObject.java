@@ -1,12 +1,18 @@
 package com.firefly.conoche.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
+
+import com.firefly.conoche.domain.enumeration.ActionType;
 
 import com.firefly.conoche.domain.enumeration.ActionObjectType;
 
@@ -28,15 +34,26 @@ public class ActionObject implements Serializable {
     @Column(name = "object_id", nullable = false)
     private Long objectId;
 
-    @Column(name = "description")
-    private String description;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "action_type")
+    private ActionType actionType;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "object_type")
     private ActionObjectType objectType;
 
-    @ManyToOne
-    private Action action;
+    @NotNull
+    @Column(name = "creation_time", nullable = false)
+    private ZonedDateTime creationTime;
+
+    @NotNull
+    @Column(name = "active", nullable = false)
+    private Boolean active;
+
+    @OneToMany(mappedBy = "actionObject")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<ObjectChange> changes = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -59,17 +76,17 @@ public class ActionObject implements Serializable {
         this.objectId = objectId;
     }
 
-    public String getDescription() {
-        return description;
+    public ActionType getActionType() {
+        return actionType;
     }
 
-    public ActionObject description(String description) {
-        this.description = description;
+    public ActionObject actionType(ActionType actionType) {
+        this.actionType = actionType;
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setActionType(ActionType actionType) {
+        this.actionType = actionType;
     }
 
     public ActionObjectType getObjectType() {
@@ -85,17 +102,55 @@ public class ActionObject implements Serializable {
         this.objectType = objectType;
     }
 
-    public Action getAction() {
-        return action;
+    public ZonedDateTime getCreationTime() {
+        return creationTime;
     }
 
-    public ActionObject action(Action action) {
-        this.action = action;
+    public ActionObject creationTime(ZonedDateTime creationTime) {
+        this.creationTime = creationTime;
         return this;
     }
 
-    public void setAction(Action action) {
-        this.action = action;
+    public void setCreationTime(ZonedDateTime creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Boolean isActive() {
+        return active;
+    }
+
+    public ActionObject active(Boolean active) {
+        this.active = active;
+        return this;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Set<ObjectChange> getChanges() {
+        return changes;
+    }
+
+    public ActionObject changes(Set<ObjectChange> objectChanges) {
+        this.changes = objectChanges;
+        return this;
+    }
+
+    public ActionObject addChanges(ObjectChange objectChange) {
+        this.changes.add(objectChange);
+        objectChange.setActionObject(this);
+        return this;
+    }
+
+    public ActionObject removeChanges(ObjectChange objectChange) {
+        this.changes.remove(objectChange);
+        objectChange.setActionObject(null);
+        return this;
+    }
+
+    public void setChanges(Set<ObjectChange> objectChanges) {
+        this.changes = objectChanges;
     }
 
     @Override
@@ -123,8 +178,10 @@ public class ActionObject implements Serializable {
         return "ActionObject{" +
             "id=" + id +
             ", objectId='" + objectId + "'" +
-            ", description='" + description + "'" +
+            ", actionType='" + actionType + "'" +
             ", objectType='" + objectType + "'" +
+            ", creationTime='" + creationTime + "'" +
+            ", active='" + active + "'" +
             '}';
     }
 }

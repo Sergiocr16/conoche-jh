@@ -1,11 +1,15 @@
 package com.firefly.conoche.service.dto;
 
 
+import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+
+import com.firefly.conoche.domain.ObjectChange;
+import com.firefly.conoche.domain.enumeration.ActionType;
 import com.firefly.conoche.domain.enumeration.ActionObjectType;
 
 /**
@@ -18,11 +22,16 @@ public class ActionObjectDTO implements Serializable {
     @NotNull
     private Long objectId;
 
-    private String description;
+    private ActionType actionType;
 
     private ActionObjectType objectType;
 
-    private Long actionId;
+    private Set<ObjectChangeDTO> changes;
+    @NotNull
+    private ZonedDateTime creationTime;
+
+    @NotNull
+    private Boolean active;
 
     public Long getId() {
         return id;
@@ -38,12 +47,12 @@ public class ActionObjectDTO implements Serializable {
     public void setObjectId(Long objectId) {
         this.objectId = objectId;
     }
-    public String getDescription() {
-        return description;
+    public ActionType getActionType() {
+        return actionType;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setActionType(ActionType actionType) {
+        this.actionType = actionType;
     }
     public ActionObjectType getObjectType() {
         return objectType;
@@ -52,13 +61,19 @@ public class ActionObjectDTO implements Serializable {
     public void setObjectType(ActionObjectType objectType) {
         this.objectType = objectType;
     }
-
-    public Long getActionId() {
-        return actionId;
+    public ZonedDateTime getCreationTime() {
+        return creationTime;
     }
 
-    public void setActionId(Long actionId) {
-        this.actionId = actionId;
+    public void setCreationTime(ZonedDateTime creationTime) {
+        this.creationTime = creationTime;
+    }
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     @Override
@@ -87,8 +102,18 @@ public class ActionObjectDTO implements Serializable {
         return "ActionObjectDTO{" +
             "id=" + id +
             ", objectId='" + objectId + "'" +
-            ", description='" + description + "'" +
+            ", actionType='" + actionType + "'" +
             ", objectType='" + objectType + "'" +
+            ", creationTime='" + creationTime + "'" +
+            ", active='" + active + "'" +
             '}';
+    }
+
+    public Set<ObjectChangeDTO> getChanges() {
+        return changes;
+    }
+
+    public void setChanges(Set<ObjectChangeDTO> changes) {
+        this.changes = changes;
     }
 }

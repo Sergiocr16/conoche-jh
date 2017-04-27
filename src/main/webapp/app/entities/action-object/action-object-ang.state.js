@@ -46,6 +46,7 @@
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('actionObject');
+                    $translatePartialLoader.addPart('actionType');
                     $translatePartialLoader.addPart('actionObjectType');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
@@ -69,6 +70,7 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('actionObject');
+                    $translatePartialLoader.addPart('actionType');
                     $translatePartialLoader.addPart('actionObjectType');
                     return $translate.refresh();
                 }],
@@ -127,8 +129,10 @@
                         entity: function () {
                             return {
                                 objectId: null,
-                                description: null,
+                                actionType: null,
                                 objectType: null,
+                                creationTime: null,
+                                active: false,
                                 id: null
                             };
                         }

@@ -106,7 +106,7 @@
             parent: 'local-ang',
             url: '/local-ang/{id}',
             data: {
-               authorities: ['ROLE_USER','ROLE_OWNER'],
+                authorities: ['ROLE_USER','ROLE_OWNER'],
                 pageTitle: 'conocheApp.local.detail.title'
             },
             views: {
@@ -140,7 +140,7 @@
             parent: 'local-ang-detail',
             url: '/detail/edit',
             data: {
-                 authorities: ['ROLE_USER','ROLE_OWNER']
+                authorities: ['ROLE_USER','ROLE_OWNER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -165,7 +165,7 @@
             parent: 'local-ang-by-owner',
             url: '/new',
             data: {
-             authorities: ['ROLE_USER','ROLE_OWNER']
+                authorities: ['ROLE_USER','ROLE_OWNER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -200,7 +200,7 @@
             parent: 'local-ang',
             url: '/{id}/edit',
             data: {
-               authorities: ['ROLE_USER','ROLE_OWNER']
+                authorities: ['ROLE_USER','ROLE_OWNER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -225,7 +225,7 @@
             parent: 'local-ang',
             url: '/{id}/delete',
             data: {
-                  authorities: ['ROLE_USER','ROLE_OWNER']
+                authorities: ['ROLE_USER','ROLE_OWNER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

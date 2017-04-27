@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('JhiLanguageController', JhiLanguageController);
 
-    JhiLanguageController.$inject = ['$translate', 'JhiLanguageService', 'tmhDynamicLocale','Principal'];
+    JhiLanguageController.$inject = ['$translate', 'JhiLanguageService', 'tmhDynamicLocale'];
 
-    function JhiLanguageController ($translate, JhiLanguageService, tmhDynamicLocale,Principal) {
+    function JhiLanguageController ($translate, JhiLanguageService, tmhDynamicLocale) {
         var vm = this;
 
         vm.changeLanguage = changeLanguage;
