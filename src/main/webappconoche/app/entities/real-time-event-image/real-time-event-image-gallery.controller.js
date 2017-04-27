@@ -125,7 +125,7 @@
             var item = _.find( vm.realTimeEventImages, function(img) {
                 return img.id === image.id;
             });
-            return angular.isUndefined(item);
+            return angular.isDefined(item);
         }
 
         function toSlideshow() {
