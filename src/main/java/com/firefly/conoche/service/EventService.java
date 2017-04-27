@@ -27,17 +27,16 @@ import java.util.stream.Collectors;
 public class EventService {
 
     private final Logger log = LoggerFactory.getLogger(EventService.class);
-
     private final EventRepository eventRepository;
-
     private final EventMapper eventMapper;
     private final UserRepository userRepository;
     private final LocalService localService;
 
-    public EventService(EventRepository eventRepository, EventMapper eventMapper, LocalService localService) {
+    public EventService(EventRepository eventRepository, EventMapper eventMapper, LocalService localService,UserRepository userRepository) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
         this.localService = localService;
+        this.userRepository = userRepository;
 
     }
 
