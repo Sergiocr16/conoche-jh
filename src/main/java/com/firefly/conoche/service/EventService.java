@@ -1,8 +1,12 @@
 package com.firefly.conoche.service;
 
 import com.firefly.conoche.domain.Event;
+import com.firefly.conoche.domain.User;
 import com.firefly.conoche.repository.EventRepository;
+import com.firefly.conoche.repository.UserRepository;
+import com.firefly.conoche.security.SecurityUtils;
 import com.firefly.conoche.service.dto.EventDTO;
+import com.firefly.conoche.service.dto.UserDTO;
 import com.firefly.conoche.service.mapper.EventMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Event.
@@ -26,13 +31,14 @@ public class EventService {
     private final EventRepository eventRepository;
 
     private final EventMapper eventMapper;
-
+    private final UserRepository userRepository;
     private final LocalService localService;
 
     public EventService(EventRepository eventRepository, EventMapper eventMapper, LocalService localService) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
         this.localService = localService;
+
     }
 
     /**
@@ -85,4 +91,28 @@ public class EventService {
         log.debug("Request to delete Event : {}", id);
         eventRepository.delete(id);
     }
+    public void attendEvent(Long idEvent) {
+         Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+
+         user.ifPresent(u -> {
+             Event event = eventRepository.findOneWithEagerRelationships(idEvent);
+             event.addAttendingUsers(u);
+             eventRepository.save(event);
+             EventDTO eventDTO = eventMapper.eventToEventDTO(event);
+         });
+
+    }
+
+    public void dismissEvent(Long idEvent) {
+        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+
+        user.ifPresent(u -> {
+            Event event = eventRepository.findOneWithEagerRelationships(idEvent);
+            event.removeAttendingUsers(u);
+            eventRepository.save(event);
+            EventDTO eventDTO = eventMapper.eventToEventDTO(event);
+        });
+
+    }
+
 }

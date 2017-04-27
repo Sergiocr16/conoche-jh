@@ -52,6 +52,7 @@ module.exports = function (config) {
             'src/main/webappconoche/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
             'src/main/webappconoche/bower_components/cloudinary_ng/js/angular.cloudinary.js',
             'src/main/webappconoche/bower_components/angular-timer/dist/angular-timer.js',
+            'src/main/webappconoche/bower_components/angular-animate/angular-animate.js',
             'src/main/webappconoche/bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'src/main/webappconoche/app/app.module.js',
