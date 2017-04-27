@@ -70,28 +70,23 @@ gulp.task('styles', [], function () {
 gulp.task('concat:styles', [], function () {
 
 
-    /*@import "tabs.css";*/
-    /*@import "image-overlay.css";*/
-    /*@import "slider-ng-animate.css";*/
-    /*@import "loading-spinners.css";*/
-    /*@import "../template/global/css/font-awesome.css";*/
-
     return gulp.src([
         config.app + 'content/css/animate.css',
-        config.app + 'content/css/font-awesome.css',
         config.app + 'content/css/components.css',
-
         config.app + 'content/css/plugins.css',
         config.app + 'content/css/layout.css',
         config.app + 'content/css/default.css',
-
         config.app + 'content/css/purple-studio.css',
         config.app + 'content/css/custom.css',
         config.app + 'content/css/login2.css',
-
         config.app + 'content/css/components-rounded.css',
         config.app + 'content/css/custom.css',
-        config.app + 'content/css/**/*.css'
+        config.app + 'content/css/tabs.css',
+        config.app + 'content/css/image-overlay.css',
+        config.app + 'content/css/slider-ng-animate.css',
+        config.app + 'content/css/loading-spinners.css',
+        config.app + 'content/css/styles.css',
+
     ])
         .pipe(concat("main.css"))
         .pipe(gulp.dest(config.app + 'content/css'));
@@ -196,7 +191,7 @@ gulp.task('install', function () {
 
 gulp.task('serve', ['install'], serve);
 
-gulp.task('build', ['clean'], function (cb) {
+gulp.task('build', ['clean', 'concat:styles'], function (cb) {
     runSequence(['copy', 'inject:vendor', 'ngconstant:prod', 'copy:languages'], 'inject:app', 'inject:troubleshoot', 'assets:prod', cb);
 });
 
