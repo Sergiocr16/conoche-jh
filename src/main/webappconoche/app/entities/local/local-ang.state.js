@@ -57,6 +57,51 @@
                 }]
             }
         })
+              .state('local-ang-by-owner', {
+                         parent: 'entity',
+                         url: '/local-ang-by-owner?page&sort&search',
+                         data: {
+                             authorities: ['ROLE_OWNER'],
+                             pageTitle: 'conocheApp.local.home.title',
+                             phrase: 'conocheApp.local.home.phrase'
+                         },
+                         views: {
+                             'content@': {
+                                 templateUrl: 'app/entities/local/local-ang-by-owner.html',
+                                 controller: 'LocalAngByOwnerController',
+                                 controllerAs: 'vm'
+                             }
+                         },
+                         params: {
+                             page: {
+                                 value: '1',
+                                 squash: true
+                             },
+                             sort: {
+                                 value: 'id,asc',
+                                 squash: true
+                             },
+                             search: null,
+                             provincia: null,
+                             idCategory: null
+                         },
+                         resolve: {
+                             optionalParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+                                 return {
+                                     page: PaginationUtil.parsePage($stateParams.page),
+                                     sort: $stateParams.sort,
+                                     predicate: PaginationUtil.parsePredicate($stateParams.sort),
+                                     ascending: PaginationUtil.parseAscending($stateParams.sort),
+                                     search: $stateParams.search,
+                                 };
+                             }],
+                             translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                                 $translatePartialLoader.addPart('local');
+                                 $translatePartialLoader.addPart('global');
+                                 return $translate.refresh();
+                             }]
+                         }
+                     })
         .state('local-ang-detail', {
             parent: 'local-ang',
             url: '/local-ang/{id}',
@@ -116,8 +161,8 @@
                 });
             }]
         })
-        .state('local-ang.new', {
-            parent: 'local-ang',
+        .state('local-ang-by-owner.new', {
+            parent: 'local-ang-by-owner',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER','ROLE_OWNER']
@@ -145,9 +190,9 @@
                         }
                     }
                 }).result.then(function() {
-                    $state.go('local-ang', null, { reload: 'local-ang' });
+                    $state.go('local-ang-by-owner', null, { reload: 'local-ang-by-owner' });
                 }, function() {
-                    $state.go('local-ang');
+                    $state.go('local-ang-by-owner');
                 });
             }]
         })

@@ -14,11 +14,15 @@
         });
         getPromotions();
         function getPromotions(){
-            Promotion.geyByEvent({ eventId: vm.event.id}).$promise.then(onSuccess);
+
+        Promotion.geyByEvent({ eventId: vm.event.id}).$promise.then(onSuccess, onError);
+
         }
         function onSuccess(data, headers) {
             vm.promotions = data;
-
+        }
+       function onError() {
+          
         }
         $scope.$on('$destroy', unsubscribe);
     }

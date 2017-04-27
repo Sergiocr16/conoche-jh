@@ -211,12 +211,12 @@
              parent: 'event-ang',
              url: '/promotion/{id}',
              data: {
-                 authorities: ['ROLE_USER']
+                 authorities: ['ROLE_USER','ROLE_OWNER']
              },
              onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                  $uibModal.open({
                      templateUrl: 'app/entities/promotion/promotion-ang-idetail-in-events.html',
-                     controller: 'PromotionAngDialogController',
+                     controller: 'PromotionAngDetailController',
                      controllerAs: 'vm',
                      backdrop: 'static',
                      size: 'lg',
@@ -236,12 +236,12 @@
               parent: 'event-ang-detail.promotions',
               url: '/{idPromo}',
               data: {
-                  authorities: ['ROLE_USER']
+                  authorities: ['ROLE_USER','ROLE_OWNER']
               },
               onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                   $uibModal.open({
                       templateUrl: 'app/entities/promotion/promotion-ang-idetail-in-events.html',
-                      controller: 'PromotionAngDialogController',
+                      controller: 'PromotionAngDetailController',
                       controllerAs: 'vm',
                       backdrop: 'static',
                       size: 'lg',
@@ -333,7 +333,7 @@
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('event-ang', null, { reload: 'event-ang' });
+                    $state.go('event-ang-by-owner', null, { reload: 'event-ang-by-owner' });
                 }, function() {
                     $state.go('^');
                 });

@@ -1,42 +1,79 @@
 
 <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
-    <div class="modal-header">
+    <div class="modal-header font-red-sunglo">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="myLocalLabel" data-translate="conocheApp.local.home.createOrEditLabel">Create or edit a Local</h4>
+        <span id="myLocalLabel"  class="caption-subject bold uppercase"data-translate="conocheApp.local.home.createOrEditLabel"> Comment live</span>
+
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.local.id">
-            <label for="id" data-translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.local.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="conocheApp.local.name" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="vm.local.name"
-                    required/>
-            <div ng-show="editForm.name.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.name.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
+
+        <div class="form-body">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-group form-md-line-input">
+                        <input type="text" class="form-control gray-font" name="name" id="field_name" ng-model="vm.local.name" required>
+                        <label class="control-label font-15" data-translate="conocheApp.local.name" for="field_name">Name</label>
+                        <span ng-show="editForm.name.$invalid" class="help-block" ng-show="editForm.name.$error.required" data-translate="entity.validation.required"></span>
+                    </div>
+                </div>
+                <!--<div class="form-group">-->
+                    <!--<label class="control-label" data-translate="conocheApp.local.descripcion" for="field_descripcion">Descripcion</label>-->
+                    <!--<input type="text" class="form-control" name="descripcion" id="field_descripcion"-->
+                           <!--ng-model="vm.local.descripcion"-->
+                    <!--/>-->
+                <!--</div>-->
+
+                <div class="form-group form-md-line-input">
+                <textarea class="form-control gray-font" rows="2" name="descripcion" id="field_descripcion" style="min-height:180px;"
+                          ng-model="vm.local.descripcion" required></textarea>
+                    <label class="control-label font-15"data-translate="conocheApp.local.descripcion" for="field_descripcion">Details</label>
+                    <span ng-show="editForm.descripcion.$invalid" class="help-block" ng-show="editForm.descripcion.$error.required" data-translate="entity.validation.required"></span>
+
+                </div>
+
+                <label class="control-label gray-font font-15" data-translate="conocheApp.local.banner" for="field_banner">Banner</label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input has-info ">
+                    <select class="form-control  gray-font" id="field_localCategory" name="localCategory" ng-model="vm.local.localCategoryId" ng-options="category.id as category.name for category in vm.categories" required>
+                        <option value="">Seleccione una categoría</option>
+                    </select>
+                    <label class="control-label font-15" data-translate="conocheApp.local.localCategory" for="field_localCategory">Local</label>
+                    <span ng-show="editForm.localCategory.$invalid" class="help-block" ng-show="editForm.localCategory.$error.required" data-translate="entity.validation.required"></span>
+                </div>
+                <div class="form-group  form-md-line-input has-info ">
+                    <select class="form-control gray-font" name="provincia" ng-model="vm.local.provincia" id="field_provincia" required>
+                        <option value="">Seleccione una provincia</option>
+                        <option value="SAN_JOSE" data-translate="conocheApp.Provincia.SAN_JOSE">SAN_JOSE</option>
+                        <option value="ALAJUELA" data-translate="conocheApp.Provincia.ALAJUELA">ALAJUELA</option>
+                        <option value="CARTAGO" data-translate="conocheApp.Provincia.CARTAGO">CARTAGO</option>
+                        <option value="GUANACASTE" data-translate="conocheApp.Provincia.GUANACASTE">GUANACASTE</option>
+                        <option value="LIMON" data-translate="conocheApp.Provincia.LIMON">LIMON</option>
+                        <option value="HEREDIA" data-translate="conocheApp.Provincia.HEREDIA">HEREDIA</option>
+                        <option value="PUNTARENAS" data-translate="conocheApp.Provincia.PUNTARENAS">PUNTARENAS</option>
+                    </select>
+                    <label class="control-label  gray-font font-15" data-translate="conocheApp.local.provincia" for="field_provincia">Provincia</label>
+
+                    <span ng-show="editForm.provincia.$invalid" class="help-block" ng-show="editForm.provincia.$error.required" data-translate="entity.validation.required"></span>
+
+                </div>
+
+                <div class="form-group">
+                    <label data-translate="conocheApp.local.services " class=" gray-font font-15" for="field_services">Services</label>
+                    <select class="form-control gray-font" id="field_services" multiple name="services" ng-model="vm.local.services" ng-options="servicio as servicio.descripcion for servicio in vm.servicios track by servicio.id" required></select>
+                </div>
             </div>
         </div>
-        <div class="form-group" ngf-drop ngf-change="vm.setBanner($file, vm.local)" ngf-pattern="'image/*'">
-            <label class="control-label" data-translate="conocheApp.local.banner" for="field_banner">Banner</label>
+
+        <div class="form-group padding-10 " ngf-drop ngf-change="vm.setBanner($file, vm.local)" ngf-pattern="'image/*'">
+
             <div>
-                <img data-ng-src="{{'data:' + vm.local.bannerContentType + ';base64,' + vm.local.banner}}" style="max-height: 100px;" ng-if="vm.local.banner" alt="local image"/>
-                <div ng-if="vm.local.banner" class="help-block clearfix">
-                    <span class="pull-left">{{vm.local.bannerContentType}}, {{vm.byteSize(vm.local.banner)}}</span>
-                    <button type="button" ng-click="vm.local.banner=null;vm.local.bannerContentType=null;"
-                            class="btn btn-default btn-xs pull-right">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </div>
-                <button type="button" ngf-select class="btn btn-default btn-block"
+                <img class="col-md-12 crop-400 col-lg-12 col-sm-12 col-xs-12" data-ng-src="{{'data:' + vm.local.bannerContentType + ';base64,' + vm.local.banner}}" style="" ng-if="vm.local.banner" alt="local image"/>
+
+                <button type="button" ngf-select class="btn btn-default btn-block gray-font"
                         ngf-change="vm.setBanner($file, vm.local)" accept="image/*" data-translate="entity.action.addimage">
                     Add image
                 </button>
@@ -47,35 +84,9 @@
             <input type="hidden" class="form-control" name="bannerContentType" id="field_bannerContentType"
                     ng-model="vm.local.bannerContentType" />
         </div>
-        <div class="form-group">
-            <label data-translate="conocheApp.local.localCategory" for="field_localCategory">Local Category</label>
-            <select class="form-control" id="field_localCategory" name="localCategory" ng-model="vm.local.localCategoryId" ng-options="category.id as category.name for category in vm.categories"            >
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="conocheApp.local.descripcion" for="field_descripcion">Descripcion</label>
-            <input type="text" class="form-control" name="descripcion" id="field_descripcion"
-                    ng-model="vm.local.descripcion"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="conocheApp.local.provincia" for="field_provincia">Provincia</label>
-            <select class="form-control" name="provincia" ng-model="vm.local.provincia" id="field_provincia">
-                <option value="SAN_JOSE" data-translate="conocheApp.Provincia.SAN_JOSE">SAN_JOSE</option>
-                <option value="ALAJUELA" data-translate="conocheApp.Provincia.ALAJUELA">ALAJUELA</option>
-                <option value="CARTAGO" data-translate="conocheApp.Provincia.CARTAGO">CARTAGO</option>
-                <option value="GUANACASTE" data-translate="conocheApp.Provincia.GUANACASTE">GUANACASTE</option>
-                <option value="LIMON" data-translate="conocheApp.Provincia.LIMON">LIMON</option>
-                <option value="HEREDIA" data-translate="conocheApp.Provincia.HEREDIA">HEREDIA</option>
-                <option value="PUNTARENAS" data-translate="conocheApp.Provincia.PUNTARENAS">PUNTARENAS</option>
-            </select>
-        </div>
 
-        <div class="form-group">
-            <label data-translate="conocheApp.local.services" for="field_services">Services</label>
-            <select class="form-control" id="field_services" multiple name="services" ng-model="vm.local.services" ng-options="servicio as servicio.descripcion for servicio in vm.servicios track by servicio.id"></select>
-        </div>
+
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

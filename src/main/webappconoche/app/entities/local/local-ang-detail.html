@@ -3,9 +3,11 @@
     <!--<jhi-alert-error></jhi-alert-error>-->
     <div class="row">
         <div class="col-md-12 margin-top-20">
-            <div ng-if="vm.local.banner" class="col-md-9 no-padding-left margin-bottom-40">
+            <div class="col-md-9 no-padding-left margin-bottom-40">
                 <a ng-click="vm.openFile(vm.local.bannerContentType, vm.local.banner)">
-                    <img data-ng-src="{{'data:' + vm.local.bannerContentType + ';base64,' + vm.local.banner}}" class="col-md-12" alt="local image" />
+                    <img ng-show="vm.local.banner" data-ng-src="{{'data:' + vm.local.bannerContentType + ';base64,' + vm.local.banner}}" class="col-md-12" alt="local image" />
+                    <img ng-hide="vm.local.banner" src="content/images/defaultLocalImg.png"  class="col-md-12" alt="local image" />
+
                 </a>
 
                     <div class="col-md-9 margin-top-40">

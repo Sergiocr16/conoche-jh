@@ -7,8 +7,10 @@
                 <div class="col-md-5 no-padding-left padding-15 position-relative font-18 text-center">
                     <div id="info-date-event" class="col-md-2 padding-10 font-white"><span><span class="font-24">{{event.initialTime| date:'d'}} </span>{{event.initialTime| date:'MMM'}}</span>
                     </div>
-                    <img class="col-md-12 col-xs-12 crop no-padding" style="z-index: 0;" data-ng-src="{{'data:' + event.bannerContentType + ';base64,' +
-                         event.banner}}" alt="event image" />
+                    <img class="col-md-12 col-sm-12 col-xs-12 crop no-padding" ng-show="event.banner" style="z-index: 0;" data-ng-src="{{'data:' + event.bannerContentType + ';base64,' +
+                         event.banner}}" alt="event image"/>
+                    <img class="col-md-12 col-sm-12 col-xs-12 crop no-padding" ng-hide="event.banner" src="content/images/defaultEventImg.png" style="z-index: 0;"  alt="event image"/>
+
                 </div>
                 <div class="col-md-7 gray-font">
                     <h1 class="font-24 Raleway" style="text-transform: uppercase; padding-top:10px">{{event.name}}</h1>
@@ -33,7 +35,8 @@
                 <div class="col-md-12 col-xs-12 col-sm-12 image-promotion-in-events height-130 top-0"><span class="col-md-12 col-lg-12 col-sm-12 col-xs-12 no-padding Raleway font-18  Raleway text-center margin-top-60" style="opacity:0">Ver promocion</span></div>
                 <div id="info-time-promotion" class="col-md-12 col-sm-12 col-xs-12 padding-10 "><span class="font-16 Raleway"><span data-translate="conocheApp.event.timeLeft"></span> <timer end-time="promotion.finalTime">{{hours}}:{{minutes}}:{{seconds}}</timer></span>
                 </div>
-                <img class="col-md-12 col-sm-12 col-xs-12 no-padding crop-150" style="z-index: 0;"  data-ng-src="{{'data:' + promotion.imageContentType + ';base64,' + promotion.image}}"  alt="promotion image" />
+                <img class="col-md-12 col-sm-12 col-xs-12 no-padding crop-150" style="z-index: 0;"  ng-show="promotion.image" data-ng-src="{{'data:' + promotion.imageContentType + ';base64,' + promotion.image}}"  alt="promotion image" />
+                <img class="col-md-12 col-sm-12 col-xs-12 no-padding crop-150" style="z-index: 0;"  ng-hide="promotion.image" src="content/images/defaultPromoImg.png"  alt="promotion image" />
             </div>
             <span class="col-md-12 no-padding Raleway font-15" style="text-transform: uppercase;">{{promotion.description}}</span>
         </div>

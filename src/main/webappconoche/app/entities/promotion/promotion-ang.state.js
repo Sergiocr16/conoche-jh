@@ -111,7 +111,7 @@
         })
         .state('event-ang-detail.new', {
             parent: 'event-ang-detail',
-            url: 'promotions/new',
+            url: '/promotions/new',
             data: {
                 authorities: ['ROLE_USER','ROLE_OWNER']
             },
@@ -181,7 +181,7 @@
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
                     templateUrl: 'app/entities/promotion/promotion-ang-delete-dialog.html',
-                    controller: 'PromotionAngDeleteController',
+                    controller: 'PromotionAngDetailController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {

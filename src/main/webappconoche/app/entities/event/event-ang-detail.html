@@ -1,10 +1,10 @@
 <div class="gray-font margin-top-40">
 
     <div class="col-md-offset-10 col-md-2">
-
+<div class="col-md-12 col-sm-12 col-xs-12">
         <div has-authority="ROLE_OWNER" ui-sref="event-ang-detail.edit({id:vm.event.id})" class="btn btn-primary btn-block btn-lg border-radius-6 col-md-2"> <span class="glyphicon glyphicon-pencil"></span>
             <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span></div>
-
+</div>
 
     </div>
 
@@ -44,7 +44,8 @@
                         </h2>
                     </div>
                     <a ng-click="vm.openFile(vm.event.bannerContentType, vm.event.banner)">
-                    <img class="col-md-12 col-sm-12 col-xs-12 no-padding crop-400" style="z-index: 0;"   data-ng-src="{{'data:' + vm.event.bannerContentType + ';base64,' + vm.event.banner}}"  alt="promotion image" />
+                    <img class="col-md-12 col-sm-12 col-xs-12 no-padding crop-400" ng-show="vm.event.banner" style="z-index: 0;"   data-ng-src="{{'data:' + vm.event.bannerContentType + ';base64,' + vm.event.banner}}"  alt="promotion image" />
+                        <img class="col-md-12 col-sm-12 col-xs-12 no-padding crop-400" ng-hide="vm.event.banner" style="z-index: 0;" src="content/images/defaultEventImg.png" alt="promotion image" />
                     </a>>
                 </div>
 

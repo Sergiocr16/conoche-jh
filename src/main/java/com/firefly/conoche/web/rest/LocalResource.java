@@ -136,6 +136,16 @@ public class LocalResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
+    @GetMapping("/getByOwner")
+    @Timed
+    public ResponseEntity<List<LocalDTO>> getByOwner(@ApiParam Pageable pageable, Long ownerId)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Residents");
+        Page<LocalDTO> page = localService.getByOwner(pageable,ownerId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/getByOwner");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
     @PostMapping("/locals/subscribeLocal")
     @Timed
     public void subscribeToLocal(@RequestBody Long idLocal) throws URISyntaxException {

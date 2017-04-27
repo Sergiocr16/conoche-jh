@@ -12,11 +12,6 @@
         var vm = this;
         vm.event = entity;
         $rootScope.pageTitle = vm.event.name;
-//        setTimeout(function(){
-//             $state.current.data.pageTitle = vm.event.name;
-//             $scope.apply();
-//        },100)
-
         vm.previousState = previousState.name;
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
@@ -30,7 +25,6 @@
                 }
             })
         });
-
 
         var unsubscribe = $rootScope.$on('conocheApp:eventUpdate', function(event, result) {
             vm.event = result;
@@ -62,9 +56,12 @@
 
         function onSuccess(data, headers) {
           vm.local = data;
-          setTimeout(function() {
-            $("#container").fadeIn(500);
-            }, 200)
-          }
+
+             if(vm.event.price==0){
+                vm.event.price="Gratis";
+             }
+           setTimeout(function() {
+              $("#container").fadeIn(500);
+          }, 200)
         }
 })();
