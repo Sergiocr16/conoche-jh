@@ -83,7 +83,13 @@ public class RatingLocalService {
         RatingLocalDTO ratingLocalDTO = ratingLocalMapper.ratingLocalToRatingLocalDTO(ratingLocal);
         return ratingLocalDTO;
     }
-
+    /**
+     *  Get one ratingLocal by login and local id.
+     *
+     *  @param localId the id of the local
+     *  @param userLogin the login of the user
+     *  @return the entity
+     */
     @Transactional(readOnly = true)
     public RatingLocalDTO findOneByLoginAndLocalId(String userLogin,Long localId) {
         log.debug("Request to get RatingLocal by local and user : {}", localId,userLogin);
@@ -98,12 +104,18 @@ public class RatingLocalService {
      *  Delete the  ratingLocal by id.
      *
      *  @param id the id of the entity
+     *  @return the entity
      */
     public void delete(Long id) {
         log.debug("Request to delete RatingLocal : {}", id);
         ratingLocalRepository.delete(id);
     }
-
+    /**
+     *  Calculate rating in base of the average of all ratings.
+     *
+     *  @param localId the id of the local
+     *  @return the rating of the local
+     */
     @Transactional(readOnly = true)
     public double calculateRating(Long localId) {
         log.debug("Request to get all local rating");
