@@ -42,7 +42,7 @@
                 vm.page = pagingParams.page;
                 setTimeout(function() {
                     $("#tableData").fadeIn(500);
-                }, 200)
+                }, 200);
             }
             function onError(error) {
                 AlertService.error(error.data.message);

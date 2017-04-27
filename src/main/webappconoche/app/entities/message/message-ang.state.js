@@ -162,7 +162,7 @@
                 authorities: ['ROLE_USER','ROLE_ADMIN','ROLE_OWNER']
             },
             onEnter: ['WSRealTimeEventMessages','$stateParams', '$state', '$uibModal', function(WSRealTimeEventMessages,$stateParams, $state, $uibModal) {
-              WSRealTimeEventMessages.subscribe(Number($stateParams.id));
+                WSRealTimeEventMessages.subscribe(Number($stateParams.id));
                 $uibModal.open({
                     templateUrl: 'app/entities/message/message-ang-dialog.html',
                     controller: 'MessageAngDialogController',

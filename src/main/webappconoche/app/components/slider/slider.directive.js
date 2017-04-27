@@ -33,7 +33,7 @@
                 function changeShowNav(show) {
                     scope.$apply(function() {
                         scope.vm.showOptions = show;
-                    })
+                    });
                     $(element).css('cursor', 'none');
                 }
             },
@@ -72,14 +72,14 @@
                 function keyEvent(e) {
                     switch(e.which) {
                         //right arrow
-                        case 39:
-                            next();
-                            break;
+                    case 39:
+                        next();
+                        break;
                          //left arrow
-                        case 37:
-                            prev();
-                            break;
-                        default:
+                    case 37:
+                        prev();
+                        break;
+                    default:
                     }
                 }
             }],

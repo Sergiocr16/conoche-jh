@@ -1,15 +1,15 @@
 // See: http://eslint.org/
 // See: https://www.npmjs.com/package/eslint-plugin-angular
 {
-
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "impliedStrict" : true
+    "globals": {
+        "angular": true,
+        "$": true,
+        "Symbol": true,
+        "Layout": true,
+        "_": true,
+        "Metronic": true,
+        "moment": true
     },
-
   "extends": [
     "eslint:recommended",
     "angular"

@@ -83,4 +83,4 @@
             rgbToCSS: rgbToCSS
         };
     }
-})()
+})();

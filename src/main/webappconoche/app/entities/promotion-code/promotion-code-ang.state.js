@@ -89,7 +89,7 @@
             data: {
                 authorities: ['ROLE_OWNER'],
                 pageTitle: 'global.menu.entities.canjearPromo',
-               phrase: 'conocheApp.promotionCode.home.swapPhrase'
+                phrase: 'conocheApp.promotionCode.home.swapPhrase'
             },
             views: {
                 'content@': {
@@ -131,14 +131,14 @@
                 }
             },
             onEnter: ['$stateParams', '$state', '$uibModal','WSPromotionCodeService','Principal', function($stateParams, $state, $uibModal,WSPromotionCodeService,Principal) {
-             Principal.identity().then(function(user){
-              WSPromotionCodeService.subscribe(user.id);
-             })
+                Principal.identity().then(function(user){
+                    WSPromotionCodeService.subscribe(user.id);
+                });
             }],
             onExit: ['$stateParams', 'WSPromotionCodeService','Principal', function($stateParams, WSPromotionCodeService,Principal) {
                 Principal.identity().then(function(user){
-                WSPromotionCodeService.unsubscribe(user.id)
-                })
+                    WSPromotionCodeService.unsubscribe(user.id);
+                });
             }],
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {

@@ -25,12 +25,6 @@
                 </p>
             </div>
         </div>
-        <!--<div class="form-group">-->
-            <!--<label class="control-label" data-translate="conocheApp.local.longitud" for="field_longitud">Longitud</label>-->
-            <!--<input type="number" class="form-control" name="longitud" id="field_longitud"-->
-                    <!--ng-model="vm.local.longitud"-->
-                    <!--/>-->
-        <!--</div>-->
         <div class="form-group" ngf-drop ngf-change="vm.setBanner($file, vm.local)" ngf-pattern="'image/*'">
             <label class="control-label" data-translate="conocheApp.local.banner" for="field_banner">Banner</label>
             <div>
@@ -53,18 +47,6 @@
             <input type="hidden" class="form-control" name="bannerContentType" id="field_bannerContentType"
                     ng-model="vm.local.bannerContentType" />
         </div>
-        <!--<div class="form-group">-->
-            <!--<label class="control-label" data-translate="conocheApp.local.bannerUrl" for="field_bannerUrl">Banner Url</label>-->
-            <!--<input type="text" class="form-control" name="bannerUrl" id="field_bannerUrl"-->
-                    <!--ng-model="vm.local.bannerUrl"-->
-                    <!--/>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="control-label" data-translate="conocheApp.local.latitud" for="field_latitud">Latitud</label>-->
-            <!--<input type="number" class="form-control" name="latitud" id="field_latitud"-->
-                    <!--ng-model="vm.local.latitud"-->
-                    <!--/>-->
-        <!--</div>-->
         <div class="form-group">
             <label data-translate="conocheApp.local.localCategory" for="field_localCategory">Local Category</label>
             <select class="form-control" id="field_localCategory" name="localCategory" ng-model="vm.local.localCategoryId" ng-options="category.id as category.name for category in vm.categories"            >
@@ -94,10 +76,6 @@
             <label data-translate="conocheApp.local.services" for="field_services">Services</label>
             <select class="form-control" id="field_services" multiple name="services" ng-model="vm.local.services" ng-options="servicio as servicio.descripcion for servicio in vm.servicios track by servicio.id"></select>
         </div>
-        <!--<div class="form-group">-->
-            <!--<label data-translate="conocheApp.local.subcribers" for="field_subcribers">Subcribers</label>-->
-            <!--<select class="form-control" id="field_subcribers" multiple name="subcribers" ng-model="vm.local.subcribers" ng-options="user as user.login for user in vm.users track by user.id"></select>-->
-        <!--</div>-->
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

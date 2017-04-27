@@ -19,60 +19,55 @@
 
         loadAll();
         function defineLabelColor(rating){
-        switch((rating)){
+            switch((rating)){
             case 1:
-            return "label-danger";
-            break;
+                return "label-danger";
             case 2:
-            return "label-warning";
-            break;
+                return "label-warning";
             case 3:
-            return "label-primary";
-            break;
+                return "label-primary";
             case 4:
-            return "label-almost-good";
-            break;
-            case 5:
-            return "label-success";
-            break;
+                return "label-almost-good";
+            default:
+                return "label-success";
+            }
         }
-        }
-               function populateStars(rating){
+        function populateStars(rating){
 
-                var stars = [];
-
+            var stars = [];
 
 
-                function paintFullStars(quan){
-                     for(var i = 0;i<quan;i++){
-                        stars.push({class:'fa fa-star yellow-star'})
-                     }
-                 }
 
-                 function paintEmptyStars(quan){
-                   for(var i = 0;i<quan;i++){
-                      stars.push({class:'fa fa-star-o yellow-star'})
-                   }
-               }
-                   var fullStars = Math.floor(rating);
-                   var rest = fullStars - rating;
-                   var noStar = 5 -fullStars;
+            function paintFullStars(quan){
+                for(var i = 0;i<quan;i++){
+                    stars.push({class:'fa fa-star yellow-star'});
+                }
+            }
 
-                   if(rest == 0){
-                     paintFullStars(fullStars);
-                     paintEmptyStars(noStar);
-                     return stars;
-                   }else{
-                    paintFullStars(fullStars);
-                    if(rest<=0){
-                    stars.push({class:'fa fa-star-half-o yellow-star'})
+            function paintEmptyStars(quan){
+                for(var i = 0;i<quan;i++){
+                    stars.push({class:'fa fa-star-o yellow-star'});
+                }
+            }
+            var fullStars = Math.floor(rating);
+            var rest = fullStars - rating;
+            var noStar = 5 -fullStars;
+
+            if(rest === 0){
+                paintFullStars(fullStars);
+                paintEmptyStars(noStar);
+                return stars;
+            }else{
+                paintFullStars(fullStars);
+                if(rest<=0){
+                    stars.push({class:'fa fa-star-half-o yellow-star'});
                     paintEmptyStars((noStar-1));
-                    }else{
-                     paintEmptyStars(noStar);
-                    }
-                   }
-                   return stars;
-               }
+                }else{
+                    paintEmptyStars(noStar);
+                }
+            }
+            return stars;
+        }
         function loadAll () {
             RatingLocal.query({
                 page: pagingParams.page - 1,
@@ -94,11 +89,11 @@
                 vm.ratingLocals = data;
                 vm.page = pagingParams.page;
                 angular.forEach(data,function(value,key){
-                value.stars = populateStars(value.rating);
-                value.qualityText = "conocheApp.ratingLocal.califications."+(value.rating);
-                value.labelColor = defineLabelColor(value.rating);
-                value.creationDate = moment(value.creationDate).fromNow();
-                })
+                    value.stars = populateStars(value.rating);
+                    value.qualityText = "conocheApp.ratingLocal.califications."+(value.rating);
+                    value.labelColor = defineLabelColor(value.rating);
+                    value.creationDate = moment(value.creationDate).fromNow();
+                });
             }
             function onError(error) {
                 AlertService.error(error.data.message);

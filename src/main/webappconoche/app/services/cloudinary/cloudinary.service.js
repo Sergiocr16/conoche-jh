@@ -14,7 +14,7 @@
 
         var services = {
             uploadFile: uploadFile
-        }
+        };
         return services;
 
         function uploadFile(file, tags) {

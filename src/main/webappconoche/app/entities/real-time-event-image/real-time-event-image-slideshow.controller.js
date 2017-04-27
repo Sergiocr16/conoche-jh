@@ -7,13 +7,13 @@
 
     angular
         .module('conocheApp')
-        .controller('RealTimeEventImageSlideshow', RealTimeEventImageSlideshow);
+        .controller('RealTimeEventImageSlideshowController', RealTimeEventImageSlideshow);
 
     RealTimeEventImageSlideshow.$inject = ['$scope', '$state', 'RealTimeEventImage', 'WSRealTimeEventImages', '$timeout', '$stateParams'];
 
     function RealTimeEventImageSlideshow($scope, $state, RealTimeEventImage, WSRealTimeEventImages, $timeout, $stateParams) {
-        const SORT  = 'creationTime,desc';
-        const HOURS = 1;
+        var SORT  = 'creationTime,desc';
+        var HOURS = 1;
 
         var vm = this;
         var index = 0;
@@ -45,16 +45,13 @@
                 idEvent: idEvent,
                 hours: HOURS,
                 sort: SORT,
-            }, onSuccess, onError);
+            }, onSuccess);
 
             function onSuccess(data) {
                 vm.images = data;
                 setNext(0);
                 slideShow();
                 initWebsockets();
-            }
-            function onError(error) {
-                AlertService.error(error.data.message);
             }
         }
 
@@ -74,7 +71,6 @@
 
             var imagesLen = vm.images.length;
             if(vm.image.id === image.id) {
-                console.log(index);
                 resetTimeout(index);
             }
             else if(vm.image !== vm.images[index % imagesLen]) {
@@ -113,4 +109,4 @@
             $timeout.cancel(timeout);
         });
     }
-})()
+})();

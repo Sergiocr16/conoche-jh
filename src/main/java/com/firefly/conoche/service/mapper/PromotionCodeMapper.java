@@ -9,7 +9,9 @@ import java.util.List;
 /**
  * Mapper for the entity PromotionCode and its DTO PromotionCodeDTO.
  */
-@Mapper(componentModel = "spring", uses = {UserMapper.class, PromotionMapper.class})
+
+@Mapper(componentModel = "spring", uses = {UserMapper.class, PromotionMapper.class,  })
+
 public interface PromotionCodeMapper {
 
     @Mapping(source = "promotion.id", target = "promotionId")
