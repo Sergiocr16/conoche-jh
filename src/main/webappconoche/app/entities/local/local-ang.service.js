@@ -34,7 +34,15 @@
                 url: 'api/local/search',
                 method: 'GET',
                 isArray: true
-            }
+            },
+             'subscribeToLocal': {
+                method: 'POST',
+                url: 'api/locals/subscribeLocal',
+                         },
+             'unsubscribeToLocal': {
+                method: 'POST',
+                url: 'api/locals/unsubscribeLocal',
+                         }
         });
     }
 })();

@@ -136,4 +136,16 @@ public class LocalResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
+    @PostMapping("/locals/subscribeLocal")
+    @Timed
+    public void subscribeToLocal(@RequestBody Long idLocal) throws URISyntaxException {
+        localService.subscribeLocal(idLocal);
+    }
+
+    @PostMapping("/locals/unsubscribeLocal")
+    @Timed
+    public void unsubscribeToLocal(@RequestBody Long idLocal) throws URISyntaxException {
+        localService.unsubscribeLocal(idLocal);
+    }
+
 }

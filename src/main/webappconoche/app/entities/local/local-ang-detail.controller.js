@@ -57,6 +57,27 @@
             return stars;
         }
 
+                Principal.identity().then(function(account){
+                    vm.local.flag = 0;
+                    angular.forEach(vm.local.subcribers,function(item,index){
+                    if(parseInt(item.id) ==  parseInt(account.id)){
+                        vm.local.flag = 1;
+                    }
+                   })
+                });
+
+
+                vm.subscribeLocal = function(){
+                    Local.subscribeToLocal(vm.local.id);
+                    vm.local.flag = 1;
+                }
+
+                vm.unsubscribeLocal = function(){
+                    Local.unsubscribeToLocal(vm.local.id);
+                    vm.local.flag = 0;
+                }
+
+
 
         $scope.$on('$destroy', unsubscribe);
     }

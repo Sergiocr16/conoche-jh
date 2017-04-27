@@ -32,6 +32,8 @@
             "schedules": "Schedules",
             "services": "Services",
             "subcribers": "Subcribers",
+            "subscribeButton": "Subscribe",
+            "unsubscribeButton": "Unsubscribe",
             "ratings": "Ratings",
             "localCategory": "Local Category",
             "tabs": {
