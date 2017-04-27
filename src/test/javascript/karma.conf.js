@@ -62,6 +62,7 @@ module.exports = function (config) {
             'src/main/webappconoche/bower_components/angular-animate/angular-animate.js',
             'src/main/webappconoche/bower_components/angular-slimscroll/angular-slimscroll.js',
             'src/main/webappconoche/bower_components/angular-timer/dist/angular-timer.js',
+            'src/main/webappconoche/bower_components/angular-animate/angular-animate.js',
             'src/main/webappconoche/bower_components/angular-mocks/angular-mocks.js',
             'src/main/webappconoche/bower_components/outlayer/item.js',
             'src/main/webappconoche/bower_components/outlayer/outlayer.js',

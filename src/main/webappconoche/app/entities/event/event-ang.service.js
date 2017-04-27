@@ -37,7 +37,15 @@
                     }
                     return data;
                 }
-            }
-        });
+            },
+             'attendToEvent': {
+                method: 'POST',
+                url: 'api/events/attend',
+             },
+             'dismissEvent': {
+                method: 'POST',
+                url: 'api/events/dismiss',
+             }
+            });
     }
 })();

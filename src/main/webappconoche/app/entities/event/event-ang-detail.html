@@ -82,6 +82,19 @@
                     <span class="glyphicon glyphicon-eye"></span>
                     <span class="hidden-sm-down" data-translate="conocheApp.event.detail.addPromotionButton"> Add promotion</span>
                 </button>
+
+
+
+                <button has-authority="ROLE_USER" type="button" ng-click="vm.attend()" ng-if="vm.event.flag == 0" class="btn btn-danger btn-block btn-lg  border-radius-6 no-margin-left">
+                    <span class="glyphicon glyphicon-eye"></span>
+                    <span class="hidden-sm-down" data-translate="conocheApp.event.detail.attendButton"> Attend</span>
+                </button>
+
+
+                <button has-authority="ROLE_USER" type="button" ng-click="vm.dismiss()"  ng-if="vm.event.flag == 1"  class="btn btn-danger btn-block btn-lg  border-radius-6 no-margin-left">
+                    <span class="glyphicon glyphicon-eye"></span>
+                    <span class="hidden-sm-down" data-translate="conocheApp.event.detail.dismissButton"> Dismiss</span>
+                </button>
             </div>
         </div>
         <div class="col-md-12 no-padding">
@@ -110,12 +123,6 @@
                 <div ui-view="eventContent"></div>
             </div>
         </div>
-
 </div>
-
-
-
-
 </div>
-
 </div>
