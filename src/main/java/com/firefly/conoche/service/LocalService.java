@@ -1,9 +1,14 @@
 package com.firefly.conoche.service;
 
+import com.firefly.conoche.domain.Event;
 import com.firefly.conoche.domain.Local;
 import com.firefly.conoche.domain.RatingLocal;
+import com.firefly.conoche.domain.User;
 import com.firefly.conoche.repository.LocalRepository;
 import com.firefly.conoche.repository.RatingLocalRepository;
+import com.firefly.conoche.repository.UserRepository;
+import com.firefly.conoche.security.SecurityUtils;
+import com.firefly.conoche.service.dto.EventDTO;
 import com.firefly.conoche.service.dto.LocalDTO;
 import com.firefly.conoche.service.mapper.LocalMapper;
 import org.slf4j.Logger;
@@ -16,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -27,19 +33,17 @@ import java.util.stream.Collectors;
 public class LocalService {
 
     private final Logger log = LoggerFactory.getLogger(LocalService.class);
-
     private final LocalRepository localRepository;
-
     private final LocalMapper localMapper;
-
     private final UserService userService;
-
     private RatingLocalRepository ratingLocalRepository;
+    private final UserRepository userRepository;
 
-    public LocalService(LocalRepository localRepository, LocalMapper localMapper, UserService userService,RatingLocalRepository ratingLocalRepository) {
+    public LocalService(LocalRepository localRepository, LocalMapper localMapper, UserService userService,RatingLocalRepository ratingLocalRepository,UserRepository userRepository) {
         this.localRepository = localRepository;
         this.localMapper = localMapper;
         this.userService = userService;
+        this.userRepository = userRepository;
         this.ratingLocalRepository = ratingLocalRepository;
     }
 
@@ -104,6 +108,29 @@ public class LocalService {
     public void delete(Long id) {
         log.debug("Request to delete Local : {}", id);
         localRepository.delete(id);
+    }
+
+
+    public void subscribeLocal(Long idLocal) {
+        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+        user.ifPresent(u -> {
+            Local local = localRepository.findOneWithEagerRelationships(idLocal);
+            local.addSubcribers(u);
+            localRepository.save(local);
+            LocalDTO localDTO = localMapper.localToLocalDTO(local);
+        });
+
+    }
+
+    public void unsubscribeLocal(Long idLocal) {
+        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+        user.ifPresent(u -> {
+            Local local = localRepository.findOneWithEagerRelationships(idLocal);
+            local.removeSubcribers(u);
+            localRepository.save(local);
+            LocalDTO localDTO = localMapper.localToLocalDTO(local);
+        });
+
     }
 
 

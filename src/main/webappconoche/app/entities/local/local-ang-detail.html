@@ -18,7 +18,19 @@
 
             <div class="col-md-3 no-padding-left">
 
-                <button type="button" class="btn btn-danger btn-block btn-lg">Suscribete!</button>
+
+                <button has-authority="ROLE_USER" type="button" ng-click="vm.subscribeLocal()"  ng-if="vm.local.flag == 0"  class="btn green btn-block btn-lg  border-radius-6 no-margin-left">
+                    <span class="glyphicon glyphicon-eye"></span>
+                    <span class="hidden-sm-down" data-translate="conocheApp.local.subscribeButton">Suscribe</span>
+                </button>
+
+
+                <button has-authority="ROLE_USER" type="button" ng-click="vm.unsubscribeLocal()"  ng-if="vm.local.flag == 1"  class="btn btn-danger btn-block btn-lg  border-radius-6 no-margin-left">
+                    <span class="glyphicon glyphicon-eye"></span>
+                    <span class="hidden-sm-down" data-translate="conocheApp.local.unsubscribeButton">Desuscribe</span>
+                </button>
+
+
                 <button has-authority="ROLE_USER"  type="button" ui-sref="local-ang-detail.newRating" class="btn btn-warning btn-block btn-lg" style="margin: 5px 0!important" translate="conocheApp.local.rate">Calificar</button>
 
                 <div class="row">
@@ -49,5 +61,4 @@
 
 
     </div>
-
 </div>
