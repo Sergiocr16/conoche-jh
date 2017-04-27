@@ -1,5 +1,5 @@
 <div class="row">
-
+    <h2 ng-hide="vm.promotions.length>0" class="text-center gray-font">No hay promociones disponibles</h2>
     <div class="col-md-6 col-sm-9 col-xs-12  margin-bottom-20" ui-sref="event-ang-detail.promotions.promotionDetail({idPromo:promotion.id, id:vm.event.id})" ng-repeat="promotion in vm.promotions track by promotion.id">
         <span class="col-md-12 no-padding Raleway font-18" style="text-transform: uppercase;">{{promotion.description}}</span>
         <div class=" font-white position-relative">

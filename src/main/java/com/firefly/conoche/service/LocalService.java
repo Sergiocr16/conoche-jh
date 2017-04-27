@@ -9,6 +9,7 @@ import com.firefly.conoche.service.mapper.LocalMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -106,6 +107,13 @@ public class LocalService {
         localRepository.delete(id);
     }
 
+    @Transactional(readOnly = true)
+    public Page<LocalDTO> getByOwner(Pageable pageable,Long OwnerId) {
+        log.debug("Request to get all Residents");
+        List<Local> result = localRepository.findByOwnerId(OwnerId);
+        return new PageImpl<>(result).map(local-> localMapper.localToLocalDTO(local));
 
+
+    }
 
 }

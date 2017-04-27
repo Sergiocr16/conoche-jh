@@ -34,7 +34,11 @@
                 url: 'api/local/search',
                 method: 'GET',
                 isArray: true
-            }
+            },'getByOwner': {
+              method: 'GET',
+              url: 'api/getByOwner',
+              isArray: true
+          }
         });
     }
 })();

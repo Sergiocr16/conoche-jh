@@ -14,7 +14,6 @@
         });
             getPromotions();
         function getPromotions(){
-        console.log('id del evento: ' + vm.event.id);
                   Promotion.geyByEvent({ eventId: vm.event.id}).$promise.then(onSuccess, onError);
         }
         function onSuccess(data, headers) {
