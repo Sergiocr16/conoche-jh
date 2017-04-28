@@ -1,29 +1,19 @@
 package com.firefly.conoche.service.aspects;
 
-import com.firefly.conoche.domain.User;
 import com.firefly.conoche.domain.enumeration.ActionType;
 import com.firefly.conoche.domain.interfaces.IEntity;
 import com.firefly.conoche.repository.notifications.NotifyRepository;
 import com.firefly.conoche.service.customService.CNotificationService;
-import com.firefly.conoche.service.customService.NotificationMailService;
-import com.firefly.conoche.service.dto.ActionObjectDTO;
-import com.firefly.conoche.service.dto.DetailNotificationDTO;
-import com.firefly.conoche.service.dto.NotificationDTO;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.hibernate.envers.internal.entities.mapper.relation.AbstractOneToOneMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.annotation.Order;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Inject;
 import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import java.util.stream.Stream;
 
 
@@ -33,7 +23,6 @@ import java.util.stream.Stream;
 
 @Transactional
 @Aspect
-@Order(0)
 public class NotificationAspect {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 

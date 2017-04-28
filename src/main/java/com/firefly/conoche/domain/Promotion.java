@@ -57,7 +57,7 @@ public class Promotion implements Serializable, IEntity {
     @Column(name = "code_quantity")
     private Integer codeQuantity;
 
-    @OneToMany(mappedBy = "promotion")
+    @OneToMany(mappedBy = "promotion", cascade=CascadeType.ALL, orphanRemoval=true)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PromotionCode> codes = new HashSet<>();

@@ -1,11 +1,14 @@
 package com.firefly.conoche.service;
 
 import com.firefly.conoche.domain.Event;
+import com.firefly.conoche.domain.RealTimeEventImage;
 import com.firefly.conoche.domain.User;
 import com.firefly.conoche.repository.EventRepository;
 import com.firefly.conoche.repository.PromotionRepository;
+import com.firefly.conoche.repository.RealTimeEventImageRepository;
 import com.firefly.conoche.repository.UserRepository;
 import com.firefly.conoche.security.SecurityUtils;
+import com.firefly.conoche.service.customService.CRealTimeEventImageService;
 import com.firefly.conoche.service.dto.EventDTO;
 import com.firefly.conoche.service.dto.UserDTO;
 import com.firefly.conoche.service.mapper.EventMapper;
@@ -16,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,17 +37,21 @@ public class EventService {
     private final UserRepository userRepository;
     private final LocalService localService;
     private final PromotionRepository promotionRepository;
+    private final CRealTimeEventImageService cRealTimeEventImageService;
+
 
     public EventService(EventRepository eventRepository,
                         EventMapper eventMapper,
                         LocalService localService,
                         UserRepository userRepository,
-                        PromotionRepository promotionRepository) {
+                        PromotionRepository promotionRepository,
+                        CRealTimeEventImageService cRealTimeEventImageService) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
         this.localService = localService;
         this.userRepository = userRepository;
         this.promotionRepository = promotionRepository;
+        this.cRealTimeEventImageService = cRealTimeEventImageService;
 
     }
 
@@ -93,8 +101,16 @@ public class EventService {
      *
      *  @param id the id of the entity
      */
-    public void delete(Long id) {
+    public void delete(Long id) throws IOException {
         log.debug("Request to delete Event : {}", id);
+        Optional<Event> event = Optional.ofNullable(eventRepository.findOne(id));
+        if (event.isPresent()) {
+            for (RealTimeEventImage r : event.get().getRealTimeImages()) {
+                cRealTimeEventImageService.delete(r.getId());
+            }
+        }
+        event.map(Event::getPromotions)
+            .ifPresent(p-> p.forEach(promotionRepository::delete));
         eventRepository.delete(id);
     }
 
