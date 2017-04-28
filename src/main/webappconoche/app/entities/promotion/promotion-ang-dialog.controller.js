@@ -43,9 +43,10 @@
                     showWeeks: false,
                 }
             };
+            console.log(vm.promotion.initialTime)
             vm.picker2 = {
                 datepickerOptions: {
-                    minDate: vm.promotion.initialTime == undefined ? new Date() : vm.promotion.initialTime,
+                    minDate: vm.promotion.initialTime == undefined ? vm.event.initialTime : vm.event.initialTime,
                   maxDate: vm.event.finalTime,
                     enableTime: false,
                     showWeeks: false,
@@ -72,7 +73,7 @@
         }
 
         function onSaveSuccess (result) {
-
+     $uibModalInstance.close(result);
             $scope.$emit('conocheApp:promotionUpdate', result);
             vm.isSaving = false;
         }

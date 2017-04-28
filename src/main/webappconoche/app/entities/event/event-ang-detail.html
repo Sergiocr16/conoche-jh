@@ -75,7 +75,7 @@
                     </ul>
                 </div>
                 <div class="btn btn-success btn-block btn-lg 5cb85c-background border-radius-6 green-2-background cursor-default"><span>Entrada: ₡ {{vm.event.price}}</span></div>
-                <button has-authority="ROLE_USER"  type="button" ng-click="vm.createComment(vm.event)" class="btn btn-danger btn-block btn-lg  border-radius-6 no-margin-left">
+                <button has-authority="ROLE_USER"  type="button" ng-click="vm.createComment(vm.event)" class="btn btn-warning btn-block btn-lg  no-margin-left">
                     <span class="glyphicon glyphicon-eye"></span>
                     <span class="hidden-sm-down" data-translate="conocheApp.event.detail.commentButton"> Create comment</span>
                 </button>
@@ -86,7 +86,7 @@
 
 
 
-                <button has-authority="ROLE_USER" type="button" ng-click="vm.attend()" ng-if="vm.event.flag == 0" class="btn btn-danger btn-block btn-lg  border-radius-6 no-margin-left">
+                <button has-authority="ROLE_USER" type="button" ng-click="vm.attend()" ng-if="vm.event.flag == 0" class="btn green btn-block btn-lg  border-radius-6 no-margin-left">
                     <span class="glyphicon glyphicon-eye"></span>
                     <span class="hidden-sm-down" data-translate="conocheApp.event.detail.attendButton"> Attend</span>
                 </button>
@@ -105,7 +105,7 @@
             </div>
         </div>
 
-    </div>
+
 
         <ul class="nav nav-tabs nav-justified " role="tablist">
             <li ui-sref-active="active" ><a ui-sref="event-ang-detail.real-time-event-image-gallery"
@@ -124,6 +124,8 @@
                 <div ui-view="eventContent"></div>
             </div>
         </div>
+
+</div>
 </div>
 </div>
 </div>

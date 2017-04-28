@@ -196,8 +196,8 @@
                 });
             }]
         })
-        .state('local-ang.edit', {
-            parent: 'local-ang',
+        .state('local-ang-by-owner.edit', {
+            parent: 'local-ang-by-owner',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER','ROLE_OWNER']
@@ -215,14 +215,14 @@
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('local-ang', null, { reload: 'local-ang' });
+                    $state.go('local-ang-by-owner', null, { reload: 'local-ang-by-owner' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('local-ang.delete', {
-            parent: 'local-ang',
+        .state('local-ang-by-owner.delete', {
+            parent: 'local-ang-by-owner',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER','ROLE_OWNER']
@@ -239,7 +239,7 @@
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('local-ang', null, { reload: 'local-ang' });
+                    $state.go('local-ang-by-owner', null, { reload: 'local-ang-by-owner' });
                 }, function() {
                     $state.go('^');
                 });

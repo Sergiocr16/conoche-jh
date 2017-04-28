@@ -8,6 +8,7 @@
     </div>
     <jhi-alert></jhi-alert>
     <div class="col-md-12 no-display" id="tableData">
+        <h2 ng-hide="vm.events.length>0" class="text-center">No existen eventos ingresados</h2>
         <div ng-repeat="event in vm.events track by event.id" >
             <div class="col-md-12 F9F9F9-background margin-bottom-20 bottom-border-gray " style="padding:20px;" >
                 <div class="col-md-5 no-padding-left padding-15 position-relative font-18 text-center" >

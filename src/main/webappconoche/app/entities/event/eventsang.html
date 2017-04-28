@@ -1,6 +1,7 @@
 
 <jhi-alert></jhi-alert>
-<div class="no-display" id="tableData">
+<h2 ng-hide="vm.events.length>0" class="text-center">No existen eventos ingresados</h2>
+<div ng-show="vm.events.length>0" class="no-display" id="tableData">
     <div class="col-md-9 col-sm-9 col-xs-12">
         <div ng-repeat="event in vm.events track by event.id">
             <div class="col-md-12 E0E0E0-background margin-bottom-20 bottom-border-gray " ui-sref="event-ang-detail.promotions({id:event.id})">
@@ -30,6 +31,7 @@
     </div>
     <div class="col-md-3 col-sm-3 col-xs-12">
         <span class="font-18 col-md-12 no-padding margin-bottom-20" style="letter-spacing:1px; font-weight:600px" data-translate="conocheApp.event.promotions">PROMOCIONES</span>
+       <span class="font-15  gray-font" ng-hide="vm.promotions.length>0">No hay promociones</span>
         <div class="col-md-12 col-sm-12 col-xs-12 no-padding  margin-bottom-20 " ui-sref="event-ang.promotionDetail({id:promotion.id})" ng-repeat="promotion in vm.promotions track by promotion.id">
             <div  class="no-padding font-white">
                 <div class="col-md-12 col-xs-12 col-sm-12 image-promotion-in-events height-130 top-0"><span class="col-md-12 col-lg-12 col-sm-12 col-xs-12 no-padding Raleway font-18  Raleway text-center margin-top-60" style="opacity:0">Ver promocion</span></div>

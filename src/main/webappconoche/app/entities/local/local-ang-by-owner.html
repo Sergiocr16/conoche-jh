@@ -8,6 +8,7 @@
     <jhi-alert></jhi-alert>
     <div class="  no-padding" id="tableData">
         <div class="col-md-12">
+            <h2 ng-hide="vm.locals.length>0" class="text-center">No existen locales ingresados</h2>
             <div ng-repeat="local in vm.locals track by local.id" >
                 <div class="col-md-6">
                     <div class="E0E0E0-background padding-20 bottom-border-gray"
@@ -31,13 +32,13 @@
                             </button>
 
                             <button has-authority="ROLE_OWNER"  type="submit"
-                                    ui-sref="local-ang.edit({id:local.id})"
+                                    ui-sref="local-ang-by-owner.edit({id:local.id})"
                                     class="btn btn-primary btn-sm border-radius-6 padding-10">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
                             </button>
                             <button has-authority="ROLE_OWNER" type="submit"
-                                    ui-sref="local-ang.delete({id:local.id})"
+                                    ui-sref="local-ang-by-owner.delete({id:local.id})"
                                     class="btn btn-danger btn-sm border-radius-6 padding-10">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.delete"></span>

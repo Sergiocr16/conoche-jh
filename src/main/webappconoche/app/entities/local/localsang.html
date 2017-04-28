@@ -1,11 +1,6 @@
 <div>
-    <div class="col-md-12 margin-bottom-20">
-        <div class="col-md-offset-9 col-md-3">
-            <div has-any-authority="ROLE_ADMIN,ROLE_OWNER" ui-sref="local-ang.new" class="btn btn-primary btn-block btn-lg border-radius-6 col-md-3">    <span class="glyphicon glyphicon-plus"></span>
-                <span  data-translate="conocheApp.local.home.createLabel"></span></div>
-        </div>
-    </div>
     <jhi-alert></jhi-alert>
+
     <div class=" no-display no-padding" id="tableData">
     <div class="col-md-3  bottom-border-5cb9ff" >
         <div class="portlet box blue">
@@ -42,7 +37,8 @@
         </div>
     </div>
     <div class="col-md-9">
-        <div ng-repeat="local in vm.locals track by local.id" >
+        <h2 ng-hide="vm.locals.length>0" class="text-center">No existen locales ingresados</h2>
+        <div ng-repeat="local in vm.locals track by local.id"  ui-sref="local-ang-detail({id:local.id})" >
             <div class="col-md-6">
             <div class="E0E0E0-background padding-20 bottom-border-gray"
                  style="height:470px;margin-bottom:20px;">
