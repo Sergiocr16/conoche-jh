@@ -62,7 +62,7 @@ public class Event implements Serializable, IEntity {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Promotion> promotions = new HashSet<>();
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event",  cascade=CascadeType.ALL, orphanRemoval=true)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EventImage> images = new HashSet<>();
@@ -89,7 +89,7 @@ public class Event implements Serializable, IEntity {
     @ManyToOne
     private Local local;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade=CascadeType.ALL, orphanRemoval=true)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Message> messages = new HashSet<>();

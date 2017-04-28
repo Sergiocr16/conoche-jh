@@ -35,20 +35,17 @@ public class EventService {
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
     private final UserRepository userRepository;
-    private final LocalService localService;
     private final PromotionRepository promotionRepository;
     private final CRealTimeEventImageService cRealTimeEventImageService;
 
 
     public EventService(EventRepository eventRepository,
                         EventMapper eventMapper,
-                        LocalService localService,
                         UserRepository userRepository,
                         PromotionRepository promotionRepository,
                         CRealTimeEventImageService cRealTimeEventImageService) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
-        this.localService = localService;
         this.userRepository = userRepository;
         this.promotionRepository = promotionRepository;
         this.cRealTimeEventImageService = cRealTimeEventImageService;
