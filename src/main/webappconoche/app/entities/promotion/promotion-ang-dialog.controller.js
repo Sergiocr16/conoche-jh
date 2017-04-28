@@ -5,7 +5,7 @@
         .module('conocheApp')
         .controller('PromotionAngDialogController', PromotionAngDialogController);
 
-    PromotionAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Promotion', 'PromotionCode', 'Event','Principal'}];
+    PromotionAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Promotion', 'PromotionCode', 'Event','Principal'];
 
     function PromotionAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Promotion, PromotionCode, Event,Principal) {
         var vm = this;
