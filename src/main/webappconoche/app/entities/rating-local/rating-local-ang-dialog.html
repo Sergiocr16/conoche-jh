@@ -7,40 +7,12 @@
         <h4 class="modal-title text-center" id="myRatingLocalLabel" data-translate="conocheApp.ratingLocal.home.createOrEditLabel">Create or edit a Rating Local</h4>
     </div>
     <div class="modal-body">
-        <!--<jhi-alert-error></jhi-alert-error>-->
-        <!--<div class="form-group" ng-show="vm.ratingLocal.id">-->
-            <!--<label for="id" data-translate="global.field.id">ID</label>-->
-            <!--<input type="text" class="form-control" id="id" name="id"-->
-                    <!--ng-model="vm.ratingLocal.id" readonly />-->
-        <!--</div>-->
         <div class="form-group">
             <h1 class="text-center">
                 <i  ng-class="{'yellow-star': star.paint == 1}" ng-repeat = "star in vm.stars track by $index" ng-mouseover="vm.paintStars($index)"ng-click="vm.paintStars($index)" class="fa fa-star gray-star"></i>
             </h1>
             <h5 class="text-center"> <span class="label {{vm.labelColor}}" data-translate="{{vm.qualityText}}"></span></h5>
 
-            <!--<label class="control-label" data-translate="conocheApp.ratingLocal.rating" for="field_rating">Rating</label>-->
-            <!--<input type="number" class="form-control" name="rating" id="field_rating"-->
-                    <!--ng-model="vm.ratingLocal.rating"-->
-                    <!--required min="0" max="10"/>-->
-            <!--<div ng-show="editForm.rating.$invalid">-->
-                <!--<p class="help-block"-->
-                    <!--ng-show="editForm.rating.$error.required" data-translate="entity.validation.required">-->
-                    <!--This field is required.-->
-                <!--</p>-->
-                <!--<p class="help-block"-->
-                    <!--ng-show="editForm.rating.$error.min" data-translate="entity.validation.min" translate-value-min="0">-->
-                    <!--This field should be at least 0.-->
-                <!--</p>-->
-                <!--<p class="help-block"-->
-                    <!--ng-show="editForm.rating.$error.max" data-translate="entity.validation.max" translate-value-max="10">-->
-                    <!--This field cannot be more than 10.-->
-                <!--</p>-->
-                <!--<p class="help-block"-->
-                    <!--ng-show="editForm.rating.$error.number" data-translate="entity.validation.number">-->
-                    <!--This field should be a number.-->
-                <!--</p>-->
-            <!--</div>-->
         </div>
         <div class="form-body">
             <div class="form-group">

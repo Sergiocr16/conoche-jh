@@ -16,37 +16,37 @@
         vm.found=false;
 
 
-      vm.swapCoupon = function(){
-      vm.promoCode.promotion = undefined;
-      WSPromotionCodeService.discardPromotionCode(vm.promoCode.userId,vm.promoCode)
-      vm.promoCode = undefined;
-      vm.found = false;
-      vm.borderColor = "normal-border";
-      vm.bgColor = "normal-swap";
-      vm.query = undefined;
-      AlertService.success('conocheApp.promotionCode.swapedPromo');
-      }
+        vm.swapCoupon = function(){
+            vm.promoCode.promotion = undefined;
+            WSPromotionCodeService.discardPromotionCode(vm.promoCode.userId,vm.promoCode);
+            vm.promoCode = undefined;
+            vm.found = false;
+            vm.borderColor = "normal-border";
+            vm.bgColor = "normal-swap";
+            vm.query = undefined;
+            AlertService.success('conocheApp.promotionCode.swapedPromo');
+        };
 
         vm.findCoupon = function(){
-        vm.found = false;
-        vm.borderColor = "normal-border";
-        vm.bgColor = "normal-swap";
-        if(vm.query.length==5){
-          PromotionCode.findCoupon({ code: vm.query},onSuccess,onError)
-        }
+            vm.found = false;
+            vm.borderColor = "normal-border";
+            vm.bgColor = "normal-swap";
+            if(vm.query.length === 5){
+                PromotionCode.findCoupon({ code: vm.query},onSuccess,onError);
+            }
 
-        function onSuccess(code){
-        vm.promoCode = code;
-        vm.borderColor = "border-success";
-        vm.bgColor = "swap-coupon-found"
-        vm.found = true;
-        }
-        function onError(){
-        vm.borderColor = "border-error";
-        vm.bgColor = "swap-coupon-no-found"
-        vm.found = false;
-        }
-        }
+            function onSuccess(code){
+                vm.promoCode = code;
+                vm.borderColor = "border-success";
+                vm.bgColor = "swap-coupon-found";
+                vm.found = true;
+            }
+            function onError(){
+                vm.borderColor = "border-error";
+                vm.bgColor = "swap-coupon-no-found";
+                vm.found = false;
+            }
+        };
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });

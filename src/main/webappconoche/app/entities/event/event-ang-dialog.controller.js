@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('EventAngDialogController', EventAngDialogController);
 
-    EventAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Event', 'Promotion', 'EventImage', 'RealTimeEventImage', 'User', 'Servicio', 'Local', 'Message'];
+    EventAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Event', 'Promotion', 'EventImage','Servicio', 'RealTimeEventImage', 'User', 'Local', 'Message'];
 
-    function EventAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Event, Promotion, EventImage, RealTimeEventImage, User, Servicio, Local, Message) {
+    function EventAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Event, Promotion, EventImage,Servicio, RealTimeEventImage, User, Local, Message) {
         var vm = this;
 
         vm.event = entity;
@@ -35,9 +35,9 @@
                     enableTime: false,
                     showWeeks: false,
                 }
-            }
-        }
-vm.updatePicker()
+            };
+        };
+        vm.updatePicker();
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });

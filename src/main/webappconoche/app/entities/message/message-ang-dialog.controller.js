@@ -11,7 +11,6 @@
         var vm = this;
 
         vm.message = entity;
-        console.log(vm.message);
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
@@ -28,31 +27,21 @@
         }
 
         function save () {
-        Principal.identity().then(function(account){
-            vm.isSaving = true;
-            vm.message.creationTime = new Date();
-            vm.message.userId = account.id;
-            vm.message.userLogin = account.login;
-           WSRealTimeEventMessages.sendMessage(vm.message);
-           $scope.$emit('conocheApp:messageUpdate');
-           $uibModalInstance.close();
+            Principal.identity().then(function(account){
+                vm.isSaving = true;
+                vm.message.creationTime = new Date();
+                vm.message.userId = account.id;
+                vm.message.userLogin = account.login;
+                WSRealTimeEventMessages.sendMessage(vm.message);
+                $scope.$emit('conocheApp:messageUpdate');
+                $uibModalInstance.close();
 //            if (vm.message.id !== null) {
 //                 Message.update(vm.message, onSaveSuccess, onSaveError);
 //             } else {
 //                 Message.save(vm.message, onSaveSuccess, onSaveError);
 //             }
-        })
+            });
 
-        }
-
-        function onSaveSuccess (result) {
-            $scope.$emit('conocheApp:messageUpdate', result);
-            $uibModalInstance.close(result);
-            vm.isSaving = false;
-        }
-
-        function onSaveError () {
-            vm.isSaving = false;
         }
 
         vm.datePickerOpenStatus.creationTime = false;

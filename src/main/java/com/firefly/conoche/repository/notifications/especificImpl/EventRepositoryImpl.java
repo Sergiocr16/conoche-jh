@@ -23,7 +23,11 @@ public class EventRepositoryImpl extends NotificationRepositoryImpl<Event, Long>
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Inject
+    private EventRepository eventRepository;
+
+    @Inject
     private LocalRepository localRepository;
+
     @Override
     public Set<User> notificationRecipients(Event event) {
         return Optional.ofNullable(event)

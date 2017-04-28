@@ -12,7 +12,7 @@
 
     function NotificationController (WSNotification, $scope, Principal, Notification, AlertService, HrefNotification) {
         var vm = this;
-        const NUMBER_OF_NOTIFICATIONS = 10;
+        var NUMBER_OF_NOTIFICATIONS = 10;
 
         vm.read = read;
 
@@ -41,10 +41,10 @@
             WSNotification.receiveNotifications(user.login)
                 .then(null, null, onNewNotification);
             WSNotification.receiveDeadEntities(user.login)
-                .then(null, null, onDeadLink)
+                .then(null, null, onDeadLink);
 
             function onNewNotification(n) {
-                if(NUMBER_OF_NOTIFICATIONS == vm.notifications.length) {
+                if(NUMBER_OF_NOTIFICATIONS === vm.notifications.length) {
                     vm.notifications.pop();
                 }
                 vm.notifications.unshift(n);

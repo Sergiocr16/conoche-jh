@@ -16,10 +16,7 @@ import com.firefly.conoche.repository.notifications.NotifyRepository;
 import com.firefly.conoche.service.ActionObjectService;
 import com.firefly.conoche.service.NotificationService;
 import com.firefly.conoche.service.ObjectChangeService;
-import com.firefly.conoche.service.dto.DetailNotificationDTO;
-import com.firefly.conoche.service.dto.NotificationDTO;
-import com.firefly.conoche.service.dto.NotificationEntityDTO;
-import com.firefly.conoche.service.dto.UserDTO;
+import com.firefly.conoche.service.dto.*;
 import com.firefly.conoche.service.mapper.DetailNotificationMapper;
 import com.firefly.conoche.service.mapper.NotificationMapper;
 import com.firefly.conoche.service.mapper.UserMapper;
@@ -35,10 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.Future;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -166,14 +160,6 @@ public class CNotificationService {
             .forEach(actionObjectRepository::save);
 
         return new AsyncResult<>(users);
-    }
-
-    @Async
-    @Transactional(readOnly = true)
-    <T extends IEntity> Future<Set<User>> getAsyncRecipients(NotifyRepository<T> repo, T entity) {
-        if(true)
-            throw new RuntimeException();
-        return new AsyncResult<>(repo.notificationRecipients(entity));
     }
 
 }

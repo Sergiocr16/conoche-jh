@@ -77,34 +77,34 @@
             }]
         })
        .state('user-management.owner', {
-            url: '/new/owner',
-            data: {
-                authorities: ['ROLE_ADMIN']
-            },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
-                    templateUrl: 'app/admin/user-management/create-owner.html',
-                    controller: 'UserManagementDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: function () {
-                            return {
-                                id: null, login: null, firstName: null, lastName: null, email: null,
-                                activated: true, langKey: null, createdBy: null, createdDate: null,
-                                lastModifiedBy: null, lastModifiedDate: null, resetDate: null,
-                                resetKey: null, authorities: ['ROLE_OWNER']
-                            };
-                        }
-                    }
-                }).result.then(function() {
-                    $state.go('user-management', null, { reload: true });
-                }, function() {
-                    $state.go('user-management');
-                });
-            }]
-        })
+           url: '/new/owner',
+           data: {
+               authorities: ['ROLE_ADMIN']
+           },
+           onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+               $uibModal.open({
+                   templateUrl: 'app/admin/user-management/create-owner.html',
+                   controller: 'UserManagementDialogController',
+                   controllerAs: 'vm',
+                   backdrop: 'static',
+                   size: 'lg',
+                   resolve: {
+                       entity: function () {
+                           return {
+                               id: null, login: null, firstName: null, lastName: null, email: null,
+                               activated: true, langKey: null, createdBy: null, createdDate: null,
+                               lastModifiedBy: null, lastModifiedDate: null, resetDate: null,
+                               resetKey: null, authorities: ['ROLE_OWNER']
+                           };
+                       }
+                   }
+               }).result.then(function() {
+                   $state.go('user-management', null, { reload: true });
+               }, function() {
+                   $state.go('user-management');
+               });
+           }]
+       })
         .state('user-management.edit', {
             url: '/{login}/edit',
             data: {

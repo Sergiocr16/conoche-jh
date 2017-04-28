@@ -57,7 +57,7 @@ public class Local implements Serializable, IEntity {
     @Column(name = "rating")
     private Double rating;
 
-    @OneToMany(mappedBy = "local")
+    @OneToMany(mappedBy = "local",  cascade=CascadeType.ALL, orphanRemoval=true)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ImagenLocal> images = new HashSet<>();
@@ -67,7 +67,7 @@ public class Local implements Serializable, IEntity {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Event> events = new HashSet<>();
 
-    @OneToMany(mappedBy = "local")
+    @OneToMany(mappedBy = "local", cascade=CascadeType.ALL, orphanRemoval=true)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Schedule> schedules = new HashSet<>();

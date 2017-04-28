@@ -55,9 +55,9 @@
                     Auth.resetPreviousState();
                     $state.go(previousState.name, previousState.params);
                 }
-            Principal.identity().then(function(account) {
-                   $rootScope.account = account;
-            });
+                Principal.identity().then(function(account) {
+                    $rootScope.account = account;
+                });
             }).catch(function () {
                 vm.authenticationError = true;
             });

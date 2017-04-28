@@ -18,14 +18,14 @@
     RealTimeEventImageCloudinary.$inject = ['WSRealTimeEventImages', 'CloudinaryService'];
 
     function RealTimeEventImageCloudinary (WSRealTimeEventImages, CloudinaryService) {
-        const REAL_TIME_EVENT_IMAGE_TAG = "RealTimeEventImage";
+        var REAL_TIME_EVENT_IMAGE_TAG = "RealTimeEventImage";
         var service = {
             save: save
         };
         return service;
 
         function save (file, image) {
-            const TAGS = [REAL_TIME_EVENT_IMAGE_TAG, "Event: " + image.idEvent];
+            var TAGS = [REAL_TIME_EVENT_IMAGE_TAG, "Event: " + image.idEvent];
             return CloudinaryService.uploadFile(file, TAGS)
                 .then(onSuccess);
 

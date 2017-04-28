@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -130,10 +131,32 @@ public class LocalResource {
      */
     @DeleteMapping("/locals/{id}")
     @Timed
-    public ResponseEntity<Void> deleteLocal(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteLocal(@PathVariable Long id) throws IOException{
         log.debug("REST request to delete Local : {}", id);
         localService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/getByOwner")
+    @Timed
+    public ResponseEntity<List<LocalDTO>> getByOwner(@ApiParam Pageable pageable, Long ownerId)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Residents");
+        Page<LocalDTO> page = localService.getByOwner(pageable,ownerId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/getByOwner");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @PostMapping("/locals/subscribeLocal")
+    @Timed
+    public void subscribeToLocal(@RequestBody Long idLocal) throws URISyntaxException {
+        localService.subscribeLocal(idLocal);
+    }
+
+    @PostMapping("/locals/unsubscribeLocal")
+    @Timed
+    public void unsubscribeToLocal(@RequestBody Long idLocal) throws URISyntaxException {
+        localService.unsubscribeLocal(idLocal);
     }
 
 }

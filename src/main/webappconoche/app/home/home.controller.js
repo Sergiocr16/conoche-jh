@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', 'Event', 'Local', '$q'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', 'Event', 'Local', '$q', '$timeout'];
 
-    function HomeController ($scope, Principal, LoginService, $state, Event, Local, $q) {
+    function HomeController ($scope, Principal, LoginService, $state, Event, Local, $q, $timeout) {
         var vm = this;
 
         vm.account = null;
@@ -24,7 +24,7 @@
             getAccount();
         });
 
-        var map = {}
+        var map = {};
         map[vm.event] = eventsSearch;
         map[vm.local] = localSearch;
 
@@ -35,9 +35,9 @@
             Principal.identity().then(function(account) {
                 vm.account = account;
                 vm.isAuthenticated = Principal.isAuthenticated;
-                 setTimeout(function() {
+                $timeout(function() {
                     $("#homeContainer").fadeIn(1000);
-                }, 200)
+                }, 200);
             });
         }
         function register () {
@@ -80,7 +80,7 @@
                 vm.counters = {
                     events: response[0].data,
                     locals: response[1].data
-                }
+                };
             }
         }
     }

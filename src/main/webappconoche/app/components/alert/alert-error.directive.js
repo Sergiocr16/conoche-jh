@@ -41,10 +41,10 @@
         var cleanHttpErrorListener = $rootScope.$on('conocheApp.httpError', function (event, httpResponse) {
             var i;
             event.stopPropagation();
-            console.log(httpResponse.status);
+
             switch (httpResponse.status) {
             // connection refused, server not reachable
-                case -1:
+            case -1:
             case 0:
                 addErrorAlert('Server not reachable','error.server.not.reachable');
                 break;

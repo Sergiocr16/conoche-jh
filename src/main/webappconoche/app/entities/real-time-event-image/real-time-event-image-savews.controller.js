@@ -6,7 +6,7 @@
 
     angular
         .module('conocheApp')
-        .controller('RealTimeEventImageSaveWS', RealTimeEventImageAngDialogController);
+        .controller('RealTimeEventImageSaveWSController', RealTimeEventImageAngDialogController);
 
     RealTimeEventImageAngDialogController.$inject = ['$timeout', '$scope', 'idEvent', '$uibModalInstance', 'DataUtils', 'Event', 'RealTimeEventImageCloudinary'];
 
@@ -32,7 +32,7 @@
         }
 
         function save () {
-            vm.isSaving = true
+            vm.isSaving = true;
             RealTimeEventImageCloudinary
                 .save(fileImage, vm.realTimeEventImage)
                 .then(onSaveSuccess, onSaveError, onNotify);

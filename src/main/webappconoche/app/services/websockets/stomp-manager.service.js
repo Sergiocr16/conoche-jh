@@ -13,16 +13,16 @@
         .module('conocheApp')
         .factory('StompManager', StompManager);
 
-    StompManager.$inject = ['$window', '$q', 'AuthServerProvider'];
+    StompManager.$inject = ['$window', '$q', 'AuthServerProvider', '$timeout'];
 
-    function StompManager ($window, $q, AuthServerProvider) {
+    function StompManager ($window, $q, AuthServerProvider, $timeout) {
 
-        const END_POINT = 'websocket/tracker';
-        const RECONECT_TIME = 7000;
+        var END_POINT = 'websocket/tracker';
+        var RECONECT_TIME = 7000;
 
-        let stompClient = null;
-        let connected = $q.defer();
-        let subscribeMap = new Map();
+        var stompClient = null;
+        var connected = $q.defer();
+        var subscribeMap = {};
 
 
         var service = {
@@ -37,12 +37,19 @@
 
         return service;
 
-        function connect (headers = {}) {
-            let socket = new SockJS(buildUrl());
+        function connect (headers) {
+            headers = headers || {};
+            var socket = new SockJS(buildUrl());
             stompClient = Stomp.over(socket);
-            stompClient.connect(headers,
-                () => connected.resolve('success'),
-                () => onConnectionLost(headers));
+            stompClient.connect(headers, onSuccess, onError);
+
+            function onSuccess() {
+                connected.resolve('success');
+            }
+
+            function onError() {
+                onConnectionLost(headers);
+            }
 
             return connected.promise;
         }
@@ -52,7 +59,9 @@
             connected.reject('Connection_Lost');
             connected = $q.defer();
             if(AuthServerProvider.getToken()) {
-                setTimeout(() => reconnect(headers), RECONECT_TIME)
+                $timeout(function () {
+                    reconnect(headers);
+                },  RECONECT_TIME);
             }
         }
 
@@ -61,12 +70,12 @@
         }
 
         function buildUrl() {
-            let loc = $window.location;
-            let url = `//${loc.host}${loc.pathname}${END_POINT}`;
+            var loc = $window.location;
+            var url = '//' + loc.host + loc.pathname + END_POINT;
 
-            let authToken = AuthServerProvider.getToken();
+            var authToken = AuthServerProvider.getToken();
             if(authToken){
-                url += `?access_token=${authToken}`;
+                url += '?access_token=' + authToken;
             }
             return url;
         }
@@ -80,51 +89,59 @@
         }
 
         function getListener (url) {
-            let value = subscribeMap.get(url);
+            var value = subscribeMap[url];
             if(!value) {
-                throw `there is no subscription to url = ${url}.`
+                throw 'there is no subscription to url = ' + url + '.';
             }
             return value.listener.promise;
         }
 
-        function send(url, payload, headers = {}) {
-            connected.promise.then(() => {
+        function send(url, payload, headers) {
+            headers = headers || {};
+            connected.promise.then(sendOnConnected);
+            function sendOnConnected() {
                 if (isConnected()) {
                     stompClient.send(url, headers, angular.toJson(payload));
                 }
-            });
+            }
         }
 
-        function reconnect(headers = {}) {
+        function reconnect(headers) {
+            headers = headers || {};
             connect(headers);
-            for (let [url, value] of subscribeMap) {
-                subscribeKeyValue(url, value);
-            }
+            var urls =  Object.keys(subscribeMap);
+            angular.forEach(urls, function (url) {
+                subscribeKeyValue(url, subscribeMap[url]);
+            });
             return connected.promise;
         }
 
         function subscribe (url) {
-            let value = subscribeMap.get(url)
+
+            var value = subscribeMap[url]
                 || { subscriber: null, listener: $q.defer() };
-            subscribeMap.set(url, value);
+            subscribeMap[url] =  value;
             subscribeKeyValue(url, value);
             console.log(subscribeMap);
+
         }
         function subscribeKeyValue(url, value) {
-            connected.promise.then(() => {
+            connected.promise.then(subscribeOnConnected);
+            function subscribeOnConnected() {
                 if (isConnected()) {
-                    value.subscriber = stompClient.subscribe(url,
-                        data => value.listener.notify(angular.fromJson(data.body)));
+                    value.subscriber = stompClient.subscribe(url, function (data) {
+                        value.listener.notify(angular.fromJson(data.body));
+                    });
                 }
-            });
+            }
         }
 
         function unsubscribe (url) {
-            let value = subscribeMap.get(url);
-            if (subscribeMap.delete(url)
-                && value.subscriber !== null) {
+            var value = subscribeMap[url];
+            if (value && value.subscriber !== null) {
                 value.subscriber.unsubscribe();
             }
+            subscribeMap[url] = undefined;
         }
     }
 })();

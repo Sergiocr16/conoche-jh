@@ -5,13 +5,12 @@
         .module('conocheApp')
         .controller('PromotionAngDialogController', PromotionAngDialogController);
 
-    PromotionAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Promotion', 'PromotionCode', 'Event','Principal','AlertService'];
+    PromotionAngDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Promotion', 'PromotionCode', 'Event','Principal'];
 
-    function PromotionAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Promotion, PromotionCode, Event,Principal,AlertService) {
+    function PromotionAngDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Promotion, PromotionCode, Event,Principal) {
         var vm = this;
 
         vm.promotion = entity;
-         vm.redeemig = false;
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
@@ -22,39 +21,44 @@
         vm.events = Event.query();
 
        function onError(error) {
-//            AlertService.error(error.data.message);
-        }
-        findAvailableCodes();
-        function findAvailableCodes (){
-        PromotionCode.getAvailableByPromotion({promotionId: vm.promotion.id}).$promise.then(onSuccessAvailable, onError);
-       }
 
-
-       function onSuccessAvailablePerUser(data){
-        var availableCodesPerUser = (vm.promotion.maximumCodePerUser - data.length);
-           if(vm.availableCodes <= availableCodesPerUser){
-            availableCodesPerUser = vm.availableCodes;
-           }
-          vm.availableCodesPerUser = availableCodesPerUser;
         }
-        function onSuccessAvailable(data){
-        vm.availableCodes = data.length;
-          Principal.identity().then(function(data){
-          vm.currentUserId = data.id;
-            PromotionCode.getByUserIdAndPromotionId({promotionId: vm.promotion.id,userId: data.id}).$promise.then(onSuccessAvailablePerUser, onError);
-           })
-        }
-        $timeout(function (){
-            angular.element('.form-group:eq(1)>input').focus();
-        });
 
+        Event.get({id:$stateParams.id},onSuccess)
+
+        function onSuccess(data, headers) {
+        vm.event = data;
+            vm.updatePicker();
+        }
         function clear () {
             $uibModalInstance.dismiss('cancel');
         }
 
-        vm.redeemCode = function (){
-        vm.redeemig = true;
-        PromotionCode.redeemCode({promotionId: vm.promotion.id,userId: vm.currentUserId}).$promise.then(onSaveSuccess, onSaveError);
+     vm.updatePicker = function() {
+            vm.picker1 = {
+                datepickerOptions: {
+                    maxDate: vm.event.finalTime,
+                    minDate: vm.event.initialTime,
+                    enableTime: false,
+                    showWeeks: false,
+                }
+            };
+            vm.picker2 = {
+                datepickerOptions: {
+                    minDate: vm.promotion.initialTime == undefined ? new Date() : vm.promotion.initialTime,
+                  maxDate: vm.event.finalTime,
+                    enableTime: false,
+                    showWeeks: false,
+                }
+            }
+        }
+
+
+        vm.datePickerOpenStatus.initialTime = false;
+        vm.datePickerOpenStatus.finalTime = false;
+
+        function openCalendar (date) {
+            vm.datePickerOpenStatus[date] = true;
         }
 
         function save () {
@@ -62,14 +66,14 @@
             if (vm.promotion.id !== null) {
                 Promotion.update(vm.promotion, onSaveSuccess, onSaveError);
             } else {
+            vm.promotion.eventId = vm.event.id;
                 Promotion.save(vm.promotion, onSaveSuccess, onSaveError);
             }
         }
 
         function onSaveSuccess (result) {
-             findAvailableCodes();
-             vm.redeemig = false;
-             AlertService.success('Has redimido un código');
+
+            $scope.$emit('conocheApp:promotionUpdate', result);
             vm.isSaving = false;
         }
 

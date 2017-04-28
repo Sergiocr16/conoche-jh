@@ -2,6 +2,7 @@ package com.firefly.conoche.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.firefly.conoche.service.EventService;
+import com.firefly.conoche.service.dto.UserDTO;
 import com.firefly.conoche.web.rest.util.HeaderUtil;
 import com.firefly.conoche.web.rest.util.PaginationUtil;
 import com.firefly.conoche.service.dto.EventDTO;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedList;
@@ -123,10 +125,25 @@ public class EventResource {
      */
     @DeleteMapping("/events/{id}")
     @Timed
-    public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteEvent(@PathVariable Long id) throws IOException {
         log.debug("REST request to delete Event : {}", id);
         eventService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+
+
+    @PostMapping("/events/attend")
+    @Timed
+    public void attendToEvent(@RequestBody Long idEvent) throws URISyntaxException {
+        eventService.attendEvent(idEvent);
+
+    }
+
+    @PostMapping("/events/dismiss")
+    @Timed
+    public void dismissEvent(@RequestBody Long idEvent) throws URISyntaxException {
+        eventService.dismissEvent(idEvent);
     }
 
 }

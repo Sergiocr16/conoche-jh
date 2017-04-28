@@ -21,9 +21,9 @@
                 }
             },
             'getByCategory':{
-             url: 'api/locals/byCategory/:categoryId',
-             method: 'GET',
-             isArray: 'TRUE'
+                url: 'api/locals/byCategory/:categoryId',
+                method: 'GET',
+                isArray: 'TRUE'
             },
             'update': { method:'PUT' },
             'count': {
@@ -34,6 +34,18 @@
                 url: 'api/local/search',
                 method: 'GET',
                 isArray: true
+            },'getByOwner': {
+              method: 'GET',
+              url: 'api/getByOwner',
+              isArray: true
+            },
+             'subscribeToLocal': {
+                method: 'POST',
+                url: 'api/locals/subscribeLocal',
+             },
+             'unsubscribeToLocal': {
+                method: 'POST',
+                url: 'api/locals/unsubscribeLocal',
             }
         });
     }

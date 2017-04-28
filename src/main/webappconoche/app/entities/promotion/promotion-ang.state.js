@@ -68,7 +68,7 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('promotion');
-                     $translatePartialLoader.addPart('promotionCode');
+                    $translatePartialLoader.addPart('promotionCode');
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'Promotion', function($stateParams, Promotion) {
@@ -111,7 +111,7 @@
         })
         .state('event-ang-detail.new', {
             parent: 'event-ang-detail',
-            url: 'promotions/new',
+            url: '/promotions/new',
             data: {
                 authorities: ['ROLE_USER','ROLE_OWNER']
             },
@@ -135,10 +135,10 @@
                                 id: null
                             };
                         },   translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                                              $translatePartialLoader.addPart('promotion');
-                                              $translatePartialLoader.addPart('global');
-                                              return $translate.refresh();
-                                          }]
+                            $translatePartialLoader.addPart('promotion');
+                            $translatePartialLoader.addPart('global');
+                            return $translate.refresh();
+                        }]
                     }
                 }).result.then(function() {
                     $state.go('event-ang-detail', null, { reload: 'event-ang-detail' });
@@ -181,7 +181,7 @@
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
                     templateUrl: 'app/entities/promotion/promotion-ang-delete-dialog.html',
-                    controller: 'PromotionAngDeleteController',
+                    controller: 'PromotionAngDetailController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
@@ -200,7 +200,7 @@
             parent: 'event-ang-detail',
             url: '/promotions',
             data: {
-                  authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN'],
+                authorities: ['ROLE_USER','ROLE_OWNER','ROLE_ADMIN'],
                 pageTitle: 'conocheApp.promotion.home.title'
             },
             views: {

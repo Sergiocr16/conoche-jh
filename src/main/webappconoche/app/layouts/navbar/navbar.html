@@ -75,7 +75,7 @@
                 <!-- BEGIN USER LOGIN DROPDOWN -->
                 <li class="dropdown dropdown-user" ng-switch="vm.isAuthenticated()">
                     <a href="javascript:;" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
-                        <img alt="" class="img-circle" ng-src="{{vm.account.imageUrl || 'content/template/admin/layout3/img/no-one.jpg'}}">
+                        <img alt="" class="img-circle" ng-src="{{vm.account.imageUrl || 'content/images/no-one.jpg'}}">
                         <span ng-switch-when="true" class="username username-hide-mobile">{{vm.account.login}}</span>
                         <span ng-switch-when="false" class="username username-hide-mobile" data-translate="global.menu.account.main">Account</span>
                     </a>
@@ -119,15 +119,15 @@
                 <!-- BEGIN LANGUAGES DROPDOWN -->
                 <li class="dropdown dropdown-language"  ng-if="languageVm.languages.length > 1">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                        <img  ng-show="languageVm.currentLanguage() == 'en'" src="content/template/global/img/flags/us.png">
-                        <img ng-show="languageVm.currentLanguage() == 'es'" src="content/template/global/img/flags/es.png" alt="">
+                        <img  ng-show="languageVm.currentLanguage() == 'en'" src="content/images/us.png">
+                        <img ng-show="languageVm.currentLanguage() == 'es'" src="content/images/es.png" alt="">
                         <span>{{languageVm.currentLanguage()}}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
                         <li ng-click="languageVm.changeLanguage(language)" ng-repeat="language in languageVm.languages" ng-show="language != languageVm.currentLanguage()">
                             <a>
-                                <img ng-show="language == 'es'" src="content/template/global/img/flags/es.png" alt="">
-                                <img ng-show="language == 'en'" src="content/template/global/img/flags/us.png" alt="">
+                                <img ng-show="language == 'es'" src="content/images/es.png" alt="">
+                                <img ng-show="language == 'en'" src="content/images/us.png" alt="">
                                 <span>{{language | findLanguageFromKey}}</span>
                             </a>
                         </li>
@@ -167,7 +167,7 @@
                         <a data-translate="global.menu.entities.myEventAng" > Event Ang</a>
 
                 </li>
-                <li has-authority="ROLE_OWNER"class="dark-gray-font" ui-sref="local-ang" ng-class="{'active' : $state.includes('local-ang')}">
+                <li has-authority="ROLE_OWNER"class="dark-gray-font" ui-sref="local-ang-by-owner" ng-class="{'active' : $state.includes('local-ang-by-owner')}">
 
                         <a data-translate="global.menu.entities.myLocalAng" > Local Ang  </a>
 
@@ -189,12 +189,12 @@
                         <a data-translate="global.menu.entities.localAng"> Local Ang  </a>
 
                 </li>
-                <li has-authority="ROLE_USER" ui-sref="promotion-ang">
+                <!--<li has-authority="ROLE_USER" ui-sref="promotion-ang">-->
 
-                        <a data-translate="global.menu.entities.promotionAng">
-                         Canjear Promociones
-                        </a>
-                </li>
+                        <!--<a data-translate="global.menu.entities.promotionAng">-->
+                         <!--Canjear Promociones-->
+                        <!--</a>-->
+                <!--</li>-->
 
                 <!--BEGIN ENTITIES MENU-->
                 <li has-authority="ROLE_ADMIN" class="menu-dropdown mega-menu-dropdown" ng-switch-when="true">
@@ -432,13 +432,13 @@
                     </ul>
                 </li>
                 <!--END ADMINISTRACION MENU-->
-                <li  ui-sref="landing-page">
+                <!--<li  ui-sref="landing-page">-->
 
-                    <a>
-                        Landing Page
-                    </a>
+                    <!--<a>-->
+                        <!--Landing Page-->
+                    <!--</a>-->
 
-                </li>
+                <!--</li>-->
             </ul>
         </div>
         <!-- END MEGA MENU -->

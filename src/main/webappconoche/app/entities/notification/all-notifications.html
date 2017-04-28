@@ -1,4 +1,4 @@
-<div class="portlet light bg-inverse">
+<div style="background: rgb(255,255,255);" class="portlet light bg-inverse">
     <div class="portlet-title">
         <div class="actions">
             <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="">
@@ -8,7 +8,7 @@
     <div class="portlet-body table-responsive">
         <ul class="feeds container-fluid">
             <li ng-repeat="notification in vm.notifications track by notification.id"
-                ng-init="object = notification.actionObject">
+                ng-init="object = notification.actionObject" style="background: rgb(255,255,255);">
                 <a ng-click="vm.read(notification)">
                     <div class="col1">
                         <div class="cont">
@@ -25,8 +25,9 @@
                                     </span>
                                     <span data-translate="global.menu.notifications.changes"> </span>
                                     <span style="opacity: 0.7;" class="label label-default" ng-repeat="change in object.changes track by change.id"
-                                           color-this="background-color" data-color="change.fieldName" >
-                                            {{change.fieldName}}
+                                          color-this="background-color" data-color="change.fieldName" >
+
+                                        {{('global.menu.notificationChanges.' + change.fieldName) | translate }}
                                     </span>
                                     <span>.</span>
                                 </div>

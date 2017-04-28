@@ -32,6 +32,8 @@
             "schedules": "Horarios",
             "services": "Servicios",
             "subcribers": "Suscriptores",
+            "subscribeButton": "Suscribete",
+            "unsubscribeButton": "Desuscribete",
             "ratings": "Calificaciones",
             "localCategory": "Categoría del local",
             "tabs": {

@@ -8,9 +8,9 @@
     angular.module('conocheApp')
         .directive("imageSize", ImageSize);
 
-    ImageSize.$inject = ['$animate'];
+    ImageSize.$inject = ['$animate', '$interval'];
 
-    function ImageSize($animate) {
+    function ImageSize($animate, $interval) {
         return {
             restrict: 'A',
             scope: {},
@@ -48,7 +48,7 @@
                 }
 
                 function getImageSize(callback) {
-                    var wait = setInterval(function() {
+                    var wait = $interval(function() {
                         var w = img[0].naturalWidth,
                             h = img[0].naturalHeight;
                         if (w && h) {

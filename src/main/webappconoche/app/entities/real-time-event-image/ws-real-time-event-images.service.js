@@ -15,10 +15,10 @@
     WSRealTimeEventImages.$inject = ['StompManager'];
 
     function WSRealTimeEventImages(StompManager) {
-        const SAVE_SUBSCRIBE_IMAGE_URL = '/topic/RealTimeEventImage/';
-        const SAVE_SEND_IMAGE_URL = '/topic/saveRealTimeEventImage/';
-        const DELETE_SUBSCRIBE_IMAGE_URL = '/topic/deletedRealTimeEventImage/';
-        const DELETE_SEND_IMAGE_URL = '/topic/deleteRealTimeEventImage/';
+        var SAVE_SUBSCRIBE_IMAGE_URL = '/topic/RealTimeEventImage/';
+        var SAVE_SEND_IMAGE_URL = '/topic/saveRealTimeEventImage/';
+        var DELETE_SUBSCRIBE_IMAGE_URL = '/topic/deletedRealTimeEventImage/';
+        var DELETE_SEND_IMAGE_URL = '/topic/deleteRealTimeEventImage/';
 
 
         var service = {

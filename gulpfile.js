@@ -22,7 +22,9 @@ var handleErrors = require('./gulp/handle-errors'),
     util = require('./gulp/utils'),
     copy = require('./gulp/copy'),
     inject = require('./gulp/inject'),
-    build = require('./gulp/build');
+    build = require('./gulp/build'),
+    concat = require('gulp-concat'),
+    naturalSort = require('gulp-natural-sort');
 
 var config = require('./gulp/config');
 
@@ -64,6 +66,32 @@ gulp.task('styles', [], function () {
     return gulp.src(config.app + 'content/css')
         .pipe(browserSync.reload({stream: true}));
 });
+
+gulp.task('concat:styles', [], function () {
+
+
+    return gulp.src([
+        config.app + 'content/css/animate.css',
+        config.app + 'content/css/components.css',
+        config.app + 'content/css/plugins.css',
+        config.app + 'content/css/layout.css',
+        config.app + 'content/css/default.css',
+        config.app + 'content/css/purple-studio.css',
+        config.app + 'content/css/custom.css',
+        config.app + 'content/css/login2.css',
+        config.app + 'content/css/components-rounded.css',
+        config.app + 'content/css/custom.css',
+        config.app + 'content/css/tabs.css',
+        config.app + 'content/css/image-overlay.css',
+        config.app + 'content/css/slider-ng-animate.css',
+        config.app + 'content/css/loading-spinners.css',
+        config.app + 'content/css/styles.css',
+
+    ])
+        .pipe(concat("main.css"))
+        .pipe(gulp.dest(config.app + 'content/css'));
+});
+
 
 gulp.task('inject', function() {
     runSequence('inject:dep', 'inject:app');
@@ -163,7 +191,7 @@ gulp.task('install', function () {
 
 gulp.task('serve', ['install'], serve);
 
-gulp.task('build', ['clean'], function (cb) {
+gulp.task('build', ['clean', 'concat:styles'], function (cb) {
     runSequence(['copy', 'inject:vendor', 'ngconstant:prod', 'copy:languages'], 'inject:app', 'inject:troubleshoot', 'assets:prod', cb);
 });
 

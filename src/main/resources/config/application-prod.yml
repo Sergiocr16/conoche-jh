@@ -23,7 +23,7 @@ spring:
         type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:mysql://localhost:3306/conoche?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
-        password:
+        password: admin
         hikari:
             data-source-properties:
                 cachePrepStmts: true
@@ -41,10 +41,17 @@ spring:
             hibernate.generate_statistics: false
             hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.NoDefaultJCacheRegionFactory
     mail:
-        host: localhost
-        port: 25
-        username:
-        password:
+        host: smtp.gmail.com
+        port: 587
+        username: fireflysoporte@gmail.com  #Replace this field with your Gmail username.
+        password: firefly123           #Replace this field with your Gmail password.
+        protocol: smtp
+        tls: true
+        properties.mail.smtp:
+            auth: true
+            starttls.enable: true
+            ssl.trust: smtp.gmail.com
+
     thymeleaf:
         cache: true
 
@@ -99,7 +106,7 @@ jhipster:
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: conoche@localhost
-        base-url: http://my-server-url-to-change # Modify according to your server's URL
+        base-url: http://127.0.0.1:7777
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         graphite:
@@ -131,15 +138,15 @@ jhipster:
 
 application:
     cloudinary:
-        cloud-name:
-        api-key:
-        api-secret: secret
+        cloud-name: "dgh2svgxo"
+        api-key: "526662361431646"
+        api-secret: "fuzokP7eDuLhZtaN1JbiK8ojSHQ"
 
     notifications-url:
         user: ""
         local: "/#/local-ang/local-ang/%d"
         event: "/#/event-ang/%d"
-        promotion: ""
+        promotion: "/#/event-ang/promotion/%d"
         message: ""
         rating: ""
         event-image: ""

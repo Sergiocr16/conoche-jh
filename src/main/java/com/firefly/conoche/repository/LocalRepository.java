@@ -23,7 +23,7 @@ public interface LocalRepository extends NotifyRepository<Local>, LocalRepositor
 
     @Query("select distinct local from Local local left join fetch local.services left join fetch local.subcribers")
     List<Local> findAllWithEagerRelationships();
-
+    List<Local> findByOwnerId(Long ownerId);
     Page<Local> findBylocalCategoryId(Long categoryId, Pageable pageable);
 
     @Query("select local from Local local left join fetch local.services left join fetch local.subcribers where local.id =:id")

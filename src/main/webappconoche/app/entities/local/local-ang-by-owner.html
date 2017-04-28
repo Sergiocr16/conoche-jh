@@ -1,0 +1,56 @@
+<div>
+    <div class="col-md-12 margin-bottom-20">
+        <div class="col-md-offset-9 col-md-3">
+            <div has-any-authority="ROLE_ADMIN,ROLE_OWNER" ui-sref="local-ang-by-owner.new" class="btn btn-primary btn-block btn-lg border-radius-6 col-md-3">    <span class="glyphicon glyphicon-plus"></span>
+                <span  data-translate="conocheApp.local.home.createLabel"></span></div>
+        </div>
+    </div>
+    <jhi-alert></jhi-alert>
+    <div class="  no-padding" id="tableData">
+        <div class="col-md-12">
+            <div ng-repeat="local in vm.locals track by local.id" >
+                <div class="col-md-6">
+                    <div class="E0E0E0-background padding-20 bottom-border-gray"
+                         style="height:470px;margin-bottom:20px;">
+                        <img class="col-md-12 crop no-padding margin-bottom-20" ng-show="local.banner" style="z-index: 0;" data-ng-src="{{'data:' + local.bannerContentType + ';base64,' +
+                         local.banner}}" alt="local image"/>
+                        <img class="col-md-12 crop no-padding margin-bottom-20"  style="z-index: 0;" ng-hide="local.banner" src="content/images/defaultLocalImg.png" alt="local image"/>
+                        <h1 class="text-center font-24 Raleway" style="text-transform: uppercase; margin:10px 0 0 0!important">{{local.name}}</h1>
+                        <h6 class="text-center no-margin no-padding">
+                            <i ng-repeat = "star in local.stars track by $index"  class="{{star.class}}" style="font-size:15px!important; margin-bottom:8px!important;"></i>
+                        </h6>
+                        <p class="text-center">{{local.descripcion | limitTo:75}}{{local.descripcion.length > 20 ? '...' : ''}}</p>
+
+                        <h1 class="text-center no-padding no-margin">
+                            <button type="submit "
+                                    ui-sref="local-ang-detail({id:local.id})"
+                                    class="btn btn-danger  btn-sm border-radius-6 padding-10 col-md-offset-10"
+                                    style="margin:0;">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+
+                            <button has-authority="ROLE_OWNER"  type="submit"
+                                    ui-sref="local-ang.edit({id:local.id})"
+                                    class="btn btn-primary btn-sm border-radius-6 padding-10">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button has-authority="ROLE_OWNER" type="submit"
+                                    ui-sref="local-ang.delete({id:local.id})"
+                                    class="btn btn-danger btn-sm border-radius-6 padding-10">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </h1>
+                        <div class="clear-fix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+</div>

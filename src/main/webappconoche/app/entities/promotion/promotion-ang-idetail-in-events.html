@@ -1,121 +1,3 @@
-
-<!--<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>-->
-
-    <!--<div class="modal-header">-->
-        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true"-->
-                <!--ng-click="vm.clear()">&times;</button>-->
-        <!--&lt;!&ndash;<h4 class="modal-title" id="myPromotionLabel" data-translate="conocheApp.promotion.home.createOrEditLabel">Create or edit a Promotion</h4>&ndash;&gt;-->
-    <!--</div>-->
-    <!--<div class="modal-body">-->
-        <!--<jhi-alert-error></jhi-alert-error>-->
-        <!--<div class="form-group col-md-12">-->
-            <!--<span name="description" id="field_description" class="pageTitleAnyPage">{{vm.promotion.description}}</span>-->
-
-        <!--</div>-->
-        <!--<div class="col-md-6 no-padding">-->
-            <!--<div class="no-padding">-->
-                <!--<img data-ng-src="{{'data:' + vm.promotion.imageContentType + ';base64,' + vm.promotion.image}}"  class="col-md-12 crop-300" ng-if="vm.promotion.image" alt="promotion image"/>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-md-6">-->
-            <!--<span><i class="fa fa-home"></i>Bar las teticas</span>-->
-        <!--</div>-->
-
-        <!--<div class="form-group col-md-12">-->
-            <!--<label class="control-label" data-translate="conocheApp.promotion.imageUrl" for="field_imageUrl">Image Url</label>-->
-            <!--<input type="text" class="form-control" name="imageUrl" id="field_imageUrl"-->
-                   <!--ng-model="vm.promotion.imageUrl"-->
-            <!--/>-->
-        <!--</div>-->
-        <!--<div class="form-groupcol-md-12 " ngf-drop ngf-change="vm.setImage($file, vm.promotion)" ngf-pattern="'image/*'">-->
-            <!--<label class="control-label" data-translate="conocheApp.promotion.image" for="field_image">Image</label>-->
-
-            <!--<input type="hidden" class="form-control" name="image" id="field_image"-->
-                   <!--ng-model="vm.promotion.image"-->
-            <!--/>-->
-            <!--<input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"-->
-                   <!--ng-model="vm.promotion.imageContentType" />-->
-        <!--</div>-->
-        <!--<div class="form-group col-md-12">-->
-            <!--<label class="control-label" data-translate="conocheApp.promotion.initialTime" for="field_initialTime">Initial Time</label>-->
-            <!--<div class="input-group">-->
-                <!--<input id="field_initialTime" type="text" class="form-control" name="initialTime" datetime-picker="{{dateformat}}" ng-model="vm.promotion.initialTime" is-open="vm.datePickerOpenStatus.initialTime"-->
-                       <!--required/>-->
-                <!--<span class="input-group-btn">-->
-                        <!--<button type="button" class="btn btn-default" ng-click="vm.openCalendar('initialTime')"><i class="glyphicon glyphicon-calendar"></i></button>-->
-                    <!--</span>-->
-            <!--</div>-->
-            <!--<div ng-show="editForm.initialTime.$invalid">-->
-                <!--<p class="help-block"-->
-                   <!--ng-show="editForm.initialTime.$error.required" data-translate="entity.validation.required">-->
-                    <!--This field is required.-->
-                <!--</p>-->
-                <!--<p class="help-block"-->
-                   <!--ng-show="editForm.initialTime.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">-->
-                    <!--This field should be a date and time.-->
-                <!--</p>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="form-group col-md-12">-->
-            <!--<label class="control-label" data-translate="conocheApp.promotion.finalTime" for="field_finalTime">Final Time</label>-->
-            <!--<div class="input-group">-->
-                <!--<input id="field_finalTime" type="text" class="form-control" name="finalTime" datetime-picker="{{dateformat}}" ng-model="vm.promotion.finalTime" is-open="vm.datePickerOpenStatus.finalTime"-->
-                       <!--required/>-->
-                <!--<span class="input-group-btn">-->
-                        <!--<button type="button" class="btn btn-default" ng-click="vm.openCalendar('finalTime')"><i class="glyphicon glyphicon-calendar"></i></button>-->
-                    <!--</span>-->
-            <!--</div>-->
-            <!--<div ng-show="editForm.finalTime.$invalid">-->
-                <!--<p class="help-block"-->
-                   <!--ng-show="editForm.finalTime.$error.required" data-translate="entity.validation.required">-->
-                    <!--This field is required.-->
-                <!--</p>-->
-                <!--<p class="help-block"-->
-                   <!--ng-show="editForm.finalTime.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">-->
-                    <!--This field should be a date and time.-->
-                <!--</p>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="form-group col-md-12">-->
-            <!--<label class="control-label" data-translate="conocheApp.promotion.maximumCodePerUser" for="field_maximumCodePerUser">Maximum Code Per User</label>-->
-            <!--<input type="number" class="form-control" name="maximumCodePerUser" id="field_maximumCodePerUser"-->
-                   <!--ng-model="vm.promotion.maximumCodePerUser"-->
-                   <!--required min="1"/>-->
-            <!--<div ng-show="editForm.maximumCodePerUser.$invalid">-->
-                <!--<p class="help-block"-->
-                   <!--ng-show="editForm.maximumCodePerUser.$error.required" data-translate="entity.validation.required">-->
-                    <!--This field is required.-->
-                <!--</p>-->
-                <!--<p class="help-block"-->
-                   <!--ng-show="editForm.maximumCodePerUser.$error.min" data-translate="entity.validation.min" translate-value-min="1">-->
-                    <!--This field should be at least 1.-->
-                <!--</p>-->
-                <!--<p class="help-block"-->
-                   <!--ng-show="editForm.maximumCodePerUser.$error.number" data-translate="entity.validation.number">-->
-                    <!--This field should be a number.-->
-                <!--</p>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="form-group col-md-12">-->
-            <!--<label data-translate="conocheApp.promotion.event" for="field_event">Event</label>-->
-            <!--<select class="form-control" id="field_event" name="event" ng-model="vm.promotion.eventId" ng-options="event.id as event.id for event in vm.events"            >-->
-                <!--<option value=""></option>-->
-            <!--</select>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="modal-footer">-->
-        <!--<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">-->
-            <!--<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>-->
-        <!--</button>-->
-        <!--<button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">-->
-            <!--<span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>-->
-        <!--</button>-->
-    <!--</div>-->
-<!--</form>-->
-
-
-
 <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation >
 
     <div class="modal-header col-md-12 caption font-red-sunglo" >
@@ -126,15 +8,16 @@
         <h1 class="pageTitleAnyPage col-md-12 text-center" >{{vm.promotion.description}}</h1>
         <div class="form-body ">
             <div class="col-md-6 no-padding">
-                    <img data-ng-src="{{'data:' + vm.promotion.imageContentType + ';base64,' + vm.promotion.image}}"  class="col-md-12 col-sm-12 col-xs-12 crop-340" ng-if="vm.promotion.image" alt="promotion image"/>
+                    <img  ng-show="vm.promotion.image" data-ng-src="{{'data:' + vm.promotion.imageContentType + ';base64,' + vm.promotion.image}}"  class="col-md-12 col-sm-12 col-xs-12 crop-340" ng-if="vm.promotion.image" alt="promotion image"/>
+                <img ng-hide="vm.promotion.image" src="content/images/defaultPromoImg.png"  class="col-md-12 col-sm-12 col-xs-12 crop-340" alt="promotion image"/>
 
             </div>
             <div class="col-md-6 no-padding gray-font">
                 <span class="Raleway font-18 col-md-12" style="text-transform: uppercase;"><i class="fa fa-home font-20" style="color: #607D8B"></i> Bar las teticas</span>
                 <span class="Raleway font-18 col-md-12 margin-top-20" style="text-transform: uppercase;"><i class="fa fa-fire font-20" style="color: #607D8B" ></i> REGGAE NIGHT CREW </span>
                 <div class="col-md-12 col-lg-12 col-sm-6 col-xs-12 margin-top-20">
-                <span class="Raleway font-16 col-md-6 ">Códigos disponibles: {{vm.availableCodes}}</span>
-                <span class="Raleway font-16 col-md-6 ">Puedes redimir: {{vm.availableCodesPerUser}}</span>
+                <span has-authority="ROLE_USER"class="Raleway font-16 col-md-6 ">Códigos disponibles: {{vm.availableCodes}}</span>
+                <span  has-authority="ROLE_USER" class="Raleway font-16 col-md-6 ">Puedes redimir: {{vm.availableCodesPerUser}}</span>
                 </div>
 
                 <div class="col-md-12 text-center margin-top-20 border-radius-6 padding-20"  style="background-color:#EEEEEE;">
@@ -143,7 +26,7 @@
                         <span class=" col-md-3 col-md-offset-1 text-center"><span class="col-md-12 text-center">{{hours}}</span><div class="font-15">Horas</div> </span> <span class=" col-md-3"><span class="col-md-12 text-center">{{minutes}}</span><div class="font-15">Minutos</div></span>  <span class=" col-md-3"><span class="col-md-12 text-center">{{seconds}}</span><div class="font-15">Segundos</div></span></timer></h2>
                 </div>
                     <div class="col-md-offset-1 col-md-10 col-lg-10 margin-top-20 ">
-                    <button ng-click="vm.redeemCode()" ng-show="vm.availableCodesPerUser>0" type="button" class="btn btn-primary padding-10 border-radius-6 font-18 green-2-background col-md-12">
+                    <button has-authority="ROLE_USER" ng-click="vm.redeemCode()" ng-show="vm.availableCodesPerUser>0" type="button" class="btn btn-primary padding-10 border-radius-6 font-18 green-2-background col-md-12">
                       <span >Redimir código</span>
                     </button>
                 </div>
