@@ -4,12 +4,14 @@ import com.firefly.conoche.domain.Event;
 import com.firefly.conoche.domain.Local;
 import com.firefly.conoche.domain.RatingLocal;
 import com.firefly.conoche.domain.User;
+import com.firefly.conoche.repository.EventRepository;
 import com.firefly.conoche.repository.LocalRepository;
 import com.firefly.conoche.repository.RatingLocalRepository;
 import com.firefly.conoche.repository.UserRepository;
 import com.firefly.conoche.security.SecurityUtils;
 import com.firefly.conoche.service.dto.EventDTO;
 import com.firefly.conoche.service.dto.LocalDTO;
+import com.firefly.conoche.service.mapper.EventMapper;
 import com.firefly.conoche.service.mapper.LocalMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -37,15 +40,26 @@ public class LocalService {
     private final LocalRepository localRepository;
     private final LocalMapper localMapper;
     private final UserService userService;
-    private RatingLocalRepository ratingLocalRepository;
+    private final RatingLocalRepository ratingLocalRepository;
     private final UserRepository userRepository;
+    private final EventService eventService;
+    private final EventMapper eventMapper;
 
-    public LocalService(LocalRepository localRepository, LocalMapper localMapper, UserService userService,RatingLocalRepository ratingLocalRepository,UserRepository userRepository) {
+
+    public LocalService(LocalRepository localRepository,
+                        LocalMapper localMapper,
+                        UserService userService,
+                        RatingLocalRepository ratingLocalRepository,
+                        UserRepository userRepository,
+                        EventService eventService,
+                        EventMapper eventMapper) {
         this.localRepository = localRepository;
         this.localMapper = localMapper;
         this.userService = userService;
         this.userRepository = userRepository;
         this.ratingLocalRepository = ratingLocalRepository;
+        this.eventService = eventService;
+        this.eventMapper = eventMapper;
     }
 
     public LocalDTO saveWithCurrentUser(LocalDTO localDTO) {
@@ -106,8 +120,15 @@ public class LocalService {
      *
      *  @param id the id of the entity
      */
-    public void delete(Long id) {
+    public void delete(Long id) throws IOException{
         log.debug("Request to delete Local : {}", id);
+        Local local = localRepository.findOne(id);
+
+        if(local != null) {
+            for (Event e : local.getEvents()) {
+                eventService.delete(e.getId());
+            }
+        }
         localRepository.delete(id);
     }
 

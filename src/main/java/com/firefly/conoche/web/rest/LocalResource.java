@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -130,7 +131,7 @@ public class LocalResource {
      */
     @DeleteMapping("/locals/{id}")
     @Timed
-    public ResponseEntity<Void> deleteLocal(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteLocal(@PathVariable Long id) throws IOException{
         log.debug("REST request to delete Local : {}", id);
         localService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
