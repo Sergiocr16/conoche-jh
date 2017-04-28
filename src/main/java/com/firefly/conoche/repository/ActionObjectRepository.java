@@ -6,6 +6,7 @@ import com.firefly.conoche.domain.enumeration.ActionObjectType;
 import org.springframework.data.jpa.repository.*;
 
 import javax.swing.text.StyledEditorKit;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -14,4 +15,5 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface ActionObjectRepository extends JpaRepository<ActionObject,Long> {
     List<ActionObject> findByObjectTypeAndObjectIdAndActiveTrue(ActionObjectType objectType, Long objectId);
+    List<ActionObject> findByObjectTypeAndActiveTrueAndObjectIdIn(ActionObjectType objectType, Collection<Long> objectIds);
 }

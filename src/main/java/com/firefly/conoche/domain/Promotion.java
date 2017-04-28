@@ -5,6 +5,8 @@ import com.firefly.conoche.domain.enumeration.ActionObjectType;
 import com.firefly.conoche.domain.interfaces.IEntity;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -60,6 +62,7 @@ public class Promotion implements Serializable, IEntity {
     @OneToMany(mappedBy = "promotion", cascade=CascadeType.ALL, orphanRemoval=true)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<PromotionCode> codes = new HashSet<>();
 
     @ManyToOne

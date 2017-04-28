@@ -122,13 +122,12 @@
                 || { subscriber: null, listener: $q.defer() };
             subscribeMap[url] =  value;
             subscribeKeyValue(url, value);
-            console.log(subscribeMap);
 
         }
         function subscribeKeyValue(url, value) {
             connected.promise.then(subscribeOnConnected);
             function subscribeOnConnected() {
-                if (isConnected()) {
+                if (isConnected() && value) {
                     value.subscriber = stompClient.subscribe(url, function (data) {
                         value.listener.notify(angular.fromJson(data.body));
                     });

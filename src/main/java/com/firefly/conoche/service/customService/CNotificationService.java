@@ -146,16 +146,36 @@ public class CNotificationService {
     }
 
 
+//    @Async
+//    public Future<Stream<String>> deactivateActionObjects(ActionObjectType type, Long objectId) {
+//        List<ActionObject> actions = actionObjectRepository
+//            .findByObjectTypeAndObjectIdAndActiveTrue(type, objectId);
+//
+//        Stream<String> users = cNotificationRepository
+//            .findUsersWithPendingEnitityNotifications(objectId, type)
+//            .stream().map(User::getLogin);
+//
+//        actions.stream().peek(a -> log.error(actions.toString()))
+//            .peek(a ->  a.setActive(false))
+//            .forEach(actionObjectRepository::save);
+//
+//        return new AsyncResult<>(users);
+//    }
+
+
     @Async
-    public Future<Stream<String>> deactivateActionObjects(ActionObjectType type, Long objectId) {
+    public Future<Stream<String>> deactivateActionObjects(ActionObjectType type, Stream<Long> idStream) {
+
+        List<Long> idlist = idStream.collect(Collectors.toList());
         List<ActionObject> actions = actionObjectRepository
-            .findByObjectTypeAndObjectIdAndActiveTrue(type, objectId);
+            .findByObjectTypeAndActiveTrueAndObjectIdIn(type, idlist);
 
         Stream<String> users = cNotificationRepository
-            .findUsersWithPendingEnitityNotifications(objectId, type)
+            .findUsersWithPendingEnitityNotifications(idlist, type)
             .stream().map(User::getLogin);
 
-        actions.stream().peek(a -> log.error(actions.toString()))
+        //cambiar esto a algo mas eficiente
+        actions.stream()
             .peek(a ->  a.setActive(false))
             .forEach(actionObjectRepository::save);
 

@@ -1,5 +1,6 @@
 package com.firefly.conoche.repository;
 
+import com.firefly.conoche.domain.Event;
 import com.firefly.conoche.domain.Local;
 import com.firefly.conoche.domain.Promotion;
 
@@ -8,6 +9,7 @@ import com.firefly.conoche.repository.notifications.especificImpl.LocalRepositor
 import com.firefly.conoche.repository.notifications.especificImpl.PromotionRepositoryCustom;
 import org.springframework.data.jpa.repository.*;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,4 +18,5 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface PromotionRepository extends NotifyRepository<Promotion>, PromotionRepositoryCustom {
     List<Promotion> findByEventId(Long eventId);
+    List<Promotion> findByEventIn(Collection<Event> events);
 }

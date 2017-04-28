@@ -12,6 +12,7 @@ import com.firefly.conoche.service.customService.CRealTimeEventImageService;
 import com.firefly.conoche.service.dto.EventDTO;
 import com.firefly.conoche.service.dto.UserDTO;
 import com.firefly.conoche.service.mapper.EventMapper;
+import com.firefly.conoche.service.util.CloudinaryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -22,13 +23,14 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Event.
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = IOException.class)
 public class EventService {
 
     private final Logger log = LoggerFactory.getLogger(EventService.class);
@@ -36,19 +38,22 @@ public class EventService {
     private final EventMapper eventMapper;
     private final UserRepository userRepository;
     private final PromotionRepository promotionRepository;
-    private final CRealTimeEventImageService cRealTimeEventImageService;
+    private final RealTimeEventImageRepository realTimeEventImageRepository;
+    private final CloudinaryService cloudinaryService;
 
 
     public EventService(EventRepository eventRepository,
                         EventMapper eventMapper,
                         UserRepository userRepository,
                         PromotionRepository promotionRepository,
-                        CRealTimeEventImageService cRealTimeEventImageService) {
+                        RealTimeEventImageRepository realTimeEventImageRepository,
+                        CloudinaryService cloudinaryService) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
         this.userRepository = userRepository;
         this.promotionRepository = promotionRepository;
-        this.cRealTimeEventImageService = cRealTimeEventImageService;
+        this.realTimeEventImageRepository = realTimeEventImageRepository;
+        this.cloudinaryService = cloudinaryService;
 
     }
 
@@ -100,15 +105,16 @@ public class EventService {
      */
     public void delete(Long id) throws IOException {
         log.debug("Request to delete Event : {}", id);
-        Optional<Event> event = Optional.ofNullable(eventRepository.findOne(id));
-        if (event.isPresent()) {
-            for (RealTimeEventImage r : event.get().getRealTimeImages()) {
-                cRealTimeEventImageService.delete(r.getId());
-            }
+        Event event = eventRepository.findOne(id);
+        if(event == null) {
+            eventRepository.delete(id);
+            return;
         }
-        event.map(Event::getPromotions)
-            .ifPresent(p-> p.forEach(promotionRepository::delete));
+        Set<RealTimeEventImage> imgs = event.getRealTimeImages();
+        realTimeEventImageRepository.deleteInBatch(imgs);
+        promotionRepository.deleteInBatch(event.getPromotions());
         eventRepository.delete(id);
+        cloudinaryService.deleteRealTimeImageUrl(imgs);
     }
 
     public void attendEvent(Long idEvent) {

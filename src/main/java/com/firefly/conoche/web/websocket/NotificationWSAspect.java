@@ -49,19 +49,16 @@ public class NotificationWSAspect {
     }
 
     @AfterReturning(
-        pointcut="execution(public * com.firefly.conoche.service.customService.CNotificationService+.deactivateActionObjects(..)) && args(type,id,..)",
+        pointcut="execution(public * com.firefly.conoche.service.customService.CNotificationService+.deactivateActionObjects(..))",
         returning="retVal")
-    public void notificationDeleteAdvice(Future<Stream<String>> retVal, ActionObjectType type, Long id)
+    public void notificationDeleteAdvice(Future<Stream<String>> retVal)
             throws InterruptedException, ExecutionException {
 
         try {
-            NotificationEntityDTO notificationEntityDTO = new NotificationEntityDTO();
-            notificationEntityDTO.setId(id);
-            notificationEntityDTO.setType(type);
             retVal.get()
                 .peek(log::error)
                 .forEach(login -> messagingTemplate.convertAndSendToUser(
-                    login, DELETE_SUBSCRIPTION_URL, notificationEntityDTO));
+                    login, DELETE_SUBSCRIPTION_URL, ""));
 
         } catch(Throwable s) {
             log.error(s.getMessage());

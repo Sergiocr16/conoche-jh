@@ -1,10 +1,12 @@
 package com.firefly.conoche.service.aspects;
 
+import com.firefly.conoche.domain.enumeration.ActionObjectType;
 import com.firefly.conoche.domain.enumeration.ActionType;
 import com.firefly.conoche.domain.interfaces.IEntity;
 import com.firefly.conoche.repository.notifications.NotifyRepository;
 import com.firefly.conoche.service.customService.CNotificationService;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
@@ -15,6 +17,8 @@ import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+
 
 
 /**
@@ -61,24 +65,32 @@ public class NotificationAspect {
         T entity = repo.findOne(id);
         pjp.proceed();
         cNotificationService.deactivateActionObjects(
-            entity.getObjectType(), entity.getId());
+            entity.getObjectType(), Stream.of(entity.getId()));
     }
 
-    @Around(value="execution(public * com.firefly.conoche.repository.notifications.NotifyRepository+.delete(..)) && args(entity,..) && target(repo)")
-    public <T extends IEntity> void auditDeleteEntity(ProceedingJoinPoint pjp, T entity, NotifyRepository<T> repo) throws Throwable {
-        pjp.proceed();
+    @AfterReturning(pointcut="execution(public * com.firefly.conoche.repository.notifications.NotifyRepository+.delete(..)) && args(entity,..)")
+    public <T extends IEntity> void auditDeleteEntity(T entity) throws Throwable {
         cNotificationService.deactivateActionObjects(
-            entity.getObjectType(), entity.getId());
+            entity.getObjectType(), Stream.of(entity.getId()));
     }
 
-//    @Around(value="execution(public * com.firefly.conoche.repository.notifications.NotifyRepository+.delete(..)) && args(entity,..) && target(repo)")
-//    public <T extends IEntity> void auditDeleteEntitys(ProceedingJoinPoint pjp, Iterable<T> entity, NotifyRepository<T> repo) throws Throwable {
-//        pjp.proceed();
-//
-//
-//        a.setObjectType();
-//
-//    }
+    @AfterReturning(pointcut="execution(public * com.firefly.conoche.repository.notifications.NotifyRepository+.deleteInBatch(..))" +
+        " && args(entitys,..)")
+    public <T extends IEntity> void auditDeleteEntitys(Iterable<T> entitys) throws Throwable {
+        toStream(entitys)
+            .map(T::getObjectType)
+            .findAny()
+            .ifPresent( t -> {
+                Stream<Long> stream = toStream(entitys)
+                    .map(T::getId);
+                cNotificationService.deactivateActionObjects(t, stream);
+            });
+    }
+
+
+    private <T> Stream<T> toStream(Iterable<T> itr) {
+        return StreamSupport.stream(itr.spliterator(), false);
+    }
 
     private <T extends IEntity> void sendNotifications(NotifyRepository<T> repo,
                                                         T entity,

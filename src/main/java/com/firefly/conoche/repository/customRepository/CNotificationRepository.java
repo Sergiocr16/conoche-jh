@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -35,4 +36,15 @@ public interface CNotificationRepository extends JpaRepository<Notification,Long
         @Param("objectId")Long objectId,
         @Param("objectType") ActionObjectType objectType);
 
+
+    @Query("select distinct(notification.user) " +
+        "from Notification notification " +
+        "where notification.isRead = false " +
+        "and notification.actionObject.active = true " +
+        "and notification.actionObject.objectType = :objectType " +
+        "and notification.actionObject.objectId in :objectIds " )
+    List<User> findUsersWithPendingEnitityNotifications(
+        @Param("objectId")Collection<Long> objectIds,
+        @Param("objectType") ActionObjectType objectType);
 }
+
