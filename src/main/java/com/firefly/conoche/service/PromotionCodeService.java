@@ -65,21 +65,38 @@ public class PromotionCodeService {
         Page<PromotionCode> result = promotionCodeRepository.findAll(pageable);
         return result.map(promotionCode -> promotionCodeMapper.promotionCodeToPromotionCodeDTO(promotionCode));
     }
-
+    /**
+     *  Get all the promotionCodes by user and promotiondId.
+     *
+     *  @param userId the user id
+     *  @param promotionId the promotion id
+     *  @return the list of entities
+     */
     @Transactional(readOnly = true)
     public Page<PromotionCodeDTO> findByUserAndPromotion(Long userId,Long promotionId) {
         log.debug("Request to get all PromotionCodes");
         List<PromotionCode> result = promotionCodeRepository.findByPromotionIdAndUserId(promotionId,userId);
         return new PageImpl<PromotionCode>(result).map(promotionCode -> promotionCodeMapper.promotionCodeToPromotionCodeDTO(promotionCode));
     }
-
+    /**
+     *  Get all the promotionCodes by user.
+     *
+     *  @param userId the user id
+     *  @return the list of entities
+     */
     @Transactional(readOnly = true)
     public Page<PromotionCodeDTO> findByUserId(Long userId) {
         log.debug("Request to get all PromotionCodes");
         List<PromotionCode> result = promotionCodeRepository.findByUserIdAndActive(userId,true);
         return new PageImpl<PromotionCode>(result).map(promotionCode -> promotionCodeMapper.promotionCodeToPromotionCodeDTO(promotionCode));
     }
-
+    /**
+     *  Redeem the last available code of a promotion for an user
+     *
+     *  @param userId the user id
+     *  @param promotionId the user id
+     *  @return the promotionCode
+     */
 
     public PromotionCodeDTO redeemCodeInPromotion(Long promotionId,Long userId) {
         log.debug("Request to get all PromotionCodes");
@@ -93,6 +110,13 @@ public class PromotionCodeService {
         String a = "";
         return promotionCodeMapper.promotionCodeToPromotionCodeDTO(result);
     }
+
+    /**
+     *  Get the last available code of a promotion for an user
+     *
+     *  @param promotionId the user id
+     *  @return the promotionCode
+     */
     @Transactional(readOnly = true)
     public Page<PromotionCodeDTO> findAvailableCodesByPromotionId(Long promotionId) {
         log.debug("Request to get all Promotions available");
