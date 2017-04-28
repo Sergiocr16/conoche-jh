@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('EventAngDetailController', EventAngDetailController);
 
-    EventAngDetailController.$inject = ['$scope','$state', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Event', 'Promotion', 'EventImage', 'RealTimeEventImage', 'User', 'Servicio', 'Local', 'Message', 'Principal'];
+    EventAngDetailController.$inject = ['$state', '$scope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Event', 'Promotion', 'EventImage', 'RealTimeEventImage','Servicio', 'User', 'Local', 'Message','Principal','$rootScope'];
 
-    function EventAngDetailController($scope,$state, $rootScope, $stateParams, previousState, DataUtils, entity, Event, Promotion, EventImage, RealTimeEventImage, User, Servicio, Local, Message, Principal) {
+    function EventAngDetailController ($state, $scope, $stateParams, previousState, DataUtils, entity, Event, Promotion, EventImage, RealTimeEventImage,Servicio, User, Local, Message,Principal,$rootScope) {
 
         var vm = this;
         vm.event = entity;
@@ -30,7 +30,6 @@
             vm.event = result;
         });
 
-        console.log("load controller");
 
         vm.viewLiveMessages = function (event) {
 
@@ -55,14 +54,15 @@
         Local.get({id: vm.event.localId}, onSuccess);
 
         function onSuccess(data, headers) {
-            vm.local = data;
+          vm.local = data;
 
-            if (vm.event.price == 0) {
-                vm.event.price = "Gratis";
-            }
-            setTimeout(function () {
-                $("#container").fadeIn(500);
-            }, 200)
+             if(vm.event.price==0){
+                vm.event.price="Gratis";
+             }
+           setTimeout(function() {
+              $("#container").fadeIn(500);
+          }, 200);
         }
-    }
+}
+
 })();

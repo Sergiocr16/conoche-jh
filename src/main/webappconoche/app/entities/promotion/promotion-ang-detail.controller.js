@@ -5,7 +5,7 @@
         .module('conocheApp')
         .controller('PromotionAngDetailController', PromotionAngDetailController);
 
-    PromotionAngDetailController.$inject = [ '$uibModalInstance', '$timeout','Principal','$scope', '$rootScope', '$stateParams', 'DataUtils', 'entity', 'Promotion', 'PromotionCode', 'Event','AlertService'];
+    PromotionAngDetailController.$inject = ['$uibModalInstance', '$timeout','Principal','$scope', '$rootScope', '$stateParams', 'DataUtils', 'entity', 'Promotion', 'PromotionCode', 'Event','AlertService'];
 
     function PromotionAngDetailController( $uibModalInstance, $timeout,Principal,$scope, $rootScope, $stateParams,  DataUtils, entity, Promotion, PromotionCode, Event,AlertService) {
         var vm = this;
