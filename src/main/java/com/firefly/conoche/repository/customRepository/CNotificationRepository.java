@@ -26,15 +26,15 @@ public interface CNotificationRepository extends JpaRepository<Notification,Long
         "order by notification.actionObject.creationTime desc")
     Page<Notification> findByUserIsCurrentUser(Pageable page, @Param("isRead") Boolean isRead);
 
-    @Query("select distinct(notification.user) " +
-        "from Notification notification " +
-        "where notification.isRead = false " +
-        "and notification.actionObject.active = true " +
-        "and notification.actionObject.objectId = :objectId " +
-        "and notification.actionObject.objectType = :objectType " )
-    List<User> findUsersWithPendingEnitityNotifications(
-        @Param("objectId")Long objectId,
-        @Param("objectType") ActionObjectType objectType);
+//    @Query("select distinct(notification.user) " +
+//        "from Notification notification " +
+//        "where notification.isRead = false " +
+//        "and notification.actionObject.active = true " +
+//        "and notification.actionObject.objectId = :objectId " +
+//        "and notification.actionObject.objectType = :objectType " )
+//    List<User> findUsersWithPendingEnitityNotifications(
+//        @Param("objectId")Long objectId,
+//        @Param("objectType") ActionObjectType objectType);
 
 
     @Query("select distinct(notification.user) " +
@@ -44,7 +44,7 @@ public interface CNotificationRepository extends JpaRepository<Notification,Long
         "and notification.actionObject.objectType = :objectType " +
         "and notification.actionObject.objectId in :objectIds " )
     List<User> findUsersWithPendingEnitityNotifications(
-        @Param("objectId")Collection<Long> objectIds,
+        @Param("objectIds")Collection<Long> objectIds,
         @Param("objectType") ActionObjectType objectType);
 }
 

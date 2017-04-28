@@ -42,6 +42,7 @@ public class LocalService {
     private final RealTimeEventImageRepository realTimeEventImageRepository;
     private final CRealTimeEventImageRepository crealTimeEventImageRepository;
     private final CloudinaryService cloudinaryService;
+    private final EventRepository eventRepository;
 
 
     public LocalService(LocalRepository localRepository,
@@ -51,7 +52,8 @@ public class LocalService {
                         PromotionRepository promotionRepository,
                         RealTimeEventImageRepository realTimeEventImageRepository,
                         CRealTimeEventImageRepository crealTimeEventImageRepository,
-                        CloudinaryService cloudinaryService) {
+                        CloudinaryService cloudinaryService,
+                        EventRepository eventRepository) {
         this.localRepository = localRepository;
         this.localMapper = localMapper;
         this.userService = userService;
@@ -60,6 +62,7 @@ public class LocalService {
         this.realTimeEventImageRepository = realTimeEventImageRepository;
         this.crealTimeEventImageRepository = crealTimeEventImageRepository;
         this.cloudinaryService = cloudinaryService;
+        this.eventRepository =  eventRepository;
     }
 
     public LocalDTO saveWithCurrentUser(LocalDTO localDTO) {
@@ -128,12 +131,13 @@ public class LocalService {
             return;
         }
         Set<Event> events = local.getEvents();
+
         List<RealTimeEventImage> images =
             crealTimeEventImageRepository.findByEventIn(events);
 
-        promotionRepository.deleteInBatch(
-            promotionRepository.findByEventIn(events));
+        promotionRepository.deleteInBatch(promotionRepository.findByEventIn(events));
         realTimeEventImageRepository.deleteInBatch(images);
+        eventRepository.deleteInBatch(events);
         localRepository.delete(id);
         cloudinaryService.deleteRealTimeImageUrl(images);
     }
