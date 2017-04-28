@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('EventAngByOwnerController', EventAngByOwnerController);
 
-    EventAngByOwnerController.$inject = ['$state', 'DataUtils', 'Event', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    EventAngByOwnerController.$inject = ['Principal','Local','$state', 'DataUtils', 'Event', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
 
-    function EventAngByOwnerController($state, DataUtils, Event, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function EventAngByOwnerController(Principal,Local,$state, DataUtils, Event, ParseLinks, AlertService, paginationConstants, pagingParams) {
 
         var vm = this;
 
@@ -18,10 +18,22 @@
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
+        vm.events = []
+        loadLocals();
+        function loadLocals(){
+             Principal.identity().then(function(user){
+                    Local.getByOwner({ ownerId: user.id},onSuccess, onError);
+                });
+             function onSuccess(data) {
+                    vm.locals = data;
+                    getEvents();
+                }
+                     function onError(error) {
+                                AlertService.error(error.data.message);
+                            }
+        }
 
-        loadAll();
-
-        function loadAll () {
+        function getEvents() {
             Event.query({
                 page: pagingParams.page - 1,
                 size: vm.itemsPerPage,
@@ -38,16 +50,29 @@
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
-                vm.events = data;
+                vm.allEvents = data;
                 vm.page = pagingParams.page;
-                setTimeout(function() {
-                    $("#tableData").fadeIn(500);
-                }, 200);
+                 filterEventsByOnwer();
             }
             function onError(error) {
                 AlertService.error(error.data.message);
             }
         }
+        function filterEventsByOnwer() {
+          setTimeout(function() {
+            $("#tableData").fadeIn(500);
+        }, 200);
+           angular.forEach(vm.allEvents, function(event, key) {
+                 angular.forEach(vm.locals, function(local, key) {
+                     if(local.id==event.localId){
+                       vm.events.push(event);
+                     }
+                 });
+           });
+        }
+
+
+
 
         function loadPage(page) {
             vm.page = page;

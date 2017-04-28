@@ -20,7 +20,7 @@
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
-
+        vm.promotions = [];
         loadAll();
 
         function loadAll () {
@@ -67,7 +67,11 @@
             }
 
             function onSuccessPromotions(data, headers) {
-                vm.promotions = data;
+                    angular.forEach(data, function(promotion ,key) {
+                         if(moment(new Date()).isBefore(promotion.finalTime)){
+                          vm.promotions.push(promotion);
+                         }
+                    });
                 setTimeout(function() {
                     $("#tableData").fadeIn(700);
                 }, 200);
