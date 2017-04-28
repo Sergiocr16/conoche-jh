@@ -1,6 +1,8 @@
 package com.firefly.conoche.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.firefly.conoche.domain.enumeration.ActionObjectType;
+import com.firefly.conoche.domain.interfaces.IEntity;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -9,10 +11,7 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.security.SecureRandom;
 import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * A Promotion.
@@ -20,7 +19,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "promotion")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Promotion implements Serializable {
+public class Promotion implements Serializable, IEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -268,5 +267,22 @@ public class Promotion implements Serializable {
             ", maximumCodePerUser='" + maximumCodePerUser + "'" +
             ", codeQuantity='" + codeQuantity + "'" +
             '}';
+    }
+
+    @Override
+    public ActionObjectType getObjectType() {
+        return ActionObjectType.PROMOTION;
+    }
+
+    @Override
+    public Map<String, Object> notificationInfo() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("description", description);
+        map.put("image", image);
+        map.put("initialTime", initialTime);
+        map.put("finalTime", finalTime);
+        map.put("codeQuantity", codeQuantity);
+
+        return map;
     }
 }

@@ -6,14 +6,17 @@ import com.firefly.conoche.domain.interfaces.IEntity;
 import com.firefly.conoche.repository.notifications.NotifyRepository;
 import com.firefly.conoche.service.customService.CNotificationService;
 import com.firefly.conoche.service.customService.NotificationMailService;
+import com.firefly.conoche.service.dto.ActionObjectDTO;
 import com.firefly.conoche.service.dto.DetailNotificationDTO;
 import com.firefly.conoche.service.dto.NotificationDTO;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.hibernate.envers.internal.entities.mapper.relation.AbstractOneToOneMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Inject;
@@ -30,6 +33,7 @@ import java.util.stream.Stream;
 
 @Transactional
 @Aspect
+@Order(0)
 public class NotificationAspect {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -70,6 +74,22 @@ public class NotificationAspect {
         cNotificationService.deactivateActionObjects(
             entity.getObjectType(), entity.getId());
     }
+
+    @Around(value="execution(public * com.firefly.conoche.repository.notifications.NotifyRepository+.delete(..)) && args(entity,..) && target(repo)")
+    public <T extends IEntity> void auditDeleteEntity(ProceedingJoinPoint pjp, T entity, NotifyRepository<T> repo) throws Throwable {
+        pjp.proceed();
+        cNotificationService.deactivateActionObjects(
+            entity.getObjectType(), entity.getId());
+    }
+
+//    @Around(value="execution(public * com.firefly.conoche.repository.notifications.NotifyRepository+.delete(..)) && args(entity,..) && target(repo)")
+//    public <T extends IEntity> void auditDeleteEntitys(ProceedingJoinPoint pjp, Iterable<T> entity, NotifyRepository<T> repo) throws Throwable {
+//        pjp.proceed();
+//
+//
+//        a.setObjectType();
+//
+//    }
 
     private <T extends IEntity> void sendNotifications(NotifyRepository<T> repo,
                                                         T entity,

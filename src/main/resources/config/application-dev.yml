@@ -153,7 +153,7 @@ application:
         user: ""
         local: "/#/local-ang/local-ang/%d"
         event: "/#/event-ang/%d"
-        promotion: ""
+        promotion: "/#/event-ang/promotion/%d"
         message: ""
         rating: ""
         event-image: ""

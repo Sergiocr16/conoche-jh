@@ -3,6 +3,7 @@ package com.firefly.conoche.service;
 import com.firefly.conoche.domain.Event;
 import com.firefly.conoche.domain.User;
 import com.firefly.conoche.repository.EventRepository;
+import com.firefly.conoche.repository.PromotionRepository;
 import com.firefly.conoche.repository.UserRepository;
 import com.firefly.conoche.security.SecurityUtils;
 import com.firefly.conoche.service.dto.EventDTO;
@@ -31,12 +32,18 @@ public class EventService {
     private final EventMapper eventMapper;
     private final UserRepository userRepository;
     private final LocalService localService;
+    private final PromotionRepository promotionRepository;
 
-    public EventService(EventRepository eventRepository, EventMapper eventMapper, LocalService localService,UserRepository userRepository) {
+    public EventService(EventRepository eventRepository,
+                        EventMapper eventMapper,
+                        LocalService localService,
+                        UserRepository userRepository,
+                        PromotionRepository promotionRepository) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
         this.localService = localService;
         this.userRepository = userRepository;
+        this.promotionRepository = promotionRepository;
 
     }
 
@@ -90,6 +97,7 @@ public class EventService {
         log.debug("Request to delete Event : {}", id);
         eventRepository.delete(id);
     }
+
     public void attendEvent(Long idEvent) {
          Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
 

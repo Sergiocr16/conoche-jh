@@ -66,6 +66,25 @@
                 "hours":  "{{value}} hour{{ value != 1 ? 's' : ''}}",
                 "minutes": "{{value}} minute{{ value != 1 ? 's' : ''}}",
                 "justNow" : "just now"
+            },
+
+
+            "notificationChanges": {
+                "name": "name",
+                "details": "details",
+                "price" : "price",
+                "initialTime" : "initial time",
+                "finalTime" : "final time",
+                "banner" : "banner",
+                "services" : "services",
+                "longitud": "longitud",
+                "latitud": "latitud",
+                "descripcion": "description",
+                "provincia": "provincia",
+                "schedules": "schedules",
+                "description":"description",
+                "image":"image",
+                "codeQuantity": "code quantity"
             }
         },
         "form": {
