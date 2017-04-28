@@ -20,7 +20,13 @@
             "creationTime": "Creation Time",
             "description": "Description",
             "event": "Event",
-            "required" : "You must select an image."
+            "required" : "You must select an image.",
+
+            "slider": {
+                "close": "close",
+                "download": "download",
+                "fullscreen": "fullscreen"
+            }
         }
     }
 }

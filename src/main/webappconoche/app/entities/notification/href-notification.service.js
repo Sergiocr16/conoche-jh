@@ -37,7 +37,8 @@
                 $state.go('local-ang-detail', { id: id });
                 break;
             case "PROMOTION":
-                throw 'NotImplementedError';
+                $state.go('event-ang.promotionDetail', { id: id});
+                break;
             case "USER":
                 throw 'NotImplementedError';
             case "REALTIME_EVENT_IMAGE":

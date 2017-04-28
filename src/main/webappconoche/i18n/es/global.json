@@ -67,6 +67,24 @@
                 "hours":  "{{value}} hora{{ value != 1 ? 's' : ''}}",
                 "minutes": "{{value}} minuto{{ value != 1 ? 's' : ''}}",
                 "justNow" : "ahora"
+            },
+
+            "notificationChanges": {
+                "name": "nombre",
+                "details": "detalles",
+                "price" : "precio",
+                "initialTime" : "hora inicial",
+                "finalTime" : "hora final",
+                "banner" : "banner",
+                "services" : "servicios",
+                "longitud": "longitud",
+                "latitud": "latitud",
+                "descripcion": "descripcion",
+                "provincia": "provincia",
+                "schedules": "horarios",
+                "description":"descripcion",
+                "image":"imagen",
+                "codeQuantity": "cantidad de codigos"
             }
         },
         "form": {
