@@ -36,6 +36,14 @@ public class ActivityService implements ApplicationListener<SessionDisconnectEve
         this.messagingTemplate = messagingTemplate;
     }
 
+    /**
+     * Este servicio resive una activadad y notifica a todos los usuarios subscritos.
+     * @param activityDTO actividad
+     * @param stompHeaderAccessor headers de la peticion.
+     * @param principal
+     * @return Retorna la activadad la cual pasa por el stomp broker.
+     */
+
     @SubscribeMapping("/topic/activity")
     @SendTo("/topic/tracker")
     public ActivityDTO sendActivity(@Payload ActivityDTO activityDTO, StompHeaderAccessor stompHeaderAccessor, Principal principal) {
@@ -49,6 +57,10 @@ public class ActivityService implements ApplicationListener<SessionDisconnectEve
         return activityDTO;
     }
 
+    /**
+     * Esto es un evento que corre cuando la session se pierde.
+     * @param event Evento.
+     */
     @Override
     public void onApplicationEvent(SessionDisconnectEvent event) {
         ActivityDTO activityDTO = new ActivityDTO();

@@ -20,10 +20,19 @@ public class NotificationMailService {
 
     public final MailService mailService;
 
+    /**
+     * Constructor
+     * @param mailService
+     */
     public NotificationMailService(MailService mailService) {
         this.mailService = mailService;
     }
 
+    /**
+     * Metodo async para enviar correos con notificaciones a un grupo de usuarios.
+     * @param recipients
+     * @param ao entidad que produjo la notificacion.
+     */
     @Async
     void sendMails(Set<User> recipients, ActionObject ao) {
         recipients.forEach( u -> mailService.sendNotificationEmail(u, ao));

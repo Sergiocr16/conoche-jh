@@ -27,6 +27,7 @@ import java.util.Optional;
 /**
  * Created by melvin on 3/10/2017.
  * Utilizar rest + SimpMessageSendingOperations vs Stomp
+ * Servicio de websockets para las imagenes en tiempo real.
  */
 @Controller
 public class RealTimeImageService {
@@ -38,6 +39,13 @@ public class RealTimeImageService {
     private final CRealTimeEventImageService crealTimeEventImageService;
     private final CAuthOwnerService cAuthOwnerService;
 
+    /**
+     * Constructor
+     * @param messagingTemplate objecto que se utiliza para enviar mensajes por websockets.
+     * @param realTimeEventImageService Servicio de las imagenes.
+     * @param crealTimeEventImageService Servicio custom de las imagenes.
+     * @param cAuthOwnerService Servicio custom para autenticar al dueño de las imagen.
+     */
     public RealTimeImageService(SimpMessageSendingOperations messagingTemplate,
                                 RealTimeEventImageService realTimeEventImageService,
                                 CRealTimeEventImageService crealTimeEventImageService,
@@ -49,6 +57,11 @@ public class RealTimeImageService {
         this.cAuthOwnerService          = cAuthOwnerService;
     }
 
+    /**
+     * Servicio para noticar a los usuarios subscriptos al canal de errores.
+     * @param e Cualquier exepcion.
+     * @return mensage de la excepcion.
+     */
     //Mejorar despues.
     @MessageExceptionHandler({IOException.class, RuntimeException.class})
     @SendToUser("/queue/errors")
@@ -59,6 +72,11 @@ public class RealTimeImageService {
     }
 
 
+    /**
+     * Servicio para crear mensages y notificar a los subscriptores.
+     * @param RTEimageDTO imagen
+     * @param idEvent id del evento al cual pertenece la imagen.
+     */
     @SubscribeMapping("/topic/saveRealTimeEventImage/{idEvent}")
     public void sendRealTimeEventImage(@Payload RealTimeEventImageDTO RTEimageDTO,
                                               @DestinationVariable Long idEvent) {
@@ -70,6 +88,11 @@ public class RealTimeImageService {
             realTimeEventImageService.save(RTEimageDTO));
     }
 
+    /**
+     * Servicio para eliminar las imagenes de un evento.
+     * @param idRealTimeImage id de la imagen
+     * @throws IOException Excepcion producida por llamada al api de cloudinary.
+     */
     @SubscribeMapping("/topic/deleteRealTimeEventImage/{idRealTimeImage}")
     public void deleteRealTimeEventImage(@DestinationVariable Long idRealTimeImage) throws IOException {
         RealTimeEventImageDTO imageDTO = crealTimeEventImageService.delete(idRealTimeImage);

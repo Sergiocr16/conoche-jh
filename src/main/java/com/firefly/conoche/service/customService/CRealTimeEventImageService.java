@@ -21,6 +21,7 @@ import java.util.Optional;
 
 /**
  * Service Implementation for managing RealTimeEventImage.
+ * Servicio de las imagenes en tiempo real.
  */
 @Service
 @Transactional(rollbackFor = IOException.class)
@@ -31,6 +32,13 @@ public class CRealTimeEventImageService {
     private final CloudinaryService cloudinaryService;
     private final CAuthOwnerService cAuthOwnerService;
 
+    /**
+     * Imagenes en tiempo real.
+     * @param realTimeEventImageRepository
+     * @param realTimeEventImageMapper
+     * @param cloudinaryService
+     * @param cAuthOwnerService
+     */
     public CRealTimeEventImageService(CRealTimeEventImageRepository realTimeEventImageRepository,
                                       RealTimeEventImageMapper realTimeEventImageMapper,
                                       CloudinaryService cloudinaryService,
@@ -41,6 +49,12 @@ public class CRealTimeEventImageService {
         this.cAuthOwnerService            = cAuthOwnerService;
     }
 
+    /**
+     * Buscar imagenes por id del evento.
+     * @param id
+     * @param page
+     * @return imagenes.
+     */
     @Transactional(readOnly = true)
     public Page<RealTimeEventImageDTO> findEventRealTimeImages(Long id, Pageable page) {
         return realTimeEventImageRepository.findByEventId(id, page)

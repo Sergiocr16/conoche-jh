@@ -41,6 +41,7 @@ import java.util.stream.Stream;
 
 /**
  * Created by melvin on 4/20/2017.
+ * Clase que se encarga de la creacion y eliminacion de las notificaciones.
  */
 @Service
 @Transactional
@@ -54,6 +55,15 @@ public class CNotificationService {
     private final DetailNotificationMapper detailNotificationMapper;
     private final NotificationMailService notificationMailService;
 
+    /**
+     * Constructor
+     * @param notificationRepository
+     * @param cNotificationRepository
+     * @param actionObjectRepository
+     * @param objectChangeRepository
+     * @param detailNotificationMapper
+     * @param notificationMailService
+     */
 
     public CNotificationService(NotificationRepository notificationRepository,
                                 CNotificationRepository cNotificationRepository,
@@ -70,7 +80,15 @@ public class CNotificationService {
         this.notificationMailService =   notificationMailService;
     }
 
-
+    /**
+     * Metodo asyncronico para crear las notificaciones.
+     * @param changesStream
+     * @param recipientsSupplier
+     * @param id
+     * @param type
+     * @param actionType
+     * @return
+     */
     @Async
     public CompletableFuture<List<DetailNotificationDTO>> createNotifications(Stream<String> changesStream,
                                                             Supplier<Set<User>> recipientsSupplier,
@@ -107,6 +125,7 @@ public class CNotificationService {
         return CompletableFuture.completedFuture(notifications);
     }
 
+
     private CompletableFuture<List<DetailNotificationDTO>> emptyResult() {
         return CompletableFuture.completedFuture(new ArrayList<>());
     }
@@ -140,6 +159,12 @@ public class CNotificationService {
         return objectChangeRepository.save(oc);
     }
 
+    /**
+     * Metodo que retorna todas las notificaciones activas y no leidad del usuario actual.
+     * @param page
+     * @param isRead
+     * @return notificaciones.
+     */
     @Transactional(readOnly = true)
     public Page<DetailNotificationDTO> getAllNotificationsFromCurrent(Pageable page, Boolean isRead) {
         return cNotificationRepository.findByUserIsCurrentUser(page, isRead)
@@ -163,7 +188,12 @@ public class CNotificationService {
 //        return new AsyncResult<>(users);
 //    }
 
-
+    /**
+     * Metodo para desactivar notificaciones muertas.
+     * @param type
+     * @param idStream
+     * @return Logins de los usuarios afectados.
+     */
     @Async
     public CompletableFuture<Stream<String>> deactivateActionObjects(ActionObjectType type, Stream<Long> idStream) {
 

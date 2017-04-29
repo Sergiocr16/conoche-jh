@@ -21,11 +21,21 @@ public class CAuthOwnerService {
     private final EventRepository eventRepository;
 
 
+    /**
+     * Constructor.
+     * @param userService
+     * @param eventRepository
+     */
     public CAuthOwnerService(UserService userService,EventRepository eventRepository) {
         this.userService = userService;
         this.eventRepository = eventRepository;
     }
 
+    /**
+     * retorna si el usuario actual es el dueño del evento.
+     * @param idEvent id del evento.
+     * @return booleano opcional.
+     */
     @Transactional(readOnly = true)
     public Optional<Boolean> currentUserIsOwner(Long idEvent) {
         return Optional

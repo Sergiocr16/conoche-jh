@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
 
+/**
+ * Servicio custom para los eventos.
+ */
 @Service
 @Transactional
 public class CEventService {
@@ -22,12 +25,25 @@ public class CEventService {
         this.eventMapper = eventMapper;
     }
 
+    /**
+     * Buscar por provincia.
+     * @param page
+     * @param provincia
+     * @param name
+     * @param zonedDateTime
+     * @return
+     */
     @Transactional(readOnly = true)
     public Page<EventDTO> findByProvincia(Pageable page, Provincia provincia, String name, ZonedDateTime zonedDateTime) {
         return ceventRepository.findByProvincia(page, provincia, name, zonedDateTime)
             .map(eventMapper::eventToEventDTO);
     }
 
+    /**
+     * Contar eventos que su tiempo final sea mayor al parametro.
+     * @param zonedDateTime
+     * @return cantidad de eventos.
+     */
     @Transactional(readOnly = true)
     public Long countEventAfter(ZonedDateTime zonedDateTime) {
         return ceventRepository.countByFinalTimeGreaterThan(zonedDateTime);
