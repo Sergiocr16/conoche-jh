@@ -10,11 +10,11 @@
         </div>
     </div>
     <div class="modal-body">
-        <jhi-alert-error></jhi-alert-error>
         <div class="form-group form-md-line-input">
             <textarea type="text" class="form-control" name="payload" id="field_payload"
                     ng-model="vm.message.payload" maxlength="255"
-                    required/>
+                    required>
+            </textarea>
             <label class="control-label" data-translate="conocheApp.message.payload" for="field_payload">Payload</label>
             <div ng-show="editForm.payload.$invalid">
                 <span class="help-block"

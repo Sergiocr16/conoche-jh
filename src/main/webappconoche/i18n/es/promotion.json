@@ -24,7 +24,9 @@
             "codes": "Codes",
             "event": "Event",
             "codeQuantity": "Cantidad de códigos",
-            "redeemCode":"Has redimido un código"
+            "redeemCode":"Has solicitado un código de promoción correctamente",
+            "obtainCode":"Solicitar código",
+            "canObtain": "Para ti:"
         }
     }
 }

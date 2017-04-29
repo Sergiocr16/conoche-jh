@@ -213,6 +213,12 @@
              data: {
                  authorities: ['ROLE_USER','ROLE_OWNER']
              },
+             resolve: {
+                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                     $translatePartialLoader.addPart('promotion');
+                     return $translate.refresh();
+                 }]
+              },
              onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                  $uibModal.open({
                      templateUrl: 'app/entities/promotion/promotion-ang-idetail-in-events.html',
