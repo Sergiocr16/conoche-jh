@@ -14,9 +14,13 @@ import java.util.List;
 
 /**
  * Spring Data JPA repository for the Promotion entity.
+ * AUTOR: DIEGO BARILLAS VALVERDE
  */
 @SuppressWarnings("unused")
 public interface PromotionRepository extends NotifyRepository<Promotion>, PromotionRepositoryCustom {
+    /**
+     *Descripcion: se trae todos las promociones por el id del evento
+     */
     List<Promotion> findByEventId(Long eventId);
     List<Promotion> findByEventIn(Collection<Event> events);
 }

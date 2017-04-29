@@ -43,7 +43,7 @@ public class PromotionResource {
 
     /**
      * POST  /promotions : Create a new promotion.
-     *
+     *AUTOR: DIEGO BARILLAS VALVERDE
      * @param promotionDTO the promotionDTO to create
      * @return the ResponseEntity with status 201 (Created) and with body the new promotionDTO, or with status 400 (Bad Request) if the promotion has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
@@ -63,7 +63,7 @@ public class PromotionResource {
 
     /**
      * PUT  /promotions : Updates an existing promotion.
-     *
+     *AUTOR: DIEGO BARILLAS VALVERDE
      * @param promotionDTO the promotionDTO to update
      * @return the ResponseEntity with status 200 (OK) and with body the updated promotionDTO,
      * or with status 400 (Bad Request) if the promotionDTO is not valid,
@@ -85,7 +85,7 @@ public class PromotionResource {
 
     /**
      * GET  /promotions : get all the promotions.
-     *
+     *AUTOR: DIEGO BARILLAS VALVERDE
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of promotions in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
@@ -102,7 +102,7 @@ public class PromotionResource {
 
     /**
      * GET  /promotions/:id : get the "id" promotion.
-     *
+     *AUTOR: DIEGO BARILLAS VALVERDE
      * @param id the id of the promotionDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the promotionDTO, or with status 404 (Not Found)
      */
@@ -116,7 +116,7 @@ public class PromotionResource {
 
     /**
      * DELETE  /promotions/:id : delete the "id" promotion.
-     *
+     *AUTOR: DIEGO BARILLAS VALVERDE
      * @param id the id of the promotionDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
@@ -127,7 +127,12 @@ public class PromotionResource {
         promotionService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
-
+    /**
+     * GET  PROMOTIONS BY EVENT
+     *AUTOR: DIEGO BARILLAS VALVERDE
+     * RECIBE UN ID DEL EVENTO Y RETORNA TODAS LAS PROMOCIONES CON ESE ID DE EVENTO
+     * @return the ResponseEntity with status 200 (OK) and with body the promotionDTO, or with status 404 (Not Found)
+     */
     @GetMapping("/getByEvent")
     @Timed
     public ResponseEntity<List<PromotionDTO>> getByEvent(@ApiParam Pageable pageable, Long eventId)

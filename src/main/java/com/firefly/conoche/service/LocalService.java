@@ -141,7 +141,10 @@ public class LocalService {
         localRepository.delete(id);
         cloudinaryService.deleteRealTimeImageUrl(images);
     }
-
+    /**
+     *  AUTOR: DIEGO BARILLAS VALVERDE
+     *  Servicio que se trae todos los locales por medio del id del user que recibe
+     */
     @Transactional(readOnly = true)
     public Page<LocalDTO> getByOwner(Pageable pageable,Long OwnerId) {
         log.debug("Request to get all Residents");
