@@ -43,7 +43,7 @@ public class RatingLocalResource {
 
     /**
      * POST  /rating-locals : Create a new ratingLocal.
-     *
+     *  author Sergio Castor
      * @param ratingLocalDTO the ratingLocalDTO to create
      * @return the ResponseEntity with status 201 (Created) and with body the new ratingLocalDTO, or with status 400 (Bad Request) if the ratingLocal has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
@@ -63,7 +63,7 @@ public class RatingLocalResource {
 
     /**
      * PUT  /rating-locals : Updates an existing ratingLocal.
-     *
+     *  author Sergio Castor
      * @param ratingLocalDTO the ratingLocalDTO to update
      * @return the ResponseEntity with status 200 (OK) and with body the updated ratingLocalDTO,
      * or with status 400 (Bad Request) if the ratingLocalDTO is not valid,
@@ -102,7 +102,7 @@ public class RatingLocalResource {
 
     /**
      * GET  /rating-locals/:id : get the "id" ratingLocal.
-     *
+     *  author Sergio Castor
      * @param id the id of the ratingLocalDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the ratingLocalDTO, or with status 404 (Not Found)
      */
@@ -123,7 +123,7 @@ public class RatingLocalResource {
     }
     /**
      * DELETE  /rating-locals/:id : delete the "id" ratingLocal.
-     *
+     *  author Sergio Castor
      * @param id the id of the ratingLocalDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */

@@ -91,7 +91,10 @@ public class PromotionService {
         log.debug("Request to delete Promotion : {}", id);
         promotionRepository.delete(id);
     }
-
+    /**
+     *  AUTOR: DIEGO BARILLAS VALVERDE
+     *  Servicio que se trae todos las promociones del id del evento que recibe.
+     */
     @Transactional(readOnly = true)
     public Page<PromotionDTO> getByEvent(Pageable pageable,Long eventId) {
         log.debug("Request to get all Residents");

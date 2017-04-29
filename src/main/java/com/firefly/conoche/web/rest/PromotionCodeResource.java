@@ -50,7 +50,7 @@ public class PromotionCodeResource {
 
     /**
      * POST  /promotion-codes : Create a new promotionCode.
-     *
+     * author Sergio
      * @param promotionCodeDTO the promotionCodeDTO to create
      * @return the ResponseEntity with status 201 (Created) and with body the new promotionCodeDTO, or with status 400 (Bad Request) if the promotionCode has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
@@ -70,7 +70,7 @@ public class PromotionCodeResource {
 
     /**
      * PUT  /promotion-codes : Updates an existing promotionCode.
-     *
+     * author Sergio
      * @param promotionCodeDTO the promotionCodeDTO to update
      * @return the ResponseEntity with status 200 (OK) and with body the updated promotionCodeDTO,
      * or with status 400 (Bad Request) if the promotionCodeDTO is not valid,
@@ -92,7 +92,7 @@ public class PromotionCodeResource {
 
     /**
      * GET  /promotion-codes : get all the promotionCodes.
-     *
+     * author Sergio
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of promotionCodes in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
@@ -106,7 +106,14 @@ public class PromotionCodeResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/promotion-codes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-
+    /**
+     * GET  /promotion-codes : get all the promotionCodes by user and promotion.
+     * author Sergio
+     * @param userId the user id
+     * @param promotionId the promotion id
+     * @return the ResponseEntity with status 200 (OK) and the list of promotionCodes in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
     @GetMapping("/promotion-codes/byUserAndPromotion/{userId}/{promotionId}")
     @Timed
     public ResponseEntity<List<PromotionCodeDTO>> getByUserIdAndPromotionId( @PathVariable (value = "userId")  Long userId, @PathVariable(value = "promotionId")  Long promotionId)
@@ -116,7 +123,13 @@ public class PromotionCodeResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/promotion-codes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-
+    /**
+     * GET  /promotion-codes : get all the promotionCodes by user
+     * author Sergio
+     * @param userId the user id
+     * @return the ResponseEntity with status 200 (OK) and the list of promotionCodes in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
     @GetMapping("/promotion-codes/byUser/{userId}")
     @Timed
     public ResponseEntity<List<PromotionCodeDTO>> getByUser( @PathVariable (value = "userId")  Long userId)
@@ -136,7 +149,13 @@ public class PromotionCodeResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/promotion-codes");
         return new ResponseEntity<>(result.getContent(), headers, HttpStatus.OK);
     }
-
+    /**
+     * GET  /promotion-codes : get all the promotionCodes by promotion.
+     * author Sergio
+     * @param promotionId the promotion id
+     * @return the ResponseEntity with status 200 (OK) and the list of promotionCodes in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
     @GetMapping("/promotion-codes/availableByPromotion/{promotionId}")
     @Timed
     public ResponseEntity<List<PromotionCodeDTO>> getAvailableByPromotionId(@PathVariable(value = "promotionId")  Long promotionId)
@@ -146,7 +165,13 @@ public class PromotionCodeResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/promotion-codes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-
+    /**
+     * Redeem a code cased on the user id and the promotion id
+     * author Sergio
+     * @param userId the user id
+     * @param promotionId the promotion id
+     * @return the ResponseEntity with status 200 (OK)
+     */
     @GetMapping("/promotion-codes/redeem/{promotionId}/{userId}")
     @Timed
     public ResponseEntity<List<PromotionCodeDTO>> redemCode(@PathVariable(value = "promotionId")  Long promotionId,@PathVariable(value = "userId")  Long userId)
@@ -156,7 +181,13 @@ public class PromotionCodeResource {
 //        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders("/api/promotion-codes");
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
+    /**
+     * GET  /promotion-codes : get all the promotionCodes by code.
+     * author Sergio
+     * @param code the code
+     * @return the ResponseEntity with status 200 (OK) and the list of promotionCodes in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
     @GetMapping("/promotion-codes/findCode/{code}")
     @Timed
     public ResponseEntity<PromotionCodeDTO> findByCode(@PathVariable(value = "code")  String code)

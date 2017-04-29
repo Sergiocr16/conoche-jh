@@ -9,6 +9,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.net.URISyntaxException;
 import java.security.SecureRandom;
 import java.time.ZonedDateTime;
 import java.util.*;
@@ -197,7 +198,10 @@ public class Promotion implements Serializable, IEntity {
         promotionCode.setPromotion(null);
         return this;
     }
-
+    /**
+     *  author Sergio Casto
+     *  Generate the promotions codes in base of the code quantity
+     */
     public void generatePromotionsCodes(){
     for (int i = 0;i<this.codeQuantity;i++){
         PromotionCode promotionCode = new PromotionCode();

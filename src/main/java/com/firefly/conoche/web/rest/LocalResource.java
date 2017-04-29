@@ -136,7 +136,13 @@ public class LocalResource {
         localService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
-
+    /**
+     * GET  /locals : get all the locals by the owner id.
+     *AUTOR: DIEGO BARILLAS VALVERDE
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of locals in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
     @GetMapping("/getByOwner")
     @Timed
     public ResponseEntity<List<LocalDTO>> getByOwner(@ApiParam Pageable pageable, Long ownerId)

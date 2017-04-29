@@ -85,7 +85,7 @@ public class RatingLocalService {
     }
     /**
      *  Get one ratingLocal by login and local id.
-     *
+     *  author Sergio Castor
      *  @param localId the id of the local
      *  @param userLogin the login of the user
      *  @return the entity
@@ -102,7 +102,7 @@ public class RatingLocalService {
 
     /**
      *  Delete the  ratingLocal by id.
-     *
+     *  author Sergio Castor
      *  @param id the id of the entity
      *  @return the entity
      */
@@ -112,7 +112,7 @@ public class RatingLocalService {
     }
     /**
      *  Calculate rating in base of the average of all ratings.
-     *
+     *  author Sergio Castor
      *  @param localId the id of the local
      *  @return the rating of the local
      */
