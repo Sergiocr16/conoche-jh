@@ -17,7 +17,7 @@
         function request (config) {
             /*jshint camelcase: false */
             config.headers = config.headers || {};
-            if (config.url.startsWith(cloudinary.config().base_url)) {
+            if (config.url.startsWith && config.url.startsWith(cloudinary.config().base_url)) {
                 return config;
             }
             var token = $localStorage.authenticationToken || $sessionStorage.authenticationToken;

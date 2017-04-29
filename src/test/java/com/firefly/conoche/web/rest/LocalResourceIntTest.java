@@ -2,6 +2,7 @@ package com.firefly.conoche.web.rest;
 
 import com.firefly.conoche.ConocheApp;
 
+import com.firefly.conoche.domain.Category;
 import com.firefly.conoche.domain.Local;
 import com.firefly.conoche.domain.User;
 import com.firefly.conoche.repository.LocalRepository;
@@ -110,6 +111,7 @@ public class LocalResourceIntTest {
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
+
     public static Local createEntity(EntityManager em) {
         Local local = new Local()
                 .name(DEFAULT_NAME)
@@ -121,11 +123,14 @@ public class LocalResourceIntTest {
                 .descripcion(DEFAULT_DESCRIPCION)
                 .provincia(DEFAULT_PROVINCIA)
                 .rating(DEFAULT_RATING);
+
+
         // Add required entity
         User owner = UserResourceIntTest.createEntity(em);
         em.persist(owner);
         em.flush();
         local.setOwner(owner);
+
         return local;
     }
 
@@ -142,24 +147,11 @@ public class LocalResourceIntTest {
         // Create the Local
         LocalDTO localDTO = localMapper.localToLocalDTO(local);
 
+        //Should fail since there is no session user.
         restLocalMockMvc.perform(post("/api/locals")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(localDTO)))
-            .andExpect(status().isCreated());
-
-        // Validate the Local in the database
-        List<Local> localList = localRepository.findAll();
-        assertThat(localList).hasSize(databaseSizeBeforeCreate + 1);
-        Local testLocal = localList.get(localList.size() - 1);
-        assertThat(testLocal.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testLocal.getLongitud()).isEqualTo(DEFAULT_LONGITUD);
-        assertThat(testLocal.getBanner()).isEqualTo(DEFAULT_BANNER);
-        assertThat(testLocal.getBannerContentType()).isEqualTo(DEFAULT_BANNER_CONTENT_TYPE);
-        assertThat(testLocal.getBannerUrl()).isEqualTo(DEFAULT_BANNER_URL);
-        assertThat(testLocal.getLatitud()).isEqualTo(DEFAULT_LATITUD);
-        assertThat(testLocal.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
-        assertThat(testLocal.getProvincia()).isEqualTo(DEFAULT_PROVINCIA);
-        assertThat(testLocal.getRating()).isEqualTo(DEFAULT_RATING);
+            .andExpect(status().isInternalServerError());
     }
 
     @Test
@@ -303,15 +295,15 @@ public class LocalResourceIntTest {
         // Create the Local
         LocalDTO localDTO = localMapper.localToLocalDTO(local);
 
-        // If the entity doesn't have an ID, it will be created instead of just being updated
+        //Should fail since only owner can edit local.
         restLocalMockMvc.perform(put("/api/locals")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(localDTO)))
-            .andExpect(status().isCreated());
+            .andExpect(status().isInternalServerError());
 
         // Validate the Local in the database
         List<Local> localList = localRepository.findAll();
-        assertThat(localList).hasSize(databaseSizeBeforeUpdate + 1);
+        assertThat(localList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
@@ -332,6 +324,7 @@ public class LocalResourceIntTest {
     }
 
     @Test
+    @Transactional
     public void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(Local.class);
     }
