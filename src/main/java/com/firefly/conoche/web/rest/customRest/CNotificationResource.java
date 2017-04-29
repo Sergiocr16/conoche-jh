@@ -30,6 +30,7 @@ import java.util.Optional;
 
 /**
  * REST controller for managing Notification.
+ * Controlador rest para las notificaciones.
  */
 @RestController
 @RequestMapping("/api")
@@ -40,12 +41,26 @@ public class CNotificationResource {
     private final CNotificationService cNotificationService;
     private final NotificationService notificationService;
 
+    /**
+     * Constuctor.
+     * @param cNotificationService
+     * @param notificationService
+     */
     public CNotificationResource(CNotificationService cNotificationService, NotificationService notificationService) {
         this.cNotificationService = cNotificationService;
         this.notificationService = notificationService;
     }
 
 
+    /**
+     *
+     * @param read en caso de ser verdadero se trae las
+     *             notificaciones leidas. Ademas en caso de ser
+     *             null se retornan todas las notificaciones
+     * @param pageable objecto para la paginacion
+     * @return notificaciones
+     * @throws URISyntaxException
+     */
     @GetMapping("/notification/user")
     @Timed
     public ResponseEntity<List<DetailNotificationDTO>> getMesageByEvent(@RequestParam(value="read",required = false) Boolean read,
@@ -58,7 +73,12 @@ public class CNotificationResource {
     }
 
 
-
+    /**
+     *
+     * @param id
+     * @return Status code unauthorized en caso de no ser el dueño de la aplicacion el que haga la consulta.
+     * @throws URISyntaxException
+     */
     @PostMapping("/notification/{id}/read")
     @Timed
     public ResponseEntity getMesageByEvent(@PathVariable Long id) throws URISyntaxException {

@@ -18,7 +18,10 @@ import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-
+/**
+ * Melvin Acuña Guntanis 20/3/2017
+ * Rest controller custom de las imagenes en tiempo real.
+ */
 @RestController
 @RequestMapping("/api")
 public class CRealTimeEventImageResource {
@@ -29,10 +32,21 @@ public class CRealTimeEventImageResource {
 
     private final CRealTimeEventImageService realTimeEventImageService;
 
+    /**
+     * Constructor
+     * @param realTimeEventImageService
+     */
     public CRealTimeEventImageResource(CRealTimeEventImageService realTimeEventImageService) {
         this.realTimeEventImageService = realTimeEventImageService;
     }
 
+    /**
+     * Buscar las imagenes por evento.
+     * @param idEvent
+     * @param pageable
+     * @return imagenes del evento.
+     * @throws URISyntaxException
+     */
     @GetMapping("/real-time-event-images/event/{idEvent}")
     @Timed
     public ResponseEntity<List<RealTimeEventImageDTO>> getImagesByEvent(@PathVariable Long idEvent,
@@ -45,6 +59,14 @@ public class CRealTimeEventImageResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    /**
+     * Buscar imagenes engresadas en las ultimas n horas.
+     * @param idEvent
+     * @param hours
+     * @param pageable
+     * @return imagenes en tiempo real.
+     * @throws URISyntaxException
+     */
     @GetMapping("/real-time-event-images/event/{idEvent}/{hours}")
     @Timed
     public ResponseEntity<List<RealTimeEventImageDTO>> getLastNHourImages(@PathVariable Long idEvent,

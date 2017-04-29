@@ -25,6 +25,7 @@ import java.util.function.Predicate;
 
 /**
  * Created by ileanaguntanis on 5/4/17.
+ * Resource custom para el evento.
  */
 @RestController
 @RequestMapping("/api")
@@ -34,6 +35,15 @@ public class CEventResource {
         this.cEventService = cEventService;
     }
 
+    /**
+     * Metodo que permite buscar un local por diversos parametros opcionales.
+     * @param provincia provincia del evento.
+     * @param name Nombre
+     * @param history En caso de ser falso solo muestra los eventos por finalizar.
+     * @param pageable
+     * @return Repuesta con paginacion de los eventos.
+     * @throws URISyntaxException
+     */
     @GetMapping("/event/search")
     @Timed
     public ResponseEntity<List<EventDTO>> getMesageByEvent(@RequestParam(value="provincia",required = false) Provincia provincia,
@@ -50,6 +60,11 @@ public class CEventResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "api/event/location");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+    /**
+     * Cuenta la cantidad de eventos de toda la aplicacion.
+     * @return cantidad de eventos.
+     */
 
     @GetMapping("/event/count")
     @Timed

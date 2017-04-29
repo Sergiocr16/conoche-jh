@@ -23,6 +23,7 @@ import java.util.stream.StreamSupport;
 
 /**
  * Created by melvin on 4/19/2017.
+ * Aspecto que se utiliza para interceptar diversas operaciones de los repositorios
  */
 
 @Transactional
@@ -33,7 +34,15 @@ public class NotificationAspect {
     @Inject
     private CNotificationService cNotificationService;
 
-
+    /**
+     * Advice para interseptar el guardar y editar. Crea notificaciones para cada recipiente.
+     * @param pjp metodo que se intercepta.
+     * @param notificable Entidad por eliminar o editar.
+     * @param repo repositorio al cual se intercepta.
+     * @param <T> Cualquier tipo que implemente IEntitu.
+     * @return Objecto retornado por el metodo a interceptar.
+     * @throws Throwable
+     */
     @Around(value="execution(public * com.firefly.conoche.repository.notifications.NotifyRepository+.save(..)) && args(notificable,..) && target(repo)")
     public <T extends IEntity> Object auditCreate(ProceedingJoinPoint pjp, T notificable, NotifyRepository<T> repo) throws Throwable {
 
@@ -59,6 +68,14 @@ public class NotificationAspect {
         return afther;
     }
 
+    /**
+     * Advice para interceptar el borrar de un repositorio.
+     * @param pjp join point
+     * @param id id de la entidad
+     * @param repo repositorio.
+     * @param <T>
+     * @throws Throwable
+     */
     @Around(value="execution(public * com.firefly.conoche.repository.notifications.NotifyRepository+.delete(..)) && args(id,..) && target(repo)")
     public <T extends IEntity> void auditDelete(ProceedingJoinPoint pjp, Long id, NotifyRepository<T> repo) throws Throwable {
 
@@ -68,12 +85,24 @@ public class NotificationAspect {
             entity.getObjectType(), Stream.of(entity.getId()));
     }
 
+    /**
+     * Advice Advice para interceptar el borrar de un repositorio
+     * @param entity
+     * @param <T>
+     * @throws Throwable
+     */
     @AfterReturning(pointcut="execution(public * com.firefly.conoche.repository.notifications.NotifyRepository+.delete(..)) && args(entity,..)")
     public <T extends IEntity> void auditDeleteEntity(T entity) throws Throwable {
         cNotificationService.deactivateActionObjects(
             entity.getObjectType(), Stream.of(entity.getId()));
     }
 
+    /**
+     * Advice para interceptar la auditoria.
+     * @param entitys
+     * @param <T>
+     * @throws Throwable
+     */
     @AfterReturning(pointcut="execution(public * com.firefly.conoche.repository.notifications.NotifyRepository+.deleteInBatch(..))" +
         " && args(entitys,..)")
     public <T extends IEntity> void auditDeleteEntitys(Iterable<T> entitys) throws Throwable {

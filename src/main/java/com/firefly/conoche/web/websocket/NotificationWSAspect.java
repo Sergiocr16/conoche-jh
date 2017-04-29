@@ -24,6 +24,7 @@ import java.util.stream.Stream;
 
 /**
  * Created by melvin on 4/22/2017.
+ * Aspecto encargado de enviar notificaciones por medio de websockets.
  */
 
 @Order(1)
@@ -36,6 +37,12 @@ public class NotificationWSAspect {
     @Inject
     private SimpMessageSendingOperations messagingTemplate;
 
+    /**
+     * Advice que intercepta el metodo encargado de crear las notificaciones.
+     * @param retVal es un Future con las lista de notificaciones creadas.
+     * @throws InterruptedException
+     * @throws ExecutionException
+     */
     @AfterReturning(
         pointcut="execution(public * com.firefly.conoche.service.customService.CNotificationService+.createNotifications(..))",
         returning="retVal")
@@ -47,6 +54,12 @@ public class NotificationWSAspect {
         }
     }
 
+    /**
+     * Advice que intercepta la desactivacion de las notificaciones.
+     * @param retVal Lista login de los usuarios.
+     * @throws InterruptedException Exepcion en caso de que el thread se interumpido.
+     * @throws ExecutionException
+     */
     @AfterReturning(
         pointcut="execution(public * com.firefly.conoche.service.customService.CNotificationService+.deactivateActionObjects(..))",
         returning="retVal")
@@ -63,6 +76,10 @@ public class NotificationWSAspect {
         }
     }
 
+    /**
+     *  Envia una notificacion por websockets al usuario al cual le pertenece.
+     * @param notificationDTO notificacion.
+     */
     private void sendToUser(DetailNotificationDTO notificationDTO) {
         messagingTemplate.convertAndSendToUser(notificationDTO.getUserLogin(),
             USER_SUBSCRIPTION_URL, notificationDTO);
