@@ -167,6 +167,7 @@
             data: {
                 authorities: ['ROLE_USER','ROLE_OWNER']
             },
+
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
                     templateUrl: 'app/entities/local/local-ang-dialog.html',
@@ -187,7 +188,13 @@
                                 provincia: null,
                                 id: null
                             };
-                        }
+                        },
+                      translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+
+                                                        $translatePartialLoader.addPart('provincia');
+
+                                                        return $translate.refresh();
+                                                    }]
                     }
                 }).result.then(function() {
                     $state.go('local-ang-by-owner', null, { reload: 'local-ang-by-owner' });
