@@ -1,10 +1,10 @@
 
         <jhi-alert></jhi-alert>
         <div ng-show="vm.promotionCodes.length==0" style="height:120px"><h3 class="text-center" data-translate="conocheApp.promotionCode.noCodes">No tienes ningún código aún</h3></div>
-        <div class="col-md-12 col-sm-12 col-xs-12">
-         <div class="col-md-12 col-sm-12 col-xs-12 no-padding" style="margin:10px 0;" ng-repeat="promoCode in vm.promotionCodes">
+        <div class="col-lg-offset-2 col-lg-8 col-md-8 col-md-offset-2 col-sm-offset-1 col-sm-10 col-xs-12">
+         <div class="col-md-12 col-xs-12 col-sm-12  no-padding" style="margin:10px 0;" ng-repeat="promoCode in vm.promotionCodes">
              <div  class="font-white">
-                 <div class="col-md-12 col-xs-12 col-sm-12 code-promotion height-130 top-0">
+                 <div class="col-lg-offset-2 col-lg-8 col-md-8 col-md-offset-2 col-sm-offset-1 col-sm-10 col-xs-12 code-promotion height-130 top-0">
                      <span class="col-md-12 col-lg-12 col-sm-12 col-xs-12 no-padding Raleway Raleway" style="margin-top:15px">
                          <h3 class="text-center "><span class="promo-code">{{promoCode.code}}</span></h3></span>
                  </div>

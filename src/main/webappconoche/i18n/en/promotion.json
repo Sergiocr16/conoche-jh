@@ -24,7 +24,9 @@
             "codes": "Codes",
             "event": "Event",
             "codeQuantity": "Code quantity",
-            "redeemCode":"You have redeemed a code!"
+            "redeemCode":"You have a new promotion code!",
+            "obtainCode":"Obtain code",
+            "canObtain": "For you:"
         }
     }
 }

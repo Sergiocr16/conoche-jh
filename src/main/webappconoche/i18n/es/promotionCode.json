@@ -24,7 +24,7 @@
             "noPromo":"No se ha encontrado ningún código de promoción",
             "swapedPromo": "El código se ha canjeado correctamente",
             "noCodes":"No tienes ningún código aún",
-            "redeemCode":"Has redimido un código"
+            "redeemCode":"Has solicitado un código de promoción correctamente"
         }
     }
 }
