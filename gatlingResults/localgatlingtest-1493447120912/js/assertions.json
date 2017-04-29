@@ -1,0 +1,10 @@
+{
+  "simulation": "LocalGatlingTest",
+  "simulationId": "localgatlingtest",
+  "start": 1493447120912,
+  "description": "null",
+  "scenarios": ["Users"],
+  "assertions": [
+
+  ]
+}

@@ -22,7 +22,9 @@
     "useSass": false,
     "clientPackageManager": "yarn",
     "applicationType": "monolith",
-    "testFrameworks": [],
+    "testFrameworks": [
+      "gatling"
+    ],
     "jhiPrefix": "jhi",
     "enableTranslation": true,
     "nativeLanguage": "es",

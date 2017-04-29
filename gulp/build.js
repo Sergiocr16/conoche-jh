@@ -36,6 +36,7 @@ module.exports = function() {
         '!' + config.app + 'app/**/*.html',
         '!' + config.app + 'swagger-ui/**/*',
         '!' + config.bower + '**/*.html'])
+        .pipe(plumber({errorHandler: handleErrors}))
         //init sourcemaps and prepend semicolon
         .pipe(useref({}, initTask))
         //append html templates

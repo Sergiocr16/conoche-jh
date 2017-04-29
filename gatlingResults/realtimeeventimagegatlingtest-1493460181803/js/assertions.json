@@ -1,0 +1,10 @@
+{
+  "simulation": "RealTimeEventImageGatlingTest",
+  "simulationId": "realtimeeventimagegatlingtest",
+  "start": 1493460181803,
+  "description": "null",
+  "scenarios": ["Users"],
+  "assertions": [
+
+  ]
+}
