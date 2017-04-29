@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.mail.MailAuthenticationException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -131,19 +132,23 @@ public class MailService {
 
     @Async
     public void sendNotificationEmail(User user, ActionObject ao) {
-        log.debug("Sending notification email", user.getEmail());
-        Locale locale = Locale.forLanguageTag(user.getLangKey());
-        Context context = new Context(locale);
-        String baseUrl = jHipsterProperties.getMail().getBaseUrl();
 
-        context.setVariable(USER, user);
-        context.setVariable("url", baseUrl + getNotificationUrl(ao));
-        context.setVariable("objectId", ao.getObjectId());
-        context.setVariable("message", translateNotificationMessage(locale, ao));
-        String subject = messageSource.getMessage(NOTIFICATION_TRANSLATION + "title", null, locale);
-        String content = templateEngine.process("notificationEmail", context);
-        sendEmail(user.getEmail(), subject, content, false, true);
+        try {
+            log.debug("Sending notification email", user.getEmail());
+            Locale locale = Locale.forLanguageTag(user.getLangKey());
+            Context context = new Context(locale);
+            String baseUrl = jHipsterProperties.getMail().getBaseUrl();
 
+            context.setVariable(USER, user);
+            context.setVariable("url", baseUrl + getNotificationUrl(ao));
+            context.setVariable("objectId", ao.getObjectId());
+            context.setVariable("message", translateNotificationMessage(locale, ao));
+            String subject = messageSource.getMessage(NOTIFICATION_TRANSLATION + "title", null, locale);
+            String content = templateEngine.process("notificationEmail", context);
+            sendEmail(user.getEmail(), subject, content, false, true);
+        }catch(MailAuthenticationException exception) {
+            log.error(exception.getMessage());
+        }
     }
 
     private String translateNotificationMessage(Locale locale, ActionObject ao) {
