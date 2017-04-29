@@ -22,6 +22,15 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
+            'src/main/webappconoche/bower_components/jquery/dist/jquery.js',
+            'src/main/webappconoche/app/aa-files/custom6-bootstrap.js',
+            'src/main/webappconoche/app/aa-files/custom5-bootstrap-hover-dropdown.min.js',
+            'src/main/webappconoche/app/aa-files/custom4-metronic.js',
+            'src/main/webappconoche/app/aa-files/custom3-layout.js',
+            'src/main/webappconoche/app/aa-files/custom2-demo.js',
+            'src/main/webappconoche/app/aa-files/custom1-quick-sidebar.js',
+            'src/main/webappconoche/app/aa-files/custom0-moment.js.js',
+
             // bower:js
             'src/main/webappconoche/bower_components/jquery/dist/jquery.js',
             'src/main/webappconoche/bower_components/messageformat/messageformat.js',
@@ -62,16 +71,18 @@ module.exports = function (config) {
             'src/main/webappconoche/bower_components/angular-animate/angular-animate.js',
             'src/main/webappconoche/bower_components/angular-slimscroll/angular-slimscroll.js',
             'src/main/webappconoche/bower_components/angular-timer/dist/angular-timer.js',
-            'src/main/webappconoche/bower_components/angular-animate/angular-animate.js',
             'src/main/webappconoche/bower_components/angular-mocks/angular-mocks.js',
             'src/main/webappconoche/bower_components/outlayer/item.js',
             'src/main/webappconoche/bower_components/outlayer/outlayer.js',
             'src/main/webappconoche/bower_components/masonry/masonry.js',
             'src/main/webappconoche/bower_components/angular-masonry/angular-masonry.js',
             // endbower
+
+
             'src/main/webappconoche/app/app.module.js',
             'src/main/webappconoche/app/app.state.js',
             'src/main/webappconoche/app/app.constants.js',
+            'src/main/webappconoche/app/services/cloudinary/*.js',
             'src/main/webappconoche/app/**/*.+(js|html)',
             'src/test/javascript/spec/helpers/module.js',
             'src/test/javascript/spec/helpers/httpBackend.js',
@@ -80,7 +91,7 @@ module.exports = function (config) {
 
 
         // list of files / patterns to exclude
-        exclude: [],
+        exclude: ['src/main/webappconoche/app/aa-files/custom3-layout.js'],
 
         preprocessors: {
             './**/*.js': sourcePreprocessors

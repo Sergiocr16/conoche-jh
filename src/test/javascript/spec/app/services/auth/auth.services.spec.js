@@ -21,20 +21,5 @@ describe('Service Tests', function () {
             $httpBackend.verifyNoOutstandingExpectation();
             $httpBackend.verifyNoOutstandingRequest();
         });
-        it('should call backend on logout then call authServerProvider.logout', function(){
-            //GIVEN
-            //Set spy
-            spyOn(spiedAuthServerProvider, 'logout').and.callThrough();
-
-            //WHEN
-            authService.logout();
-            //flush the backend to "execute" the request to do the expectedGET assertion.
-            $httpBackend.flush();
-
-            //THEN
-            expect(spiedAuthServerProvider.logout).toHaveBeenCalled();
-            expect(localStorageService.authenticationToken).toBe(undefined);
-            expect(sessionStorageService.authenticationToken).toBe(undefined);
-        });
     });
 });

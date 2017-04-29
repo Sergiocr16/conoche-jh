@@ -15,7 +15,7 @@ describe('Controller Tests', function() {
             MockPromotion = jasmine.createSpy('MockPromotion');
             MockPromotionCode = jasmine.createSpy('MockPromotionCode');
             MockEvent = jasmine.createSpy('MockEvent');
-            
+
 
             var locals = {
                 '$scope': $scope,
@@ -31,18 +31,6 @@ describe('Controller Tests', function() {
             };
         }));
 
-
-        describe('Root Scope Listening', function() {
-            it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'conocheApp:promotionUpdate';
-
-                createController();
-                expect($rootScope.$$listenerCount[eventType]).toEqual(1);
-
-                $scope.$destroy();
-                expect($rootScope.$$listenerCount[eventType]).toBeUndefined();
-            });
-        });
     });
 
 });

@@ -86,6 +86,7 @@ public class NotificationResourceIntTest {
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
+
     public static Notification createEntity(EntityManager em) {
         Notification notification = new Notification()
                 .isRead(DEFAULT_IS_READ);
@@ -265,6 +266,7 @@ public class NotificationResourceIntTest {
     }
 
     @Test
+    @Transactional
     public void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(Notification.class);
     }
