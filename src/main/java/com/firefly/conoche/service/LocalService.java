@@ -1,18 +1,14 @@
 package com.firefly.conoche.service;
 
-import com.firefly.conoche.domain.Event;
-import com.firefly.conoche.domain.Local;
-import com.firefly.conoche.domain.RatingLocal;
-import com.firefly.conoche.domain.User;
-import com.firefly.conoche.repository.EventRepository;
-import com.firefly.conoche.repository.LocalRepository;
-import com.firefly.conoche.repository.RatingLocalRepository;
-import com.firefly.conoche.repository.UserRepository;
+import com.firefly.conoche.domain.*;
+import com.firefly.conoche.repository.*;
+import com.firefly.conoche.repository.customRepository.CRealTimeEventImageRepository;
 import com.firefly.conoche.security.SecurityUtils;
 import com.firefly.conoche.service.dto.EventDTO;
 import com.firefly.conoche.service.dto.LocalDTO;
 import com.firefly.conoche.service.mapper.EventMapper;
 import com.firefly.conoche.service.mapper.LocalMapper;
+import com.firefly.conoche.service.util.CloudinaryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -26,6 +22,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -40,26 +37,32 @@ public class LocalService {
     private final LocalRepository localRepository;
     private final LocalMapper localMapper;
     private final UserService userService;
-    private final RatingLocalRepository ratingLocalRepository;
     private final UserRepository userRepository;
-    private final EventService eventService;
-    private final EventMapper eventMapper;
+    private final PromotionRepository promotionRepository;
+    private final RealTimeEventImageRepository realTimeEventImageRepository;
+    private final CRealTimeEventImageRepository crealTimeEventImageRepository;
+    private final CloudinaryService cloudinaryService;
+    private final EventRepository eventRepository;
 
 
     public LocalService(LocalRepository localRepository,
                         LocalMapper localMapper,
                         UserService userService,
-                        RatingLocalRepository ratingLocalRepository,
                         UserRepository userRepository,
-                        EventService eventService,
-                        EventMapper eventMapper) {
+                        PromotionRepository promotionRepository,
+                        RealTimeEventImageRepository realTimeEventImageRepository,
+                        CRealTimeEventImageRepository crealTimeEventImageRepository,
+                        CloudinaryService cloudinaryService,
+                        EventRepository eventRepository) {
         this.localRepository = localRepository;
         this.localMapper = localMapper;
         this.userService = userService;
         this.userRepository = userRepository;
-        this.ratingLocalRepository = ratingLocalRepository;
-        this.eventService = eventService;
-        this.eventMapper = eventMapper;
+        this.promotionRepository = promotionRepository;
+        this.realTimeEventImageRepository = realTimeEventImageRepository;
+        this.crealTimeEventImageRepository = crealTimeEventImageRepository;
+        this.cloudinaryService = cloudinaryService;
+        this.eventRepository =  eventRepository;
     }
 
     public LocalDTO saveWithCurrentUser(LocalDTO localDTO) {
@@ -123,13 +126,20 @@ public class LocalService {
     public void delete(Long id) throws IOException{
         log.debug("Request to delete Local : {}", id);
         Local local = localRepository.findOne(id);
-
-        if(local != null) {
-            for (Event e : local.getEvents()) {
-                eventService.delete(e.getId());
-            }
+        if(local == null) {
+            localRepository.delete(id);
+            return;
         }
+        Set<Event> events = local.getEvents();
+
+        List<RealTimeEventImage> images =
+            crealTimeEventImageRepository.findByEventIn(events);
+
+        promotionRepository.deleteInBatch(promotionRepository.findByEventIn(events));
+        realTimeEventImageRepository.deleteInBatch(images);
+        eventRepository.deleteInBatch(events);
         localRepository.delete(id);
+        cloudinaryService.deleteRealTimeImageUrl(images);
     }
 
     @Transactional(readOnly = true)

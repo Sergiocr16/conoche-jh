@@ -74,4 +74,5 @@ public class CRealTimeEventImageService {
         cloudinaryService.delete(imageDTO.getImageUrl());
         return imageDTO;
     }
+
 }

@@ -7,11 +7,12 @@
         Added the constraints for entity PromotionCode.
     -->
     <changeSet id="20170307223303-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="promotion_id"
                                  baseTableName="promotion_code"
                                  constraintName="fk_promotion_code_promotion_id"
                                  referencedColumnNames="id"
+                                 onDelete="CASCADE"
                                  referencedTableName="promotion"/>
 
         <addForeignKeyConstraint baseColumnNames="user_id"

@@ -33,6 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Inject;
 import java.time.ZonedDateTime;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -71,7 +72,7 @@ public class CNotificationService {
 
 
     @Async
-    public Future<List<DetailNotificationDTO>> createNotifications(Stream<String> changesStream,
+    public CompletableFuture<List<DetailNotificationDTO>> createNotifications(Stream<String> changesStream,
                                                             Supplier<Set<User>> recipientsSupplier,
                                                             Long id,
                                                             ActionObjectType type,
@@ -103,11 +104,11 @@ public class CNotificationService {
 
         notificationMailService.sendMails(recipients, ao);
 
-        return new AsyncResult<>(notifications);
+        return CompletableFuture.completedFuture(notifications);
     }
 
-    private Future<List<DetailNotificationDTO>> emptyResult() {
-        return new AsyncResult<>(new ArrayList<>());
+    private CompletableFuture<List<DetailNotificationDTO>> emptyResult() {
+        return CompletableFuture.completedFuture(new ArrayList<>());
     }
 
     private ActionObject createActionObject(Long id,
@@ -146,20 +147,40 @@ public class CNotificationService {
     }
 
 
+//    @Async
+//    public Future<Stream<String>> deactivateActionObjects(ActionObjectType type, Long objectId) {
+//        List<ActionObject> actions = actionObjectRepository
+//            .findByObjectTypeAndObjectIdAndActiveTrue(type, objectId);
+//
+//        Stream<String> users = cNotificationRepository
+//            .findUsersWithPendingEnitityNotifications(objectId, type)
+//            .stream().map(User::getLogin);
+//
+//        actions.stream().peek(a -> log.error(actions.toString()))
+//            .peek(a ->  a.setActive(false))
+//            .forEach(actionObjectRepository::save);
+//
+//        return new AsyncResult<>(users);
+//    }
+
+
     @Async
-    public Future<Stream<String>> deactivateActionObjects(ActionObjectType type, Long objectId) {
+    public CompletableFuture<Stream<String>> deactivateActionObjects(ActionObjectType type, Stream<Long> idStream) {
+
+        List<Long> idlist = idStream.collect(Collectors.toList());
         List<ActionObject> actions = actionObjectRepository
-            .findByObjectTypeAndObjectIdAndActiveTrue(type, objectId);
+            .findByObjectTypeAndActiveTrueAndObjectIdIn(type, idlist);
 
         Stream<String> users = cNotificationRepository
-            .findUsersWithPendingEnitityNotifications(objectId, type)
+            .findUsersWithPendingEnitityNotifications(idlist, type)
             .stream().map(User::getLogin);
 
-        actions.stream().peek(a -> log.error(actions.toString()))
+        //cambiar esto a algo mas eficiente
+        actions.stream()
             .peek(a ->  a.setActive(false))
             .forEach(actionObjectRepository::save);
 
-        return new AsyncResult<>(users);
+        return CompletableFuture.completedFuture(users);
     }
 
 }

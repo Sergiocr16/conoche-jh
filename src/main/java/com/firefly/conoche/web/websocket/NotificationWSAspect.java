@@ -2,9 +2,7 @@ package com.firefly.conoche.web.websocket;
 
 import com.firefly.conoche.domain.ActionObject;
 import com.firefly.conoche.domain.enumeration.ActionObjectType;
-import com.firefly.conoche.service.dto.DetailNotificationDTO;
-import com.firefly.conoche.service.dto.NotificationDTO;
-import com.firefly.conoche.service.dto.NotificationEntityDTO;
+import com.firefly.conoche.service.dto.*;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -19,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.stream.Stream;
@@ -40,28 +39,24 @@ public class NotificationWSAspect {
     @AfterReturning(
         pointcut="execution(public * com.firefly.conoche.service.customService.CNotificationService+.createNotifications(..))",
         returning="retVal")
-    public void notificationCreateAdvice(Future<List<DetailNotificationDTO>> retVal) throws InterruptedException, ExecutionException {
+    public void notificationCreateAdvice(CompletableFuture<List<DetailNotificationDTO>> retVal) throws InterruptedException, ExecutionException {
         try {
-            retVal.get().forEach(this::sendToUser);
+            retVal.thenAccept(l -> l.forEach(this::sendToUser));
         } catch(Throwable s) {
             log.error(s.getMessage());
         }
     }
 
     @AfterReturning(
-        pointcut="execution(public * com.firefly.conoche.service.customService.CNotificationService+.deactivateActionObjects(..)) && args(type,id,..)",
+        pointcut="execution(public * com.firefly.conoche.service.customService.CNotificationService+.deactivateActionObjects(..))",
         returning="retVal")
-    public void notificationDeleteAdvice(Future<Stream<String>> retVal, ActionObjectType type, Long id)
+    public void notificationDeleteAdvice(CompletableFuture<Stream<String>> retVal)
             throws InterruptedException, ExecutionException {
-
         try {
-            NotificationEntityDTO notificationEntityDTO = new NotificationEntityDTO();
-            notificationEntityDTO.setId(id);
-            notificationEntityDTO.setType(type);
-            retVal.get()
-                .peek(log::error)
+            WrapperDTO<?> empty = new WrapperDTO<>(null);
+            retVal.thenAccept( logins -> logins
                 .forEach(login -> messagingTemplate.convertAndSendToUser(
-                    login, DELETE_SUBSCRIPTION_URL, notificationEntityDTO));
+                    login, DELETE_SUBSCRIPTION_URL, empty)));
 
         } catch(Throwable s) {
             log.error(s.getMessage());
