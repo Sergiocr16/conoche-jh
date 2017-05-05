@@ -5,9 +5,9 @@
         .module('conocheApp')
         .controller('PromotionAngDetailController', PromotionAngDetailController);
 
-    PromotionAngDetailController.$inject = ['$uibModalInstance', '$timeout','Principal','$scope', '$rootScope', '$stateParams', 'DataUtils', 'entity', 'Promotion', 'PromotionCode', 'Event','AlertService'];
+    PromotionAngDetailController.$inject = ['Local','$uibModalInstance', '$timeout','Principal','$scope', '$rootScope', '$stateParams', 'DataUtils', 'entity', 'Promotion', 'PromotionCode', 'Event','AlertService'];
 
-    function PromotionAngDetailController( $uibModalInstance, $timeout,Principal,$scope, $rootScope, $stateParams,  DataUtils, entity, Promotion, PromotionCode, Event,AlertService) {
+    function PromotionAngDetailController( Local,$uibModalInstance, $timeout,Principal,$scope, $rootScope, $stateParams,  DataUtils, entity, Promotion, PromotionCode, Event,AlertService) {
         var vm = this;
         vm.promotion = entity;
         vm.redeemig = false;
@@ -35,9 +35,26 @@
             Principal.identity().then(function(data){
                 vm.currentUserId = data.id;
                 PromotionCode.getByUserIdAndPromotionId({promotionId: vm.promotion.id,userId: data.id}).$promise.then(onSuccessAvailablePerUser, onError);
+                getPromotionEvent();
             });
         }
 
+        function getPromotionEvent (){
+            Event.get({id: vm.promotion.eventId}).$promise.then(onSuccessEvent, onError);
+
+        }
+        function onSuccessEvent(data){
+            vm.event = data;
+            getPromotionLocal();
+        }
+        function getPromotionLocal (){
+            Local.get({id: vm.event.localId}).$promise.then(onSuccessLocal, onError);
+
+        }
+        function onSuccessLocal(data){
+            vm.local = data;
+
+        }
         function clear () {
             $uibModalInstance.dismiss('cancel');
         }
