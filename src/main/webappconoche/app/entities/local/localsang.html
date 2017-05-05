@@ -39,12 +39,12 @@
     <div class="col-md-9">
         <h2 ng-hide="vm.locals.length>0" class="text-center">No existen locales ingresados</h2>
         <div ng-repeat="local in vm.locals track by local.id"  ui-sref="local-ang-detail({id:local.id})" >
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6">
             <div class="E0E0E0-background padding-20 bottom-border-gray"
                  style="height:470px;margin-bottom:20px;">
-                <img class="col-md-12 crop no-padding margin-bottom-20" ng-show="local.banner" style="z-index: 0;" data-ng-src="{{'data:' + local.bannerContentType + ';base64,' +
+                <img class="col-md-12 col-sm-12 col-xs-12 crop no-padding margin-bottom-20" ng-show="local.banner" style="z-index: 0;" data-ng-src="{{'data:' + local.bannerContentType + ';base64,' +
                          local.banner}}" alt="local image"/>
-                <img class="col-md-12 crop no-padding margin-bottom-20"  style="z-index: 0;" ng-hide="local.banner" src="content/images/defaultLocalImg.png" alt="local image"/>
+                <img class="col-md-12  col-sm-12 col-xs-12 crop no-padding margin-bottom-20"  style="z-index: 0;" ng-hide="local.banner" src="content/images/defaultLocalImg.png" alt="local image"/>
                 <h1 class="text-center font-24 Raleway" style="text-transform: uppercase; margin:10px 0 0 0!important">{{local.name}}</h1>
                 <h6 class="text-center no-margin no-padding">
                     <i ng-repeat = "star in local.stars track by $index"  class="{{star.class}}" style="font-size:15px!important; margin-bottom:8px!important;"></i>
