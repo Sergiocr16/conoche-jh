@@ -15,7 +15,7 @@
     <jhi-alert></jhi-alert>
     <div ng-show="vm.showGallery" class="container">
         <div masonry="{ transitionDuration: '0.3s' }" preserve-order="true">
-            <div class=" masonry-brick" ng-repeat="realTimeEventImage in vm.realTimeEventImages track by realTimeEventImage.id">
+            <div class=" masonry-brick" ng-repeat="realTimeEventImage in vm.realTimeEventImages track by realTimeEventImage.id" my-post-repeat-directive>
                 <div class="masondry-overlay-view masondry-overlay-view-first" ng-init="dimentions = vm.computeDimentions(realTimeEventImage.aspectRatio)">
                     <div ng-style="dimentions">
                         <cl-image public-id="{{realTimeEventImage.imageUrl}}" class="thumbnail">

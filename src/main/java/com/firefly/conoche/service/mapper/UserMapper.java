@@ -46,6 +46,9 @@ public interface UserMapper {
     }
 
     default Set<Authority> authoritiesFromStrings(Set<String> strings) {
+        if(strings == null) {
+            return null;
+        }
         return strings.stream().map(string -> {
             Authority auth = new Authority();
             auth.setName(string);
