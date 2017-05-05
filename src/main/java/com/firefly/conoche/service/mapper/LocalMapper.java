@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Mapper for the entity Local and its DTO LocalDTO.
  */
-@Mapper(componentModel = "spring", uses = {ServicioMapper.class, UserMapper.class, UserMapper.class, })
+@Mapper(componentModel = "spring", uses = {ServicioMapper.class, UserMapper.class, })
 public interface LocalMapper {
 
     @Mapping(source = "localCategory.id", target = "localCategoryId")
@@ -25,7 +25,6 @@ public interface LocalMapper {
     @Mapping(target = "events", ignore = true)
     @Mapping(target = "schedules", ignore = true)
     @Mapping(target = "ratings", ignore = true)
-    @Mapping(target = "subcribers", ignore = true)
     @Mapping(source = "localCategoryId", target = "localCategory")
     @Mapping(source = "ownerId", target = "owner")
 

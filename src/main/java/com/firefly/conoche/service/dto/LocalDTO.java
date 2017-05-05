@@ -190,6 +190,7 @@ public class LocalDTO implements Serializable {
 
     @Override
     public String toString() {
+        subcribers.forEach(System.out::println);
         return "LocalDTO{" +
             "id=" + id +
             ", name='" + name + "'" +
